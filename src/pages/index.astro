@@ -1,16 +1,132 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import { ProjectCard } from "../components/ProjectCard";
+import { MusicReleaseCard } from "../components/MusicReleaseCard";
+import { projects } from "../data/projects";
+import { musicReleases } from "../data/music";
+import { bioData } from "../data/bio";
 
+const lang = "en";
+const bio = bioData[lang];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="Tommaso Scalici | Software Engineer & Musician"
+  description={bio.description}
+  lang={lang}
+>
+  <!-- Hero Section -->
+  <section class="min-h-screen flex flex-col relative">
+    <div class="flex-grow flex flex-col justify-center px-6 pt-16">
+      <div class="max-w-7xl mx-auto w-full">
+        <div class="max-w-4xl">
+          <h1
+            class="font-mono text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter mb-8 leading-none"
+          >
+            <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-white via-primary to-blue-400 animate-pulse block pb-2"
+            >
+              {bio.heroTitle}
+            </span>
+            <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-white via-secondary to-purple-500 animate-pulse block"
+            >
+              {bio.heroSubtitle}
+            </span>
+          </h1>
+
+          <p
+            class="text-xl md:text-2xl text-gray-400 max-w-2xl leading-relaxed mb-10 border-l-2 border-primary/50 pl-6"
+          >
+            {bio.description}
+          </p>
+
+          <div class="flex flex-wrap gap-4">
+            <a
+              href="#projects"
+              class="px-8 py-3 border border-primary text-primary font-bold rounded-full hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(0,243,255,0.3)] transition-all duration-300"
+            >
+              View Projects
+            </a>
+            <a
+              href="#music"
+              class="px-8 py-3 border border-secondary text-secondary font-bold rounded-full hover:bg-secondary/10 hover:shadow-[0_0_20px_rgba(255,0,85,0.3)] transition-all duration-300"
+            >
+              Listen to Music
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="pb-10 mt-16 flex justify-center animate-bounce shrink-0">
+      <svg
+        class="w-6 h-6 text-gray-500"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-32 px-6 bg-black/50">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-end justify-between mb-16">
+        <div>
+          <h2 class="text-4xl md:text-5xl font-bold font-mono mb-4">
+            <span class="text-primary">01.</span> Selected Works
+          </h2>
+          <p class="text-gray-400">
+            Engineering robust solutions for complex problems.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          projects.map((project) => (
+            <ProjectCard client:visible project={project} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Music Section -->
+  <section id="music" class="py-32 px-6 relative overflow-hidden">
+    <!-- Background Gradient -->
+    <div
+      class="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/5 to-transparent pointer-events-none"
+    >
+    </div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="flex items-end justify-between mb-16">
+        <div>
+          <h2 class="text-4xl md:text-5xl font-bold font-mono mb-4">
+            <span class="text-secondary">02.</span> Sonic Architectures
+          </h2>
+          <p class="text-gray-400">
+            Exploring the boundaries of rhythm and atmosphere.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          musicReleases.map((release) => (
+            <MusicReleaseCard client:visible release={release} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

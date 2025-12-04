@@ -1,0 +1,40 @@
+---
+import { SEO } from "astro-seo";
+
+interface Props {
+    title: string;
+    description: string;
+    image?: string;
+}
+
+const { title, description, image = "/og-image.png" } = Astro.props;
+---
+
+<SEO
+    title={title}
+    description={description}
+    openGraph={{
+        basic: {
+            title,
+            type: "website",
+            image,
+        },
+    }}
+    twitter={{
+        creator: "@tommasoscalici",
+        card: "summary_large_image",
+    }}
+    extend={{
+        link: [{ rel: "icon", href: "/favicon.svg" }],
+        meta: [
+            {
+                name: "viewport",
+                content: "width=device-width, initial-scale=1",
+            },
+            {
+                name: "generator",
+                content: Astro.generator,
+            },
+        ],
+    }}
+/>

@@ -1,0 +1,210 @@
+---
+import "@fontsource/inter";
+import "@fontsource/jetbrains-mono";
+import "../styles/global.css";
+
+interface Props {
+    title: string;
+    description: string;
+    coverImage: string;
+    theme: "prog" | "lofi";
+}
+
+const { title, description, coverImage, theme } = Astro.props;
+
+// Theme Configuration
+const themeConfig = {
+    prog: {
+        bgBlur: "filter: blur(30px) brightness(0.3);",
+        card: "background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(0, 243, 255, 0.2); box-shadow: 0 0 40px rgba(0, 243, 255, 0.1);",
+        coverShadow: "box-shadow: 0 10px 30px rgba(0,0,0,0.6);",
+    },
+    lofi: {
+        bgBlur: "filter: blur(25px) brightness(0.4);",
+        card: "background: rgba(22, 27, 34, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5);",
+        coverShadow: "box-shadow: 0 8px 20px rgba(0,0,0,0.4);",
+    },
+};
+
+const currentTheme = themeConfig[theme];
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <title>{title}</title>
+
+        <meta name="description" content={description} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={coverImage} />
+        <meta property="og:type" content="music.playlist" />
+
+        <!-- Meta Pixel Code -->
+        <script
+            is:inline
+            define:vars={{
+                facebookPixelId: import.meta.env.PUBLIC_FACEBOOK_PIXEL_ID,
+            }}
+        >
+            !(function (f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function () {
+                    n.callMethod
+                        ? n.callMethod.apply(n, arguments)
+                        : n.queue.push(arguments);
+                };
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = "2.0";
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s);
+            })(
+                window,
+                document,
+                "script",
+                "https://connect.facebook.net/en_US/fbevents.js",
+            );
+            fbq("init", facebookPixelId);
+            fbq("track", "PageView");
+        </script>
+        <noscript>
+            <img
+                height="1"
+                width="1"
+                style="display:none"
+                src={`https://www.facebook.com/tr?id=${import.meta.env.PUBLIC_FACEBOOK_PIXEL_ID}&ev=PageView&noscript=1`}
+            />
+        </noscript>
+        <!-- End Meta Pixel Code -->
+
+        <!-- TikTok Pixel Code -->
+        <script
+            is:inline
+            define:vars={{
+                tiktokPixelId: import.meta.env.PUBLIC_TIKTOK_PIXEL_ID,
+            }}
+        >
+            (function (w, d, t) {
+                w.TiktokAnalyticsObject = t;
+                var ttq = (w[t] = w[t] || []);
+                ttq.methods = [
+                    "page",
+                    "track",
+                    "identify",
+                    "instances",
+                    "debug",
+                    "on",
+                    "off",
+                    "once",
+                    "ready",
+                    "alias",
+                    "group",
+                    "enableCookie",
+                    "disableCookie",
+                ];
+                ttq.setAndDefer = function (t, e) {
+                    t.align = 2;
+                    ttq.push([
+                        t,
+                        e,
+                        function () {
+                            t.align = 1;
+                            ttq[arguments.length - 1].call(ttq, arguments);
+                        },
+                    ]);
+                };
+                for (var n = 0; n < ttq.methods.length; n++)
+                    ttq.setAndDefer(ttq, ttq.methods[n]);
+                ttq.instance = function (t) {
+                    for (
+                        var e = ttq._i[t] || [], n = 0;
+                        n < ttq.methods.length;
+                        n++
+                    )
+                        ttq.setAndDefer(e, ttq.methods[n]);
+                    return e;
+                };
+                ttq.load = function (e, n) {
+                    var i = "https://analytics.tiktok.com/i18n/pixel/events.js";
+                    ttq._i = ttq._i || {};
+                    ttq._i[e] = [];
+                    ttq._i[e]._u = i;
+                    ttq._t = ttq._t || {};
+                    ttq._t[e] = +new Date();
+                    ttq._o = ttq._o || {};
+                    ttq._o[e] = n || {};
+                    var o = d.createElement("script");
+                    o.type = "text/javascript";
+                    o.async = !0;
+                    o.src = i + "?sdkid=" + e + "&lib=" + t;
+                    var a = d.getElementsByTagName("script")[0];
+                    a.parentNode.insertBefore(o, a);
+                };
+
+                ttq.load(tiktokPixelId);
+                ttq.page();
+            })(window, document, "ttq");
+        </script>
+
+        <style>
+            @keyframes floatUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+    </head>
+    <body
+        class="h-screen overflow-hidden flex justify-center items-center relative font-sans text-white"
+        style={theme === "lofi"
+            ? "background-color: #0d1117;"
+            : "background-color: #050505;"}
+    >
+        <div
+            class="absolute top-0 left-0 w-full h-full -z-10 scale-110 bg-no-repeat bg-center bg-cover"
+            style={`${currentTheme.bgBlur} background-image: url('${coverImage}');`}
+        >
+        </div>
+
+        <div
+            class="w-[90%] max-w-[380px] p-[30px_20px] rounded-3xl text-center"
+            style={`${currentTheme.card} animation: floatUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);`}
+        >
+            <img
+                src={coverImage}
+                class="w-full aspect-square rounded-xl mb-5 object-cover"
+                style={currentTheme.coverShadow}
+                alt={`${title} Cover`}
+            />
+
+            <slot />
+
+            <div
+                class={`mt-5 text-[11px] ${theme === "lofi" ? "text-[#484f58]" : "text-[#666]"} border-none outline-none bg-transparent`}
+            >
+                Curated by <a
+                    href="https://linktr.ee/tommasoscalici"
+                    target="_blank"
+                    class="font-semibold text-inherit no-underline transition-colors duration-200 border-b border-transparent hover:text-white hover:border-white bg-transparent outline-none"
+                    >Tommaso Scalici</a
+                >
+            </div>
+        </div>
+    </body>
+</html>

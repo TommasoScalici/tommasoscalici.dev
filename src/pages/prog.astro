@@ -1,0 +1,55 @@
+---
+import SpotifyLandingLayout from "../layouts/SpotifyLandingLayout.astro";
+import { SpotifyDeepLinkButton } from "../components/SpotifyDeepLinkButton";
+
+const title = "Modern Prog | Instrumental Metal";
+const description =
+    "The best Modern Instrumental Progressive Metal. Djent, Math Rock & Heavy Riffs.";
+const coverImage = "/images/prog-cover.webp";
+const playlistId = "32xYNI24QWMWfSgG1xZgjI";
+---
+
+<SpotifyLandingLayout
+    title={title}
+    description={description}
+    coverImage={coverImage}
+    theme="prog"
+>
+    <style>
+        /* Typography */
+        h1 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            color: #b3b3b3;
+            font-size: 14px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        /* Highlight Cyberpunk */
+        .highlight {
+            color: #00f3ff; /* Cyan Neon */
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+        }
+    </style>
+
+    <h1>Modern Prog ⚡</h1>
+    <p class="subtitle">
+        The ultimate Progressive Instrumental collection.<br />
+        <span class="highlight">Djent</span>, <span class="highlight"
+            >Math Rock</span
+        > & <span class="highlight">Heavy Riffs</span>.
+    </p>
+
+    <SpotifyDeepLinkButton
+        client:load
+        playlistId={playlistId}
+        eventName="Modern Prog"
+    />
+</SpotifyLandingLayout>
