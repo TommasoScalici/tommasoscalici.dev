@@ -12,6 +12,11 @@ export const ui = {
         'nav.projects': 'Projects',
         'nav.music': 'Music',
         'footer.copyright': 'All rights reserved.',
+        'dialog.choosePlatform': 'Choose your Platform',
+        'card.listenNow': 'Listen Now',
+        'card.playOnSpotify': 'PLAY ON SPOTIFY',
+        'card.comingSoon': 'Coming Soon',
+        'card.comingYear': 'Coming',
     },
     it: {
         'nav.home': 'Home',
@@ -19,5 +24,10 @@ export const ui = {
         'nav.projects': 'Progetti',
         'nav.music': 'Musica',
         'footer.copyright': 'Tutti i diritti riservati.',
+        'dialog.choosePlatform': 'Scegli la tua Piattaforma',
+        'card.listenNow': 'Ascolta Ora',
+        'card.playOnSpotify': 'ASCOLTA SU SPOTIFY',
+        'card.comingSoon': 'Presto Disponibile',
+        'card.comingYear': 'In arrivo nel',
     },
 } as const;

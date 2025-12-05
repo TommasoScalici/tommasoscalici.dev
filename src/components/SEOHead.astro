@@ -25,7 +25,15 @@ const { title, description, image = "/og-image.png" } = Astro.props;
         card: "summary_large_image",
     }}
     extend={{
-        link: [{ rel: "icon", href: "/favicon.svg" }],
+        link: [
+            { rel: "icon", href: "/favicon.ico", sizes: "any" },
+            {
+                rel: "icon",
+                href: "/images/apple-touch-icon.png",
+                type: "image/png",
+            },
+            { rel: "apple-touch-icon", href: "/images/apple-touch-icon.png" },
+        ],
         meta: [
             {
                 name: "viewport",

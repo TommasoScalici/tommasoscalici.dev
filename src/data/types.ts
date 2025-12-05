@@ -8,13 +8,24 @@ export interface Project {
     featured?: boolean;
 }
 
+export interface PlatformLinks {
+    spotify?: string;
+    apple?: string;
+    deezer?: string;
+    tidal?: string;
+    amazon?: string;
+    youtube?: string;
+    bandcamp?: string;
+}
+
 export interface MusicRelease {
     title: string;
-    artist: string;
-    year: number;
-    coverImage: string;
-    spotifyUrl?: string;
+    year: string;
     genre: string;
+    coverImage: string;
+    type: "Album" | "EP" | "Single";
+    links: PlatformLinks;
+    isUpcoming?: boolean; // New flag for 2026 release
 }
 
 export interface Bio {

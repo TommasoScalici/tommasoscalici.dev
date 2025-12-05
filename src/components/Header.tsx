@@ -37,10 +37,11 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems }) => {
             <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
                 <a
                     href={lang === "en" ? "/" : `/${lang}`}
-                    className="group font-mono font-bold text-xl tracking-tighter transition-colors"
+                    className="group font-mono font-bold text-xl tracking-tighter transition-colors flex items-center"
                 >
+                    <img src="/images/logo.webp" alt="TS Circuit Logo" className="h-12 w-auto mr-3 object-contain" />
                     <span className="text-white group-hover:text-primary transition-colors">TOMMASO</span>
-                    <span className="text-white group-hover:text-secondary transition-colors"> SCALICI</span>
+                    <span className="text-white group-hover:text-secondary transition-colors ml-2">SCALICI</span>
                 </a>
 
                 {/* Desktop Nav */}

@@ -1,8 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions";
-import { SiGithub, SiLinkedin, SiInstagram, SiSpotify } from "react-icons/si";
-
 import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 import SEOHead from "../components/SEOHead.astro";
 
 import { ui, defaultLang } from "../i18n/ui";
@@ -25,7 +24,6 @@ const {
 
 const t = ui[lang as keyof typeof ui] || ui[defaultLang];
 
-// Definiamo qui i link, così possiamo passarli sia al componente React che usarli altrove se serve
 const navItems = [
     { label: t["nav.home"], href: lang === "en" ? "/" : `/${lang}` },
     { label: t["nav.projects"], href: "#projects" },
@@ -43,6 +41,7 @@ const copyrightDate =
 <!doctype html>
 <html lang={lang} class="scroll-smooth">
     <head>
+        <meta charset="UTF-8" />
         <SEOHead title={title} description={description} />
         <ClientRouter />
     </head>
@@ -64,59 +63,6 @@ const copyrightDate =
             <slot />
         </main>
 
-        <footer
-            class="border-t border-surface bg-black/50 backdrop-blur-md mt-20"
-        >
-            <div
-                class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4"
-            >
-                <p class="text-gray-500 text-sm font-mono">
-                    &copy; {copyrightDate} Tommaso Scalici. {
-                        t["footer.copyright"]
-                    }
-                </p>
-                <div class="flex gap-6">
-                    {/* Dev Links - Hover Primary */}
-                    <a
-                        href="https://github.com/TommasoScalici"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="text-gray-400 hover:text-primary transition-colors"
-                        aria-label="GitHub"
-                    >
-                        <SiGithub className="w-5 h-5" />
-                    </a>
-                    <a
-                        href="https://www.linkedin.com/in/tommasoscalici"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="text-gray-400 hover:text-primary transition-colors"
-                        aria-label="LinkedIn"
-                    >
-                        <SiLinkedin className="w-5 h-5" />
-                    </a>
-
-                    {/* Music/Social Links - Hover Secondary */}
-                    <a
-                        href="https://open.spotify.com/artist/6KswMpmmtp3tUbWF3TjBgD"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="text-gray-400 hover:text-secondary transition-colors"
-                        aria-label="Spotify"
-                    >
-                        <SiSpotify className="w-5 h-5" />
-                    </a>
-                    <a
-                        href="https://www.instagram.com/tommasoscalici91"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="text-gray-400 hover:text-secondary transition-colors"
-                        aria-label="Instagram"
-                    >
-                        <SiInstagram className="w-5 h-5" />
-                    </a>
-                </div>
-            </div>
-        </footer>
+        <Footer client:visible lang={lang} t={t} />
     </body>
 </html>
