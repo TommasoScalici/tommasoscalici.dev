@@ -36,8 +36,11 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
 
                 {/* Background Image (Cover Art) */}
                 <img
-                    src={release.coverImage}
+                    src={typeof release.coverImage === 'string' ? release.coverImage : release.coverImage.src}
                     alt={release.title}
+                    width={300}
+                    height={300}
+                    loading="lazy"
                     className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 ${isUpcoming ? 'grayscale opacity-40 scale-100' : 'group-hover:scale-110 opacity-80 group-hover:opacity-60'}`}
                 />
 

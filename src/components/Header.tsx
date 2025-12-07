@@ -4,9 +4,10 @@ import { Menu, X, Languages } from 'lucide-react';
 interface HeaderProps {
     lang: string;
     navItems: { label: string; href: string }[];
+    logoSrc: string;
 }
 
-export const Header: React.FC<HeaderProps> = ({ lang, navItems }) => {
+export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleLanguage = () => {
@@ -39,7 +40,7 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems }) => {
                     href={lang === "en" ? "/" : `/${lang}`}
                     className="group font-mono font-bold text-xl tracking-tighter transition-colors flex items-center"
                 >
-                    <img src="/images/logo.webp" alt="TS Circuit Logo" className="h-12 w-auto mr-3 object-contain" />
+                    <img src={logoSrc} alt="TS Circuit Logo" width={48} height={48} loading="eager" className="h-12 w-auto mr-3 object-contain" />
                     <span className="text-white group-hover:text-primary transition-colors">TOMMASO</span>
                     <span className="text-white group-hover:text-secondary transition-colors ml-2">SCALICI</span>
                 </a>

@@ -1,0 +1,51 @@
+---
+import { PlaylistCard } from "../PlaylistCard";
+import { playlistsData } from "../../data/playlists";
+import { ui, defaultLang } from "../../i18n/ui";
+import { getImage } from "astro:assets";
+
+interface Props {
+    lang: string;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang as keyof typeof ui] || ui[defaultLang];
+
+// Optimize Playlist Images
+const optimizedPlaylists = await Promise.all(
+    playlistsData[lang].map(async (playlist) => {
+        const optimizedImage = await getImage({
+            src: playlist.coverImage,
+            format: "webp",
+            width: 320,
+            height: 180,
+        });
+        return {
+            ...playlist,
+            coverImage: optimizedImage.src,
+        };
+    }),
+);
+---
+
+<section id="playlists" class="py-32 px-6 bg-black/50">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex items-end justify-between mb-16">
+            <div>
+                <h2 class="text-4xl md:text-5xl font-bold font-mono mb-4">
+                    <span class="text-secondary">03.</span>
+                    {t["section.playlists.title"]}
+                </h2>
+                <p class="text-gray-400">{t["section.playlists"]}</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {
+                optimizedPlaylists.map((playlist) => (
+                    <PlaylistCard client:visible playlist={playlist} t={t} />
+                ))
+            }
+        </div>
+    </div>
+</section>

@@ -7,24 +7,23 @@ import { artistLinks } from '../data/artistLinks';
 interface FooterProps {
     lang: string;
     t: Record<string, string>;
+    copyrightDate: string;
 }
 
-export const Footer: React.FC<FooterProps> = ({ lang, t }) => {
+export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-    // Dynamic Copyright Year
-    const currentYear = new Date().getFullYear();
-    const startYear = 2010; // Career start
-    const copyrightDate =
-        startYear === currentYear
-            ? `${startYear}`
-            : `${startYear} - ${currentYear}`;
 
     return (
         <footer className="border-t border-surface bg-black/50 backdrop-blur-md mt-20">
             <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-                <p className="text-gray-500 text-sm font-mono">
-                    &copy; {copyrightDate} Tommaso Scalici. {t["footer.copyright"]}
+                <p className="text-gray-500 text-sm font-mono flex items-center gap-4">
+                    <span>&copy; {copyrightDate} Tommaso Scalici. {t["footer.copyright"]}</span>
+                    <a
+                        href={lang === "en" ? "/uses" : `/${lang}/uses`}
+                        className="px-3 py-1 rounded-full bg-white/5 border border-primary/20 text-xs text-primary hover:bg-primary/10 hover:border-primary/50 transition-all font-bold tracking-wide shadow-[0_0_10px_rgba(0,243,255,0.1)] hover:shadow-[0_0_15px_rgba(0,243,255,0.3)]"
+                    >
+                        {t["footer.uses"]}
+                    </a>
                 </p>
 
                 <div className="flex gap-6">

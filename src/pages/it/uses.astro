@@ -1,0 +1,97 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { usesData } from "../../data/uses";
+import { FiExternalLink } from "react-icons/fi";
+
+const title = "Strumentazione | Tommaso Scalici";
+const description =
+    "Il software, l'hardaware e gli strumenti che utilizzo per programmare, comporre e crescere.";
+const lang = "it";
+
+// Translate dynamic titles if needed, or keeping english for "Development Stack" etc since they are proper names/accepted terms.
+// However, the section titles in `usesData` are strings. Ideally, `usesData` should support localization or I should map them.
+// For now, I will keep the items as they are universally understandable, but I will translate the page structure.
+---
+
+<Layout title={title} description={description} lang={lang}>
+    <section class="max-w-7xl mx-auto px-6 py-20 min-h-screen">
+        {/* Hero */}
+        <div class="mb-16 text-center md:text-left">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight">
+                Software. Hardware. Tool.
+            </h1>
+            <p class="text-xl text-gray-400 max-w-2xl">
+                Tutto quello che uso per programmare, comporre e crescere.
+            </p>
+        </div>
+
+        {/* Grid Layout */}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {
+                usesData.map((category, index) => {
+                    // Determine header color based on index or title (Cyber-Noir palette)
+                    // Cyan for Dev (0), Purple for Music (1), Green/Gold for Growth (2)
+                    let titleColorClass = "text-cyan-400";
+                    if (index === 1) titleColorClass = "text-purple-400";
+                    if (index === 2) titleColorClass = "text-emerald-400";
+
+                    let containerClass =
+                        "bg-white/5 border border-white/5 rounded-xl p-6 transition-colors group relative overflow-hidden";
+
+                    // Default hover effect for all cards
+                    if (index !== 2) {
+                        containerClass += " hover:border-primary/30";
+                    }
+
+                    // Special Glow Effect for Artist Growth Tools (Index 2)
+                    if (index === 2) {
+                        containerClass +=
+                            " border-emerald-500/50 shadow-[0_0_30px_rgba(16,185,129,0.2)] hover:shadow-[0_0_40px_rgba(16,185,129,0.4)] hover:border-emerald-400";
+                    }
+
+                    return (
+                        <div class={containerClass}>
+                            <h2
+                                class={`font-mono text-xl font-bold mb-6 ${titleColorClass}`}
+                            >
+                                {category.title}
+                            </h2>
+                            <ul class="space-y-6">
+                                {category.items.map((item) => (
+                                    <li class="flex flex-col gap-1">
+                                        <div class="flex items-center gap-2">
+                                            {item.url ? (
+                                                <a
+                                                    href={item.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="text-white font-bold hover:underline flex items-center gap-1 group-hover/link:text-primary transition-colors"
+                                                >
+                                                    {item.name}
+                                                    <FiExternalLink className="w-3 h-3 text-gray-500" />
+                                                </a>
+                                            ) : (
+                                                <span class="text-white font-bold">
+                                                    {item.name}
+                                                </span>
+                                            )}
+                                        </div>
+                                        {item.description && (
+                                            <p class="text-gray-400 text-sm leading-relaxed">
+                                                {typeof item.description ===
+                                                "string"
+                                                    ? item.description
+                                                    : item.description.it ||
+                                                      item.description.en}
+                                            </p>
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    );
+                })
+            }
+        </div>
+    </section>
+</Layout>

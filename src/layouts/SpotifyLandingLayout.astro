@@ -2,15 +2,19 @@
 import "@fontsource/inter";
 import "@fontsource/jetbrains-mono";
 import "../styles/global.css";
+import { Image, getImage } from "astro:assets";
 
 interface Props {
     title: string;
     description: string;
-    coverImage: string;
+    coverImage: ImageMetadata | string;
     theme: "prog" | "lofi";
 }
 
 const { title, description, coverImage, theme } = Astro.props;
+
+// Optimize image for background and SEO
+const optimizedBg = await getImage({ src: coverImage, format: "webp" });
 
 // Theme Configuration
 const themeConfig = {
@@ -42,7 +46,7 @@ const currentTheme = themeConfig[theme];
         <meta name="description" content={description} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content={coverImage} />
+        <meta property="og:image" content={optimizedBg.src} />
         <meta property="og:type" content="music.playlist" />
 
         <!-- Meta Pixel Code -->
@@ -178,7 +182,7 @@ const currentTheme = themeConfig[theme];
     >
         <div
             class="absolute top-0 left-0 w-full h-full -z-10 scale-110 bg-no-repeat bg-center bg-cover"
-            style={`${currentTheme.bgBlur} background-image: url('${coverImage}');`}
+            style={`${currentTheme.bgBlur} background-image: url('${optimizedBg.src}');`}
         >
         </div>
 
@@ -186,12 +190,29 @@ const currentTheme = themeConfig[theme];
             class="w-[90%] max-w-[380px] p-[30px_20px] rounded-3xl text-center"
             style={`${currentTheme.card} animation: floatUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);`}
         >
-            <img
-                src={coverImage}
-                class="w-full aspect-square rounded-xl mb-5 object-cover"
-                style={currentTheme.coverShadow}
-                alt={`${title} Cover`}
-            />
+            {
+                typeof coverImage === "string" ? (
+                    <Image
+                        src={coverImage}
+                        width={300}
+                        height={300}
+                        loading="eager"
+                        class="w-full aspect-square rounded-xl mb-5 object-cover"
+                        style={currentTheme.coverShadow}
+                        alt={`${title} Cover`}
+                    />
+                ) : (
+                    <Image
+                        src={coverImage}
+                        width={300}
+                        height={300}
+                        loading="eager"
+                        class="w-full aspect-square rounded-xl mb-5 object-cover"
+                        style={currentTheme.coverShadow}
+                        alt={`${title} Cover`}
+                    />
+                )
+            }
 
             <slot />
 

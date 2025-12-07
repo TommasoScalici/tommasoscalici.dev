@@ -31,8 +31,11 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, t }) => {
         >
             {/* Background Image */}
             <img
-                src={playlist.coverImage}
+                src={typeof playlist.coverImage === 'string' ? playlist.coverImage : playlist.coverImage.src}
                 alt={playlist.title}
+                width={320}
+                height={180}
+                loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 group-hover:scale-105 transition-all duration-500"
             />
 

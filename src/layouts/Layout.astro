@@ -9,6 +9,16 @@ import { ui, defaultLang } from "../i18n/ui";
 import "@fontsource/inter";
 import "@fontsource/jetbrains-mono";
 import "../styles/global.css";
+import { Image, getImage } from "astro:assets";
+import logoImage from "../assets/logo.webp";
+
+// Optimize Logo
+const optimizedLogo = await getImage({
+    src: logoImage,
+    width: 64, // Slightly larger for high DPR
+    height: 64,
+    format: "webp",
+});
 
 interface Props {
     title: string;
@@ -48,7 +58,12 @@ const copyrightDate =
     <body
         class="bg-background text-white font-sans antialiased selection:bg-primary selection:text-black"
     >
-        <Header client:load lang={lang} navItems={navItems} />
+        <Header
+            client:load
+            lang={lang}
+            navItems={navItems}
+            logoSrc={optimizedLogo.src}
+        />
 
         <main class="pt-20 min-h-screen relative overflow-hidden">
             <div
@@ -63,6 +78,11 @@ const copyrightDate =
             <slot />
         </main>
 
-        <Footer client:visible lang={lang} t={t} />
+        <Footer
+            client:visible
+            lang={lang}
+            t={t}
+            copyrightDate={copyrightDate}
+        />
     </body>
 </html>

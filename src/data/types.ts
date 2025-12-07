@@ -22,7 +22,7 @@ export interface MusicRelease {
     title: string;
     year: string;
     genre: string;
-    coverImage: string;
+    coverImage: string | ImageMetadata;
     type: "Album" | "EP" | "Single";
     links: PlatformLinks;
     isUpcoming?: boolean; // New flag for 2026 release

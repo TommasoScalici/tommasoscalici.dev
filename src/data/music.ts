@@ -1,11 +1,15 @@
 import type { MusicRelease } from "./types";
 
+import randomAccessThoughts from "../assets/album_covers/random-access-thoughts.webp";
+import innerThoughts from "../assets/album_covers/inner-thoughts.webp";
+import sinestesie from "../assets/album_covers/sinestesie.webp";
+
 export const musicReleases: MusicRelease[] = [
     {
         title: "Random Access Thoughts",
         year: "2025",
         genre: "Prog Metal / Djent / Lofi",
-        coverImage: "images/album_covers/random-access-thoughts.webp",
+        coverImage: randomAccessThoughts,
         type: "Album",
         links: {
             spotify: "https://open.spotify.com/album/28mIion9ys60E5GbX5CpLS",
@@ -21,7 +25,7 @@ export const musicReleases: MusicRelease[] = [
         title: "Inner Thoughts",
         year: "2024",
         genre: "Prog Rock / Metal",
-        coverImage: "images/album_covers/inner-thoughts.webp",
+        coverImage: innerThoughts,
         type: "EP",
         links: {
             spotify: "https://open.spotify.com/album/4ReGhGEuJ3WQpW5uuEXusv",
@@ -37,7 +41,7 @@ export const musicReleases: MusicRelease[] = [
         title: "Sinestesie",
         year: "2026",
         genre: "Experimental / Prog",
-        coverImage: "images/album_covers/sinestesie.webp",
+        coverImage: sinestesie,
         type: "EP",
         links: {},
         isUpcoming: true

@@ -1,0 +1,59 @@
+---
+import { MusicReleaseCard } from "../MusicReleaseCard";
+import { musicReleases } from "../../data/music";
+import { ui, defaultLang } from "../../i18n/ui";
+import { getImage } from "astro:assets";
+
+interface Props {
+    lang: string;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang as keyof typeof ui] || ui[defaultLang];
+
+// Optimize Music Images
+const optimizedMusicReleases = await Promise.all(
+    musicReleases.map(async (release) => {
+        const optimizedImage = await getImage({
+            src: release.coverImage,
+            format: "webp",
+            width: 300,
+            height: 300,
+        });
+        return {
+            ...release,
+            coverImage: optimizedImage.src,
+        };
+    }),
+);
+---
+
+<section id="music" class="py-32 px-6 relative overflow-hidden">
+    {/* Background Gradient */}
+    <div
+        class="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/5 to-transparent pointer-events-none"
+    >
+    </div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+        <div class="flex items-end justify-between mb-16">
+            <div>
+                <h2 class="text-4xl md:text-5xl font-bold font-mono mb-4">
+                    <span class="text-secondary">02.</span>
+                    {t["section.music.title"]}
+                </h2>
+                <p class="text-gray-400">
+                    {t["section.music.subtitle"]}
+                </p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {
+                optimizedMusicReleases.map((release) => (
+                    <MusicReleaseCard client:visible release={release} t={t} />
+                ))
+            }
+        </div>
+    </div>
+</section>
