@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Play } from 'lucide-react';
 import type { MusicRelease } from '../data/types';
 import { SmartLinkDialog, type SmartLink } from './SmartLinkDialog';
-import { platforms } from '../data/platforms';
+import { platforms, platformOrder } from '../data/platforms';
 
 interface MusicReleaseCardProps {
     release: MusicRelease;
@@ -14,9 +14,12 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     // Transform PlatformLinks to SmartLink[]
-    const albumLinks: SmartLink[] = Object.entries(release.links).map(([platformKey, url]) => {
+    const albumLinks: SmartLink[] = platformOrder.map((platformKey) => {
+        const url = release.links[platformKey as keyof typeof release.links];
         const platformDef = platforms[platformKey];
+
         if (!platformDef || !url) return null;
+
         return {
             ...platformDef,
             url: url

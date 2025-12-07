@@ -5,13 +5,16 @@ export interface ToolItem {
 }
 
 export interface UsesCategory {
-    title: string;
+    title: string | Record<string, string>;
     items: ToolItem[];
 }
 
 export const usesData: UsesCategory[] = [
     {
-        title: "Development Stack",
+        title: {
+            en: "Development Stack",
+            it: "Stack di Sviluppo",
+        },
         items: [
             {
                 name: "Google Antigravity",
@@ -55,7 +58,10 @@ export const usesData: UsesCategory[] = [
         ],
     },
     {
-        title: "Music Production & Gear",
+        title: {
+            en: "Music Production & Gear",
+            it: "Produzione Musicale & Gear",
+        },
         items: [
             {
                 name: "Ibanez GRG170DX",
@@ -90,8 +96,19 @@ export const usesData: UsesCategory[] = [
         ],
     },
     {
-        title: "Artist Growth Tools (Recommended)",
+        title: {
+            en: "Artist Growth Tools (Recommended)",
+            it: "Strumenti Crescita Artista (Consigliati)",
+        },
         items: [
+            {
+                name: "Ditto Music",
+                description: {
+                    en: "Best music distributor with unlimited releases.",
+                    it: "Miglior distributore musicale con release illimitate.",
+                },
+                url: "https://vrlps.co/iyizd55/cp",
+            },
             {
                 name: "artist.tools",
                 description: {

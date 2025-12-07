@@ -41,3 +41,13 @@ export const platforms: Record<string, PlatformDef> = {
         color: "hover:text-[#629aa9]"
     }
 };
+
+export const platformOrder = [
+    'spotify',
+    'apple',
+    'youtube',
+    'amazon',
+    'tidal',
+    'deezer',
+    'bandcamp'
+];

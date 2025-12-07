@@ -8,41 +8,87 @@ interface Props {
 }
 
 const { title, description, image = "/og-image.png" } = Astro.props;
+
+// 1. Canonical & Hreflang Logic
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const path = Astro.url.pathname;
+// Remove language prefix for alternates generation
+const purePath = path.replace(/^\/it\//, "/").replace(/\/$/, "") || "";
+
+const enUrl = new URL(purePath || "/", Astro.site).toString();
+const itUrl = new URL(
+    `/it${purePath ? "/" + purePath : ""}/`,
+    Astro.site,
+).toString();
+
+// 2. The Identity Graph Data
+const identitySchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Tommaso Scalici",
+    url: canonicalURL,
+    image: new URL("assets/profile.webp", Astro.site).toString(),
+    jobTitle: ["Senior Software Engineer", "Music Producer"],
+    worksFor: { "@type": "Organization", name: "BC Soft S.r.l." },
+    sameAs: [
+        // Tech & Dev
+        "https://github.com/TommasoScalici",
+        "https://www.linkedin.com/in/tommasoscalici",
+        "https://play.google.com/store/apps/developer?id=Tommaso%C2%A0Scalici",
+        "https://stackoverflow.com/users/3150766/tommaso-scalici",
+
+        // Music Stores (Authority)
+        "https://open.spotify.com/artist/6KswMpmmtp3tUbWF3TjBgD",
+        "https://music.apple.com/artist/tommaso-scalici/1723885661",
+        "https://www.deezer.com/artist/249432402",
+        "https://tidal.com/browse/artist/44874415",
+        "https://music.amazon.com/artists/B0CRLSQVLW",
+        "https://music.youtube.com/channel/UC4BMkFEXynC2UUVaav-ICCg",
+        "https://tommasoscalici.bandcamp.com/",
+
+        // Social & Personal
+        "https://www.instagram.com/tommasoscalici91",
+        "https://www.facebook.com/tommasoscaliciproducer", // Page
+        "https://www.facebook.com/tommaso.scalici.91/", // Profile
+        "https://x.com/Tommaso_Scalici",
+        "https://www.tiktok.com/@tommaso.scalici",
+        "https://www.threads.net/@tommasoscalici91",
+        "https://www.last.fm/it/user/TommasoScalici",
+        "https://steamcommunity.com/id/tommasoscalici/",
+    ],
+};
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(identitySchema)} />
 
 <SEO
     title={title}
     description={description}
+    canonical={canonicalURL.toString()}
     openGraph={{
-        basic: {
-            title,
-            type: "website",
-            image,
-        },
+        basic: { title, type: "website", image },
+        optional: { locale: Astro.currentLocale === "it" ? "it_IT" : "en_US" },
     }}
     twitter={{
-        creator: "@tommasoscalici",
+        creator: "@Tommaso_Scalici",
         card: "summary_large_image",
     }}
     extend={{
         link: [
             { rel: "icon", href: "/favicon.ico", sizes: "any" },
-            {
-                rel: "icon",
-                href: "/images/apple-touch-icon.png",
-                type: "image/png",
-            },
-            { rel: "apple-touch-icon", href: "/images/apple-touch-icon.png" },
+            { rel: "icon", href: "/apple-touch-icon.png", type: "image/png" },
+            { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+            // Hreflangs
+            { rel: "alternate", hreflang: "en", href: enUrl },
+            { rel: "alternate", hreflang: "it", href: itUrl },
+            { rel: "alternate", hreflang: "x-default", href: enUrl },
         ],
         meta: [
             {
                 name: "viewport",
                 content: "width=device-width, initial-scale=1",
             },
-            {
-                name: "generator",
-                content: Astro.generator,
-            },
+            { name: "generator", content: Astro.generator },
         ],
     }}
 />

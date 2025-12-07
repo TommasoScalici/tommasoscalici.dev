@@ -54,7 +54,9 @@ const lang = "it";
                             <h2
                                 class={`font-mono text-xl font-bold mb-6 ${titleColorClass}`}
                             >
-                                {category.title}
+                                {typeof category.title === "string"
+                                    ? category.title
+                                    : category.title.it || category.title.en}
                             </h2>
                             <ul class="space-y-6">
                                 {category.items.map((item) => (
