@@ -44,11 +44,11 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
                     width={300}
                     height={300}
                     loading="lazy"
-                    className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 ${isUpcoming ? 'grayscale opacity-40 scale-100' : 'group-hover:scale-110 opacity-80 group-hover:opacity-60'}`}
+                    className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 ${isUpcoming ? 'grayscale opacity-40 scale-100' : 'group-hover:scale-110 opacity-80 group-hover:opacity-100'}`}
                 />
 
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90" />
+                <div className={`absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 transition-opacity duration-500 ${!isUpcoming && 'group-hover:opacity-0'}`} />
 
                 {/* Content */}
                 <div className="absolute inset-0 p-6 flex flex-col justify-end">

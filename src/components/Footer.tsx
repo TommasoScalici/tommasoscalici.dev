@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { SiGithub, SiLinkedin, SiInstagram } from "react-icons/si";
-import { Music } from 'lucide-react';
+import { Music, MoreHorizontal } from 'lucide-react';
 import { SmartLinkDialog } from './SmartLinkDialog';
+import { SocialSmartDialog } from './SocialSmartDialog';
 import { artistLinks } from '../data/artistLinks';
+import { secondarySocials } from '../data/socials';
 
 interface FooterProps {
     lang: string;
@@ -12,6 +14,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isSocialOpen, setIsSocialOpen] = useState(false);
 
     return (
         <footer className="border-t border-surface bg-black/50 backdrop-blur-md mt-20">
@@ -66,6 +69,14 @@ export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
                     >
                         <SiInstagram className="w-5 h-5" />
                     </a>
+
+                    <button
+                        onClick={() => setIsSocialOpen(true)}
+                        className="text-gray-400 hover:text-white transition-colors"
+                        aria-label="More Socials"
+                    >
+                        <MoreHorizontal className="w-5 h-5" />
+                    </button>
                 </div>
             </div>
 
@@ -73,6 +84,13 @@ export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
                 isOpen={isDialogOpen}
                 onClose={() => setIsDialogOpen(false)}
                 links={artistLinks}
+                t={(key) => t[key]}
+            />
+
+            <SocialSmartDialog
+                isOpen={isSocialOpen}
+                onClose={() => setIsSocialOpen(false)}
+                links={secondarySocials}
                 t={(key) => t[key]}
             />
         </footer>

@@ -27,6 +27,7 @@ export const ui = {
         'section.music.title': 'Sonic Architectures',
         'section.music.subtitle': 'Exploring the boundaries of rhythm and atmosphere.',
         'section.playlists.title': 'Curated Flows',
+        'dialog.connectEverywhere': 'Connect Everywhere',
     },
     it: {
         'nav.home': 'Home',
@@ -49,5 +50,6 @@ export const ui = {
         'section.music.title': 'Architetture Sonore',
         'section.music.subtitle': 'Esplorando i confini del ritmo e dell\'atmosfera.',
         'section.playlists.title': 'Flussi Curati',
+        'dialog.connectEverywhere': 'Connettiti Ovunque',
     },
 } as const;

@@ -79,7 +79,7 @@ const bio = bioData[lang];
 
                         {/* Image Container */}
                         <div
-                            class="absolute inset-0 bg-black/40 backdrop-blur-sm rounded-[2rem] border border-white/10 overflow-hidden shadow-2xl ring-1 ring-white/20 transform -rotate-3 transition-transform hover:rotate-0 duration-500"
+                            class="absolute inset-0 bg-black/40 backdrop-blur-sm rounded-[2rem] border border-white/10 overflow-hidden shadow-2xl ring-1 ring-white/20 transform -rotate-3 transition-all hover:rotate-0 duration-500 hover:shadow-[0_0_50px_rgba(0,243,255,0.4)] hover:border-primary/50"
                         >
                             <Image
                                 src={profileImage}
@@ -99,18 +99,20 @@ const bio = bioData[lang];
     </div>
 
     {/* Scroll Indicator */}
-    <div class="pb-10 mt-16 flex justify-center animate-bounce shrink-0">
-        <svg
-            class="w-6 h-6 text-gray-500"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-        >
-            <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-        </svg>
+    <div class="pb-24 mt-16 flex justify-center animate-bounce shrink-0">
+        <a href="#projects" aria-label="Scroll to projects">
+            <svg
+                class="w-6 h-6 text-white/50 hover:text-white transition-colors duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </a>
     </div>
 </section>
