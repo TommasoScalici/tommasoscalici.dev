@@ -1,6 +1,7 @@
 import lofiCover from "../assets/playlist_covers/lofi.webp";
 import progCover from "../assets/playlist_covers/instrumental-prog.webp";
 import odysseyCover from "../assets/playlist_covers/prog-odyssey.webp";
+import heavyRiffsCover from "../assets/playlist_covers/heavy-riffs.webp";
 
 export interface Playlist {
     title: string;
@@ -32,6 +33,13 @@ export const playlistsData: Record<string, Playlist[]> = {
             coverImage: odysseyCover,
             spotifyId: "7sO9HU4rqRAnF7A15zqc5K",
             genre: "Prog Rock / Metal"
+        },
+        {
+            title: "Heavy Riffs 🎸",
+            description: "A solid collection of the best Heavy Riffs from Hard Rock, Metal & Alternative.",
+            coverImage: heavyRiffsCover,
+            spotifyId: "49NveLmBkE159Zt6g0Novv",
+            genre: "Hard Rock / Metal"
         }
     ],
     it: [
@@ -55,6 +63,13 @@ export const playlistsData: Record<string, Playlist[]> = {
             coverImage: odysseyCover,
             spotifyId: "7sO9HU4rqRAnF7A15zqc5K",
             genre: "Prog Rock / Metal"
+        },
+        {
+            title: "Heavy Riffs 🎸",
+            description: "Una solida raccolta dei migliori Riff Pesanti dal Hard Rock, Metal & Alternative.",
+            coverImage: heavyRiffsCover,
+            spotifyId: "49NveLmBkE159Zt6g0Novv",
+            genre: "Hard Rock / Metal"
         }
     ]
 };

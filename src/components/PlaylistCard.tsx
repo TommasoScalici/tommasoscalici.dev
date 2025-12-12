@@ -13,8 +13,8 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, t }) => {
         e.preventDefault();
 
         // Track Event if Pixel is initialized
-        if (typeof window !== 'undefined' && (window as any).fbq) {
-            (window as any).fbq('track', 'ViewContent', {
+        if (typeof window !== 'undefined' && window.fbq) {
+            window.fbq('track', 'ViewContent', {
                 content_name: playlist.title,
                 content_category: 'Spotify Playlist'
             });

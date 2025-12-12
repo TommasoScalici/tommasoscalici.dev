@@ -6,8 +6,6 @@ interface SpotifyDeepLinkButtonProps {
     className?: string;
 }
 
-
-
 export const SpotifyDeepLinkButton: React.FC<SpotifyDeepLinkButtonProps> = ({ playlistId, eventName, className = "" }) => {
     const [label, setLabel] = useState("Play on Spotify");
     const [isOpening, setIsOpening] = useState(false);

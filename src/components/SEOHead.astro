@@ -7,7 +7,7 @@ interface Props {
     image?: string;
 }
 
-const { title, description, image = "/og-image.png" } = Astro.props;
+const { title, description, image = "/og-image.webp" } = Astro.props;
 
 // 1. Canonical & Hreflang Logic
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
