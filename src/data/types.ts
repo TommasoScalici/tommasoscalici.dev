@@ -33,4 +33,7 @@ export interface Bio {
     heroSubtitle: string;
     description: string;
     role: string;
+    title: string;
+    paragraph1: string;
+    paragraph2: string;
 }
