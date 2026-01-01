@@ -3,5 +3,4 @@
     "name": "tommasoscalici-dev",
     "compatibility_date": "2025-01-01",
     "pages_build_output_dir": "./dist",
-    "main": "./dist/_worker.js/index.js",
 }
