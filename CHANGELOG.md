@@ -1,10 +1,9 @@
 ## [1.0.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.0.0...v1.0.1) (2026-01-01)
 
-
 ### Bug Fixes
 
-* Remove `main` worker script configuration from `wrangler.jsonc` ([d67b6d1](https://github.com/TommasoScalici/tommasoscalici.dev/commit/d67b6d11e7db6867f70388df27074570aeade5d9))
-* remove unnecessary blank lines from CHANGELOG.md that blocked lint ([3ae7ea3](https://github.com/TommasoScalici/tommasoscalici.dev/commit/3ae7ea3e84e3e466381c97ca8c242c5a06b008de))
+- Remove `main` worker script configuration from `wrangler.jsonc` ([d67b6d1](https://github.com/TommasoScalici/tommasoscalici.dev/commit/d67b6d11e7db6867f70388df27074570aeade5d9))
+- remove unnecessary blank lines from CHANGELOG.md that blocked lint ([3ae7ea3](https://github.com/TommasoScalici/tommasoscalici.dev/commit/3ae7ea3e84e3e466381c97ca8c242c5a06b008de))
 
 # 1.0.0 (2026-01-01)
 
