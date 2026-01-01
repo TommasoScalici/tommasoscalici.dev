@@ -34,24 +34,35 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
     };
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 border-b border-surface bg-background/70 backdrop-blur-xl">
-            <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <header className="fixed left-0 right-0 top-0 z-50 border-b border-surface bg-background/70 backdrop-blur-xl">
+            <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
                 <a
-                    href={lang === "en" ? "/" : `/${lang}`}
-                    className="group font-mono font-bold text-xl tracking-tighter transition-colors flex items-center"
+                    href={lang === 'en' ? '/' : `/${lang}`}
+                    className="group flex items-center font-mono text-xl font-bold tracking-tighter transition-colors"
                 >
-                    <img src={logoSrc} alt="TS Circuit Logo" width={48} height={48} loading="eager" className="h-12 w-auto mr-3 object-contain" />
-                    <span className="text-white group-hover:text-primary transition-colors">TOMMASO</span>
-                    <span className="text-white group-hover:text-secondary transition-colors ml-2">SCALICI</span>
+                    <img
+                        src={logoSrc}
+                        alt="TS Circuit Logo"
+                        width={48}
+                        height={48}
+                        loading="eager"
+                        className="mr-3 h-12 w-auto object-contain"
+                    />
+                    <span className="text-white transition-colors group-hover:text-primary">
+                        TOMMASO
+                    </span>
+                    <span className="ml-2 text-white transition-colors group-hover:text-secondary">
+                        SCALICI
+                    </span>
                 </a>
 
                 {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-8">
+                <nav className="hidden items-center gap-8 md:flex">
                     {navItems.map((item) => (
                         <a
                             key={item.href}
                             href={item.href}
-                            className="text-sm font-medium text-gray-400 hover:text-white transition-colors hover:drop-shadow-[0_0_8px_rgba(0,243,255,0.5)]"
+                            className="text-sm font-medium text-gray-400 transition-colors hover:text-white hover:drop-shadow-[0_0_8px_rgba(0,243,255,0.5)]"
                         >
                             {item.label}
                         </a>
@@ -60,10 +71,10 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
                     {/* Language Selector */}
                     <button
                         onClick={toggleLanguage}
-                        className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-surface bg-white/5 text-xs font-mono text-gray-300 hover:border-primary/50 hover:text-primary transition-all"
+                        className="flex items-center gap-2 rounded-full border border-surface bg-white/5 px-3 py-1.5 font-mono text-xs text-gray-300 transition-all hover:border-primary/50 hover:text-primary"
                         aria-label="Switch Language"
                     >
-                        <Languages className="w-3.5 h-3.5" />
+                        <Languages className="h-3.5 w-3.5" />
                         <span>{lang === 'en' ? 'IT' : 'EN'}</span>
                     </button>
                 </nav>
@@ -72,7 +83,7 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
                 <div className="flex items-center gap-4 md:hidden">
                     <button
                         onClick={toggleLanguage}
-                        className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-surface bg-white/5 text-xs font-mono text-gray-300 hover:border-primary/50 hover:text-primary transition-all"
+                        className="flex items-center gap-2 rounded-full border border-surface bg-white/5 px-3 py-1.5 font-mono text-xs text-gray-300 transition-all hover:border-primary/50 hover:text-primary"
                     >
                         <span>{lang === 'en' ? 'IT' : 'EN'}</span>
                     </button>
@@ -82,19 +93,19 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
                         onClick={() => setIsOpen(!isOpen)}
                         aria-label="Menu"
                     >
-                        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                        {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                     </button>
                 </div>
             </div>
 
             {/* Mobile Nav Overlay */}
             {isOpen && (
-                <div className="md:hidden absolute top-16 left-0 right-0 bg-black/95 border-b border-surface backdrop-blur-xl p-6 flex flex-col gap-6 animate-in slide-in-from-top-5">
+                <div className="animate-in slide-in-from-top-5 absolute left-0 right-0 top-16 flex flex-col gap-6 border-b border-surface bg-black/95 p-6 backdrop-blur-xl md:hidden">
                     {navItems.map((item) => (
                         <a
                             key={item.href}
                             href={item.href}
-                            className="text-lg font-medium text-gray-300 hover:text-primary transition-colors"
+                            className="text-lg font-medium text-gray-300 transition-colors hover:text-primary"
                             onClick={() => setIsOpen(false)}
                         >
                             {item.label}

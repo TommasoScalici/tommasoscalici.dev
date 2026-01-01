@@ -1,7 +1,7 @@
 ---
-import { projects } from "../../data/projects";
-import { ProjectCard } from "../ProjectCard";
-import { ui, defaultLang } from "../../i18n/ui";
+import { projects } from '../../data/projects';
+import { ProjectCard } from '../ProjectCard';
+import { ui, defaultLang } from '../../i18n/ui';
 
 interface Props {
     lang?: string;
@@ -11,26 +11,22 @@ const { lang = defaultLang } = Astro.props;
 const t = ui[lang as keyof typeof ui] || ui[defaultLang];
 ---
 
-<section id="projects" class="py-32 px-6 bg-black/50">
-    <div class="max-w-7xl mx-auto">
-        <div class="flex items-end justify-between mb-16">
+<section id="projects" class="bg-black/50 px-6 py-32">
+    <div class="mx-auto max-w-7xl">
+        <div class="mb-16 flex items-end justify-between">
             <div>
-                <h2 class="text-4xl md:text-5xl font-bold font-mono mb-4">
+                <h2 class="mb-4 font-mono text-4xl font-bold md:text-5xl">
                     <span class="text-primary">01.</span>
-                    {t["section.projects.title"]}
+                    {t['section.projects.title']}
                 </h2>
                 <p class="text-gray-400">
-                    {t["section.projects.subtitle"]}
+                    {t['section.projects.subtitle']}
                 </p>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {
-                projects.map((project) => (
-                    <ProjectCard client:visible project={project} />
-                ))
-            }
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {projects.map((project) => <ProjectCard client:visible project={project} />)}
         </div>
     </div>
 </section>

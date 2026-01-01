@@ -1,8 +1,8 @@
 ---
-import { MusicReleaseCard } from "../MusicReleaseCard";
-import { musicReleases } from "../../data/music";
-import { ui, defaultLang } from "../../i18n/ui";
-import { getImage } from "astro:assets";
+import { MusicReleaseCard } from '../MusicReleaseCard';
+import { musicReleases } from '../../data/music';
+import { ui, defaultLang } from '../../i18n/ui';
+import { getImage } from 'astro:assets';
 
 interface Props {
     lang: string;
@@ -16,7 +16,7 @@ const optimizedMusicReleases = await Promise.all(
     musicReleases.map(async (release) => {
         const optimizedImage = await getImage({
             src: release.coverImage,
-            format: "webp",
+            format: 'webp',
             width: 300,
             height: 300,
         });
@@ -28,27 +28,27 @@ const optimizedMusicReleases = await Promise.all(
 );
 ---
 
-<section id="music" class="py-32 px-6 relative overflow-hidden">
+<section id="music" class="relative overflow-hidden px-6 py-32">
     {/* Background Gradient */}
     <div
-        class="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/5 to-transparent pointer-events-none"
+        class="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-secondary/5 to-transparent"
     >
     </div>
 
-    <div class="max-w-7xl mx-auto relative z-10">
-        <div class="flex items-end justify-between mb-16">
+    <div class="relative z-10 mx-auto max-w-7xl">
+        <div class="mb-16 flex items-end justify-between">
             <div>
-                <h2 class="text-4xl md:text-5xl font-bold font-mono mb-4">
+                <h2 class="mb-4 font-mono text-4xl font-bold md:text-5xl">
                     <span class="text-secondary">02.</span>
-                    {t["section.music.title"]}
+                    {t['section.music.title']}
                 </h2>
                 <p class="text-gray-400">
-                    {t["section.music.subtitle"]}
+                    {t['section.music.subtitle']}
                 </p>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {
                 optimizedMusicReleases.map((release) => (
                     <MusicReleaseCard client:visible release={release} t={t} />

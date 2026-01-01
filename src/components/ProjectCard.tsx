@@ -9,17 +9,15 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     return (
-        <div
-            className="bg-white/5 backdrop-blur-md border border-white/10 hover:border-primary/50 transition-all duration-300 group block rounded-2xl overflow-hidden hover:shadow-[0_0_30px_rgba(0,243,255,0.1)]"
-        >
-            <div className="relative p-6 h-full flex flex-col">
+        <div className="group block overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(0,243,255,0.1)]">
+            <div className="relative flex h-full flex-col p-6">
                 {/* Hover Gradient Effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-                <div className="relative z-10 flex flex-col h-full">
-                    <div className="flex justify-between items-start mb-4">
-                        <div className="p-3 rounded-lg bg-background/50 border border-surface group-hover:border-primary/30 transition-colors">
-                            <Code2 className="w-6 h-6 text-primary" />
+                <div className="relative z-10 flex h-full flex-col">
+                    <div className="mb-4 flex items-start justify-between">
+                        <div className="rounded-lg border border-surface bg-background/50 p-3 transition-colors group-hover:border-primary/30">
+                            <Code2 className="h-6 w-6 text-primary" />
                         </div>
                         <div className="flex gap-2">
                             {project.repoUrl && (
@@ -27,10 +25,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                                     href={project.repoUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-full transition-colors"
+                                    className="rounded-full p-2 text-gray-400 transition-colors hover:bg-white/5 hover:text-white"
                                     aria-label="View Source Code"
                                 >
-                                    <SiGithub className="w-5 h-5" />
+                                    <SiGithub className="h-5 w-5" />
                                 </a>
                             )}
                             {project.playStoreUrl && (
@@ -38,10 +36,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                                     href={project.playStoreUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-full transition-colors"
+                                    className="rounded-full p-2 text-gray-400 transition-colors hover:bg-white/5 hover:text-white"
                                     aria-label="View on Google Play"
                                 >
-                                    <SiGoogleplay className="w-5 h-5" />
+                                    <SiGoogleplay className="h-5 w-5" />
                                 </a>
                             )}
                             {project.demoUrl && (
@@ -49,28 +47,28 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                                     href={project.demoUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-full transition-colors"
+                                    className="rounded-full p-2 text-gray-400 transition-colors hover:bg-white/5 hover:text-white"
                                     aria-label="View Live Demo"
                                 >
-                                    <ExternalLink className="w-5 h-5" />
+                                    <ExternalLink className="h-5 w-5" />
                                 </a>
                             )}
                         </div>
                     </div>
 
-                    <h3 className="text-xl font-bold font-mono text-white mb-2 group-hover:text-primary transition-colors">
+                    <h3 className="mb-2 font-mono text-xl font-bold text-white transition-colors group-hover:text-primary">
                         {project.title}
                     </h3>
 
-                    <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                    <p className="mb-6 flex-grow text-sm leading-relaxed text-gray-400">
                         {project.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-2 mt-auto">
+                    <div className="mt-auto flex flex-wrap gap-2">
                         {project.techStack.map((tech) => (
                             <span
                                 key={tech}
-                                className="px-3 py-1 text-xs font-medium font-mono rounded-full border border-surface bg-white/5 text-gray-300 group-hover:border-primary/20 group-hover:text-primary/90 transition-colors"
+                                className="rounded-full border border-surface bg-white/5 px-3 py-1 font-mono text-xs font-medium text-gray-300 transition-colors group-hover:border-primary/20 group-hover:text-primary/90"
                             >
                                 {tech}
                             </span>

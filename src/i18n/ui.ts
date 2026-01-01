@@ -46,10 +46,13 @@ export const ui = {
         'hero.listenMusic': 'Ascolta Musica',
         'hero.enterFlow': 'Entra nel Flow',
         'section.projects.title': 'Lavori Selezionati',
-        'section.projects.subtitle': 'Ingegnerizzazione di soluzioni robuste per problemi complessi.',
+        'section.projects.subtitle':
+            'Ingegnerizzazione di soluzioni robuste per problemi complessi.',
         'section.music.title': 'Architetture Sonore',
-        'section.music.subtitle': 'Esplorando i confini del ritmo e dell\'atmosfera.',
+        'section.music.subtitle': "Esplorando i confini del ritmo e dell'atmosfera.",
         'section.playlists.title': 'Flussi Curati',
         'dialog.connectEverywhere': 'Connettiti Ovunque',
     },
 } as const;
+
+export type TranslationKey = keyof typeof ui.en;

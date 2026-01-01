@@ -6,40 +6,40 @@ export interface PlatformDef {
 
 export const platforms: Record<string, PlatformDef> = {
     spotify: {
-        label: "Spotify",
-        icon: "spotify",
-        color: "hover:text-[#1DB954]"
+        label: 'Spotify',
+        icon: 'spotify',
+        color: 'hover:text-[#1DB954]',
     },
     apple: {
-        label: "Apple Music",
-        icon: "apple",
-        color: "hover:text-[#FA243C]"
+        label: 'Apple Music',
+        icon: 'apple',
+        color: 'hover:text-[#FA243C]',
     },
     youtube: {
-        label: "YouTube Music",
-        icon: "youtube",
-        color: "hover:text-[#FF0000]"
+        label: 'YouTube Music',
+        icon: 'youtube',
+        color: 'hover:text-[#FF0000]',
     },
     amazon: {
-        label: "Amazon Music",
-        icon: "amazon",
-        color: "hover:text-[#25D1DA]"
+        label: 'Amazon Music',
+        icon: 'amazon',
+        color: 'hover:text-[#25D1DA]',
     },
     tidal: {
-        label: "Tidal",
-        icon: "tidal",
-        color: "hover:text-white"
+        label: 'Tidal',
+        icon: 'tidal',
+        color: 'hover:text-white',
     },
     deezer: {
-        label: "Deezer",
-        icon: "deezer",
-        color: "hover:text-[#A238FF]"
+        label: 'Deezer',
+        icon: 'deezer',
+        color: 'hover:text-[#A238FF]',
     },
     bandcamp: {
-        label: "Bandcamp",
-        icon: "bandcamp",
-        color: "hover:text-[#629aa9]"
-    }
+        label: 'Bandcamp',
+        icon: 'bandcamp',
+        color: 'hover:text-[#629aa9]',
+    },
 };
 
 export const platformOrder = [
@@ -49,5 +49,5 @@ export const platformOrder = [
     'amazon',
     'tidal',
     'deezer',
-    'bandcamp'
+    'bandcamp',
 ];

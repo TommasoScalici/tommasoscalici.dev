@@ -10,8 +10,9 @@ import {
     SiTelegram,
     SiGoogleplay,
     SiLastdotfm,
-    SiSteam
-} from "react-icons/si";
+    SiSteam,
+} from 'react-icons/si';
+import type { TranslationKey } from '../i18n/ui';
 
 export interface SocialLink {
     label: string;
@@ -24,22 +25,27 @@ interface SocialSmartDialogProps {
     isOpen: boolean;
     onClose: () => void;
     links: SocialLink[];
-    t: (key: string) => string;
+    t: (key: TranslationKey) => string;
 }
 
 const iconMap: Record<string, React.ReactNode> = {
-    spotify: <SiSpotify className="w-5 h-5" />,
-    facebook: <SiFacebook className="w-5 h-5" />,
-    x: <SiX className="w-5 h-5" />,
-    tiktok: <SiTiktok className="w-5 h-5" />,
-    threads: <SiThreads className="w-5 h-5" />,
-    telegram: <SiTelegram className="w-5 h-5" />,
-    googleplay: <SiGoogleplay className="w-5 h-5" />,
-    lastfm: <SiLastdotfm className="w-5 h-5" />,
-    steam: <SiSteam className="w-5 h-5" />,
+    spotify: <SiSpotify className="h-5 w-5" />,
+    facebook: <SiFacebook className="h-5 w-5" />,
+    x: <SiX className="h-5 w-5" />,
+    tiktok: <SiTiktok className="h-5 w-5" />,
+    threads: <SiThreads className="h-5 w-5" />,
+    telegram: <SiTelegram className="h-5 w-5" />,
+    googleplay: <SiGoogleplay className="h-5 w-5" />,
+    lastfm: <SiLastdotfm className="h-5 w-5" />,
+    steam: <SiSteam className="h-5 w-5" />,
 };
 
-export const SocialSmartDialog: React.FC<SocialSmartDialogProps> = ({ isOpen, onClose, links, t }) => {
+export const SocialSmartDialog: React.FC<SocialSmartDialogProps> = ({
+    isOpen,
+    onClose,
+    links,
+    t,
+}) => {
     if (!isOpen) return null;
 
     return createPortal(
@@ -48,34 +54,40 @@ export const SocialSmartDialog: React.FC<SocialSmartDialogProps> = ({ isOpen, on
             <div
                 className="absolute inset-0 bg-black/80 backdrop-blur-sm"
                 onClick={onClose}
+                onKeyDown={(e) => {
+                    if (e.key === 'Escape') onClose();
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label="Close dialog"
             />
-
             {/* Dialog Card */}
-            <div className="relative w-full max-w-sm bg-[#0a0a0a] border border-white/10 rounded-2xl p-6 shadow-2xl animate-in zoom-in-95 duration-200">
-
+            <div className="animate-in zoom-in-95 relative w-full max-w-sm rounded-2xl border border-white/10 bg-[#0a0a0a] p-6 shadow-2xl duration-200">
                 {/* Close Button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+                    className="absolute right-4 top-4 text-gray-400 transition-colors hover:text-white"
                     aria-label="Close"
                 >
-                    <X className="w-5 h-5" />
+                    <X className="h-5 w-5" />
                 </button>
 
                 {/* Header */}
-                <div className="text-center mb-6">
-                    <h3 className="font-mono text-lg font-bold text-white">{t("dialog.connectEverywhere") || "Connect Everywhere"}</h3>
+                <div className="mb-6 text-center">
+                    <h3 className="font-mono text-lg font-bold text-white">
+                        {t('dialog.connectEverywhere') || 'Connect Everywhere'}
+                    </h3>
                 </div>
 
                 {/* Links Grid */}
-                <div className="flex flex-col gap-3 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+                <div className="custom-scrollbar flex max-h-[60vh] flex-col gap-3 overflow-y-auto pr-2">
                     {links.map((link) => (
                         <a
                             key={link.label}
                             href={link.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`flex items-center gap-4 p-3 rounded-lg bg-white/5 hover:bg-white/10 border border-transparent hover:border-white/10 transition-all group`}
+                            className={`group flex items-center gap-4 rounded-lg border border-transparent bg-white/5 p-3 transition-all hover:border-white/10 hover:bg-white/10`}
                         >
                             <span className={`text-gray-400 transition-colors ${link.color}`}>
                                 {iconMap[link.icon]}
@@ -88,6 +100,6 @@ export const SocialSmartDialog: React.FC<SocialSmartDialogProps> = ({ isOpen, on
                 </div>
             </div>
         </div>,
-        document.body
+        document.body,
     );
 };

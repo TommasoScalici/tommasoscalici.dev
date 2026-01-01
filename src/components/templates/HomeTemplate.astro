@@ -1,0 +1,66 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import HeroSection from '../sections/HeroSection.astro';
+import ProjectsSection from '../sections/ProjectsSection.astro';
+import MusicSection from '../sections/MusicSection.astro';
+import PlaylistsSection from '../sections/PlaylistsSection.astro';
+import { bioData } from '../../data/bio';
+
+interface Props {
+    lang: 'en' | 'it';
+}
+
+const { lang } = Astro.props;
+const bio = bioData[lang];
+
+const pageTitle =
+    lang === 'it'
+        ? 'Tommaso Scalici | Software Engineer & Musicista'
+        : 'Tommaso Scalici | Software Engineer & Musician';
+---
+
+<Layout title={pageTitle} description={bio.description} lang={lang}>
+    <HeroSection lang={lang} />
+    <ProjectsSection lang={lang} />
+
+    <!-- Narrative Bio Section -->
+    <section class="relative overflow-hidden border-t border-white/10 bg-white/5">
+        <div class="mx-auto max-w-7xl px-6 py-24">
+            <div class="grid items-center gap-12 md:grid-cols-2">
+                {/* Left Column: The Hook */}
+                <div class="border-l-4 border-cyan-500 pl-6">
+                    <h2
+                        class="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text font-mono text-3xl font-bold leading-tight text-transparent md:text-5xl"
+                    >
+                        {bio.title}
+                    </h2>
+                </div>
+
+                {/* Right Column: The Narrative */}
+                <div class="space-y-6 font-sans text-lg leading-relaxed text-gray-300">
+                    <p
+                        set:html={bio.paragraph1.replace(
+                            /(RPG Maker XP|Nobuo Uematsu)/g,
+                            '<span class="text-white font-semibold">$1</span>',
+                        )}
+                    />
+                    <p
+                        set:html={bio.paragraph2.replace(
+                            /(.NET|Dream Theater)/g,
+                            '<span class="text-white font-semibold">$1</span>',
+                        )}
+                    />
+                </div>
+            </div>
+        </div>
+
+        {/* Subtle Background Radial */}
+        <div
+            class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-cyan-900/10 to-transparent opacity-50"
+        >
+        </div>
+    </section>
+
+    <MusicSection lang={lang} />
+    <PlaylistsSection lang={lang} />
+</Layout>

@@ -1,23 +1,22 @@
 ---
-import { ClientRouter } from "astro:transitions";
-import { Header } from "../components/Header";
-import { Footer } from "../components/Footer";
-import SEOHead from "../components/SEOHead.astro";
+import { ClientRouter } from 'astro:transitions';
+import { Header } from '../components/Header';
+import { Footer } from '../components/Footer';
+import SEOHead from '../components/SEOHead.astro';
 
-import { ui, defaultLang } from "../i18n/ui";
+import { ui, defaultLang } from '../i18n/ui';
 
-import "@fontsource/inter";
-import "@fontsource/jetbrains-mono";
-import "../styles/global.css";
-import { getImage } from "astro:assets";
-import logoImage from "../assets/logo.webp";
+import '@fontsource/inter';
+import '@fontsource/jetbrains-mono';
+import '../styles/global.css';
+import { getImage } from 'astro:assets';
+import logoImage from '../assets/logo.webp';
 
-// Optimize Logo
 const optimizedLogo = await getImage({
     src: logoImage,
     width: 64, // Slightly larger for high DPR
     height: 64,
-    format: "webp",
+    format: 'webp',
 });
 
 interface Props {
@@ -28,24 +27,20 @@ interface Props {
 
 const {
     title,
-    description = "Senior Software Engineer & Prog Metal Musician",
+    description = 'Senior Software Engineer & Prog Metal Musician',
     lang = defaultLang,
 } = Astro.props;
 
 const t = ui[lang as keyof typeof ui] || ui[defaultLang];
 
 const navItems = [
-    { label: t["nav.home"], href: lang === "en" ? "/" : `/${lang}` },
-    { label: t["nav.projects"], href: "#projects" },
-    { label: t["nav.music"], href: "#music" },
+    { label: t['nav.home'], href: lang === 'en' ? '/' : `/${lang}` },
+    { label: t['nav.projects'], href: '#projects' },
+    { label: t['nav.music'], href: '#music' },
 ];
-// Dynamic Copyright Year
 const currentYear = new Date().getFullYear();
 const startYear = 2010; // Career start
-const copyrightDate =
-    startYear === currentYear
-        ? `${startYear}`
-        : `${startYear} - ${currentYear}`;
+const copyrightDate = startYear === currentYear ? `${startYear}` : `${startYear} - ${currentYear}`;
 ---
 
 <!doctype html>
@@ -56,33 +51,23 @@ const copyrightDate =
         <ClientRouter />
     </head>
     <body
-        class="bg-background text-white font-sans antialiased selection:bg-primary selection:text-black"
+        class="bg-background font-sans text-white antialiased selection:bg-primary selection:text-black"
     >
-        <Header
-            client:load
-            lang={lang}
-            navItems={navItems}
-            logoSrc={optimizedLogo.src}
-        />
+        <Header client:load lang={lang} navItems={navItems} logoSrc={optimizedLogo.src} />
 
-        <main class="pt-20 min-h-screen relative overflow-hidden">
+        <main class="relative min-h-screen overflow-hidden pt-20">
             <div
-                class="fixed top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[128px] -z-10 pointer-events-none"
+                class="pointer-events-none fixed left-1/4 top-0 -z-10 h-96 w-96 rounded-full bg-primary/10 blur-[128px]"
             >
             </div>
             <div
-                class="fixed bottom-0 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-[128px] -z-10 pointer-events-none"
+                class="pointer-events-none fixed bottom-0 right-1/4 -z-10 h-96 w-96 rounded-full bg-secondary/10 blur-[128px]"
             >
             </div>
 
             <slot />
         </main>
 
-        <Footer
-            client:visible
-            lang={lang}
-            t={t}
-            copyrightDate={copyrightDate}
-        />
+        <Footer client:visible lang={lang} t={t} copyrightDate={copyrightDate} />
     </body>
 </html>

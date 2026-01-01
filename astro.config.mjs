@@ -9,19 +9,19 @@ export default defineConfig({
     output: 'server',
     adapter: cloudflare(),
     i18n: {
-        defaultLocale: "en",
-        locales: ["en", "it"],
+        defaultLocale: 'en',
+        locales: ['en', 'it'],
         routing: {
-            prefixDefaultLocale: false
-        }
+            prefixDefaultLocale: false,
+        },
     },
     image: {
-        domains: ["f4.bcbits.com", "googleusercontent.com", "i.scdn.co"],
-        remotePatterns: [{ protocol: "https" }],
+        domains: ['f4.bcbits.com', 'googleusercontent.com', 'i.scdn.co'],
+        remotePatterns: [{ protocol: 'https' }],
     },
     vite: {
         ssr: {
-            external: ['node:fs', 'node:path']
-        }
-    }
+            external: ['node:fs', 'node:path'],
+        },
+    },
 });

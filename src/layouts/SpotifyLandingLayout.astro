@@ -1,32 +1,33 @@
 ---
-import "@fontsource/inter";
-import "@fontsource/jetbrains-mono";
-import "../styles/global.css";
-import { Image, getImage } from "astro:assets";
+import '@fontsource/inter';
+import '@fontsource/jetbrains-mono';
+import '../styles/global.css';
+import { Image, getImage } from 'astro:assets';
 
 interface Props {
     title: string;
     description: string;
-    coverImage: ImageMetadata | string;
-    theme: "prog" | "lofi";
+    // eslint-disable-next-line no-undef
+    coverImage: ImageMetadata;
+    theme: 'lofi' | 'prog';
 }
 
 const { title, description, coverImage, theme } = Astro.props;
 
 // Optimize image for background and SEO
-const optimizedBg = await getImage({ src: coverImage, format: "webp" });
+const optimizedBg = await getImage({ src: coverImage, format: 'webp' });
 
 // Theme Configuration
 const themeConfig = {
     prog: {
-        bgBlur: "filter: blur(30px) brightness(0.3);",
-        card: "background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(0, 243, 255, 0.2); box-shadow: 0 0 40px rgba(0, 243, 255, 0.1);",
-        coverShadow: "box-shadow: 0 10px 30px rgba(0,0,0,0.6);",
+        bgBlur: 'filter: blur(30px) brightness(0.3);',
+        card: 'background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(0, 243, 255, 0.2); box-shadow: 0 0 40px rgba(0, 243, 255, 0.1);',
+        coverShadow: 'box-shadow: 0 10px 30px rgba(0,0,0,0.6);',
     },
     lofi: {
-        bgBlur: "filter: blur(25px) brightness(0.4);",
-        card: "background: rgba(22, 27, 34, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5);",
-        coverShadow: "box-shadow: 0 8px 20px rgba(0,0,0,0.4);",
+        bgBlur: 'filter: blur(25px) brightness(0.4);',
+        card: 'background: rgba(22, 27, 34, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5);',
+        coverShadow: 'box-shadow: 0 8px 20px rgba(0,0,0,0.4);',
     },
 };
 
@@ -56,31 +57,26 @@ const currentTheme = themeConfig[theme];
                 facebookPixelId: import.meta.env.PUBLIC_FACEBOOK_PIXEL_ID,
             }}
         >
+            /* eslint-disable */
             !(function (f, b, e, v, n, t, s) {
                 if (f.fbq) return;
                 n = f.fbq = function () {
-                    n.callMethod
-                        ? n.callMethod.apply(n, arguments)
-                        : n.queue.push(arguments);
+                    n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
                 };
                 if (!f._fbq) f._fbq = n;
                 n.push = n;
                 n.loaded = !0;
-                n.version = "2.0";
+                n.version = '2.0';
                 n.queue = [];
                 t = b.createElement(e);
                 t.async = !0;
                 t.src = v;
                 s = b.getElementsByTagName(e)[0];
                 s.parentNode.insertBefore(t, s);
-            })(
-                window,
-                document,
-                "script",
-                "https://connect.facebook.net/en_US/fbevents.js",
-            );
-            fbq("init", facebookPixelId);
-            fbq("track", "PageView");
+            })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', facebookPixelId);
+            fbq('track', 'PageView');
+            /* eslint-enable */
         </script>
         <noscript>
             <img
@@ -92,73 +88,74 @@ const currentTheme = themeConfig[theme];
         </noscript>
         <!-- End Meta Pixel Code -->
 
+        <!-- Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-X000000000"></script>
+        <script>
+            /* eslint-disable */
+            window.dataLayer = window.dataLayer || [];
+            function gtag(...args: any[]) {
+                window.dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-X000000000');
+            /* eslint-enable */
+        </script>
+        <!-- End Meta Pixel Code -->
+
         <!-- TikTok Pixel Code -->
-        <script
-            is:inline
-            define:vars={{
-                tiktokPixelId: import.meta.env.PUBLIC_TIKTOK_PIXEL_ID,
-            }}
-        >
-            (function (w, d, t) {
+        <script is:inline define:vars={{ tiktokPixelId: import.meta.env.PUBLIC_TIKTOK_PIXEL_ID }}>
+            /* eslint-disable */
+            !(function (w, d, t) {
                 w.TiktokAnalyticsObject = t;
                 var ttq = (w[t] = w[t] || []);
-                ttq.methods = [
-                    "page",
-                    "track",
-                    "identify",
-                    "instances",
-                    "debug",
-                    "on",
-                    "off",
-                    "once",
-                    "ready",
-                    "alias",
-                    "group",
-                    "enableCookie",
-                    "disableCookie",
-                ];
-                ttq.setAndDefer = function (t, e) {
-                    t.align = 2;
-                    ttq.push([
-                        t,
-                        e,
-                        function () {
-                            t.align = 1;
-                            ttq[arguments.length - 1].call(ttq, arguments);
-                        },
-                    ]);
-                };
-                for (var n = 0; n < ttq.methods.length; n++)
-                    ttq.setAndDefer(ttq, ttq.methods[n]);
-                ttq.instance = function (t) {
-                    for (
-                        var e = ttq._i[t] || [], n = 0;
-                        n < ttq.methods.length;
-                        n++
-                    )
+                ((ttq.methods = [
+                    'page',
+                    'track',
+                    'identify',
+                    'instances',
+                    'debug',
+                    'on',
+                    'off',
+                    'once',
+                    'ready',
+                    'alias',
+                    'group',
+                    'enableCookie',
+                    'disableCookie',
+                ]),
+                    (ttq.setAndDefer = function (t, e) {
+                        t[e] = function () {
+                            t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+                        };
+                    }));
+                for (var i = 0; i < ttq.methods.length; i++) ttq.setAndDefer(ttq, ttq.methods[i]);
+                ((ttq.instance = function (t) {
+                    for (var e = ttq.of[t] || [], n = 0; n < ttq.methods.length; n++)
                         ttq.setAndDefer(e, ttq.methods[n]);
                     return e;
-                };
-                ttq.load = function (e, n) {
-                    var i = "https://analytics.tiktok.com/i18n/pixel/events.js";
-                    ttq._i = ttq._i || {};
-                    ttq._i[e] = [];
-                    ttq._i[e]._u = i;
-                    ttq._t = ttq._t || {};
-                    ttq._t[e] = +new Date();
-                    ttq._o = ttq._o || {};
-                    ttq._o[e] = n || {};
-                    var o = d.createElement("script");
-                    o.type = "text/javascript";
-                    o.async = !0;
-                    o.src = i + "?sdkid=" + e + "&lib=" + t;
-                    var a = d.getElementsByTagName("script")[0];
-                    a.parentNode.insertBefore(o, a);
-                };
+                }),
+                    (ttq.load = function (e, n) {
+                        var i = 'https://analytics.tiktok.com/i18n/pixel/events.js';
+                        ((ttq._i = ttq._i || {}),
+                            (ttq._i[e] = []),
+                            (ttq._i[e]._u = i),
+                            (ttq._t = ttq._t || {}),
+                            (ttq._t[e] = +new Date()),
+                            (ttq._o = ttq._o || {}),
+                            (ttq._o[e] = n || {}));
+                        var o = document.createElement('script');
+                        ((o.type = 'text/javascript'),
+                            (o.async = !0),
+                            (o.src = i + '?sdkid=' + e + '&lib=' + t));
+                        var a = document.getElementsByTagName('script')[0];
+                        a.parentNode.insertBefore(o, a);
+                    }));
 
                 ttq.load(tiktokPixelId);
                 ttq.page();
-            })(window, document, "ttq");
+            })(window, document, 'ttq');
+            /* eslint-enable */
         </script>
 
         <style>
@@ -175,29 +172,27 @@ const currentTheme = themeConfig[theme];
         </style>
     </head>
     <body
-        class="h-screen overflow-hidden flex justify-center items-center relative font-sans text-white"
-        style={theme === "lofi"
-            ? "background-color: #0d1117;"
-            : "background-color: #050505;"}
+        class="relative flex h-screen items-center justify-center overflow-hidden font-sans text-white"
+        style={theme === 'lofi' ? 'background-color: #0d1117;' : 'background-color: #050505;'}
     >
         <div
-            class="absolute top-0 left-0 w-full h-full -z-10 scale-110 bg-no-repeat bg-center bg-cover"
+            class="absolute left-0 top-0 -z-10 h-full w-full scale-110 bg-cover bg-center bg-no-repeat"
             style={`${currentTheme.bgBlur} background-image: url('${optimizedBg.src}');`}
         >
         </div>
 
         <div
-            class="w-[90%] max-w-[380px] p-[30px_20px] rounded-3xl text-center"
+            class="w-[90%] max-w-[380px] rounded-3xl p-[30px_20px] text-center"
             style={`${currentTheme.card} animation: floatUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);`}
         >
             {
-                typeof coverImage === "string" ? (
+                typeof coverImage === 'string' ? (
                     <Image
                         src={coverImage}
                         width={300}
                         height={300}
                         loading="eager"
-                        class="w-full aspect-square rounded-xl mb-5 object-cover"
+                        class="mb-5 aspect-square w-full rounded-xl object-cover"
                         style={currentTheme.coverShadow}
                         alt={`${title} Cover`}
                     />
@@ -207,7 +202,7 @@ const currentTheme = themeConfig[theme];
                         width={300}
                         height={300}
                         loading="eager"
-                        class="w-full aspect-square rounded-xl mb-5 object-cover"
+                        class="mb-5 aspect-square w-full rounded-xl object-cover"
                         style={currentTheme.coverShadow}
                         alt={`${title} Cover`}
                     />
@@ -217,12 +212,12 @@ const currentTheme = themeConfig[theme];
             <slot />
 
             <div
-                class={`mt-5 text-[11px] ${theme === "lofi" ? "text-[#484f58]" : "text-[#666]"} border-none outline-none bg-transparent`}
+                class={`mt-5 text-[11px] ${theme === 'lofi' ? 'text-[#484f58]' : 'text-[#666]'} border-none outline-none bg-transparent`}
             >
                 Curated by <a
                     href="https://linktr.ee/tommasoscalici"
                     target="_blank"
-                    class="font-semibold text-inherit no-underline transition-colors duration-200 border-b border-transparent hover:text-white hover:border-white bg-transparent outline-none"
+                    class="border-b border-transparent bg-transparent font-semibold text-inherit no-underline outline-none transition-colors duration-200 hover:border-white hover:text-white"
                     >Tommaso Scalici</a
                 >
             </div>

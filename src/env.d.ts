@@ -1,3 +1,4 @@
+/// <reference types="astro/client" />
 /// <reference path="../.astro/types.d.ts" />
 
 interface ImportMetaEnv {
@@ -10,7 +11,9 @@ interface ImportMeta {
 }
 
 interface Window {
-    fbq?: any;
-    _fbq?: any;
-    ttq?: any;
+    fbq?: unknown;
+    _fbq?: unknown;
+    ttq?: unknown;
+    dataLayer: unknown[];
+    gtag: (...args: unknown[]) => void;
 }

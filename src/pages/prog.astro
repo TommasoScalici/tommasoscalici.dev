@@ -1,20 +1,15 @@
 ---
-import SpotifyLandingLayout from "../layouts/SpotifyLandingLayout.astro";
-import { SpotifyDeepLinkButton } from "../components/SpotifyDeepLinkButton";
+import SpotifyLandingLayout from '../layouts/SpotifyLandingLayout.astro';
+import { SpotifyDeepLinkButton } from '../components/SpotifyDeepLinkButton';
 
-const title = "Modern Prog | Instrumental Metal";
+const title = 'Modern Prog | Instrumental Metal';
 const description =
-    "The best Modern Instrumental Progressive Metal. Djent, Math Rock & Heavy Riffs.";
-import coverImage from "../assets/playlist_covers/instrumental-prog.webp";
-const playlistId = "32xYNI24QWMWfSgG1xZgjI";
+    'The best Modern Instrumental Progressive Metal. Djent, Math Rock & Heavy Riffs.';
+import coverImage from '../assets/playlist_covers/instrumental-prog.webp';
+const playlistId = '32xYNI24QWMWfSgG1xZgjI';
 ---
 
-<SpotifyLandingLayout
-    title={title}
-    description={description}
-    coverImage={coverImage}
-    theme="prog"
->
+<SpotifyLandingLayout title={title} description={description} coverImage={coverImage} theme="prog">
     <style>
         /* Typography */
         h1 {
@@ -42,14 +37,10 @@ const playlistId = "32xYNI24QWMWfSgG1xZgjI";
     <h1>Modern Prog ⚡</h1>
     <p class="subtitle">
         The ultimate Progressive Instrumental collection.<br />
-        <span class="highlight">Djent</span>, <span class="highlight"
-            >Math Rock</span
-        > & <span class="highlight">Heavy Riffs</span>.
+        <span class="highlight">Djent</span>, <span class="highlight">Math Rock</span> & <span
+            class="highlight">Heavy Riffs</span
+        >.
     </p>
 
-    <SpotifyDeepLinkButton
-        client:load
-        playlistId={playlistId}
-        eventName="Modern Prog"
-    />
+    <SpotifyDeepLinkButton client:load playlistId={playlistId} eventName="Modern Prog" />
 </SpotifyLandingLayout>

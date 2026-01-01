@@ -1,20 +1,14 @@
 ---
-import SpotifyLandingLayout from "../layouts/SpotifyLandingLayout.astro";
-import { SpotifyDeepLinkButton } from "../components/SpotifyDeepLinkButton";
+import SpotifyLandingLayout from '../layouts/SpotifyLandingLayout.astro';
+import { SpotifyDeepLinkButton } from '../components/SpotifyDeepLinkButton';
 
-const title = "Coding Lofi | Focus Music for Devs";
-const description =
-    "Focus music designed for Developers. Python, JS, C++ & Deep Work.";
-import coverImage from "../assets/playlist_covers/lofi.webp";
-const playlistId = "0yF9pJ62XkAgxDGMlbyenf";
+const title = 'Coding Lofi | Focus Music for Devs';
+const description = 'Focus music designed for Developers. Python, JS, C++ & Deep Work.';
+import coverImage from '../assets/playlist_covers/lofi.webp';
+const playlistId = '0yF9pJ62XkAgxDGMlbyenf';
 ---
 
-<SpotifyLandingLayout
-    title={title}
-    description={description}
-    coverImage={coverImage}
-    theme="lofi"
->
+<SpotifyLandingLayout title={title} description={description} coverImage={coverImage} theme="lofi">
     <style>
         /* Typography */
         h1 {
@@ -38,15 +32,10 @@ const playlistId = "0yF9pJ62XkAgxDGMlbyenf";
     <h1>Coding Lofi ☕</h1>
     <p class="subtitle">
         Focus music curated for Developers.<br />
-        <span class="highlight">Python</span>, <span class="highlight">JS</span
-        >, <span class="highlight">C++</span> & <span class="highlight"
-            >Deep Work</span
-        >.
+        <span class="highlight">Python</span>, <span class="highlight">JS</span>, <span
+            class="highlight">C++</span
+        > & <span class="highlight">Deep Work</span>.
     </p>
 
-    <SpotifyDeepLinkButton
-        client:load
-        playlistId={playlistId}
-        eventName="Coding Lofi"
-    />
+    <SpotifyDeepLinkButton client:load playlistId={playlistId} eventName="Coding Lofi" />
 </SpotifyLandingLayout>
