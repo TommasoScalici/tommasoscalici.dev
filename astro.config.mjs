@@ -7,7 +7,7 @@ export default defineConfig({
     site: 'https://tommasoscalici.dev',
     integrations: [react(), tailwind({ applyBaseStyles: false })],
     output: 'server',
-    adapter: cloudflare(),
+    adapter: cloudflare({ imageService: 'compile' }),
     i18n: {
         defaultLocale: 'en',
         locales: ['en', 'it'],
