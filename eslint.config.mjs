@@ -50,7 +50,7 @@ export default [
                 ...globals.node,
             },
             parserOptions: {
-                projectService: true,
+                project: true,
                 tsconfigRootDir: import.meta.dirname,
                 ecmaFeatures: {
                     jsx: true,
