@@ -61,7 +61,14 @@ export default [
 
     // Ignore dist and other build artifacts
     {
-        ignores: ['dist/**', '.astro/**', 'node_modules/**', 'wrangler.jsonc', '.prettierrc.mjs', 'release.config.mjs'],
+        ignores: [
+            'dist/**',
+            '.astro/**',
+            'node_modules/**',
+            'wrangler.jsonc',
+            '.prettierrc.mjs',
+            'release.config.mjs',
+        ],
     },
     {
         files: ['**/*.d.ts'],
