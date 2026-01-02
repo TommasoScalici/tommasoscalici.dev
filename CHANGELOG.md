@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.1.0...v1.2.0) (2026-01-02)
+
+
+### Bug Fixes
+
+* add trailing commas to Astro config for formatting consistency, that was blocking CI/CD pipeline ([af5b8db](https://github.com/TommasoScalici/tommasoscalici.dev/commit/af5b8db46538a977adfd7389202365c4b29d93a9))
+
+
+### Features
+
+* Configure Cloudflare adapter for passthrough image service and platform proxy, and remove logo image optimization. ([f679bdf](https://github.com/TommasoScalici/tommasoscalici.dev/commit/f679bdf9861f8e1e52b676852aeac9e3308d65e1))
+
 # [1.1.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.0.5...v1.1.0) (2026-01-02)
 
 
