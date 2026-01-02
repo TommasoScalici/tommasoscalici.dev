@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.0.2...v1.0.3) (2026-01-02)
+
+
+### Bug Fixes
+
+* malformed index.astro causing [object Object] error (deploy trigger) ([522f1d3](https://github.com/TommasoScalici/tommasoscalici.dev/commit/522f1d35c2f8e8c4fadaf0f9a263ff512b5a2e7f))
+
 ## [1.0.2](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.0.1...v1.0.2) (2026-01-01)
 
 ### Bug Fixes
