@@ -8,10 +8,10 @@ export default {
         extend: {
             colors: {
                 // Cyber-Noir Palette
-                background: '#050505', // Deep Black
-                primary: '#00f3ff', // Neon Cyan (Tech)
-                secondary: '#ff0055', // Electric Red/Purple (Music)
-                surface: 'rgba(255, 255, 255, 0.05)', // Glassmorphism
+                background: 'rgb(var(--color-background) / <alpha-value>)', // Deep Black
+                primary: 'rgb(var(--color-primary) / <alpha-value>)', // Neon Cyan (Tech)
+                secondary: 'rgb(var(--color-secondary) / <alpha-value>)', // Electric Red/Purple (Music)
+                surface: 'rgb(var(--color-surface) / 0.05)', // Glassmorphism (default 5% opacity)
             },
             fontFamily: {
                 sans: ['Inter', ...defaultTheme.fontFamily.sans],

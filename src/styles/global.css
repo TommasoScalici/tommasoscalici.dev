@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 @layer base {
+    :root {
+        /* Cyber-Noir Palette */
+        --color-background: 5 5 5; /* #050505 */
+        --color-primary: 0 243 255; /* #00f3ff */
+        --color-secondary: 255 0 85; /* #ff0055 */
+        --color-surface: 255 255 255; /* White base for surface opacity */
+    }
+
     body {
         @apply bg-background font-sans text-white antialiased;
     }

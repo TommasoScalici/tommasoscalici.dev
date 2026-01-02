@@ -33,6 +33,7 @@
     "dependencies": {
         "@astrojs/cloudflare": "^12.6.12",
         "@astrojs/react": "^4.4.2",
+        "@astrojs/sitemap": "^3.6.0",
         "@astrojs/tailwind": "^6.0.2",
         "@fontsource/inter": "^5.2.8",
         "@fontsource/jetbrains-mono": "^5.2.8",

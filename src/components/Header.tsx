@@ -10,14 +10,15 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const toggleLanguage = () => {
-        const newLang = lang === 'en' ? 'it' : 'en';
+    const getTargetLanguageUrl = () => {
+        if (typeof window === 'undefined') return lang === 'en' ? '/it' : '/';
+
         const currentPath = window.location.pathname;
+        const newLang = lang === 'en' ? 'it' : 'en';
 
         // Handle root path
         if (currentPath === '/' || currentPath === '/it') {
-            window.location.href = newLang === 'en' ? '/' : '/it';
-            return;
+            return newLang === 'en' ? '/' : '/it';
         }
 
         // Handle other paths
@@ -30,8 +31,10 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
             segments.unshift('it');
         }
 
-        window.location.href = `/${segments.join('/')}`;
+        return `/${segments.join('/')}`;
     };
+
+    const targetUrl = getTargetLanguageUrl();
 
     return (
         <header className="fixed left-0 right-0 top-0 z-50 border-b border-surface bg-background/70 backdrop-blur-xl">
@@ -69,24 +72,24 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
                     ))}
 
                     {/* Language Selector */}
-                    <button
-                        onClick={toggleLanguage}
+                    <a
+                        href={targetUrl}
                         className="flex items-center gap-2 rounded-full border border-surface bg-white/5 px-3 py-1.5 font-mono text-xs text-gray-300 transition-all hover:border-primary/50 hover:text-primary"
                         aria-label="Switch Language"
                     >
                         <Languages className="h-3.5 w-3.5" />
                         <span>{lang === 'en' ? 'IT' : 'EN'}</span>
-                    </button>
+                    </a>
                 </nav>
 
                 {/* Mobile Menu Button */}
                 <div className="flex items-center gap-4 md:hidden">
-                    <button
-                        onClick={toggleLanguage}
+                    <a
+                        href={targetUrl}
                         className="flex items-center gap-2 rounded-full border border-surface bg-white/5 px-3 py-1.5 font-mono text-xs text-gray-300 transition-all hover:border-primary/50 hover:text-primary"
                     >
                         <span>{lang === 'en' ? 'IT' : 'EN'}</span>
-                    </button>
+                    </a>
 
                     <button
                         className="text-gray-400 hover:text-white"
