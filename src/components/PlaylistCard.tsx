@@ -18,37 +18,32 @@ interface PlaylistCardProps {
 
 export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, t }) => {
     const handleClick = () => {
-        // Simple navigation logic
-        if (typeof window !== 'undefined') {
-            // The original instruction provided a snippet with `lang` and `id` which are not defined in this component.
-            // Reverting to the original functionality of opening the Spotify URL,
-            // but incorporating the type change for `e` and removing `e.preventDefault()` as per the instruction's intent.
-            // If the intent was to change navigation, please provide the full context for `lang` and `id`.
-
-            // Track Event if Pixel is initialized
-            if (typeof window !== 'undefined' && window.fbq) {
-                window.fbq('track', 'ViewContent', {
-                    content_name: playlist.title,
-                    content_category: 'Spotify Playlist',
-                });
-            }
-
-            const url = `https://open.spotify.com/playlist/${playlist.spotifyId}`;
-            window.open(url, '_blank');
+        // Track Event if Pixel is initialized
+        if (typeof window !== 'undefined' && window.fbq) {
+            window.fbq('track', 'ViewContent', {
+                content_name: playlist.title,
+                content_category: 'Spotify Playlist',
+            });
         }
     };
 
     return (
-        <div
-            onClick={handleClick}
+        <a
+            onClick={handleClick} // Keep onClick for tracking purposes
             onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
+                    // For accessibility, if the <a> tag is clicked via keyboard, trigger tracking
                     handleClick();
                 }
             }}
-            role="button"
+            role="button" // Keep role and tabIndex for accessibility if onClick is present
             tabIndex={0}
-            className="group relative aspect-video cursor-pointer overflow-hidden rounded-xl border border-white/5 bg-white/5 outline-none transition-all duration-300 hover:border-primary/50 focus:ring-2 focus:ring-primary/50"
+            href={
+                playlist.spotifyId ? `https://open.spotify.com/playlist/${playlist.spotifyId}` : '#'
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative aspect-square overflow-hidden rounded-2xl border border-glass-border/10 bg-glass-bg/5 transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(0,243,255,0.15)]"
         >
             {/* Background Image */}
             <img
@@ -66,9 +61,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, t }) => {
             {/* Content Overlay */}
             <div className="absolute inset-0 z-10 flex flex-col justify-end p-6">
                 <span className="mb-1 font-mono text-xs text-primary">{playlist.genre}</span>
-                <h3 className="mb-1 text-xl font-bold leading-tight text-white">
-                    {playlist.title}
-                </h3>
+                <h3 className="mb-1 text-xl font-bold leading-tight text-main">{playlist.title}</h3>
                 <p className="line-clamp-2 text-xs text-gray-400">{playlist.description}</p>
             </div>
 
@@ -83,9 +76,9 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, t }) => {
             </div>
 
             {/* Top Right Badge */}
-            <div className="absolute right-0 top-0 m-3 rounded border border-white/10 bg-black/50 px-2 py-1 font-mono text-[10px] text-gray-300 backdrop-blur-md">
+            <div className="absolute right-0 top-0 m-3 rounded border border-glass-border/10 bg-black/50 px-2 py-1 font-mono text-[10px] text-gray-300 backdrop-blur-md">
                 PLAYLIST
             </div>
-        </div>
+        </a>
     );
 };

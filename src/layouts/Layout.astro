@@ -3,6 +3,7 @@ import { ClientRouter } from 'astro:transitions';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import SEOHead from '../components/SEOHead.astro';
+import Analytics from '../components/Analytics.astro';
 
 import { ui, defaultLang } from '../i18n/ui';
 
@@ -50,11 +51,31 @@ const copyrightDate =
 <html lang={lang} class="scroll-smooth">
     <head>
         <meta charset="UTF-8" />
+        <script is:inline>
+            // Prevent FOUC
+            const theme = (() => {
+                if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+                    return localStorage.getItem('theme');
+                }
+                if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+                    return 'light';
+                }
+                return 'dark';
+            })();
+
+            if (theme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+            }
+        </script>
+        <Analytics id="G-LMT1M9750Q" />
         <SEOHead title={title} description={description} />
         <ClientRouter />
     </head>
+
     <body
-        class="bg-background font-sans text-white antialiased selection:bg-primary selection:text-black"
+        class="bg-background font-sans text-main antialiased selection:bg-primary selection:text-black"
     >
         <Header client:load lang={lang} navItems={navItems} logoSrc={optimizedLogo.src} />
 

@@ -3,6 +3,7 @@ import '@fontsource/inter';
 import '@fontsource/jetbrains-mono';
 import '../styles/global.css';
 import { Image, getImage } from 'astro:assets';
+import Analytics from '../components/Analytics.astro';
 
 interface Props {
     title: string;
@@ -89,20 +90,8 @@ const currentTheme = themeConfig[theme];
         <!-- End Meta Pixel Code -->
 
         <!-- Google Analytics -->
-        <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-X000000000"
-        ></script>
-        <script>
-            /* eslint-disable */
-            window.dataLayer = window.dataLayer || [];
-            function gtag(..._args: any[]) {
-                window.dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-
-            gtag('config', 'G-X000000000');
-            /* eslint-enable */
-        </script>
-        <!-- End Meta Pixel Code -->
+        <Analytics id="G-LMT1M9750Q" />
+        <!-- End Google Analytics -->
 
         <!-- TikTok Pixel Code -->
         <script is:inline define:vars={{ tiktokPixelId: import.meta.env.PUBLIC_TIKTOK_PIXEL_ID }}>

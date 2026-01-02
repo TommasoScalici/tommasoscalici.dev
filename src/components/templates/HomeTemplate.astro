@@ -47,14 +47,19 @@ const pageTitle =
                     <p
                         set:html={bio.paragraph1.replace(
                             /(RPG Maker XP|Nobuo Uematsu)/g,
-                            '<span class="text-white font-semibold">$1</span>',
+                            '<span class="text-main font-semibold">$1</span>',
                         )}
                     />
                     <p
-                        set:html={bio.paragraph2.replace(
-                            /(.NET|Dream Theater)/g,
-                            '<span class="text-white font-semibold">$1</span>',
-                        )}
+                        set:html={bio.paragraph2
+                            .replace(
+                                /(.NET|Dream Theater)/g,
+                                '<span class="text-main font-semibold">$1</span>',
+                            )
+                            .replace(
+                                /\*\*([^*]+)\*\*/g,
+                                '<span class="text-main font-semibold">$1</span>',
+                            )}
                     />
                 </div>
             </div>

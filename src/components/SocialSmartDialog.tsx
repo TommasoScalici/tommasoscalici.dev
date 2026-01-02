@@ -62,20 +62,20 @@ export const SocialSmartDialog: React.FC<SocialSmartDialogProps> = ({
                 aria-label="Close dialog"
             />
             {/* Dialog Card */}
-            <div className="animate-in zoom-in-95 relative w-full max-w-sm rounded-2xl border border-white/10 bg-[#0a0a0a] p-6 shadow-2xl duration-200">
+            <div className="animate-in zoom-in-95 relative w-full max-w-sm rounded-2xl border border-glass-border/10 bg-[#0a0a0a] p-6 shadow-2xl duration-200">
                 {/* Close Button */}
                 <button
                     onClick={onClose}
-                    className="absolute right-4 top-4 text-gray-400 transition-colors hover:text-white"
+                    className="absolute right-4 top-4 text-muted transition-colors hover:text-main"
                     aria-label="Close"
                 >
                     <X className="h-5 w-5" />
                 </button>
 
                 {/* Header */}
-                <div className="mb-6 text-center">
-                    <h3 className="font-mono text-lg font-bold text-white">
-                        {t('dialog.connectEverywhere') || 'Connect Everywhere'}
+                <div className="mb-6 flex flex-col items-center">
+                    <h3 className="font-mono text-lg font-bold text-main">
+                        {t('dialog.connectEverywhere') || 'Connect with me'}
                     </h3>
                 </div>
 
@@ -87,12 +87,14 @@ export const SocialSmartDialog: React.FC<SocialSmartDialogProps> = ({
                             href={link.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`group flex items-center gap-4 rounded-lg border border-transparent bg-white/5 p-3 transition-all hover:border-white/10 hover:bg-white/10`}
+                            className="group flex w-full items-center gap-3 rounded-xl border border-glass-border/5 bg-glass-bg/5 p-3 transition-all hover:border-primary/50 hover:bg-glass-bg/10"
                         >
-                            <span className={`text-gray-400 transition-colors ${link.color}`}>
-                                {iconMap[link.icon]}
-                            </span>
-                            <span className="font-medium text-gray-200 group-hover:text-white">
+                            {iconMap[link.icon] && (
+                                <span className="h-6 w-6 text-gray-400 transition-colors group-hover:text-primary">
+                                    {iconMap[link.icon]}
+                                </span>
+                            )}
+                            <span className="font-medium text-muted group-hover:text-main">
                                 {link.label}
                             </span>
                         </a>

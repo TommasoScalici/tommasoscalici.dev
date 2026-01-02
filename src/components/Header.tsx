@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, Languages } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle';
 
 interface HeaderProps {
     lang: string;
@@ -51,10 +52,10 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
                         loading="eager"
                         className="mr-3 h-12 w-auto object-contain"
                     />
-                    <span className="text-white transition-colors group-hover:text-primary">
+                    <span className="text-main transition-colors group-hover:text-primary">
                         TOMMASO
                     </span>
-                    <span className="ml-2 text-white transition-colors group-hover:text-secondary">
+                    <span className="ml-2 text-main transition-colors group-hover:text-secondary">
                         SCALICI
                     </span>
                 </a>
@@ -65,7 +66,7 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
                         <a
                             key={item.href}
                             href={item.href}
-                            className="text-sm font-medium text-gray-400 transition-colors hover:text-white hover:drop-shadow-[0_0_8px_rgba(0,243,255,0.5)]"
+                            className="text-sm font-medium text-muted transition-colors hover:text-main hover:drop-shadow-[0_0_8px_rgba(0,243,255,0.5)]"
                         >
                             {item.label}
                         </a>
@@ -80,6 +81,8 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
                         <Languages className="h-3.5 w-3.5" />
                         <span>{lang === 'en' ? 'IT' : 'EN'}</span>
                     </a>
+
+                    <ThemeToggle />
                 </nav>
 
                 {/* Mobile Menu Button */}
@@ -90,9 +93,10 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
                     >
                         <span>{lang === 'en' ? 'IT' : 'EN'}</span>
                     </a>
+                    <ThemeToggle />
 
                     <button
-                        className="text-gray-400 hover:text-white"
+                        className="text-muted hover:text-main"
                         onClick={() => {
                             setIsOpen(!isOpen);
                         }}

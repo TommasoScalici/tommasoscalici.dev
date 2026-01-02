@@ -76,7 +76,7 @@ export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
                         onClick={() => {
                             setIsSocialOpen(true);
                         }}
-                        className="text-gray-400 transition-colors hover:text-white"
+                        className="text-gray-400 transition-colors hover:text-main"
                         aria-label="More Socials"
                     >
                         <MoreHorizontal className="h-5 w-5" />

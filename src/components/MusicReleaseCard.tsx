@@ -37,9 +37,7 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
 
     return (
         <>
-            <div
-                className={`border border-white/10 bg-white/5 backdrop-blur-md ${isUpcoming ? 'opacity-70' : 'hover:border-primary/50 hover:shadow-[0_0_30px_rgba(255,0,85,0.2)]'} group relative aspect-square overflow-hidden rounded-2xl transition-all duration-300`}
-            >
+            <div className="group relative aspect-square overflow-hidden rounded-2xl border border-glass-border/10 bg-glass-bg/5 transition-all duration-300 hover:border-secondary/50 hover:shadow-[0_0_30px_rgba(255,0,85,0.15)]">
                 {/* Background Image (Cover Art) */}
                 <img
                     src={
@@ -65,7 +63,7 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
                         <span className="mb-1 block font-mono text-xs uppercase tracking-wider text-secondary">
                             {release.genre} • {release.year}
                         </span>
-                        <h3 className="mb-1 text-2xl font-bold leading-tight text-white">
+                        <h3 className="mb-1 text-2xl font-bold leading-tight text-main">
                             {release.title}
                         </h3>
                         <p className="mb-4 text-sm text-gray-400">{release.type}</p>

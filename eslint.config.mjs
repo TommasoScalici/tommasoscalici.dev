@@ -31,9 +31,7 @@ export default [
             ...jsxA11yPlugin.configs.recommended.rules,
             'react/prop-types': 'off', // Not needed with TypeScript
             '@typescript-eslint/no-explicit-any': 'error',
-            '@typescript-eslint/no-unsafe-assignment': 'off', // Too noisy for existing codebase
-            '@typescript-eslint/no-unsafe-member-access': 'off', // Too noisy for existing codebase
-            // We can re-enable these later if the user wants absolute purity, but for now we focus on "any"
+            // Strict rules enabled!
         },
         settings: {
             react: {

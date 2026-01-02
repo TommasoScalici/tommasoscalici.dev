@@ -12,6 +12,11 @@ export default {
                 primary: 'rgb(var(--color-primary) / <alpha-value>)', // Neon Cyan (Tech)
                 secondary: 'rgb(var(--color-secondary) / <alpha-value>)', // Electric Red/Purple (Music)
                 surface: 'rgb(var(--color-surface) / 0.05)', // Glassmorphism (default 5% opacity)
+                main: 'rgb(var(--color-text-main) / <alpha-value>)',
+                muted: 'rgb(var(--color-text-muted) / <alpha-value>)',
+                inverse: 'rgb(var(--color-text-inverse) / <alpha-value>)',
+                'glass-border': 'rgb(var(--color-glass-border) / <alpha-value>)',
+                'glass-bg': 'rgb(var(--color-glass-bg) / <alpha-value>)',
             },
             fontFamily: {
                 sans: ['Inter', ...defaultTheme.fontFamily.sans],

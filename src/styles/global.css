@@ -4,15 +4,51 @@
 
 @layer base {
     :root {
-        /* Cyber-Noir Palette */
-        --color-background: 5 5 5; /* #050505 */
-        --color-primary: 0 243 255; /* #00f3ff */
-        --color-secondary: 255 0 85; /* #ff0055 */
-        --color-surface: 255 255 255; /* White base for surface opacity */
+        /* Cyber-Noir Palette (Default) */
+        --color-background: 5 5 5;
+        /* #050505 */
+        --color-primary: 0 243 255;
+        /* #00f3ff */
+        --color-secondary: 255 0 85;
+        /* #ff0055 */
+        --color-surface: 255 255 255;
+        /* White base for surface opacity */
+        --color-text-main: 255 255 255;
+        /* White */
+        --color-text-muted: 156 163 175;
+        /* Gray-400 */
+        --color-text-inverse: 0 0 0;
+        /* Black text on neon buttons */
+        --color-glass-border: 255 255 255;
+        /* White for dark mode borders */
+        --color-glass-bg: 255 255 255;
+        /* White for dark mode glass */
+    }
+
+    html[data-theme='light'] {
+        /* Solar-Punk / Clean Light Palette (Refined) */
+        --color-background: 250 250 250;
+        /* #FAFAFA (Zinc-50) */
+        --color-primary: 6 182 212;
+        /* #06B6D4 (Cyan-500) - Readable */
+        --color-secondary: 217 70 239;
+        /* #D946EF (Fuchsia-500) - Readable */
+        --color-surface: 0 0 0;
+        /* Black base for surface opacity */
+        --color-text-main: 23 23 23;
+        /* Neutral-900 */
+        --color-text-muted: 82 82 91;
+        /* Zinc-600 */
+        --color-text-inverse: 255 255 255;
+        /* White text on prim buttons */
+        --color-glass-border: 0 0 0;
+        /* Black for light mode borders */
+        --color-glass-bg: 0 0 0;
+        /* Black for light mode glass */
     }
 
     body {
-        @apply bg-background font-sans text-white antialiased;
+        @apply bg-background font-sans text-main antialiased transition-colors duration-300;
     }
 }
 

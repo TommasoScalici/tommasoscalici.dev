@@ -9,7 +9,7 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     return (
-        <div className="group block overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(0,243,255,0.1)]">
+        <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-glass-border/10 bg-glass-bg/5 transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(0,243,255,0.15)]">
             <div className="relative flex h-full flex-col p-6">
                 {/* Hover Gradient Effect */}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -25,7 +25,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                                     href={project.repoUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="rounded-full p-2 text-gray-400 transition-colors hover:bg-white/5 hover:text-white"
+                                    className="rounded-full p-2 text-gray-400 transition-colors hover:bg-glass-bg/5 hover:text-white"
                                     aria-label="View Source Code"
                                 >
                                     <SiGithub className="h-5 w-5" />
@@ -36,7 +36,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                                     href={project.playStoreUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="rounded-full p-2 text-gray-400 transition-colors hover:bg-white/5 hover:text-white"
+                                    className="rounded-full p-2 text-gray-400 transition-colors hover:bg-glass-bg/5 hover:text-white"
                                     aria-label="View on Google Play"
                                 >
                                     <SiGoogleplay className="h-5 w-5" />
@@ -47,7 +47,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                                     href={project.demoUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="rounded-full p-2 text-gray-400 transition-colors hover:bg-white/5 hover:text-white"
+                                    className="rounded-full p-2 text-gray-400 transition-colors hover:bg-glass-bg/5 hover:text-white"
                                     aria-label="View Live Demo"
                                 >
                                     <ExternalLink className="h-5 w-5" />
@@ -56,7 +56,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                         </div>
                     </div>
 
-                    <h3 className="mb-2 font-mono text-xl font-bold text-white transition-colors group-hover:text-primary">
+                    <h3 className="mb-2 font-mono text-xl font-bold text-main transition-colors group-hover:text-primary">
                         {project.title}
                     </h3>
 
