@@ -1,8 +1,10 @@
 ---
 import { MusicReleaseCard } from '../MusicReleaseCard';
-import { musicReleases } from '../../data/music';
+import { getCollection } from 'astro:content';
 import { ui, defaultLang } from '../../i18n/ui';
 import { getImage } from 'astro:assets';
+
+const musicReleases = await getCollection('music');
 
 interface Props {
     lang: string;
@@ -15,13 +17,13 @@ const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
 const optimizedMusicReleases = await Promise.all(
     musicReleases.map(async (release) => {
         const optimizedImage = await getImage({
-            src: release.coverImage,
+            src: release.data.coverImage,
             format: 'webp',
             width: 300,
             height: 300,
         });
         return {
-            ...release,
+            ...release.data,
             coverImage: optimizedImage.src,
         };
     }),

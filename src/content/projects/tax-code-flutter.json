@@ -1,0 +1,8 @@
+{
+    "title": "Tax Code Flutter",
+    "description": "Vertex AI-enabled utility app.",
+    "techStack": ["Dart", "Flutter", "Vertex AI"],
+    "featured": true,
+    "repoUrl": "https://github.com/TommasoScalici/tax_code_flutter",
+    "playStoreUrl": "https://play.google.com/store/apps/details?id=tommasoscalici.taxcode"
+}

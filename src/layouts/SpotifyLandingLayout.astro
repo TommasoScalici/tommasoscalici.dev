@@ -89,11 +89,12 @@ const currentTheme = themeConfig[theme];
         <!-- End Meta Pixel Code -->
 
         <!-- Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-X000000000"></script>
+        <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-X000000000"
+        ></script>
         <script>
             /* eslint-disable */
             window.dataLayer = window.dataLayer || [];
-            function gtag(...args: any[]) {
+            function gtag(..._args: any[]) {
                 window.dataLayer.push(arguments);
             }
             gtag('js', new Date());
@@ -144,11 +145,11 @@ const currentTheme = themeConfig[theme];
                             (ttq._t[e] = +new Date()),
                             (ttq._o = ttq._o || {}),
                             (ttq._o[e] = n || {}));
-                        var o = document.createElement('script');
+                        var o = d.createElement('script');
                         ((o.type = 'text/javascript'),
                             (o.async = !0),
                             (o.src = i + '?sdkid=' + e + '&lib=' + t));
-                        var a = document.getElementsByTagName('script')[0];
+                        var a = d.getElementsByTagName('script')[0];
                         a.parentNode.insertBefore(o, a);
                     }));
 

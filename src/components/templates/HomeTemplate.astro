@@ -4,14 +4,20 @@ import HeroSection from '../sections/HeroSection.astro';
 import ProjectsSection from '../sections/ProjectsSection.astro';
 import MusicSection from '../sections/MusicSection.astro';
 import PlaylistsSection from '../sections/PlaylistsSection.astro';
-import { bioData } from '../../data/bio';
+import { getEntry } from 'astro:content';
 
 interface Props {
     lang: 'en' | 'it';
 }
 
 const { lang } = Astro.props;
-const bio = bioData[lang];
+const bioEntry = await getEntry('bio', lang);
+
+if (!bioEntry) {
+    throw new Error(`Bio entry for locale ${lang} not found.`);
+}
+
+const bio = bioEntry.data;
 
 const pageTitle =
     lang === 'it'

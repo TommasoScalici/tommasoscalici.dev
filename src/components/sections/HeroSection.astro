@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import profileImage from '../../assets/profile.webp';
-import { bioData } from '../../data/bio';
+import { getEntry } from 'astro:content';
 
 interface Props {
     lang: string;
@@ -11,7 +11,13 @@ const { lang } = Astro.props;
 import { ui, defaultLang } from '../../i18n/ui';
 
 const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
-const bio = bioData[lang];
+const bioEntry = await getEntry('bio', lang);
+
+if (!bioEntry) {
+    throw new Error(`Bio entry for locale ${lang} not found.`);
+}
+
+const bio = bioEntry.data;
 ---
 
 <section class="relative flex min-h-screen flex-col">

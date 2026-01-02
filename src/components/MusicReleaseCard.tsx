@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Play } from 'lucide-react';
-import type { MusicRelease } from '../data/types';
+import type { MusicRelease, PlatformLinks } from '../data/types';
 import { SmartLinkDialog, type SmartLink } from './SmartLinkDialog';
 import { platforms, platformOrder } from '../data/platforms';
 
@@ -16,7 +16,7 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
     // Transform PlatformLinks to SmartLink[]
     const albumLinks: SmartLink[] = platformOrder
         .map((platformKey) => {
-            const url = release.links[platformKey as keyof typeof release.links];
+            const url = release.links?.[platformKey as keyof PlatformLinks];
             const platformDef = platforms[platformKey];
 
             if (!url) return null;

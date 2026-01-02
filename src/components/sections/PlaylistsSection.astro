@@ -1,6 +1,6 @@
 ---
 import { PlaylistCard } from '../PlaylistCard';
-import { playlistsData } from '../../data/playlists';
+import { getEntry } from 'astro:content';
 import { ui, defaultLang } from '../../i18n/ui';
 import { getImage } from 'astro:assets';
 
@@ -11,9 +11,15 @@ interface Props {
 const { lang } = Astro.props;
 const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
 
+const playlistEntry = await getEntry('playlists', lang);
+
+if (!playlistEntry) {
+    throw new Error(`Playlist entry for locale ${lang} not found.`);
+}
+
 // Optimize Playlist Images
 const optimizedPlaylists = await Promise.all(
-    playlistsData[lang].map(async (playlist) => {
+    playlistEntry.data.map(async (playlist) => {
         const optimizedImage = await getImage({
             src: playlist.coverImage,
             format: 'webp',

@@ -1,10 +1,15 @@
 import React from 'react';
-import type { Playlist } from '../data/playlists';
 import { SiSpotify } from 'react-icons/si';
 
 /// <reference path="../.astro/types.d.ts" />
 
-// Local Window interface removed in favor of src/env.d.ts
+interface Playlist {
+    title: string;
+    description: string;
+    coverImage: string;
+    spotifyId: string;
+    genre: string;
+}
 
 interface PlaylistCardProps {
     playlist: Playlist;
@@ -47,11 +52,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, t }) => {
         >
             {/* Background Image */}
             <img
-                src={
-                    typeof playlist.coverImage === 'string'
-                        ? playlist.coverImage
-                        : playlist.coverImage.src
-                }
+                src={playlist.coverImage}
                 alt={playlist.title}
                 width={320}
                 height={180}
