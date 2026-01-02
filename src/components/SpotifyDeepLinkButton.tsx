@@ -29,13 +29,13 @@ export const SpotifyDeepLinkButton: React.FC<SpotifyDeepLinkButtonProps> = ({
 
         // Tracking
         if (typeof window !== 'undefined') {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const w = window as any;
-            if (w.fbq) {
-                w.fbq('track', eventName || 'ViewContent', { content_name: 'Spotify Playlist' });
+            if (window.fbq) {
+                window.fbq('track', eventName || 'ViewContent', {
+                    content_name: 'Spotify Playlist',
+                });
             }
-            if (w.ttq) {
-                w.ttq.track('ClickButton', { content_name: 'Spotify Playlist' });
+            if (window.ttq) {
+                window.ttq.track('ClickButton', { content_name: 'Spotify Playlist' });
             }
         } // Visual Feedback
         setLabel('Opening...');

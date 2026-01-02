@@ -31,7 +31,7 @@ const {
     lang = defaultLang,
 } = Astro.props;
 
-const t = ui[lang as keyof typeof ui] || ui[defaultLang];
+const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
 
 const navItems = [
     { label: t['nav.home'], href: lang === 'en' ? '/' : `/${lang}` },
@@ -40,7 +40,10 @@ const navItems = [
 ];
 const currentYear = new Date().getFullYear();
 const startYear = 2010; // Career start
-const copyrightDate = startYear === currentYear ? `${startYear}` : `${startYear} - ${currentYear}`;
+const copyrightDate =
+    startYear === currentYear
+        ? startYear.toString()
+        : `${startYear.toString()} - ${currentYear.toString()}`;
 ---
 
 <!doctype html>

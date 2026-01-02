@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const t = ui[lang as keyof typeof ui] || ui[defaultLang];
+const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
 
 // Optimize Playlist Images
 const optimizedPlaylists = await Promise.all(

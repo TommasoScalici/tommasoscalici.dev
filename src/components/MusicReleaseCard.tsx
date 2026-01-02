@@ -19,7 +19,7 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
             const url = release.links[platformKey as keyof typeof release.links];
             const platformDef = platforms[platformKey];
 
-            if (!platformDef || !url) return null;
+            if (!url) return null;
 
             return {
                 ...platformDef,
@@ -56,7 +56,7 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
 
                 {/* Gradient Overlay */}
                 <div
-                    className={`absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 transition-opacity duration-500 ${!isUpcoming && 'group-hover:opacity-0'}`}
+                    className={`absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 transition-opacity duration-500 ${!isUpcoming ? 'group-hover:opacity-0' : ''}`}
                 />
 
                 {/* Content */}
@@ -81,11 +81,10 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
                         <button
                             onClick={handleListenClick}
                             disabled={isUpcoming}
-                            className={`inline-flex transform items-center gap-2 rounded-full bg-secondary/90 px-4 py-2 text-sm font-medium text-white transition-all duration-300 ${
-                                isUpcoming
+                            className={`inline-flex transform items-center gap-2 rounded-full bg-secondary/90 px-4 py-2 text-sm font-medium text-white transition-all duration-300 ${isUpcoming
                                     ? 'translate-y-0 cursor-not-allowed bg-gray-700 text-gray-400 opacity-100 hover:bg-gray-700'
                                     : 'translate-y-4 opacity-0 hover:scale-105 hover:bg-secondary hover:shadow-[0_0_25px_rgba(255,255,255,0.6)] hover:brightness-110 group-hover:translate-y-0 group-hover:opacity-100'
-                            }`}
+                                }`}
                         >
                             {isUpcoming ? (
                                 <span>
@@ -103,7 +102,9 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
             </div>
             <SmartLinkDialog
                 isOpen={isDialogOpen}
-                onClose={() => setIsDialogOpen(false)}
+                onClose={() => {
+                    setIsDialogOpen(false);
+                }}
                 links={albumLinks}
                 t={(key) => t[key]}
             />

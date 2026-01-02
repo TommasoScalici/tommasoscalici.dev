@@ -9,7 +9,8 @@ interface Props {
 
 const { lang } = Astro.props;
 import { ui, defaultLang } from '../../i18n/ui';
-const t = ui[lang as keyof typeof ui] || ui[defaultLang];
+
+const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
 const bio = bioData[lang];
 ---
 

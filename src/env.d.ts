@@ -11,9 +11,14 @@ interface ImportMeta {
 }
 
 interface Window {
-    fbq?: unknown;
+    // Facebook Pixel
+    fbq?: (event: string, eventName: string, params?: Record<string, unknown>) => void;
     _fbq?: unknown;
-    ttq?: unknown;
+    // TikTok Pixel
+    ttq?: {
+        track: (event: string, params?: Record<string, unknown>) => void;
+        [key: string]: unknown;
+    };
     dataLayer: unknown[];
     gtag: (...args: unknown[]) => void;
 }

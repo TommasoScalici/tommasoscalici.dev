@@ -4,11 +4,7 @@ import { SiSpotify } from 'react-icons/si';
 
 /// <reference path="../.astro/types.d.ts" />
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-interface Window {
-    dataLayer: unknown[];
-    gtag: (...args: unknown[]) => void;
-}
+// Local Window interface removed in favor of src/env.d.ts
 
 interface PlaylistCardProps {
     playlist: Playlist;

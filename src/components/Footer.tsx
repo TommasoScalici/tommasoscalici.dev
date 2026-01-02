@@ -53,7 +53,9 @@ export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
                     </a>
 
                     <button
-                        onClick={() => setIsDialogOpen(true)}
+                        onClick={() => {
+                            setIsDialogOpen(true);
+                        }}
                         className="text-gray-400 transition-colors hover:text-secondary"
                         aria-label="Music Platforms"
                     >
@@ -71,7 +73,9 @@ export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
                     </a>
 
                     <button
-                        onClick={() => setIsSocialOpen(true)}
+                        onClick={() => {
+                            setIsSocialOpen(true);
+                        }}
                         className="text-gray-400 transition-colors hover:text-white"
                         aria-label="More Socials"
                     >
@@ -82,14 +86,18 @@ export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
 
             <SmartLinkDialog
                 isOpen={isDialogOpen}
-                onClose={() => setIsDialogOpen(false)}
+                onClose={() => {
+                    setIsDialogOpen(false);
+                }}
                 links={artistLinks}
                 t={(key) => t[key]}
             />
 
             <SocialSmartDialog
                 isOpen={isSocialOpen}
-                onClose={() => setIsSocialOpen(false)}
+                onClose={() => {
+                    setIsSocialOpen(false);
+                }}
                 links={secondarySocials}
                 t={(key) => t[key]}
             />

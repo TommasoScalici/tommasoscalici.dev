@@ -67,7 +67,9 @@ export const SmartLinkDialog: React.FC<SmartLinkDialogProps> = ({ isOpen, onClos
                 {/* Header */}
                 <div
                     className="mb-6 text-center"
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                    }}
                     role="presentation"
                 >
                     <h3 className="font-mono text-lg font-bold text-white">

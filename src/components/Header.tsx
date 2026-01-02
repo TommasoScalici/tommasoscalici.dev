@@ -90,7 +90,9 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
 
                     <button
                         className="text-gray-400 hover:text-white"
-                        onClick={() => setIsOpen(!isOpen)}
+                        onClick={() => {
+                            setIsOpen(!isOpen);
+                        }}
                         aria-label="Menu"
                     >
                         {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -106,7 +108,9 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
                             key={item.href}
                             href={item.href}
                             className="text-lg font-medium text-gray-300 transition-colors hover:text-primary"
-                            onClick={() => setIsOpen(false)}
+                            onClick={() => {
+                                setIsOpen(false);
+                            }}
                         >
                             {item.label}
                         </a>
