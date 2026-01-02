@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.0.5...v1.1.0) (2026-01-02)
+
+
+### Bug Fixes
+
+* add .prettierignore to exclude build artifacts, dependencies, and lock files and fixing build fails ([9f43639](https://github.com/TommasoScalici/tommasoscalici.dev/commit/9f4363995117a4f3f2b6de86060c3f0c86346852))
+* **debug:** enable prerender on index.astro to bypass SSR ([1011921](https://github.com/TommasoScalici/tommasoscalici.dev/commit/1011921b01d56e67f720aea7fafdfa775033f96a))
+
+
+### Features
+
+* Add debug logging and remove prerender from index page, and configure Vite SSR external dependencies. ([d0c4c9d](https://github.com/TommasoScalici/tommasoscalici.dev/commit/d0c4c9d0e57c869474c587409f3f64ba4d6bec48))
+
 ## [1.0.5](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.0.4...v1.0.5) (2026-01-02)
 
 
