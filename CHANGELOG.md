@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.0.4...v1.0.5) (2026-01-02)
+
+
+### Bug Fixes
+
+* revert nuclear test & remove incompatible vite config ([4fcbf73](https://github.com/TommasoScalici/tommasoscalici.dev/commit/4fcbf73f35754b56c6be8d5948ea0c14a8ffb90f))
+
 ## [1.0.4](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.0.3...v1.0.4) (2026-01-02)
 
 ### Bug Fixes
