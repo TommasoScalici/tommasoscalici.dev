@@ -25,8 +25,8 @@
     "scripts": {
         "build": "astro build",
         "dev": "astro dev",
-        "preview": "astro preview",
-        "astro": "astro",
+        "preview:local": "npx wrangler pages dev dist",
+        "preview:cloudflare": "npx wrangler pages deployment tail --project-name=tommasoscalici-dev",
         "lint": "eslint .",
         "format": "prettier --write ."
     },

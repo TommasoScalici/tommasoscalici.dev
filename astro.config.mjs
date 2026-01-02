@@ -8,8 +8,11 @@ export default defineConfig({
     integrations: [react(), tailwind({ applyBaseStyles: false })],
     output: 'server',
     adapter: cloudflare({
-        imageService: 'passthrough',
+        imageService: 'compile',
         platformProxy: { enabled: true },
+        routes: {
+            strategy: 'auto',
+        },
     }),
     i18n: {
         defaultLocale: 'en',
