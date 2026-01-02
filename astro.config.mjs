@@ -19,9 +19,4 @@ export default defineConfig({
         domains: ['f4.bcbits.com', 'googleusercontent.com', 'i.scdn.co'],
         remotePatterns: [{ protocol: 'https' }],
     },
-    vite: {
-        ssr: {
-            external: ['node:fs', 'node:path'],
-        },
-    },
 });
