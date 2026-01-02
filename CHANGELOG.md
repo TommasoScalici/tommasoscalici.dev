@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.3.0...v1.4.0) (2026-01-02)
+
+
+### Features
+
+* Add sitemap integration, refactor color system to CSS variables, and update language switcher to use anchor tags. ([74d4d63](https://github.com/TommasoScalici/tommasoscalici.dev/commit/74d4d63b78a11edbd0a0ea01c97595f4b8c0832c))
+
 # [1.3.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.2.0...v1.3.0) (2026-01-02)
 
 
