@@ -4,3 +4,4 @@ node_modules/
 .wrangler/
 CHANGELOG.md
 package-lock.json
+wrangler.jsonc
