@@ -7,7 +7,10 @@ export default defineConfig({
     site: 'https://tommasoscalici.dev',
     integrations: [react(), tailwind({ applyBaseStyles: false })],
     output: 'server',
-    adapter: cloudflare({ imageService: 'compile' }),
+    adapter: cloudflare({
+        imageService: 'passthrough',
+        platformProxy: { enabled: true }
+    }),
     i18n: {
         defaultLocale: 'en',
         locales: ['en', 'it'],
@@ -18,10 +21,5 @@ export default defineConfig({
     image: {
         domains: ['f4.bcbits.com', 'googleusercontent.com', 'i.scdn.co'],
         remotePatterns: [{ protocol: 'https' }],
-    },
-    vite: {
-        ssr: {
-            external: ['node:fs', 'node:path'],
-        },
-    },
+    }
 });
