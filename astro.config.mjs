@@ -24,5 +24,4 @@ export default defineConfig({
             external: ['node:fs', 'node:path'],
         },
     },
-
 });
