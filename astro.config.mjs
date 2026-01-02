@@ -9,7 +9,7 @@ export default defineConfig({
     output: 'server',
     adapter: cloudflare({
         imageService: 'passthrough',
-        platformProxy: { enabled: true }
+        platformProxy: { enabled: true },
     }),
     i18n: {
         defaultLocale: 'en',
@@ -21,5 +21,5 @@ export default defineConfig({
     image: {
         domains: ['f4.bcbits.com', 'googleusercontent.com', 'i.scdn.co'],
         remotePatterns: [{ protocol: 'https' }],
-    }
+    },
 });
