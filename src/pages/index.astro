@@ -1,6 +1,10 @@
 ---
+// 1. Logghiamo cosa arriva a questa pagina
+console.log('🔍 DEBUG INDEX - Params:', JSON.stringify(Astro.params));
+console.log('🔍 DEBUG INDEX - Props:', JSON.stringify(Astro.props));
+console.log('🔍 DEBUG INDEX - Locale:', Astro.currentLocale);
+
 import HomeTemplate from '../components/templates/HomeTemplate.astro';
-export const prerender = true;
 ---
 
 <HomeTemplate lang="en" />
