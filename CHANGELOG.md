@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.2.0...v1.3.0) (2026-01-02)
+
+
+### Bug Fixes
+
+* add wrangler.jsonc to .prettierignore, fixed prettier errors ([249491f](https://github.com/TommasoScalici/tommasoscalici.dev/commit/249491fb9308e4b5e62078c2a940117ed153995f))
+
+
+### Features
+
+* Enable Astro image optimization with Cloudflare adapter compilation, update Cloudflare compatibility flags and preview scripts, and remove debug logs. ([2d82041](https://github.com/TommasoScalici/tommasoscalici.dev/commit/2d82041259d58402151801afe3066f71761cfe30))
+
 # [1.2.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.1.0...v1.2.0) (2026-01-02)
 
 
