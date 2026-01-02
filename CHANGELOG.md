@@ -1,9 +1,8 @@
 ## [1.0.4](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.0.3...v1.0.4) (2026-01-02)
 
-
 ### Bug Fixes
 
-* fixed prettier error ([42d313f](https://github.com/TommasoScalici/tommasoscalici.dev/commit/42d313f5d2947e8c4437f52122d66249c54d4698))
+- fixed prettier error ([42d313f](https://github.com/TommasoScalici/tommasoscalici.dev/commit/42d313f5d2947e8c4437f52122d66249c54d4698))
 
 ## [1.0.3](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.0.2...v1.0.3) (2026-01-02)
 
