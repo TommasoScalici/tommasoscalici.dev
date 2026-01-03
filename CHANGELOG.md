@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.7.0...v1.8.0) (2026-01-03)
+
+
+### Features
+
+* Add music pre-save links, integrate Partytown for analytics, and introduce new project and playlist content with updated navigation. ([83bdb75](https://github.com/TommasoScalici/tommasoscalici.dev/commit/83bdb75e0ba892be3a6c024a16ab44a50007b8de))
+
 # [1.7.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.6.0...v1.7.0) (2026-01-03)
 
 
