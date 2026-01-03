@@ -52,7 +52,7 @@ export const SocialSmartDialog: React.FC<SocialSmartDialogProps> = ({
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
             {/* Backdrop */}
             <div
-                className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+                className="absolute inset-0 bg-white/60 backdrop-blur-sm dark:bg-black/80"
                 onClick={onClose}
                 onKeyDown={(e) => {
                     if (e.key === 'Escape') onClose();
@@ -62,7 +62,7 @@ export const SocialSmartDialog: React.FC<SocialSmartDialogProps> = ({
                 aria-label="Close dialog"
             />
             {/* Dialog Card */}
-            <div className="animate-in zoom-in-95 relative w-full max-w-sm rounded-2xl border border-glass-border/10 bg-[#0a0a0a] p-6 shadow-2xl duration-200">
+            <div className="animate-in zoom-in-95 relative w-full max-w-sm rounded-2xl border border-glass-border bg-white p-6 shadow-2xl duration-200 dark:bg-[#0a0a0a]">
                 {/* Close Button */}
                 <button
                     onClick={onClose}

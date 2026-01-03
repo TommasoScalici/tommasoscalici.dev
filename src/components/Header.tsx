@@ -75,7 +75,7 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
                     {/* Language Selector */}
                     <a
                         href={targetUrl}
-                        className="flex items-center gap-2 rounded-full border border-surface bg-white/5 px-3 py-1.5 font-mono text-xs text-gray-300 transition-all hover:border-primary/50 hover:text-primary"
+                        className="flex items-center gap-2 rounded-full border border-glass-border bg-white/70 px-3 py-1.5 font-mono text-xs text-muted transition-all hover:border-primary/50 hover:text-primary dark:border-white/10 dark:bg-white/5"
                         aria-label="Switch Language"
                     >
                         <Languages className="h-3.5 w-3.5" />
@@ -89,7 +89,7 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
                 <div className="flex items-center gap-4 md:hidden">
                     <a
                         href={targetUrl}
-                        className="flex items-center gap-2 rounded-full border border-surface bg-white/5 px-3 py-1.5 font-mono text-xs text-gray-300 transition-all hover:border-primary/50 hover:text-primary"
+                        className="flex items-center gap-2 rounded-full border border-glass-border bg-white/70 px-3 py-1.5 font-mono text-xs text-muted transition-all hover:border-primary/50 hover:text-primary dark:border-white/10 dark:bg-white/5"
                     >
                         <span>{lang === 'en' ? 'IT' : 'EN'}</span>
                     </a>

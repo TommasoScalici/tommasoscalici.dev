@@ -42,7 +42,7 @@ const bio = bioEntry.data;
                     </h1>
 
                     <p
-                        class="mb-10 max-w-2xl border-l-2 border-primary/50 pl-6 text-xl leading-relaxed text-gray-400 md:text-2xl"
+                        class="mb-10 max-w-2xl border-l-2 border-primary/50 pl-6 text-xl leading-relaxed text-muted md:text-2xl"
                     >
                         {bio.description}
                     </p>
@@ -62,7 +62,7 @@ const bio = bioEntry.data;
                         </a>
                         <a
                             href="#projects"
-                            class="rounded-full border border-glass-border/10 bg-glass-bg/5 px-8 py-3 font-bold text-muted transition-all duration-300 hover:border-glass-border/30 hover:bg-glass-bg/15 hover:text-main"
+                            class="rounded-full border border-glass-border bg-white/70 px-8 py-3 font-bold text-muted transition-all duration-300 hover:border-glass-border/30 hover:bg-glass-bg/15 hover:text-main dark:border-white/10 dark:bg-white/5"
                         >
                             {t['hero.enterFlow']}
                         </a>
@@ -82,7 +82,7 @@ const bio = bioEntry.data;
 
                         {/* Image Container */}
                         <div
-                            class="absolute inset-0 -rotate-3 transform overflow-hidden rounded-[2rem] border border-white/10 bg-black/40 shadow-2xl ring-1 ring-white/20 backdrop-blur-sm transition-all duration-500 hover:rotate-0 hover:border-primary/50 hover:shadow-[0_0_50px_rgba(0,243,255,0.4)]"
+                            class="absolute inset-0 -rotate-3 transform overflow-hidden rounded-[2rem] border border-glass-border/10 bg-white/40 shadow-2xl ring-1 ring-white/20 backdrop-blur-sm transition-all duration-500 hover:rotate-0 hover:border-primary/50 hover:shadow-[0_0_50px_rgba(0,243,255,0.4)] dark:border-white/10 dark:bg-black/40"
                         >
                             <Image
                                 src={profileImage}

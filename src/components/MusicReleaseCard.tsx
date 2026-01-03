@@ -37,7 +37,7 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
 
     return (
         <>
-            <div className="group relative aspect-square overflow-hidden rounded-2xl border border-glass-border/10 bg-glass-bg/5 transition-all duration-300 hover:border-secondary/50 hover:shadow-[0_0_30px_rgba(255,0,85,0.15)]">
+            <div className="group relative aspect-square overflow-hidden rounded-2xl border border-glass-border bg-white/70 shadow-glass-light backdrop-blur-xl transition-all duration-300 hover:border-secondary/50 hover:shadow-[0_0_30px_rgba(255,0,85,0.15)] dark:border-white/10 dark:bg-white/5 dark:shadow-none">
                 {/* Background Image (Cover Art) */}
                 <img
                     src={
@@ -63,7 +63,7 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
                         <span className="mb-1 block font-mono text-xs uppercase tracking-wider text-secondary">
                             {release.genre} • {release.year}
                         </span>
-                        <h3 className="mb-1 text-2xl font-bold leading-tight text-main">
+                        <h3 className="mb-1 text-2xl font-bold leading-tight text-white">
                             {release.title}
                         </h3>
                         <p className="mb-4 text-sm text-gray-400">{release.type}</p>
@@ -79,11 +79,10 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
                         <button
                             onClick={handleListenClick}
                             disabled={isUpcoming}
-                            className={`inline-flex transform items-center gap-2 rounded-full bg-secondary/90 px-4 py-2 text-sm font-medium text-white transition-all duration-300 ${
-                                isUpcoming
-                                    ? 'translate-y-0 cursor-not-allowed bg-gray-700 text-gray-400 opacity-100 hover:bg-gray-700'
-                                    : 'translate-y-4 opacity-0 hover:scale-105 hover:bg-secondary hover:shadow-[0_0_25px_rgba(255,255,255,0.6)] hover:brightness-110 group-hover:translate-y-0 group-hover:opacity-100'
-                            }`}
+                            className={`inline-flex transform items-center gap-2 rounded-full bg-secondary/90 px-4 py-2 text-sm font-medium text-white transition-all duration-300 ${isUpcoming
+                                ? 'translate-y-0 cursor-not-allowed bg-gray-700 text-gray-400 opacity-100 hover:bg-gray-700'
+                                : 'translate-y-4 opacity-0 hover:scale-105 hover:bg-secondary hover:shadow-[0_0_25px_rgba(255,255,255,0.6)] hover:brightness-110 group-hover:translate-y-0 group-hover:opacity-100'
+                                }`}
                         >
                             {isUpcoming ? (
                                 <span>

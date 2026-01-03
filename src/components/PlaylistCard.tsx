@@ -43,7 +43,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, t }) => {
             }
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative aspect-square overflow-hidden rounded-2xl border border-glass-border/10 bg-glass-bg/5 transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(0,243,255,0.15)]"
+            className="group relative aspect-square overflow-hidden rounded-2xl border border-glass-border bg-white/70 shadow-glass-light backdrop-blur-xl transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(0,243,255,0.15)] dark:border-white/10 dark:bg-white/5 dark:shadow-none"
         >
             {/* Background Image */}
             <img
@@ -61,7 +61,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, t }) => {
             {/* Content Overlay */}
             <div className="absolute inset-0 z-10 flex flex-col justify-end p-6">
                 <span className="mb-1 font-mono text-xs text-primary">{playlist.genre}</span>
-                <h3 className="mb-1 text-xl font-bold leading-tight text-main">{playlist.title}</h3>
+                <h3 className="mb-1 text-xl font-bold leading-tight text-white">{playlist.title}</h3>
                 <p className="line-clamp-2 text-xs text-gray-400">{playlist.description}</p>
             </div>
 

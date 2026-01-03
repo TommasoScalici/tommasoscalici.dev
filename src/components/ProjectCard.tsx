@@ -9,7 +9,7 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     return (
-        <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-glass-border/10 bg-glass-bg/5 transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(0,243,255,0.15)]">
+        <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-glass-border bg-white/70 shadow-glass-light backdrop-blur-xl transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(0,243,255,0.15)] dark:border-white/10 dark:bg-white/5 dark:shadow-none">
             <div className="relative flex h-full flex-col p-6">
                 {/* Hover Gradient Effect */}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -25,7 +25,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                                     href={project.repoUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="rounded-full p-2 text-gray-400 transition-colors hover:bg-glass-bg/5 hover:text-white"
+                                    className="rounded-full p-2 text-muted transition-colors hover:bg-glass-bg/5 hover:text-white"
                                     aria-label="View Source Code"
                                 >
                                     <SiGithub className="h-5 w-5" />
@@ -36,7 +36,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                                     href={project.playStoreUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="rounded-full p-2 text-gray-400 transition-colors hover:bg-glass-bg/5 hover:text-white"
+                                    className="rounded-full p-2 text-muted transition-colors hover:bg-glass-bg/5 hover:text-white"
                                     aria-label="View on Google Play"
                                 >
                                     <SiGoogleplay className="h-5 w-5" />
@@ -47,7 +47,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                                     href={project.demoUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="rounded-full p-2 text-gray-400 transition-colors hover:bg-glass-bg/5 hover:text-white"
+                                    className="rounded-full p-2 text-muted transition-colors hover:bg-glass-bg/5 hover:text-white"
                                     aria-label="View Live Demo"
                                 >
                                     <ExternalLink className="h-5 w-5" />
@@ -60,7 +60,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                         {project.title}
                     </h3>
 
-                    <p className="mb-6 flex-grow text-sm leading-relaxed text-gray-400">
+                    <p className="mb-6 flex-grow text-sm leading-relaxed text-muted">
                         {project.description}
                     </p>
 
@@ -68,7 +68,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                         {project.techStack.map((tech) => (
                             <span
                                 key={tech}
-                                className="rounded-full border border-surface bg-white/5 px-3 py-1 font-mono text-xs font-medium text-gray-300 transition-colors group-hover:border-primary/20 group-hover:text-primary/90"
+                                className="rounded-full border border-surface bg-black/5 px-3 py-1 font-mono text-xs font-medium text-muted transition-colors group-hover:border-primary/20 group-hover:text-primary/90 dark:bg-white/5"
                             >
                                 {tech}
                             </span>

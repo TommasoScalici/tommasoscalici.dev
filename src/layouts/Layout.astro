@@ -65,8 +65,10 @@ const copyrightDate =
 
             if (theme === 'light') {
                 document.documentElement.setAttribute('data-theme', 'light');
+                document.documentElement.classList.remove('dark');
             } else {
                 document.documentElement.removeAttribute('data-theme');
+                document.documentElement.classList.add('dark');
             }
         </script>
         <Analytics id="G-LMT1M9750Q" />
@@ -75,7 +77,7 @@ const copyrightDate =
     </head>
 
     <body
-        class="bg-background font-sans text-main antialiased selection:bg-primary selection:text-black"
+        class="bg-background font-sans text-main antialiased selection:bg-primary selection:text-inverse"
     >
         <Header client:load lang={lang} navItems={navItems} logoSrc={optimizedLogo.src} />
 
