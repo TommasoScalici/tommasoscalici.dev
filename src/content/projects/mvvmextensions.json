@@ -1,6 +1,9 @@
 {
     "title": "MVVMExtensions",
-    "description": "Architecture toolkit.",
+    "description": {
+        "en": "Architecture toolkit.",
+        "it": "Toolkit architetturale."
+    },
     "techStack": ["C#", ".NET", "MVVM"],
     "featured": true,
     "repoUrl": "https://github.com/TommasoScalici/MVVMExtensions"

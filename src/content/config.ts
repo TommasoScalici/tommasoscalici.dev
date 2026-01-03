@@ -3,8 +3,8 @@ import { defineCollection, z } from 'astro:content';
 const projects = defineCollection({
     type: 'data',
     schema: z.object({
-        title: z.string(),
-        description: z.string(),
+        title: z.union([z.string(), z.record(z.string())]),
+        description: z.union([z.string(), z.record(z.string())]),
         techStack: z.array(z.string()),
         featured: z.boolean().default(false),
         repoUrl: z.string().url(),

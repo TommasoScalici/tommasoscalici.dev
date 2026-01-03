@@ -1,6 +1,9 @@
 {
     "title": "Tax Code Flutter",
-    "description": "Vertex AI-enabled utility app.",
+    "description": {
+        "en": "Vertex AI-enabled utility app.",
+        "it": "App di utilità con Vertex AI."
+    },
     "techStack": ["Dart", "Flutter", "Vertex AI"],
     "featured": true,
     "repoUrl": "https://github.com/TommasoScalici/tax_code_flutter",

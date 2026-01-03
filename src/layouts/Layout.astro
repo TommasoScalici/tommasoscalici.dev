@@ -34,11 +34,19 @@ const {
 
 const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
 
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
 const navItems = [
-    { label: t['nav.home'], href: lang === 'en' ? '/' : `/${lang}` },
+    { label: t['nav.home'], href: getRelativeLocaleUrl(lang, '/') },
     { label: t['nav.projects'], href: '#projects' },
     { label: t['nav.music'], href: '#music' },
 ];
+
+const targetLang = lang === 'en' ? 'it' : 'en';
+const targetLangUrl = getRelativeLocaleUrl(
+    targetLang,
+    Astro.url.pathname.replace(/^\/it\//, '/') || '/',
+);
 const currentYear = new Date().getFullYear();
 const startYear = 2010; // Career start
 const copyrightDate =
@@ -53,23 +61,67 @@ const copyrightDate =
         <meta charset="UTF-8" />
         <script is:inline>
             // Prevent FOUC
-            const theme = (() => {
+            function getTheme() {
                 if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
                     return localStorage.getItem('theme');
                 }
-                if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-                    return 'light';
-                }
                 return 'dark';
-            })();
-
-            if (theme === 'light') {
-                document.documentElement.setAttribute('data-theme', 'light');
-                document.documentElement.classList.remove('dark');
-            } else {
-                document.documentElement.removeAttribute('data-theme');
-                document.documentElement.classList.add('dark');
             }
+
+            function applyTheme() {
+                const theme = getTheme();
+                if (theme === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    document.documentElement.classList.remove('dark');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                    document.documentElement.classList.add('dark');
+                }
+            }
+
+            applyTheme();
+            document.addEventListener('astro:after-swap', applyTheme);
+
+            // Language Persistence
+            function checkLanguage() {
+                if (typeof localStorage === 'undefined' || typeof window === 'undefined') return;
+
+                const storedLang = localStorage.getItem('lang');
+                const currentPath = window.location.pathname;
+
+                // If no stored lang or stored lang matches current path prefix/root, do nothing
+                if (!storedLang) return;
+
+                const worksInEnglish = !currentPath.startsWith('/it');
+                const worksInItalian = currentPath.startsWith('/it');
+
+                // If we are in English but user prefers Italian
+                if (worksInEnglish && storedLang === 'it') {
+                    // Check if we are at root or a subpath that should be redirected
+                    // For simplicity, we only redirect if we are sure.
+                    // But strictly speaking, if I am at /, I should go to /it.
+                    // Avoid redirect loops: checking if we just came from a language switch?
+                    // No, the switch sets the storage.
+
+                    // Simply redirect replacing the path
+                    // But wait, if I want to View English version explicitly?
+                    // Usually standard behavior is: if I land on Root /, use preference.
+                    // If I navigate to specific URL, respect URL.
+
+                    if (currentPath === '/') {
+                        window.location.replace('/it');
+                    }
+                }
+
+                // If we are in Italian but user prefers English
+                if (worksInItalian && storedLang === 'en') {
+                    if (currentPath === '/it' || currentPath === '/it/') {
+                        window.location.replace('/');
+                    }
+                }
+            }
+
+            checkLanguage();
         </script>
         <Analytics id="G-LMT1M9750Q" />
         <SEOHead title={title} description={description} />
@@ -79,7 +131,13 @@ const copyrightDate =
     <body
         class="bg-background font-sans text-main antialiased selection:bg-primary selection:text-inverse"
     >
-        <Header client:load lang={lang} navItems={navItems} logoSrc={optimizedLogo.src} />
+        <Header
+            client:load
+            lang={lang}
+            navItems={navItems}
+            logoSrc={optimizedLogo.src}
+            targetLangUrl={targetLangUrl}
+        />
 
         <main class="relative min-h-screen overflow-hidden pt-20">
             <div

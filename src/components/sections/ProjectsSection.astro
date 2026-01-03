@@ -29,7 +29,30 @@ const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
         </div>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project) => <ProjectCard client:visible project={project.data} />)}
+            {
+                projects.map((project) => {
+                    const data = project.data;
+                    const localizedTitle =
+                        typeof data.title === 'string'
+                            ? data.title
+                            : data.title[lang] || data.title[defaultLang] || '';
+                    const localizedDescription =
+                        typeof data.description === 'string'
+                            ? data.description
+                            : data.description[lang] || data.description[defaultLang] || '';
+
+                    return (
+                        <ProjectCard
+                            client:visible
+                            project={{
+                                ...data,
+                                title: localizedTitle,
+                                description: localizedDescription,
+                            }}
+                        />
+                    );
+                })
+            }
         </div>
     </div>
 </section>

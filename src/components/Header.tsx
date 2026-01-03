@@ -6,36 +6,18 @@ interface HeaderProps {
     lang: string;
     navItems: { label: string; href: string }[];
     logoSrc: string;
+    targetLangUrl: string;
 }
 
-export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
+export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc, targetLangUrl }) => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const getTargetLanguageUrl = () => {
-        if (typeof window === 'undefined') return lang === 'en' ? '/it' : '/';
-
-        const currentPath = window.location.pathname;
-        const newLang = lang === 'en' ? 'it' : 'en';
-
-        // Handle root path
-        if (currentPath === '/' || currentPath === '/it') {
-            return newLang === 'en' ? '/' : '/it';
+    const onLanguageSwitch = () => {
+        if (typeof window !== 'undefined') {
+            const newLang = lang === 'en' ? 'it' : 'en';
+            localStorage.setItem('lang', newLang);
         }
-
-        // Handle other paths
-        const segments = currentPath.split('/').filter(Boolean);
-        if (segments[0] === 'it') {
-            segments.shift(); // Remove 'it'
-        }
-
-        if (newLang === 'it') {
-            segments.unshift('it');
-        }
-
-        return `/${segments.join('/')}`;
     };
-
-    const targetUrl = getTargetLanguageUrl();
 
     return (
         <header className="fixed left-0 right-0 top-0 z-50 border-b border-surface bg-background/70 backdrop-blur-xl">
@@ -74,7 +56,8 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
 
                     {/* Language Selector */}
                     <a
-                        href={targetUrl}
+                        href={targetLangUrl}
+                        onClick={onLanguageSwitch}
                         className="flex items-center gap-2 rounded-full border border-glass-border bg-white/70 px-3 py-1.5 font-mono text-xs text-muted transition-all hover:border-primary/50 hover:text-primary dark:border-white/10 dark:bg-white/5"
                         aria-label="Switch Language"
                     >
@@ -88,7 +71,8 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc }) => {
                 {/* Mobile Menu Button */}
                 <div className="flex items-center gap-4 md:hidden">
                     <a
-                        href={targetUrl}
+                        href={targetLangUrl}
+                        onClick={onLanguageSwitch}
                         className="flex items-center gap-2 rounded-full border border-glass-border bg-white/70 px-3 py-1.5 font-mono text-xs text-muted transition-all hover:border-primary/50 hover:text-primary dark:border-white/10 dark:bg-white/5"
                     >
                         <span>{lang === 'en' ? 'IT' : 'EN'}</span>

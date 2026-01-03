@@ -29,7 +29,19 @@
         "preview:local": "npx wrangler pages dev dist",
         "preview:cloudflare": "npx wrangler pages deployment tail --project-name=tommasoscalici-dev",
         "lint": "eslint .",
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "prepare": "husky"
+    },
+    "lint-staged": {
+        "*.{js,jsx,ts,tsx,astro}": [
+            "eslint --fix",
+            "prettier --write"
+        ],
+        "*.{json,md,css}": [
+            "prettier --write"
+        ]
     },
     "dependencies": {
         "@astrojs/cloudflare": "^12.6.12",
@@ -38,11 +50,11 @@
         "@astrojs/tailwind": "^6.0.2",
         "@fontsource/inter": "^5.2.8",
         "@fontsource/jetbrains-mono": "^5.2.8",
-        "astro": "^5.16.4",
+        "astro": "^5.16.6",
         "astro-seo": "^0.8.4",
-        "lucide-react": "^0.560.0",
-        "react": "^19.2.1",
-        "react-dom": "^19.2.1",
+        "lucide-react": "^0.562.0",
+        "react": "^19.2.3",
+        "react-dom": "^19.2.3",
         "react-icons": "^5.5.0"
     },
     "devDependencies": {
@@ -55,11 +67,15 @@
         "eslint-plugin-react": "^7.37.5",
         "eslint-plugin-react-hooks": "^7.0.1",
         "globals": "^16.5.0",
+        "happy-dom": "^20.0.11",
+        "husky": "^9.1.7",
+        "lint-staged": "^16.2.7",
         "prettier": "^3.7.4",
         "prettier-plugin-astro": "^0.14.1",
         "prettier-plugin-tailwindcss": "^0.7.2",
         "semantic-release": "^25.0.2",
         "typescript-eslint": "^8.51.0",
+        "vitest": "^4.0.16",
         "wrangler": "^4.54.0"
     }
 }

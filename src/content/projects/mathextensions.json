@@ -1,6 +1,9 @@
 {
     "title": "MathExtensions",
-    "description": "High-performance math library.",
+    "description": {
+        "en": "High-performance math library.",
+        "it": "Libreria matematica ad alte prestazioni."
+    },
     "techStack": ["C#", ".NET"],
     "featured": true,
     "repoUrl": "https://github.com/TommasoScalici/MathExtensions"
