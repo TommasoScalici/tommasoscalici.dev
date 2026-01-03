@@ -1,3 +1,13 @@
+# [1.5.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.4.0...v1.5.0) (2026-01-03)
+
+
+### Features
+
+* Add Google Analytics and theme toggle, and refine UI with glassmorphism styling and accessibility improvements. ([e08a372](https://github.com/TommasoScalici/tommasoscalici.dev/commit/e08a3721334a925ff51a4d6cc87e0033635e2c27))
+* Componentize uses page into `UsesPage.astro` and specify Node.js v22.14.0 in `.nvmrc`. ([8920b1a](https://github.com/TommasoScalici/tommasoscalici.dev/commit/8920b1aee9c73a4b735d7170bff2b0fe19a71cd9))
+* Implement dark mode support and refine UI styling with new color tokens ([d8ac461](https://github.com/TommasoScalici/tommasoscalici.dev/commit/d8ac4611b43a62d088c8ca196ee2f5830cd19911))
+* Migrate site content to Astro Content Collections, replacing TS data files with JSON and updating components. ([237690e](https://github.com/TommasoScalici/tommasoscalici.dev/commit/237690e7157cb897b79c27d2acaafea2ba17137b))
+
 # [1.4.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.3.0...v1.4.0) (2026-01-02)
 
 
