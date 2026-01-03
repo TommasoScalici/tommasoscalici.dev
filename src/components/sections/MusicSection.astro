@@ -16,15 +16,25 @@ const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
 // Optimize Music Images
 const optimizedMusicReleases = await Promise.all(
     musicReleases.map(async (release) => {
-        const optimizedImage = await getImage({
+        const webpImage = await getImage({
             src: release.data.coverImage,
             format: 'webp',
             width: 300,
             height: 300,
         });
+        const avifImage = await getImage({
+            src: release.data.coverImage,
+            format: 'avif',
+            width: 300,
+            height: 300,
+        });
         return {
             ...release.data,
-            coverImage: optimizedImage.src,
+            coverImage: webpImage.src,
+            coverImageSet: {
+                webp: webpImage.src,
+                avif: avifImage.src,
+            },
         };
     }),
 );

@@ -39,18 +39,32 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
         <>
             <div className="group relative aspect-square overflow-hidden rounded-2xl border border-glass-border bg-white/70 shadow-glass-light backdrop-blur-xl transition-all duration-300 hover:border-secondary/50 hover:shadow-[0_0_30px_rgba(255,0,85,0.15)] dark:border-white/10 dark:bg-white/5 dark:shadow-none">
                 {/* Background Image (Cover Art) */}
-                <img
-                    src={
-                        typeof release.coverImage === 'string'
-                            ? release.coverImage
-                            : release.coverImage.src
-                    }
-                    alt={release.title}
-                    width={300}
-                    height={300}
-                    loading="lazy"
-                    className={`absolute inset-0 h-full w-full object-cover transition-transform duration-700 ${isUpcoming ? 'scale-100 opacity-40 grayscale' : 'opacity-80 group-hover:scale-110 group-hover:opacity-100'}`}
-                />
+                <picture className="absolute inset-0 h-full w-full">
+                    {release.coverImageSet && (
+                        <>
+                            <source srcSet={release.coverImageSet.avif} type="image/avif" />
+                            <source srcSet={release.coverImageSet.webp} type="image/webp" />
+                        </>
+                    )}
+                    <img
+                        src={
+                            release.coverImageSet
+                                ? release.coverImageSet.webp
+                                : typeof release.coverImage === 'string'
+                                  ? release.coverImage
+                                  : release.coverImage.src
+                        }
+                        alt={release.title}
+                        width={300}
+                        height={300}
+                        loading="lazy"
+                        className={`h-full w-full object-cover transition-transform duration-700 ${
+                            isUpcoming
+                                ? 'scale-100 opacity-40 grayscale'
+                                : 'opacity-80 group-hover:scale-110 group-hover:opacity-100'
+                        }`}
+                    />
+                </picture>
 
                 {/* Gradient Overlay */}
                 <div

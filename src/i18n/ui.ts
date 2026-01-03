@@ -50,7 +50,7 @@ export const ui = {
             'Ingegnerizzazione di soluzioni robuste per problemi complessi.',
         'section.music.title': 'Architetture Sonore',
         'section.music.subtitle': "Esplorando i confini del ritmo e dell'atmosfera.",
-        'section.playlists.title': 'Flussi Curati',
+        'section.playlists.title': 'Playlist che curo',
         'dialog.connectEverywhere': 'Connettiti Ovunque',
     },
 } as const;

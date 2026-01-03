@@ -7,6 +7,10 @@ interface Playlist {
     title: string;
     description: string;
     coverImage: string;
+    coverImageSet?: {
+        avif: string;
+        webp: string;
+    };
     spotifyId: string;
     genre: string;
 }
@@ -46,14 +50,22 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, t }) => {
             className="group relative aspect-square overflow-hidden rounded-2xl border border-glass-border bg-white/70 shadow-glass-light backdrop-blur-xl transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(0,243,255,0.15)] dark:border-white/10 dark:bg-white/5 dark:shadow-none"
         >
             {/* Background Image */}
-            <img
-                src={playlist.coverImage}
-                alt={playlist.title}
-                width={320}
-                height={180}
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover opacity-60 transition-all duration-500 group-hover:scale-105 group-hover:opacity-40"
-            />
+            <picture className="absolute inset-0 h-full w-full">
+                {playlist.coverImageSet && (
+                    <>
+                        <source srcSet={playlist.coverImageSet.avif} type="image/avif" />
+                        <source srcSet={playlist.coverImageSet.webp} type="image/webp" />
+                    </>
+                )}
+                <img
+                    src={playlist.coverImageSet ? playlist.coverImageSet.webp : playlist.coverImage}
+                    alt={playlist.title}
+                    width={320}
+                    height={180}
+                    loading="lazy"
+                    className="h-full w-full object-cover opacity-60 transition-all duration-500 group-hover:scale-105 group-hover:opacity-40"
+                />
+            </picture>
 
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />

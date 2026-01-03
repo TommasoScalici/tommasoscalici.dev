@@ -5,5 +5,6 @@ export default getViteConfig({
     // @ts-expect-error - vitest types are not effectively merged into AstroUserConfig in this context
     test: {
         environment: 'happy-dom',
+        isolate: false,
     },
 });

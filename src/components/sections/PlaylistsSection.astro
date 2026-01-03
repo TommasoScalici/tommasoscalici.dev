@@ -20,15 +20,25 @@ if (!playlistEntry) {
 // Optimize Playlist Images
 const optimizedPlaylists = await Promise.all(
     playlistEntry.data.map(async (playlist) => {
-        const optimizedImage = await getImage({
+        const webpImage = await getImage({
             src: playlist.coverImage,
             format: 'webp',
             width: 320,
             height: 180,
         });
+        const avifImage = await getImage({
+            src: playlist.coverImage,
+            format: 'avif',
+            width: 320,
+            height: 180,
+        });
         return {
             ...playlist,
-            coverImage: optimizedImage.src,
+            coverImage: webpImage.src,
+            coverImageSet: {
+                webp: webpImage.src,
+                avif: avifImage.src,
+            },
         };
     }),
 );

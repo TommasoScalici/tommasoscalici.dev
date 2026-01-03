@@ -1,8 +1,8 @@
 {
     "title": "MVVMExtensions",
     "description": {
-        "en": "Architecture toolkit.",
-        "it": "Toolkit architetturale."
+        "en": "Architecture toolkit for the Model-View-ViewModel pattern in .NET",
+        "it": "Toolkit architetturale per il pattern Model-View-ViewModel in .NET"
     },
     "techStack": ["C#", ".NET", "MVVM"],
     "featured": true,

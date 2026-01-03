@@ -5,13 +5,15 @@ import cloudflare from '@astrojs/cloudflare';
 
 import sitemap from '@astrojs/sitemap';
 
+const isTest = process.env.VITEST === 'true';
+
 export default defineConfig({
     site: 'https://tommasoscalici.dev',
     integrations: [react(), tailwind({ applyBaseStyles: false }), sitemap()],
     output: 'server',
     adapter: cloudflare({
         imageService: 'compile',
-        platformProxy: { enabled: true },
+        platformProxy: { enabled: !isTest },
         routes: {
             strategy: 'auto',
         },

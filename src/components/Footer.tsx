@@ -27,6 +27,7 @@ export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
                     <a
                         href={lang === 'en' ? '/uses' : `/${lang}/uses`}
                         className="rounded-full border border-primary/20 bg-white/5 px-3 py-1 text-xs font-bold tracking-wide text-primary shadow-[0_0_10px_rgba(0,243,255,0.1)] transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-[0_0_15px_rgba(0,243,255,0.3)]"
+                        aria-label={t['footer.uses']}
                     >
                         {t['footer.uses']}
                     </a>
