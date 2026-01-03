@@ -22,6 +22,9 @@ export default defineConfig({
         }),
     ],
     output: 'static',
+    build: {
+        inlineStylesheets: 'always',
+    },
     adapter: cloudflare({
         platformProxy: { enabled: !isTest },
         imageService: 'compile',
