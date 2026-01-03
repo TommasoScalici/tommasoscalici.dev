@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.8.1...v1.9.0) (2026-01-03)
+
+
+### Features
+
+* add multilingual privacy policy and data deletion pages for the Tax Code app. ([08c5183](https://github.com/TommasoScalici/tommasoscalici.dev/commit/08c51834e981dc7e17703d157a5c3a7fe3929805))
+
 ## [1.8.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.8.0...v1.8.1) (2026-01-03)
 
 
