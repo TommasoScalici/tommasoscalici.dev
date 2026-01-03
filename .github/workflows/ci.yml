@@ -24,6 +24,9 @@ jobs:
             - name: Install dependencies
               run: npm ci
 
+            - name: Generate Content Types
+              run: npx astro sync
+
             - name: Check Formatting
               # We use a custom script or just run prettier with --check
               run: npx prettier --check .
