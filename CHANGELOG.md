@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.5.0...v1.6.0) (2026-01-03)
+
+
+### Features
+
+* Implement internationalization for project content and navigation, integrate Vitest for testing, and add Husky pre-commit hooks. ([666d3d4](https://github.com/TommasoScalici/tommasoscalici.dev/commit/666d3d4826b4111b2279a30c0df8c9f60b0988f6))
+
 # [1.5.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.4.0...v1.5.0) (2026-01-03)
 
 
