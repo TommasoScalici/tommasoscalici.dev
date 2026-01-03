@@ -61,7 +61,9 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, t }) => {
             {/* Content Overlay */}
             <div className="absolute inset-0 z-10 flex flex-col justify-end p-6">
                 <span className="mb-1 font-mono text-xs text-primary">{playlist.genre}</span>
-                <h3 className="mb-1 text-xl font-bold leading-tight text-white">{playlist.title}</h3>
+                <h3 className="mb-1 text-xl font-bold leading-tight text-white">
+                    {playlist.title}
+                </h3>
                 <p className="line-clamp-2 text-xs text-gray-400">{playlist.description}</p>
             </div>
 

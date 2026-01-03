@@ -1,0 +1,100 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { usesData } from '../../data/uses';
+import { FiExternalLink } from 'react-icons/fi';
+
+interface Props {
+    title: string;
+    description: string;
+    heroTitle: string;
+    heroSubtitle: string;
+    lang: 'en' | 'it';
+}
+
+const { title, description, heroTitle, heroSubtitle, lang } = Astro.props;
+
+// Helper to get localized string
+const getLocalized = (
+    content: string | Record<string, string> | undefined,
+    fallbackKey: 'en' | 'it' = 'en',
+) => {
+    if (!content) return '';
+    if (typeof content === 'string') return content;
+    return content[lang] || content[fallbackKey] || '';
+};
+---
+
+<Layout title={title} description={description} lang={lang}>
+    <section class="mx-auto min-h-screen max-w-7xl px-6 py-20">
+        {/* Hero */}
+        <div class="mb-16 text-center md:text-left">
+            <h1 class="mb-4 text-4xl font-bold tracking-tight md:text-6xl">
+                {heroTitle}
+            </h1>
+            <p class="max-w-2xl text-xl text-muted">{heroSubtitle}</p>
+        </div>
+
+        {/* Grid Layout */}
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {
+                usesData.map((category, index) => {
+                    // Determine header color based on index or title (Adaptive palette)
+                    // Cyan for Dev (0), Purple for Music (1), Green/Gold for Growth (2)
+                    let titleColorClass = 'text-cyan-600 dark:text-cyan-400';
+                    if (index === 1) titleColorClass = 'text-purple-600 dark:text-purple-400';
+                    if (index === 2) titleColorClass = 'text-emerald-600 dark:text-emerald-400';
+
+                    let containerClass =
+                        'rounded-xl p-6 transition-colors group relative overflow-hidden bg-white/70 border border-glass-border shadow-glass-light backdrop-blur-xl dark:bg-white/5 dark:border-white/5 dark:shadow-none';
+
+                    // Default hover effect for all cards
+                    if (index !== 2) {
+                        containerClass += ' hover:border-primary/50 dark:hover:border-primary/30';
+                    }
+
+                    // Special Glow Effect for Artist Growth Tools (Index 2)
+                    if (index === 2) {
+                        containerClass +=
+                            ' border-emerald-500/50 shadow-[0_0_30px_rgba(16,185,129,0.2)] hover:shadow-[0_0_40px_rgba(16,185,129,0.4)] hover:border-emerald-600 dark:hover:border-emerald-400';
+                    }
+
+                    return (
+                        <div class={containerClass}>
+                            <h2 class={`mb-6 font-mono text-xl font-bold ${titleColorClass}`}>
+                                {getLocalized(category.title)}
+                            </h2>
+                            <ul class="space-y-6">
+                                {category.items.map((item) => (
+                                    <li class="flex flex-col gap-1">
+                                        <div class="flex items-center gap-2">
+                                            {item.url ? (
+                                                <a
+                                                    href={item.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="flex items-center gap-1 font-bold text-main transition-colors hover:underline group-hover/link:text-primary dark:text-white"
+                                                >
+                                                    {item.name}
+                                                    <FiExternalLink className="w-3 h-3 text-muted" />
+                                                </a>
+                                            ) : (
+                                                <span class="font-bold text-main dark:text-white">
+                                                    {item.name}
+                                                </span>
+                                            )}
+                                        </div>
+                                        {item.description && (
+                                            <p class="text-sm leading-relaxed text-muted">
+                                                {getLocalized(item.description)}
+                                            </p>
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    );
+                })
+            }
+        </div>
+    </section>
+</Layout>

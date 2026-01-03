@@ -19,7 +19,8 @@ export default {
                 'glass-bg': 'rgb(var(--color-glass-bg) / <alpha-value>)',
             },
             boxShadow: {
-                'glass-light': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+                'glass-light':
+                    '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
             },
             fontFamily: {
                 sans: ['Inter', ...defaultTheme.fontFamily.sans],
