@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.8.0...v1.8.1) (2026-01-03)
+
+
+### Performance Improvements
+
+* Improve loading performance by deferring header JS, inlining stylesheets, and prioritizing hero image fetch. ([f53a196](https://github.com/TommasoScalici/tommasoscalici.dev/commit/f53a1962c0913cbde7682c705b79ca05ef538a90))
+
 # [1.8.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.7.0...v1.8.0) (2026-01-03)
 
 
