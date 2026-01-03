@@ -40,6 +40,7 @@ const navItems = [
     { label: t['nav.home'], href: getRelativeLocaleUrl(lang, '/') },
     { label: t['nav.projects'], href: '#projects' },
     { label: t['nav.music'], href: '#music' },
+    { label: t['nav.playlists'], href: '#playlists' },
 ];
 
 const targetLang = lang === 'en' ? 'it' : 'en';
@@ -97,17 +98,6 @@ const copyrightDate =
 
                 // If we are in English but user prefers Italian
                 if (worksInEnglish && storedLang === 'it') {
-                    // Check if we are at root or a subpath that should be redirected
-                    // For simplicity, we only redirect if we are sure.
-                    // But strictly speaking, if I am at /, I should go to /it.
-                    // Avoid redirect loops: checking if we just came from a language switch?
-                    // No, the switch sets the storage.
-
-                    // Simply redirect replacing the path
-                    // But wait, if I want to View English version explicitly?
-                    // Usually standard behavior is: if I land on Root /, use preference.
-                    // If I navigate to specific URL, respect URL.
-
                     if (currentPath === '/') {
                         window.location.replace('/it');
                     }
@@ -131,6 +121,12 @@ const copyrightDate =
     <body
         class="bg-background font-sans text-main antialiased selection:bg-primary selection:text-inverse"
     >
+        <a
+            href="#main-content"
+            class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-background focus:p-4 focus:text-primary focus:outline-none"
+        >
+            {t['nav.skipToContent']}
+        </a>
         <Header
             client:load
             lang={lang}
@@ -139,7 +135,7 @@ const copyrightDate =
             targetLangUrl={targetLangUrl}
         />
 
-        <main class="relative min-h-screen overflow-hidden pt-20">
+        <main id="main-content" class="relative min-h-screen overflow-hidden pt-20">
             <div
                 class="pointer-events-none fixed left-1/4 top-0 -z-10 h-96 w-96 rounded-full bg-primary/10 blur-[128px]"
             >

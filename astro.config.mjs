@@ -5,18 +5,26 @@ import cloudflare from '@astrojs/cloudflare';
 
 import sitemap from '@astrojs/sitemap';
 
+import partytown from '@astrojs/partytown';
+
 const isTest = process.env.VITEST === 'true';
 
 export default defineConfig({
     site: 'https://tommasoscalici.dev',
-    integrations: [react(), tailwind({ applyBaseStyles: false }), sitemap()],
-    output: 'server',
+    integrations: [
+        react(),
+        tailwind({ applyBaseStyles: false }),
+        sitemap(),
+        partytown({
+            config: {
+                forward: ['dataLayer.push', 'gtag'],
+            },
+        }),
+    ],
+    output: 'static',
     adapter: cloudflare({
-        imageService: 'compile',
         platformProxy: { enabled: !isTest },
-        routes: {
-            strategy: 'auto',
-        },
+        imageService: 'compile',
     }),
     i18n: {
         defaultLocale: 'en',

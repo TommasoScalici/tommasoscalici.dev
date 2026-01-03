@@ -33,6 +33,7 @@ const music = defineCollection({
                 })
                 .optional(), // Links might be empty for upcoming releases
             isUpcoming: z.boolean().optional(),
+            presaveLink: z.string().url().optional(),
         }),
 });
 

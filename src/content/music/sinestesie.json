@@ -4,5 +4,6 @@
     "genre": "Experimental / Prog",
     "coverImage": "../../assets/album_covers/sinestesie.webp",
     "type": "EP",
-    "isUpcoming": true
+    "isUpcoming": true,
+    "presaveLink": "https://ditto.fm/sinestesie"
 }

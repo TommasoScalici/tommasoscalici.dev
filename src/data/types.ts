@@ -31,6 +31,7 @@ export interface MusicRelease {
     type: 'Album' | 'EP' | 'Single';
     links?: PlatformLinks;
     isUpcoming?: boolean; // New flag for 2026 release
+    presaveLink?: string; // Optional pre-save link
 }
 
 export interface Bio {

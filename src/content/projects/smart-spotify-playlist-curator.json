@@ -1,0 +1,10 @@
+{
+    "title": "Smart Spotify Playlist Curator",
+    "description": {
+        "en": "A smart automation tool for curating Spotify playlists using Firebase Cloud Functions and the Spotify Web API.",
+        "it": "Uno strumento di automazione intelligente per curare playlist Spotify usando Firebase Cloud Functions e la Spotify Web API."
+    },
+    "techStack": ["TypeScript", "Node.js", "Spotify API", "Google AI Studio", "Firebase"],
+    "featured": true,
+    "repoUrl": "https://github.com/TommasoScalici/smart-spotify-playlist-curator"
+}

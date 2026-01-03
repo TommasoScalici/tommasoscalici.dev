@@ -30,6 +30,10 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
 
     const handleListenClick = (e: React.MouseEvent) => {
         e.preventDefault();
+        if (release.presaveLink) {
+            window.open(release.presaveLink, '_blank', 'noopener,noreferrer');
+            return;
+        }
         if (!isUpcoming) {
             setIsDialogOpen(true);
         }
@@ -38,6 +42,13 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
     return (
         <>
             <div className="group relative aspect-square overflow-hidden rounded-2xl border border-glass-border bg-white/70 shadow-glass-light backdrop-blur-xl transition-all duration-300 hover:border-secondary/50 hover:shadow-[0_0_30px_rgba(255,0,85,0.15)] dark:border-white/10 dark:bg-white/5 dark:shadow-none">
+                {/* Upcoming Badge */}
+                {isUpcoming ? (
+                    <div className="absolute right-0 top-0 z-10 m-4 rounded-md border border-primary bg-black/50 px-3 py-1 text-xs font-bold uppercase text-primary shadow-[0_0_10px_rgba(0,243,255,0.3)] backdrop-blur-sm">
+                        {t['card.comingSoon']}
+                    </div>
+                ) : null}
+
                 {/* Background Image (Cover Art) */}
                 <picture className="absolute inset-0 h-full w-full">
                     {release.coverImageSet && (
@@ -60,7 +71,7 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
                         loading="lazy"
                         className={`h-full w-full object-cover transition-transform duration-700 ${
                             isUpcoming
-                                ? 'scale-100 opacity-40 grayscale'
+                                ? 'scale-100 opacity-40 grayscale' // Keep grayscale for upcoming, even if presave
                                 : 'opacity-80 group-hover:scale-110 group-hover:opacity-100'
                         }`}
                     />
@@ -68,13 +79,13 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
 
                 {/* Gradient Overlay */}
                 <div
-                    className={`absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 transition-opacity duration-500 ${!isUpcoming ? 'group-hover:opacity-0' : ''}`}
+                    className={`absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 transition-opacity duration-500 ${!isUpcoming ? 'group-hover:opacity-30' : ''}`}
                 />
 
                 {/* Content */}
-                <div className="absolute inset-0 flex flex-col justify-end p-6">
+                <div className="absolute inset-0 flex flex-col justify-end p-6 drop-shadow-md transition-all duration-300 group-hover:drop-shadow-xl">
                     <div className="translate-y-4 transform transition-transform duration-500 group-hover:translate-y-0">
-                        <span className="mb-1 block font-mono text-xs uppercase tracking-wider text-secondary">
+                        <span className="mb-1 block font-mono text-xs uppercase tracking-wider text-secondary transition-all duration-300 group-hover:font-bold group-hover:text-primary">
                             {release.genre} • {release.year}
                         </span>
                         <h3 className="mb-1 text-2xl font-bold leading-tight text-white">
@@ -82,27 +93,27 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
                         </h3>
                         <p className="mb-4 text-sm text-gray-400">{release.type}</p>
 
-                        {/* Upcoming Badge */}
-                        {isUpcoming ? (
-                            <div className="absolute right-0 top-0 m-4 rounded-md border border-primary bg-black/50 px-3 py-1 text-xs font-bold uppercase text-primary shadow-[0_0_10px_rgba(0,243,255,0.3)] backdrop-blur-sm">
-                                {t['card.comingSoon']}
-                            </div>
-                        ) : null}
-
                         {/* Action Button */}
                         <button
                             onClick={handleListenClick}
-                            disabled={isUpcoming}
+                            disabled={isUpcoming && !release.presaveLink}
                             className={`inline-flex transform items-center gap-2 rounded-full bg-secondary/90 px-4 py-2 text-sm font-medium text-white transition-all duration-300 ${
-                                isUpcoming
+                                isUpcoming && !release.presaveLink
                                     ? 'translate-y-0 cursor-not-allowed bg-gray-700 text-gray-400 opacity-100 hover:bg-gray-700'
                                     : 'translate-y-4 opacity-0 hover:scale-105 hover:bg-secondary hover:shadow-[0_0_25px_rgba(255,255,255,0.6)] hover:brightness-110 group-hover:translate-y-0 group-hover:opacity-100'
                             }`}
                         >
                             {isUpcoming ? (
-                                <span>
-                                    {t['card.comingYear']} {release.year}
-                                </span>
+                                release.presaveLink ? (
+                                    <>
+                                        <Play className="h-4 w-4 fill-current transition-transform group-hover:scale-110" />
+                                        <span>{t['card.presave']}</span>
+                                    </>
+                                ) : (
+                                    <span>
+                                        {t['card.comingYear']} {release.year}
+                                    </span>
+                                )
                             ) : (
                                 <>
                                     <Play className="h-4 w-4 fill-current transition-transform group-hover:scale-110" />

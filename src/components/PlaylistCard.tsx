@@ -33,15 +33,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, t }) => {
 
     return (
         <a
-            onClick={handleClick} // Keep onClick for tracking purposes
-            onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    // For accessibility, if the <a> tag is clicked via keyboard, trigger tracking
-                    handleClick();
-                }
-            }}
-            role="button" // Keep role and tabIndex for accessibility if onClick is present
-            tabIndex={0}
+            onClick={handleClick}
             href={
                 playlist.spotifyId ? `https://open.spotify.com/playlist/${playlist.spotifyId}` : '#'
             }

@@ -1,0 +1,13 @@
+{
+    "title": {
+        "en": "This site!",
+        "it": "Questo sito!"
+    },
+    "description": {
+        "en": "The site you're viewing right now.",
+        "it": "Il sito che stai visitando in questo momento."
+    },
+    "techStack": ["Astro", "React", "TypeScript", "Tailwind CSS", "Cloudflare"],
+    "featured": true,
+    "repoUrl": "https://github.com/TommasoScalici/tommasoscalici.dev"
+}
