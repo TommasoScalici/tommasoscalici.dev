@@ -1,22 +1,26 @@
 # Tommaso Scalici - Personal Website
 
+![CI/CD & Release](https://github.com/TommasoScalici/tommasoscalici.dev/actions/workflows/ci.yml/badge.svg)
+
 A personal portfolio website that bridges the worlds of software engineering and music composition. Built with modern web technologies, this site features a bilingual interface (English/Italian) and showcases both technical projects and musical releases.
 
 ## 🚀 Tech Stack
 
-- **Framework:** [Astro](https://astro.build)
-- **UI Library:** [React](https://react.dev)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com)
-- **Icons:** [Lucide React](https://lucide.dev) & [React Icons](https://react-icons.github.io/react-icons/)
+- **Framework:** [Astro 5](https://astro.build) (SSG Mode)
+- **UI Library:** [React 19](https://react.dev)
+- **Styling:** [Tailwind CSS 3](https://tailwindcss.com) & [Lucide React](https://lucide.dev)
+- **Performance:** [Partytown](https://partytown.builder.io) (Analytics off-main-thread)
 - **Typography:** Inter & JetBrains Mono (via [@fontsource](https://fontsource.org))
-- **Deployment:** [Cloudflare Pages](https://pages.cloudflare.com)
+- **Deployment:** [Cloudflare Pages](https://pages.cloudflare.com) via GitHub Actions
 
 ## ✨ Features
 
-- **Dual Persona:** Distinct sections for "Architecting Code" (Software Engineering) and "Composing Soundscapes" (Music).
-- **Bilingual Support:** Fully localized content in English and Italian (`/` and `/it`).
-- **Modern UI:** responsive design with dark mode aesthetic, glassmorphism effects, and smooth animations.
-- **Dynamic Content:** Data-driven components for Projects and Music releases.
+- **💯 Excellence:** Achieved **100/100/100/100** on Google Lighthouse (Performance, Accessibility, Best Practices, SEO).
+- **🎨 UX/UI:** Responsive design with **Dark/Light Mode**, glassmorphism effects, and smooth animations.
+- **🌍 Bilingual:** Fully localized content in English and Italian (`/` and `/it`).
+- **🚀 Performance:** Critical CSS inlining, Font optimization, LCP prioritization, and Partytown.
+- **🔒 Type Safety:** Strict TypeScript + Zod content schemas.
+- **🎵 Music Integration:** Pre-save functionality and smart link routing for music releases.
 
 ## 📂 Project Structure
 
@@ -42,6 +46,8 @@ All commands are run from the root of the project, from a terminal:
 | `npm run dev`     | Starts local dev server at `localhost:4321`  |
 | `npm run build`   | Build your production site to `./dist/`      |
 | `npm run preview` | Preview your build locally, before deploying |
+| `npm run check`   | Run Astro's TypeScript checker               |
+| `npm run lint`    | Run ESLint to verify code quality            |
 
 ## 📄 License
 
