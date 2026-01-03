@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+interface Props {
+    title: string;
+    description?: string;
+    lang?: string;
+}
+
+const { title, description, lang = 'en' } = Astro.props;
+---
+
+<Layout title={title} description={description} lang={lang}>
+    <section class="relative min-h-screen px-6 py-24 md:py-32">
+        <div
+            class="mx-auto max-w-3xl rounded-2xl border border-glass-border bg-white/70 p-8 shadow-glass-light backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:shadow-none md:p-12"
+        >
+            <article
+                class="prose prose-lg max-w-none text-muted dark:prose-invert prose-headings:font-mono prose-headings:text-main prose-a:text-primary hover:prose-a:text-secondary prose-strong:text-main"
+            >
+                <h1 class="mb-8 text-3xl font-bold tracking-tight text-main md:text-4xl">
+                    {title}
+                </h1>
+                <slot />
+            </article>
+        </div>
+    </section>
+</Layout>

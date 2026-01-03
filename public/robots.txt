@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+Disallow: /apps/
 Sitemap: https://tommasoscalici.dev/sitemap-index.xml
