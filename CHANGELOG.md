@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.6.0...v1.7.0) (2026-01-03)
+
+
+### Features
+
+* Implement AVIF/WebP image optimization for music releases and playlists, enhance project details, and refine configurations. ([8947ab1](https://github.com/TommasoScalici/tommasoscalici.dev/commit/8947ab132ac1524eda3e1e58ceb7f901324d9e10))
+
 # [1.6.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.5.0...v1.6.0) (2026-01-03)
 
 
