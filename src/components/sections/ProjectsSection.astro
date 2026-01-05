@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import { ProjectCard } from '../ProjectCard';
 import { ui, defaultLang } from '../../i18n/ui';
 
@@ -12,6 +12,8 @@ interface Props {
 
 const { lang = defaultLang } = Astro.props;
 const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
+
+type ProjectEntry = CollectionEntry<'projects'>;
 ---
 
 <section id="projects" class="bg-white/50 px-6 py-32 dark:bg-transparent">
@@ -30,7 +32,7 @@ const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {
-                projects.map((project) => {
+                projects.map((project: ProjectEntry) => {
                     const data = project.data;
                     const localizedTitle =
                         typeof data.title === 'string'

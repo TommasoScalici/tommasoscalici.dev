@@ -1,6 +1,6 @@
 ---
 import { PlaylistCard } from '../PlaylistCard';
-import { getEntry } from 'astro:content';
+import { getEntry, type CollectionEntry } from 'astro:content';
 import { ui, defaultLang } from '../../i18n/ui';
 import { getImage } from 'astro:assets';
 
@@ -19,7 +19,7 @@ if (!playlistEntry) {
 
 // Optimize Playlist Images
 const optimizedPlaylists = await Promise.all(
-    playlistEntry.data.map(async (playlist) => {
+    playlistEntry.data.map(async (playlist: CollectionEntry<'playlists'>['data'][number]) => {
         const webpImage = await getImage({
             src: playlist.coverImage,
             format: 'webp',

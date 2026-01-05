@@ -28,7 +28,7 @@
         "dev": "astro dev",
         "preview:local": "npx wrangler pages dev dist",
         "preview:cloudflare": "npx wrangler pages deployment tail --project-name=tommasoscalici-dev",
-        "lint": "eslint .",
+        "lint": "eslint . --fix",
         "format": "prettier --write .",
         "test": "vitest run",
         "test:watch": "vitest",

@@ -7,10 +7,11 @@ export async function getStaticPaths() {
     const allLegal = await getCollection('legal');
     // Filter for English docs related to 'taxcode' (exclude .it.md files)
     const taxCodeDocs = allLegal.filter(
-        (doc) => doc.id.startsWith('taxcode/') && !doc.id.endsWith('.it.md'),
+        (doc: CollectionEntry<'legal'>) =>
+            doc.id.startsWith('taxcode/') && !doc.id.endsWith('.it.md'),
     );
 
-    return taxCodeDocs.map((doc) => {
+    return taxCodeDocs.map((doc: CollectionEntry<'legal'>) => {
         // Extract slug from filename (e.g., 'taxcode/data-deletion.md' -> 'data-deletion')
         const slug = doc.id.split('/').pop()?.replace('.md', '') ?? '';
         return {

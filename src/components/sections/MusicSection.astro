@@ -1,6 +1,6 @@
 ---
 import { MusicReleaseCard } from '../MusicReleaseCard';
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import { ui, defaultLang } from '../../i18n/ui';
 import { getImage } from 'astro:assets';
 
@@ -15,7 +15,7 @@ const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
 
 // Optimize Music Images
 const optimizedMusicReleases = await Promise.all(
-    musicReleases.map(async (release) => {
+    musicReleases.map(async (release: CollectionEntry<'music'>) => {
         const webpImage = await getImage({
             src: release.data.coverImage,
             format: 'webp',
