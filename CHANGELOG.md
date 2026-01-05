@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.9.0...v1.10.0) (2026-01-05)
+
+
+### Features
+
+* Fixed lint errors, alongside SEO enhancements. ([b99c1ae](https://github.com/TommasoScalici/tommasoscalici.dev/commit/b99c1ae22485f8ef4339fac4c33ea4f99631d6e6))
+
 # [1.9.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.8.1...v1.9.0) (2026-01-03)
 
 
