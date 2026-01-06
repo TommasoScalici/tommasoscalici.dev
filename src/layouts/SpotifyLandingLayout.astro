@@ -3,12 +3,15 @@ import '@fontsource/inter';
 import '@fontsource/jetbrains-mono';
 import '../styles/global.css';
 import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import Analytics from '../components/Analytics.astro';
+
+import MetaPixel from '../components/analytics/MetaPixel.astro';
+import TikTokPixel from '../components/analytics/TikTokPixel.astro';
 
 interface Props {
     title: string;
     description: string;
-    // eslint-disable-next-line no-undef
     coverImage: ImageMetadata;
     theme: 'lofi' | 'prog';
 }
@@ -51,102 +54,13 @@ const currentTheme = themeConfig[theme];
         <meta property="og:image" content={optimizedBg.src} />
         <meta property="og:type" content="music.playlist" />
 
-        <!-- Meta Pixel Code -->
-        <script
-            is:inline
-            define:vars={{
-                facebookPixelId: import.meta.env.PUBLIC_FACEBOOK_PIXEL_ID,
-            }}
-        >
-            /* eslint-disable */
-            !(function (f, b, e, v, n, t, s) {
-                if (f.fbq) return;
-                n = f.fbq = function () {
-                    n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-                };
-                if (!f._fbq) f._fbq = n;
-                n.push = n;
-                n.loaded = !0;
-                n.version = '2.0';
-                n.queue = [];
-                t = b.createElement(e);
-                t.async = !0;
-                t.src = v;
-                s = b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t, s);
-            })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', facebookPixelId);
-            fbq('track', 'PageView');
-            /* eslint-enable */
-        </script>
-        <noscript>
-            <img
-                height="1"
-                width="1"
-                style="display:none"
-                src={`https://www.facebook.com/tr?id=${import.meta.env.PUBLIC_FACEBOOK_PIXEL_ID}&ev=PageView&noscript=1`}
-            />
-        </noscript>
-        <!-- End Meta Pixel Code -->
+        <MetaPixel />
 
         <!-- Google Analytics -->
         <Analytics id="G-LMT1M9750Q" />
         <!-- End Google Analytics -->
 
-        <!-- TikTok Pixel Code -->
-        <script is:inline define:vars={{ tiktokPixelId: import.meta.env.PUBLIC_TIKTOK_PIXEL_ID }}>
-            /* eslint-disable */
-            !(function (w, d, t) {
-                w.TiktokAnalyticsObject = t;
-                var ttq = (w[t] = w[t] || []);
-                ((ttq.methods = [
-                    'page',
-                    'track',
-                    'identify',
-                    'instances',
-                    'debug',
-                    'on',
-                    'off',
-                    'once',
-                    'ready',
-                    'alias',
-                    'group',
-                    'enableCookie',
-                    'disableCookie',
-                ]),
-                    (ttq.setAndDefer = function (t, e) {
-                        t[e] = function () {
-                            t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
-                        };
-                    }));
-                for (var i = 0; i < ttq.methods.length; i++) ttq.setAndDefer(ttq, ttq.methods[i]);
-                ((ttq.instance = function (t) {
-                    for (var e = ttq.of[t] || [], n = 0; n < ttq.methods.length; n++)
-                        ttq.setAndDefer(e, ttq.methods[n]);
-                    return e;
-                }),
-                    (ttq.load = function (e, n) {
-                        var i = 'https://analytics.tiktok.com/i18n/pixel/events.js';
-                        ((ttq._i = ttq._i || {}),
-                            (ttq._i[e] = []),
-                            (ttq._i[e]._u = i),
-                            (ttq._t = ttq._t || {}),
-                            (ttq._t[e] = +new Date()),
-                            (ttq._o = ttq._o || {}),
-                            (ttq._o[e] = n || {}));
-                        var o = d.createElement('script');
-                        ((o.type = 'text/javascript'),
-                            (o.async = !0),
-                            (o.src = i + '?sdkid=' + e + '&lib=' + t));
-                        var a = d.getElementsByTagName('script')[0];
-                        a.parentNode.insertBefore(o, a);
-                    }));
-
-                ttq.load(tiktokPixelId);
-                ttq.page();
-            })(window, document, 'ttq');
-            /* eslint-enable */
-        </script>
+        <TikTokPixel />
 
         <style>
             @keyframes floatUp {
@@ -205,7 +119,7 @@ const currentTheme = themeConfig[theme];
                 class={`mt-5 text-[11px] ${theme === 'lofi' ? 'text-[#484f58]' : 'text-[#666]'} border-none outline-none bg-transparent`}
             >
                 Curated by <a
-                    href="https://linktr.ee/tommasoscalici"
+                    href="https://tommasoscalici.dev"
                     target="_blank"
                     class="border-b border-transparent bg-transparent font-semibold text-inherit no-underline outline-none transition-colors duration-200 hover:border-white hover:text-white"
                     >Tommaso Scalici</a

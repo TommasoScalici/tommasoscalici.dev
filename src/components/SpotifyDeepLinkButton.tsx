@@ -35,7 +35,15 @@ export const SpotifyDeepLinkButton: React.FC<SpotifyDeepLinkButtonProps> = ({
                 });
             }
             if (window.ttq) {
-                window.ttq.track('ClickButton', { content_name: 'Spotify Playlist' });
+                window.ttq.track('ViewContent', {
+                    contents: [
+                        {
+                            content_id: playlistId,
+                            content_type: 'product',
+                            content_name: eventName || 'Spotify Playlist',
+                        },
+                    ],
+                });
             }
         } // Visual Feedback
         setLabel('Opening...');
