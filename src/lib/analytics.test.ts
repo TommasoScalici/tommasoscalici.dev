@@ -58,7 +58,7 @@ describe('analytics', () => {
         trackEvent('click_deep_link');
 
         expect(window.fbq).toHaveBeenCalledWith('track', 'Lead', undefined);
-        expect(window.ttq.track).toHaveBeenCalledWith('Download', {});
+        expect(window.ttq.track).toHaveBeenCalledWith('ClickButton', {});
     });
 
     it('should handle missing platforms gracefully', () => {

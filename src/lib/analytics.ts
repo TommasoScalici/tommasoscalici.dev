@@ -15,8 +15,8 @@ interface EventData {
  */
 const EVENT_MAP: Record<EventName, { fb: string; tt: string }> = {
     view_item: { fb: 'ViewContent', tt: 'ViewContent' },
-    select_content: { fb: 'ViewContent', tt: 'ClickButton' }, // Secondary engagement
-    click_deep_link: { fb: 'Lead', tt: 'Download' }, // PRIMARY CONVERSION: Intent to open App
+    select_content: { fb: 'ViewContent', tt: 'ViewContent' }, // Secondary engagement
+    click_deep_link: { fb: 'Lead', tt: 'ClickButton' }, // PRIMARY CONVERSION: Intent to open App
 };
 
 /**
