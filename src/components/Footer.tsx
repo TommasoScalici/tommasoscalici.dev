@@ -1,11 +1,12 @@
+import { MoreHorizontal, Music } from 'lucide-react';
 import React, { useState } from 'react';
-import { SiGithub, SiLinkedin, SiInstagram } from 'react-icons/si';
-import { Music, MoreHorizontal } from 'lucide-react';
-import { SmartLinkDialog } from './SmartLinkDialog';
-import { SocialSmartDialog } from './SocialSmartDialog';
+import { SiGithub, SiInstagram, SiLinkedin } from 'react-icons/si';
+
 import { artistLinks } from '../data/artistLinks';
 import { secondarySocials } from '../data/socials';
 import type { TranslationKey } from '../i18n/ui';
+import { SmartLinkDialog } from './SmartLinkDialog';
+import { SocialSmartDialog } from './SocialSmartDialog';
 
 interface FooterProps {
     lang: string;
@@ -18,7 +19,7 @@ export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
     const [isSocialOpen, setIsSocialOpen] = useState(false);
 
     return (
-        <footer className="mt-20 border-t border-glass-border bg-white/70 backdrop-blur-md dark:border-surface dark:bg-black/50">
+        <footer className="border-glass-border mt-20 border-t bg-white/70 backdrop-blur-md dark:border-surface dark:bg-black/50">
             <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-8 md:flex-row">
                 <p className="flex items-center gap-4 font-mono text-sm text-muted">
                     <span>
@@ -26,7 +27,7 @@ export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
                     </span>
                     <a
                         href={lang === 'en' ? '/uses' : `/${lang}/uses`}
-                        className="rounded-full border border-primary/20 bg-white/5 px-3 py-1 text-xs font-bold tracking-wide text-primary shadow-[0_0_10px_rgba(0,243,255,0.1)] transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-[0_0_15px_rgba(0,243,255,0.3)]"
+                        className="rounded-full border border-primary/20 bg-white/5 px-3 py-1 text-xs font-bold tracking-wide text-primary shadow-[0_0_10px_rgba(0,243,255,0.1)] transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-primary-glow"
                         aria-label={t['footer.uses']}
                     >
                         {t['footer.uses']}

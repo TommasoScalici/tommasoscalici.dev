@@ -1,15 +1,16 @@
+import { X } from 'lucide-react';
 import React from 'react';
 import { createPortal } from 'react-dom';
-import { X } from 'lucide-react';
-import {
-    SiSpotify,
-    SiApplemusic,
-    SiYoutubemusic,
-    SiAmazon,
-    SiTidal,
-    SiBandcamp,
-} from 'react-icons/si';
 import { FaDeezer } from 'react-icons/fa';
+import {
+    SiAmazon,
+    SiApplemusic,
+    SiBandcamp,
+    SiSpotify,
+    SiTidal,
+    SiYoutubemusic,
+} from 'react-icons/si';
+
 import type { TranslationKey } from '../i18n/ui';
 
 export interface SmartLink {
@@ -51,7 +52,7 @@ export const SmartLinkDialog: React.FC<SmartLinkDialogProps> = ({ isOpen, onClos
 
             {/* Dialog Card */}
             <div
-                className="animate-in zoom-in-95 relative w-full max-w-sm rounded-2xl border border-glass-border bg-white p-6 shadow-2xl duration-200 dark:bg-[#0a0a0a]"
+                className="animate-in zoom-in-95 border-glass-border relative w-full max-w-sm rounded-2xl border bg-white p-6 shadow-2xl duration-200 dark:bg-background"
                 role="dialog"
                 aria-modal="true"
             >
@@ -79,7 +80,7 @@ export const SmartLinkDialog: React.FC<SmartLinkDialogProps> = ({ isOpen, onClos
                             href={link.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group flex w-full items-center gap-3 rounded-xl border border-glass-border/5 bg-glass-bg/5 p-3 transition-all hover:border-primary/50 hover:bg-glass-bg/10"
+                            className="border-glass-border/5 group flex w-full items-center gap-3 rounded-xl border bg-glass-bg/5 p-3 transition-all hover:border-primary/50 hover:bg-glass-bg/10"
                         >
                             <span
                                 className={`text-muted transition-colors group-hover:text-primary ${link.color}`}

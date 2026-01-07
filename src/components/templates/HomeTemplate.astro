@@ -1,10 +1,11 @@
 ---
+import { getEntry } from 'astro:content';
+
 import Layout from '../../layouts/Layout.astro';
 import HeroSection from '../sections/HeroSection.astro';
-import ProjectsSection from '../sections/ProjectsSection.astro';
 import MusicSection from '../sections/MusicSection.astro';
 import PlaylistsSection from '../sections/PlaylistsSection.astro';
-import { getEntry } from 'astro:content';
+import ProjectsSection from '../sections/ProjectsSection.astro';
 
 interface Props {
     lang: 'en' | 'it';

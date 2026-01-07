@@ -1,8 +1,9 @@
 ---
-import { MusicReleaseCard } from '../MusicReleaseCard';
-import { getCollection, type CollectionEntry } from 'astro:content';
-import { ui, defaultLang } from '../../i18n/ui';
 import { getImage } from 'astro:assets';
+import { type CollectionEntry, getCollection } from 'astro:content';
+
+import { defaultLang, ui } from '../../i18n/ui';
+import { MusicReleaseCard } from '../MusicReleaseCard';
 
 const musicReleases = await getCollection('music');
 

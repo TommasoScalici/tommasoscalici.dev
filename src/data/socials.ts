@@ -3,13 +3,13 @@ export const secondarySocials = [
         label: 'Spotify (User)',
         url: 'https://open.spotify.com/user/21kjx4nrep4cwzkiuwbzj5l4y',
         icon: 'spotify',
-        color: 'hover:text-[#1DB954]',
+        color: 'hover:text-spotify',
     },
     {
         label: 'Facebook (Page)',
         url: 'https://www.facebook.com/tommasoscaliciproducer',
         icon: 'facebook',
-        color: 'hover:text-[#1877F2]',
+        color: 'hover:text-facebook',
     },
     {
         label: 'X / Twitter',
@@ -21,7 +21,7 @@ export const secondarySocials = [
         label: 'TikTok',
         url: 'https://www.tiktok.com/@tommaso.scalici',
         icon: 'tiktok',
-        color: 'hover:text-[#ff0050]',
+        color: 'hover:text-tiktok',
     },
     {
         label: 'Threads',
@@ -33,24 +33,24 @@ export const secondarySocials = [
         label: 'Telegram',
         url: 'https://t.me/TommasoScalici',
         icon: 'telegram',
-        color: 'hover:text-[#26A5E4]',
+        color: 'hover:text-telegram',
     },
     {
         label: 'Google Play Dev',
         url: 'https://play.google.com/store/apps/developer?id=Tommaso%C2%A0Scalici',
         icon: 'googleplay',
-        color: 'hover:text-[#3BCCFF]',
+        color: 'hover:text-googleplay',
     },
     {
         label: 'Last.fm',
         url: 'https://www.last.fm/it/user/TommasoScalici',
         icon: 'lastfm',
-        color: 'hover:text-[#D51007]',
+        color: 'hover:text-lastfm',
     },
     {
         label: 'Steam',
         url: 'https://steamcommunity.com/id/tommasoscalici/',
         icon: 'steam',
-        color: 'hover:text-[#1b2838]',
+        color: 'hover:text-steam',
     },
 ];

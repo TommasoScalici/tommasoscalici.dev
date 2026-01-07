@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SiSpotify } from 'react-icons/si';
+
+import { useSpotifyDeepLink } from '../hooks/useSpotifyDeepLink';
 
 interface SpotifyDeepLinkButtonProps {
     playlistId: string;
@@ -13,68 +15,99 @@ export const SpotifyDeepLinkButton: React.FC<SpotifyDeepLinkButtonProps> = ({
 }) => {
     const [label, setLabel] = useState('OPEN IN SPOTIFY');
     const [isOpening, setIsOpening] = useState(false);
+    const [buttonAnimation, setButtonAnimation] = useState('');
 
-    const deepLink = `spotify:playlist:${playlistId}`;
-    const webLink = `https://open.spotify.com/playlist/${playlistId}`;
+    useEffect(() => {
+        const controller = new AbortController();
+        const { signal } = controller;
 
-    const isMobile = () => {
-        if (typeof navigator === 'undefined') return false;
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            navigator.userAgent,
-        );
-    };
+        const runAnimationSequence = async () => {
+            try {
+                // First shake after 3s
+                await new Promise((resolve, reject) => {
+                    const timeout = setTimeout(resolve, 3000);
+                    signal.addEventListener('abort', () => {
+                        clearTimeout(timeout);
+                        reject(new DOMException('Aborted', 'AbortError'));
+                    });
+                });
+
+                setButtonAnimation('animate-shake');
+
+                await new Promise((resolve, reject) => {
+                    const timeout = setTimeout(resolve, 800);
+                    signal.addEventListener('abort', () => {
+                        clearTimeout(timeout);
+                        reject(new DOMException('Aborted', 'AbortError'));
+                    });
+                }); // Shake duration
+
+                setButtonAnimation('');
+
+                // Second shake after 2s pause
+                await new Promise((resolve, reject) => {
+                    const timeout = setTimeout(resolve, 2000);
+                    signal.addEventListener('abort', () => {
+                        clearTimeout(timeout);
+                        reject(new DOMException('Aborted', 'AbortError'));
+                    });
+                });
+
+                setButtonAnimation('animate-shake');
+
+                await new Promise((resolve, reject) => {
+                    const timeout = setTimeout(resolve, 800);
+                    signal.addEventListener('abort', () => {
+                        clearTimeout(timeout);
+                        reject(new DOMException('Aborted', 'AbortError'));
+                    });
+                });
+
+                setButtonAnimation('');
+            } catch (error) {
+                // Ignore abort errors
+                if ((error as Error).name !== 'AbortError') throw error;
+            }
+        };
+
+        void runAnimationSequence();
+
+        return () => {
+            controller.abort();
+        };
+    }, []);
+
+    const { handleDeepLink } = useSpotifyDeepLink({
+        eventName,
+        playlistId,
+    });
 
     const handleClick = (e: React.MouseEvent) => {
         e.preventDefault();
-
-        // Tracking
-        if (typeof window !== 'undefined') {
-            if (window.fbq) {
-                window.fbq('track', eventName || 'ViewContent', {
-                    content_name: 'Spotify Playlist',
-                });
-            }
-            if (window.ttq) {
-                window.ttq.track('ViewContent', {
-                    contents: [
-                        {
-                            content_id: playlistId,
-                            content_type: 'product',
-                            content_name: eventName || 'Spotify Playlist',
-                        },
-                    ],
-                });
-            }
-        } // Visual Feedback
         setLabel('Opening...');
         setIsOpening(true);
 
-        if (isMobile()) {
-            // Mobile Logic
-            window.location.href = deepLink;
+        handleDeepLink();
 
-            const now = Date.now();
+        // Specific UI reset logic remaining in component as it affects local state
+        if (typeof navigator !== 'undefined' && !/Mobi/i.test(navigator.userAgent)) {
             setTimeout(() => {
-                if (Date.now() - now < 1500) {
-                    window.location.href = webLink;
-                }
-            }, 800);
-        } else {
-            // Desktop Logic
-            window.location.href = deepLink;
-
-            setTimeout(() => {
-                window.location.href = webLink;
                 setLabel('Play on Spotify');
                 setIsOpening(false);
             }, 2500);
+        } else {
+            // Reset for mobile immediately as the app switch happens
+            setTimeout(() => {
+                setIsOpening(false);
+                setLabel('OPEN IN SPOTIFY');
+            }, 2000);
         }
     };
 
     return (
         <button
             onClick={handleClick}
-            className={`group flex w-full transform items-center justify-center gap-3 rounded-full bg-[#1db954] px-8 py-4 font-bold text-black shadow-[0_0_20px_rgba(29,185,84,0.3)] transition-all hover:scale-105 hover:bg-[#1ed760] hover:shadow-[0_0_30px_rgba(29,185,84,0.5)] ${
+            className={`group flex w-full transform items-center justify-center gap-3 rounded-full bg-spotify px-8 py-4 font-bold text-black shadow-[0_0_20px_rgba(29,185,84,0.3)] transition-all hover:scale-105 hover:bg-spotify-hover hover:shadow-[0_0_30px_rgba(29,185,84,0.5)] ${buttonAnimation} ${
                 isOpening ? 'cursor-wait opacity-75' : ''
             }`}
         >

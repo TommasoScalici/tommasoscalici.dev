@@ -1,17 +1,17 @@
 ---
-import { ClientRouter } from 'astro:transitions';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
-import SEOHead from '../components/SEOHead.astro';
-import Analytics from '../components/Analytics.astro';
-
-import { ui, defaultLang } from '../i18n/ui';
-
 import '@fontsource/inter';
 import '@fontsource/jetbrains-mono';
 import '../styles/global.css';
+
 import { getImage } from 'astro:assets';
+import { ClientRouter } from 'astro:transitions';
+
 import logoImage from '../assets/logo.webp';
+import Analytics from '../components/Analytics.astro';
+import { Footer } from '../components/Footer';
+import { Header } from '../components/Header';
+import SEOHead from '../components/SEOHead.astro';
+import { defaultLang, ui } from '../i18n/ui';
 
 const optimizedLogo = await getImage({
     src: logoImage,

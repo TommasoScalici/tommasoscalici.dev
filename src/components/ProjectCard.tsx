@@ -1,6 +1,7 @@
+import { Code2, ExternalLink } from 'lucide-react';
 import React from 'react';
-import { ExternalLink, Code2 } from 'lucide-react';
 import { SiGithub, SiGoogleplay } from 'react-icons/si';
+
 import type { Project } from '../data/types';
 
 interface ProjectCardProps {
@@ -9,7 +10,7 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     return (
-        <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-glass-border bg-white/70 shadow-glass-light backdrop-blur-xl transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(0,243,255,0.15)] dark:border-white/10 dark:bg-white/5 dark:shadow-none">
+        <div className="border-glass-border group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-white/70 shadow-glass-light backdrop-blur-xl transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(0,243,255,0.15)] dark:border-white/10 dark:bg-white/5 dark:shadow-none">
             <div className="relative flex h-full flex-col p-6">
                 {/* Hover Gradient Effect */}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />

@@ -1,5 +1,6 @@
+import { Languages, Menu, X } from 'lucide-react';
 import React, { useState } from 'react';
-import { Menu, X, Languages } from 'lucide-react';
+
 import { ThemeToggle } from './ThemeToggle';
 
 interface HeaderProps {
@@ -58,7 +59,7 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc, targetL
                     <a
                         href={targetLangUrl}
                         onClick={onLanguageSwitch}
-                        className="flex items-center gap-2 rounded-full border border-glass-border bg-white/70 px-3 py-1.5 font-mono text-xs text-muted transition-all hover:border-primary/50 hover:text-primary dark:border-white/10 dark:bg-white/5"
+                        className="border-glass-border flex items-center gap-2 rounded-full border bg-white/70 px-3 py-1.5 font-mono text-xs text-muted transition-all hover:border-primary/50 hover:text-primary dark:border-white/10 dark:bg-white/5"
                         aria-label="Switch Language"
                     >
                         <Languages className="h-3.5 w-3.5" />
@@ -73,7 +74,7 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc, targetL
                     <a
                         href={targetLangUrl}
                         onClick={onLanguageSwitch}
-                        className="flex items-center gap-2 rounded-full border border-glass-border bg-white/70 px-3 py-1.5 font-mono text-xs text-muted transition-all hover:border-primary/50 hover:text-primary dark:border-white/10 dark:bg-white/5"
+                        className="border-glass-border flex items-center gap-2 rounded-full border bg-white/70 px-3 py-1.5 font-mono text-xs text-muted transition-all hover:border-primary/50 hover:text-primary dark:border-white/10 dark:bg-white/5"
                     >
                         <span>{lang === 'en' ? 'IT' : 'EN'}</span>
                     </a>

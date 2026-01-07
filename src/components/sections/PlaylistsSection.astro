@@ -1,8 +1,9 @@
 ---
-import { PlaylistCard } from '../PlaylistCard';
-import { getEntry, type CollectionEntry } from 'astro:content';
-import { ui, defaultLang } from '../../i18n/ui';
 import { getImage } from 'astro:assets';
+import { type CollectionEntry, getEntry } from 'astro:content';
+
+import { defaultLang, ui } from '../../i18n/ui';
+import { PlaylistCard } from '../PlaylistCard';
 
 interface Props {
     lang: string;

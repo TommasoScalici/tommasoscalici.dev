@@ -1,5 +1,6 @@
-import { describe, it, expect } from 'vitest';
-import { ui, languages, defaultLang } from './ui';
+import { describe, expect, it } from 'vitest';
+
+import { defaultLang, languages, ui } from './ui';
 
 describe('i18n UI Configuration', () => {
     it('should have English and Italian languages defined', () => {

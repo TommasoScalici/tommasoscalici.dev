@@ -2,10 +2,11 @@
 import '@fontsource/inter';
 import '@fontsource/jetbrains-mono';
 import '../styles/global.css';
-import { Image, getImage } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
-import Analytics from '../components/Analytics.astro';
 
+import type { ImageMetadata } from 'astro';
+import { getImage, Image } from 'astro:assets';
+
+import Analytics from '../components/Analytics.astro';
 import MetaPixel from '../components/analytics/MetaPixel.astro';
 import TikTokPixel from '../components/analytics/TikTokPixel.astro';
 
@@ -36,6 +37,10 @@ const themeConfig = {
 };
 
 const currentTheme = themeConfig[theme];
+const gradientClasses =
+    theme === 'lofi'
+        ? 'from-indigo-500 via-sky-500 to-indigo-500'
+        : 'from-[#00f3ff] via-[#ff0055] to-[#00f3ff]';
 ---
 
 <!doctype html>
@@ -89,29 +94,35 @@ const currentTheme = themeConfig[theme];
             class="w-[90%] max-w-[380px] rounded-3xl p-[30px_20px] text-center"
             style={`${currentTheme.card} animation: floatUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);`}
         >
-            {
-                typeof coverImage === 'string' ? (
-                    <Image
-                        src={coverImage}
-                        width={300}
-                        height={300}
-                        loading="eager"
-                        class="mb-5 aspect-square w-full rounded-xl object-cover"
-                        style={currentTheme.coverShadow}
-                        alt={`${title} Cover`}
-                    />
-                ) : (
-                    <Image
-                        src={coverImage}
-                        width={300}
-                        height={300}
-                        loading="eager"
-                        class="mb-5 aspect-square w-full rounded-xl object-cover"
-                        style={currentTheme.coverShadow}
-                        alt={`${title} Cover`}
-                    />
-                )
-            }
+            <div class="group relative mx-auto mb-5 aspect-square w-full rounded-xl">
+                <div
+                    class={`absolute -inset-1 animate-spin-slow rounded-xl bg-gradient-to-r opacity-75 blur-lg transition duration-1000 group-hover:duration-200 group-hover:opacity-100 ${gradientClasses}`}
+                >
+                </div>
+                {
+                    typeof coverImage === 'string' ? (
+                        <Image
+                            src={coverImage}
+                            width={300}
+                            height={300}
+                            loading="eager"
+                            class="relative h-full w-full rounded-xl object-cover"
+                            style={currentTheme.coverShadow}
+                            alt={`${title} Cover`}
+                        />
+                    ) : (
+                        <Image
+                            src={coverImage}
+                            width={300}
+                            height={300}
+                            loading="eager"
+                            class="relative h-full w-full rounded-xl object-cover"
+                            style={currentTheme.coverShadow}
+                            alt={`${title} Cover`}
+                        />
+                    )
+                }
+            </div>
 
             <slot />
 

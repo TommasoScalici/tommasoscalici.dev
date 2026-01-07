@@ -8,22 +8,22 @@ export const platforms: Record<string, PlatformDef> = {
     spotify: {
         label: 'Spotify',
         icon: 'spotify',
-        color: 'hover:text-[#1DB954]',
+        color: 'hover:text-spotify',
     },
     apple: {
         label: 'Apple Music',
         icon: 'apple',
-        color: 'hover:text-[#FA243C]',
+        color: 'hover:text-apple',
     },
     youtube: {
         label: 'YouTube Music',
         icon: 'youtube',
-        color: 'hover:text-[#FF0000]',
+        color: 'hover:text-youtube',
     },
     amazon: {
         label: 'Amazon Music',
         icon: 'amazon',
-        color: 'hover:text-[#25D1DA]',
+        color: 'hover:text-amazon',
     },
     tidal: {
         label: 'Tidal',
@@ -33,12 +33,12 @@ export const platforms: Record<string, PlatformDef> = {
     deezer: {
         label: 'Deezer',
         icon: 'deezer',
-        color: 'hover:text-[#A238FF]',
+        color: 'hover:text-deezer',
     },
     bandcamp: {
         label: 'Bandcamp',
         icon: 'bandcamp',
-        color: 'hover:text-[#629aa9]',
+        color: 'hover:text-bandcamp',
     },
 };
 

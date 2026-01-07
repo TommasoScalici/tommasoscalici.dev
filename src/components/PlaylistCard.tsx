@@ -39,7 +39,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, t }) => {
             }
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative aspect-square overflow-hidden rounded-2xl border border-glass-border bg-white/70 shadow-glass-light backdrop-blur-xl transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(0,243,255,0.15)] dark:border-white/10 dark:bg-white/5 dark:shadow-none"
+            className="border-glass-border group relative aspect-square overflow-hidden rounded-2xl border bg-white/70 shadow-glass-light backdrop-blur-xl transition-all duration-300 hover:border-primary/50 hover:shadow-primary-glow dark:border-white/10 dark:bg-white/5 dark:shadow-none"
         >
             {/* Background Image */}
             <picture className="absolute inset-0 h-full w-full">
@@ -74,15 +74,15 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, t }) => {
             {/* Hover Overlay with Icon */}
             <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/60 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100">
                 <div className="flex translate-y-4 transform flex-col items-center gap-2 transition-transform duration-300 group-hover:translate-y-0">
-                    <SiSpotify className="h-12 w-12 text-[#1DB954] drop-shadow-[0_0_15px_rgba(29,185,84,0.6)]" />
-                    <span className="animate-text-shimmer bg-gradient-to-r from-[#1DB954] via-white to-[#1DB954] bg-clip-text text-sm font-bold tracking-widest text-transparent">
+                    <SiSpotify className="h-12 w-12 text-spotify drop-shadow-[0_0_15px_rgba(29,185,84,0.6)]" />
+                    <span className="animate-text-shimmer bg-gradient-to-r from-spotify via-white to-spotify bg-clip-text text-sm font-bold tracking-widest text-transparent">
                         {t['card.playOnSpotify']}
                     </span>
                 </div>
             </div>
 
             {/* Top Right Badge */}
-            <div className="absolute right-0 top-0 m-3 rounded border border-glass-border/10 bg-black/50 px-2 py-1 font-mono text-[10px] text-gray-300 backdrop-blur-md">
+            <div className="border-glass-border/10 absolute right-0 top-0 m-3 rounded border bg-black/50 px-2 py-1 font-mono text-[10px] text-gray-300 backdrop-blur-md">
                 PLAYLIST
             </div>
         </a>

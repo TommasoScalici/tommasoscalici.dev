@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
 import { Play } from 'lucide-react';
+import React, { useState } from 'react';
+
+import { platformOrder, platforms } from '../data/platforms';
 import type { MusicRelease, PlatformLinks } from '../data/types';
-import { SmartLinkDialog, type SmartLink } from './SmartLinkDialog';
-import { platforms, platformOrder } from '../data/platforms';
+import { type SmartLink, SmartLinkDialog } from './SmartLinkDialog';
 
 interface MusicReleaseCardProps {
     release: MusicRelease;
@@ -41,10 +42,10 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
 
     return (
         <>
-            <div className="group relative aspect-square overflow-hidden rounded-2xl border border-glass-border bg-white/70 shadow-glass-light backdrop-blur-xl transition-all duration-300 hover:border-secondary/50 hover:shadow-[0_0_30px_rgba(255,0,85,0.15)] dark:border-white/10 dark:bg-white/5 dark:shadow-none">
+            <div className="border-glass-border group relative aspect-square overflow-hidden rounded-2xl border bg-white/70 shadow-glass-light backdrop-blur-xl transition-all duration-300 hover:border-secondary/50 hover:shadow-secondary-glow dark:border-white/10 dark:bg-white/5 dark:shadow-none">
                 {/* Upcoming Badge */}
                 {isUpcoming ? (
-                    <div className="absolute right-0 top-0 z-10 m-4 rounded-md border border-primary bg-black/50 px-3 py-1 text-xs font-bold uppercase text-primary shadow-[0_0_10px_rgba(0,243,255,0.3)] backdrop-blur-sm">
+                    <div className="absolute right-0 top-0 z-10 m-4 rounded-md border border-primary bg-black/50 px-3 py-1 text-xs font-bold uppercase text-primary shadow-primary-glow backdrop-blur-sm">
                         {t['card.comingSoon']}
                     </div>
                 ) : null}
