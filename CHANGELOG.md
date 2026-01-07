@@ -1,3 +1,10 @@
+## [1.13.3](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.13.2...v1.13.3) (2026-01-07)
+
+
+### Bug Fixes
+
+* fixed Meta Pixel primary conversion event name ([b83d4e3](https://github.com/TommasoScalici/tommasoscalici.dev/commit/b83d4e3f5bb5fce6662859454534fe25dd08111c))
+
 ## [1.13.2](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.13.1...v1.13.2) (2026-01-07)
 
 
