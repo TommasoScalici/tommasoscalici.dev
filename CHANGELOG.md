@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.11.0...v1.12.0) (2026-01-07)
+
+
+### Features
+
+* Fixed bug with Pixel TikTok regarding user's privacy ([77175a2](https://github.com/TommasoScalici/tommasoscalici.dev/commit/77175a261067de7d3308d1531a16b12e40568795))
+
 # [1.11.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.10.0...v1.11.0) (2026-01-07)
 
 
