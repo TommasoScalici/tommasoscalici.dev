@@ -183,11 +183,11 @@ const { gaId, fbPixelId, tiktokPixelId } = Astro.props;
 
                     if (cookieEnabled) {
                         ttq.enableCookie();
+                        ttq.load(tiktokPixelId);
+                        ttq.page();
                     } else {
                         ttq.disableCookie();
                     }
-                    ttq.load(tiktokPixelId);
-                    ttq.page();
                 })(window, 'ttq');
             })();
         `}
