@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.12.0...v1.13.0) (2026-01-07)
+
+
+### Features
+
+* Implement analytics tracking with consent management for GA4, Meta, and TikTok pixels. ([b8db175](https://github.com/TommasoScalici/tommasoscalici.dev/commit/b8db17505c3f0eeb6507e46f8d5b50f240555786))
+
 # [1.12.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.11.0...v1.12.0) (2026-01-07)
 
 
