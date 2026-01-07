@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.13.0...v1.13.1) (2026-01-07)
+
+
+### Bug Fixes
+
+* fixed [TikTok Pixel] Duplicate Pixel ID warning and logo resource preload warning ([f080fb0](https://github.com/TommasoScalici/tommasoscalici.dev/commit/f080fb0ad9d56014f795f138f4ad0bb3b40ef013))
+
 # [1.13.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.12.0...v1.13.0) (2026-01-07)
 
 
