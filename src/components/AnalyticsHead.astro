@@ -5,192 +5,29 @@ interface Props {
     tiktokPixelId?: string;
 }
 
+import analyticsScript from '../scripts/analytics.js?raw';
+
 const { gaId, fbPixelId, tiktokPixelId } = Astro.props;
+const hasAnalytics = [gaId, fbPixelId, tiktokPixelId].some((id) => !!id);
 ---
 
-<!-- Google Analytics 4 (Consent Mode) -->{
-    [gaId, fbPixelId, tiktokPixelId].some((id) => !!id) && (
-        <script
-            is:inline
-            set:html={`
-            window.ANALYTICS_CONFIG = {
-                gaId: ${JSON.stringify(gaId)},
-                fbPixelId: ${JSON.stringify(fbPixelId)},
-                tiktokPixelId: ${JSON.stringify(tiktokPixelId)},
-            };
-        `}
-        />
-    )
-}
-
-<!-- Google Analytics 4 -->
-{
-    gaId && (
+<!-- Analytics Configuration -->{
+    hasAnalytics && (
         <>
             <script
                 is:inline
                 set:html={`
-                (() => {
-                    const config = window.ANALYTICS_CONFIG || {};
-                    const gaId = config.gaId;
-                    if (!gaId) return;
-
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag() {
-                        window.dataLayer.push(arguments);
-                    }
-                    window.gtag = gtag;
-
-                    let savedConsent = 'denied';
-                    try {
-                        if (localStorage.getItem('user-consent') === 'granted') {
-                            savedConsent = 'granted';
-                        }
-                    } catch (e) {}
-
-                    gtag('consent', 'default', {
-                        ad_storage: savedConsent,
-                        ad_user_data: savedConsent,
-                        ad_personalization: savedConsent,
-                        analytics_storage: savedConsent,
-                        wait_for_update: 500,
-                    });
-
-                    gtag('js', new Date());
-                    gtag('config', gaId);
-                })();
+                window.ANALYTICS_CONFIG = {
+                    gaId: ${JSON.stringify(gaId)},
+                    fbPixelId: ${JSON.stringify(fbPixelId)},
+                    tiktokPixelId: ${JSON.stringify(tiktokPixelId)},
+                };
             `}
             />
-            <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+            <script is:inline set:html={analyticsScript} />
         </>
     )
 }
 
-<!-- Meta Pixel -->
-{
-    fbPixelId && (
-        <script
-            is:inline
-            set:html={`
-            (() => {
-                const config = window.ANALYTICS_CONFIG || {};
-                const fbPixelId = config.fbPixelId;
-                if (!fbPixelId) return;
-
-                !(function (f, b, e, v, n, t, s) {
-                    if (f.fbq) return;
-                    n = f.fbq = function () {
-                        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-                    };
-                    if (!f._fbq) f._fbq = n;
-                    n.push = n;
-                    n.loaded = !0;
-                    n.version = '2.0';
-                    n.queue = [];
-                    t = b.createElement(e);
-                    t.async = !0;
-                    t.src = v;
-                    s = b.getElementsByTagName(e)[0];
-                    s.parentNode.insertBefore(t, s);
-                })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-
-                let savedConsent = 'revoke';
-                try {
-                    if (localStorage.getItem('user-consent') === 'granted') {
-                        savedConsent = 'grant';
-                    }
-                } catch (e) {}
-
-                if (savedConsent === 'revoke') {
-                    fbq('consent', 'revoke');
-                } else {
-                    fbq('consent', 'grant');
-                }
-
-                fbq('init', fbPixelId);
-                fbq('track', 'PageView');
-            })();
-        `}
-        />
-    )
-}
-
-<!-- TikTok Pixel -->
-{
-    tiktokPixelId && (
-        <script
-            is:inline
-            set:html={`
-            (() => {
-                const config = window.ANALYTICS_CONFIG || {};
-                const tiktokPixelId = config.tiktokPixelId;
-                if (!tiktokPixelId) return;
-
-                !(function (w, t) {
-                    w.TiktokAnalyticsObject = t;
-                    var ttq = (w[t] = w[t] || []);
-                    (ttq.methods = [
-                        'page',
-                        'track',
-                        'identify',
-                        'instances',
-                        'debug',
-                        'on',
-                        'off',
-                        'once',
-                        'ready',
-                        'alias',
-                        'group',
-                        'enableCookie',
-                        'disableCookie',
-                    ]),
-                        (ttq.setAndDefer = function (t, e) {
-                            t[e] = function () {
-                                t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
-                            };
-                        });
-                    for (var i = 0; i < ttq.methods.length; i++)
-                        ttq.setAndDefer(ttq, ttq.methods[i]);
-                    (ttq.instance = function (t) {
-                        for (var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++)
-                            ttq.setAndDefer(e, ttq.methods[n]);
-                        return e;
-                    }),
-                        (ttq.load = function (e, n) {
-                            var i = 'https://analytics.tiktok.com/i18n/pixel/events.js';
-                            (ttq._i = ttq._i || {}),
-                                (ttq._i[e] = []),
-                                (ttq._i[e]._u = i),
-                                (ttq._t = ttq._t || {}),
-                                (ttq._t[e] = +new Date()),
-                                (ttq._o = ttq._o || {}),
-                                (ttq._o[e] = n || {});
-                            var o = document.createElement('script');
-                            (o.type = 'text/javascript'),
-                                (o.async = !0),
-                                (o.src = i + '?sdkid=' + e + '&lib=' + t);
-                            var a = document.getElementsByTagName('script')[0];
-                            a.parentNode.insertBefore(o, a);
-                        });
-
-                    // Check storage
-                    let cookieEnabled = false;
-                    try {
-                        if (localStorage.getItem('user-consent') === 'granted') {
-                            cookieEnabled = true;
-                        }
-                    } catch (e) {}
-
-                    if (cookieEnabled) {
-                        ttq.enableCookie();
-                        ttq.load(tiktokPixelId);
-                        ttq.page();
-                    } else {
-                        ttq.disableCookie();
-                    }
-                })(window, 'ttq');
-            })();
-        `}
-        />
-    )
-}
+<!-- Google Analytics 4 (Async Loader) -->
+{gaId && <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />}

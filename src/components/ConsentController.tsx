@@ -4,11 +4,12 @@ import { getConsent } from '../lib/consent';
 
 export const ConsentController: React.FC = () => {
     useEffect(() => {
-        const updateConsent = () => {
+        const updateConsent = (event?: Event) => {
             const consent = getConsent();
+            const isUpdateEvent = !!event;
 
             if (consent === 'granted') {
-                // GA4: Grant Consent (Google Consent Mode v2)
+                // GA4: Grant Consent
                 if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
                     window.gtag('consent', 'update', {
                         ad_storage: 'granted',
@@ -17,28 +18,53 @@ export const ConsentController: React.FC = () => {
                         analytics_storage: 'granted',
                     });
 
-                    // Manually trigger page_view to ensure immediate tracking with new consent
-                    window.gtag('event', 'page_view');
+                    // Only trigger page_view if this is a reactive update (user just accepted)
+                    // If it's initial load, the head script already handles the page_view.
+                    if (isUpdateEvent) {
+                        window.gtag('event', 'page_view');
+                    }
                 }
 
                 // Meta Pixel: Grant Consent
                 if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
                     window.fbq('consent', 'grant');
-                    // Re-fire PageView to capture this session now that we have consent
-                    // (The initial PageView in head was likely dropped or anonymized)
-                    window.fbq('track', 'PageView');
+                    if (isUpdateEvent) {
+                        window.fbq('track', 'PageView');
+                    }
                 }
 
-                // TikTok Pixel: Enable Cookie
+                // TikTok Pixel: Enable & Load
                 if (typeof window !== 'undefined' && window.ttq) {
                     window.ttq.enableCookie();
-                    // Re-fire PageView
-                    if (typeof window.ttq.page === 'function') {
+
+                    if (isUpdateEvent && window.ANALYTICS_CONFIG?.tiktokPixelId) {
+                        // If update, we need to manually load and fire page view because head script skipped it
+                        window.ttq.load(window.ANALYTICS_CONFIG.tiktokPixelId);
                         window.ttq.page();
                     }
                 }
             } else {
-                // Optional: Explicit denial updates if logic allows revocation (mostly handled by initial state though)
+                // Revoke Consent
+
+                // GA4: Deny Consent
+                if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+                    window.gtag('consent', 'update', {
+                        ad_storage: 'denied',
+                        ad_user_data: 'denied',
+                        ad_personalization: 'denied',
+                        analytics_storage: 'denied',
+                    });
+                }
+
+                // Meta Pixel: Revoke Consent
+                if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
+                    window.fbq('consent', 'revoke');
+                }
+
+                // TikTok Pixel: Disable Cookie
+                if (typeof window !== 'undefined' && window.ttq) {
+                    window.ttq.disableCookie();
+                }
             }
         };
 

@@ -25,4 +25,9 @@ interface Window {
     };
     dataLayer: unknown[];
     gtag: (...args: unknown[]) => void;
+    ANALYTICS_CONFIG?: {
+        gaId?: string;
+        fbPixelId?: string;
+        tiktokPixelId?: string;
+    };
 }
