@@ -33,6 +33,7 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc, targetL
                         width={48}
                         height={48}
                         loading="eager"
+                        fetchPriority="high"
                         className="mr-3 h-12 w-auto object-contain"
                     />
                     <div className="flex flex-col leading-none sm:flex-row sm:leading-normal">

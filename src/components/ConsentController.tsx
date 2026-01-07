@@ -38,8 +38,12 @@ export const ConsentController: React.FC = () => {
                     window.ttq.enableCookie();
 
                     if (isUpdateEvent && window.ANALYTICS_CONFIG?.tiktokPixelId) {
-                        // If update, we need to manually load and fire page view because head script skipped it
-                        window.ttq.load(window.ANALYTICS_CONFIG.tiktokPixelId);
+                        const pixelId = window.ANALYTICS_CONFIG.tiktokPixelId;
+                        // Check if already loaded to prevent "Duplicate Pixel ID" warning
+                        // @ts-expect-error - _i is internal to the TikTok SDK and not in standard types
+                        if (!window.ttq._i?.[pixelId]) {
+                            window.ttq.load(pixelId);
+                        }
                         window.ttq.page();
                     }
                 }
