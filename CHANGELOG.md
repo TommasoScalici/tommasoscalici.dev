@@ -1,3 +1,10 @@
+## [1.13.2](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.13.1...v1.13.2) (2026-01-07)
+
+
+### Bug Fixes
+
+* using correct event naming for tiktok pixel ([4038c04](https://github.com/TommasoScalici/tommasoscalici.dev/commit/4038c04a5d9e6a351961d3e755050e7805eff0a2))
+
 ## [1.13.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.13.0...v1.13.1) (2026-01-07)
 
 
