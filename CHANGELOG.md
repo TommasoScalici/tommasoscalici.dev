@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.10.0...v1.11.0) (2026-01-07)
+
+
+### Features
+
+* implement TikTok pixel and refactor analytics ([738953a](https://github.com/TommasoScalici/tommasoscalici.dev/commit/738953a5b0fa6e21c504ab240624810e5c388a18))
+
 # [1.10.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.9.0...v1.10.0) (2026-01-05)
 
 
