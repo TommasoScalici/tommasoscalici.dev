@@ -31,20 +31,24 @@ const pageTitle =
     <ProjectsSection lang={lang} />
 
     <!-- Narrative Bio Section -->
-    <section class="relative overflow-hidden border-t border-white/10 bg-white/5">
+    <section
+        class="relative overflow-hidden border-t border-black/5 bg-black/5 dark:border-white/10 dark:bg-white/5"
+    >
         <div class="mx-auto max-w-7xl px-6 py-24">
             <div class="grid items-center gap-12 md:grid-cols-2">
                 {/* Left Column: The Hook */}
                 <div class="border-l-4 border-cyan-500 pl-6">
                     <h2
-                        class="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text font-mono text-3xl font-bold leading-tight text-transparent md:text-5xl"
+                        class="bg-gradient-to-r from-cyan-600 to-purple-600 bg-clip-text font-mono text-3xl font-bold leading-tight text-transparent dark:from-cyan-400 dark:to-purple-600 md:text-5xl"
                     >
                         {bio.title}
                     </h2>
                 </div>
 
                 {/* Right Column: The Narrative */}
-                <div class="space-y-6 font-sans text-lg leading-relaxed text-gray-300">
+                <div
+                    class="space-y-6 font-sans text-lg leading-relaxed text-gray-600 dark:text-gray-300"
+                >
                     <p
                         set:html={bio.paragraph1.replace(
                             /(RPG Maker XP|Nobuo Uematsu)/g,

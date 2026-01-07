@@ -5,6 +5,7 @@ import { SiGithub, SiInstagram, SiLinkedin } from 'react-icons/si';
 import { artistLinks } from '../data/artistLinks';
 import { secondarySocials } from '../data/socials';
 import type { TranslationKey } from '../i18n/ui';
+import { trackEvent } from '../lib/analytics';
 import { SmartLinkDialog } from './SmartLinkDialog';
 import { SocialSmartDialog } from './SocialSmartDialog';
 
@@ -39,6 +40,13 @@ export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
                         href="https://github.com/TommasoScalici"
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => {
+                            trackEvent('select_content', {
+                                content_type: 'social_link',
+                                content_name: 'GitHub',
+                                item_id: 'GitHub',
+                            });
+                        }}
                         className="text-muted transition-colors hover:text-primary"
                         aria-label="GitHub"
                     >
@@ -48,6 +56,13 @@ export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
                         href="https://www.linkedin.com/in/tommasoscalici"
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => {
+                            trackEvent('select_content', {
+                                content_type: 'social_link',
+                                content_name: 'LinkedIn',
+                                item_id: 'LinkedIn',
+                            });
+                        }}
                         className="text-muted transition-colors hover:text-primary"
                         aria-label="LinkedIn"
                     >
@@ -68,6 +83,13 @@ export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
                         href="https://www.instagram.com/tommasoscalici91"
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => {
+                            trackEvent('select_content', {
+                                content_type: 'social_link',
+                                content_name: 'Instagram',
+                                item_id: 'Instagram',
+                            });
+                        }}
                         className="text-muted transition-colors hover:text-secondary"
                         aria-label="Instagram"
                     >
@@ -93,6 +115,11 @@ export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
                 }}
                 links={artistLinks}
                 t={(key) => t[key]}
+                tracking={{
+                    type: 'artist_profile',
+                    name: 'Tommaso Scalici',
+                    id: 'tommaso-scalici',
+                }}
             />
 
             <SocialSmartDialog
@@ -102,6 +129,10 @@ export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
                 }}
                 links={secondarySocials}
                 t={(key) => t[key]}
+                tracking={{
+                    type: 'social_link',
+                    name: 'Tommaso Scalici',
+                }}
             />
         </footer>
     );

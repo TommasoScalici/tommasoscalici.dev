@@ -31,6 +31,11 @@ export const ui = {
         'section.music.subtitle': 'Exploring the boundaries of rhythm and atmosphere.',
         'section.playlists.title': 'Curated Flows',
         'dialog.connectEverywhere': 'Connect Everywhere',
+        'cookie.title': 'Cookie Policy',
+        'cookie.text':
+            'I use analytics to optimize the user flow and understand how my audience interacts with my projects. No personal data is sold.',
+        'cookie.deny': 'Deny',
+        'cookie.accept': 'Accept',
     },
     it: {
         'nav.home': 'Home',
@@ -58,6 +63,11 @@ export const ui = {
         'section.music.subtitle': "Esplorando i confini del ritmo e dell'atmosfera.",
         'section.playlists.title': 'Playlist che curo',
         'dialog.connectEverywhere': 'Connettiti Ovunque',
+        'cookie.title': 'Politica sui Cookie',
+        'cookie.text':
+            'Utilizzo strumenti di analisi per ottimizzare il flusso utente e capire come il mio pubblico interagisce con i miei progetti. Nessun dato personale viene venduto.',
+        'cookie.deny': 'Rifiuta',
+        'cookie.accept': 'Accetta',
     },
 } as const;
 

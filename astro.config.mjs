@@ -1,5 +1,4 @@
 import cloudflare from '@astrojs/cloudflare';
-import partytown from '@astrojs/partytown';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
@@ -9,16 +8,7 @@ const isTest = process.env.VITEST === 'true';
 
 export default defineConfig({
     site: 'https://tommasoscalici.dev',
-    integrations: [
-        react(),
-        tailwind({ applyBaseStyles: false }),
-        sitemap(),
-        partytown({
-            config: {
-                forward: ['dataLayer.push', 'gtag'],
-            },
-        }),
-    ],
+    integrations: [react(), tailwind({ applyBaseStyles: false }), sitemap()],
     output: 'static',
     build: {
         inlineStylesheets: 'always',

@@ -12,6 +12,7 @@ import {
 } from 'react-icons/si';
 
 import type { TranslationKey } from '../i18n/ui';
+import { trackEvent } from '../lib/analytics';
 
 export interface SmartLink {
     label: string;
@@ -25,6 +26,11 @@ interface SmartLinkDialogProps {
     onClose: () => void;
     links: SmartLink[];
     t: (key: TranslationKey) => string;
+    tracking?: {
+        type: 'music_release' | 'artist_profile';
+        name: string;
+        id: string;
+    };
 }
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -37,7 +43,13 @@ const iconMap: Record<string, React.ReactNode> = {
     bandcamp: <SiBandcamp className="h-5 w-5" />,
 };
 
-export const SmartLinkDialog: React.FC<SmartLinkDialogProps> = ({ isOpen, onClose, links, t }) => {
+export const SmartLinkDialog: React.FC<SmartLinkDialogProps> = ({
+    isOpen,
+    onClose,
+    links,
+    t,
+    tracking,
+}) => {
     if (!isOpen) return null;
 
     return createPortal(
@@ -80,6 +92,14 @@ export const SmartLinkDialog: React.FC<SmartLinkDialogProps> = ({ isOpen, onClos
                             href={link.url}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={() => {
+                                trackEvent('select_content', {
+                                    content_type: tracking ? tracking.type : 'platform_link',
+                                    content_name: tracking ? tracking.name : link.label,
+                                    content_ids: tracking ? [tracking.id] : undefined,
+                                    item_id: link.label, // Stores the specific platform clicked (Spotify, Apple...)
+                                });
+                            }}
                             className="border-glass-border/5 group flex w-full items-center gap-3 rounded-xl border bg-glass-bg/5 p-3 transition-all hover:border-primary/50 hover:bg-glass-bg/10"
                         >
                             <span

@@ -17,6 +17,10 @@ interface Window {
     // TikTok Pixel
     ttq?: {
         track: (event: string, params?: Record<string, unknown>) => void;
+        enableCookie: () => void;
+        disableCookie: () => void;
+        load: (id: string) => void;
+        page: () => void;
         [key: string]: unknown;
     };
     dataLayer: unknown[];

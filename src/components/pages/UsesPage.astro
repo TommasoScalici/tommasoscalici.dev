@@ -48,17 +48,6 @@ const getLocalized = (
                     let containerClass =
                         'rounded-xl p-6 transition-colors group relative overflow-hidden bg-white/70 border border-glass-border shadow-glass-light backdrop-blur-xl dark:bg-white/5 dark:border-white/5 dark:shadow-none';
 
-                    // Default hover effect for all cards
-                    if (index !== 2) {
-                        containerClass += ' hover:border-primary/50 dark:hover:border-primary/30';
-                    }
-
-                    // Special Glow Effect for Artist Growth Tools (Index 2)
-                    if (index === 2) {
-                        containerClass +=
-                            ' border-emerald-500/50 shadow-[0_0_30px_rgba(16,185,129,0.2)] hover:shadow-[0_0_40px_rgba(16,185,129,0.4)] hover:border-emerald-600 dark:hover:border-emerald-400';
-                    }
-
                     return (
                         <div class={containerClass}>
                             <h2 class={`mb-6 font-mono text-xl font-bold ${titleColorClass}`}>
@@ -73,7 +62,11 @@ const getLocalized = (
                                                     href={item.url}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    class="flex items-center gap-1 font-bold text-main transition-colors hover:underline group-hover/link:text-primary dark:text-white"
+                                                    data-track-name={item.name}
+                                                    data-track-category={getLocalized(
+                                                        category.title,
+                                                    )}
+                                                    class="track-uses-link flex items-center gap-1 font-bold text-main transition-colors hover:underline group-hover/link:text-primary dark:text-white"
                                                 >
                                                     {item.name}
                                                     <FiExternalLink className="w-3 h-3 text-muted" />
@@ -98,4 +91,25 @@ const getLocalized = (
             }
         </div>
     </section>
+
+    <script>
+        import { trackEvent } from '../../lib/analytics';
+
+        const links = document.querySelectorAll<HTMLAnchorElement>('.track-uses-link');
+
+        links.forEach((link) => {
+            link.addEventListener('click', () => {
+                const name = link.getAttribute('data-track-name');
+                const category = link.getAttribute('data-track-category');
+
+                if (name) {
+                    trackEvent('select_content', {
+                        content_type: 'uses_link',
+                        content_name: name,
+                        item_id: category || 'General',
+                    });
+                }
+            });
+        });
+    </script>
 </Layout>

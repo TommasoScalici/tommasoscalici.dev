@@ -1,4 +1,6 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
+
+import { trackEvent } from '../lib/analytics';
 
 interface UseSpotifyDeepLinkProps {
     eventName: string;
@@ -25,26 +27,11 @@ export const useSpotifyDeepLink = ({
         };
 
         // Tracking
-        if (typeof window !== 'undefined') {
-            if (window.fbq) {
-                window.fbq('track', 'ViewContent', {
-                    content_ids: [playlistId],
-                    content_type: 'product',
-                    content_name: eventName || 'Spotify Playlist',
-                });
-            }
-            if (window.ttq) {
-                window.ttq.track('ViewContent', {
-                    contents: [
-                        {
-                            content_id: playlistId,
-                            content_type: 'product',
-                            content_name: eventName || 'Spotify Playlist',
-                        },
-                    ],
-                });
-            }
-        }
+        trackEvent('click_deep_link', {
+            content_name: eventName || 'Spotify Playlist',
+            content_ids: [playlistId],
+            content_type: 'product',
+        });
 
         if (isMobile()) {
             window.location.href = deepLink;
@@ -60,6 +47,15 @@ export const useSpotifyDeepLink = ({
                 window.location.href = webLink;
             }, 2500);
         }
+    }, [eventName, playlistId]);
+
+    // Track "ViewContent" on mount (Landing Page visit)
+    useEffect(() => {
+        trackEvent('view_item', {
+            content_name: eventName || 'Spotify Playlist',
+            content_ids: [playlistId],
+            content_type: 'product',
+        });
     }, [eventName, playlistId]);
 
     return { handleDeepLink };

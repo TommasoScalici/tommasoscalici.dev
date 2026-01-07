@@ -6,9 +6,9 @@ import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
 import { getImage, Image } from 'astro:assets';
 
-import Analytics from '../components/Analytics.astro';
-import MetaPixel from '../components/analytics/MetaPixel.astro';
-import TikTokPixel from '../components/analytics/TikTokPixel.astro';
+import AnalyticsHead from '../components/AnalyticsHead.astro';
+import { ConsentController } from '../components/ConsentController';
+import { CookieBanner } from '../components/CookieBanner';
 
 interface Props {
     title: string;
@@ -44,7 +44,7 @@ const gradientClasses =
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
     <head>
         <meta charset="UTF-8" />
         <meta
@@ -59,13 +59,11 @@ const gradientClasses =
         <meta property="og:image" content={optimizedBg.src} />
         <meta property="og:type" content="music.playlist" />
 
-        <MetaPixel />
-
-        <!-- Google Analytics -->
-        <Analytics id="G-LMT1M9750Q" />
-        <!-- End Google Analytics -->
-
-        <TikTokPixel />
+        <AnalyticsHead
+            gaId="G-LMT1M9750Q"
+            fbPixelId={import.meta.env.PUBLIC_FACEBOOK_PIXEL_ID}
+            tiktokPixelId={import.meta.env.PUBLIC_TIKTOK_PIXEL_ID}
+        />
 
         <style>
             @keyframes floatUp {
@@ -84,6 +82,8 @@ const gradientClasses =
         class="relative flex h-screen items-center justify-center overflow-hidden font-sans text-white"
         style={theme === 'lofi' ? 'background-color: #0d1117;' : 'background-color: #050505;'}
     >
+        <ConsentController client:load />
+        <CookieBanner client:load lang="en" />
         <div
             class="absolute left-0 top-0 -z-10 h-full w-full scale-110 bg-cover bg-center bg-no-repeat"
             style={`${currentTheme.bgBlur} background-image: url('${optimizedBg.src}');`}

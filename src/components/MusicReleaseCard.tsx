@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import { platformOrder, platforms } from '../data/platforms';
 import type { MusicRelease, PlatformLinks } from '../data/types';
+import { trackEvent } from '../lib/analytics';
 import { type SmartLink, SmartLinkDialog } from './SmartLinkDialog';
 
 interface MusicReleaseCardProps {
@@ -36,6 +37,11 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
             return;
         }
         if (!isUpcoming) {
+            trackEvent('select_content', {
+                content_type: 'music_release',
+                content_name: release.title,
+                content_ids: [release.title.toLowerCase().replace(/\s+/g, '-')],
+            });
             setIsDialogOpen(true);
         }
     };
@@ -132,6 +138,11 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
                 }}
                 links={albumLinks}
                 t={(key) => t[key]}
+                tracking={{
+                    type: 'music_release',
+                    name: release.title,
+                    id: release.title.toLowerCase().replace(/\s+/g, '-'),
+                }}
             />
         </>
     );

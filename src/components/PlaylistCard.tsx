@@ -55,7 +55,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, t }) => {
                     width={320}
                     height={180}
                     loading="lazy"
-                    className="h-full w-full object-cover opacity-60 transition-all duration-500 group-hover:scale-105 group-hover:opacity-40"
+                    className="h-full w-full object-cover opacity-80 transition-all duration-500 group-hover:scale-105 group-hover:opacity-40"
                 />
             </picture>
 

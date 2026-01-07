@@ -14,6 +14,7 @@ import {
 } from 'react-icons/si';
 
 import type { TranslationKey } from '../i18n/ui';
+import { trackEvent } from '../lib/analytics';
 
 export interface SocialLink {
     label: string;
@@ -27,6 +28,10 @@ interface SocialSmartDialogProps {
     onClose: () => void;
     links: SocialLink[];
     t: (key: TranslationKey) => string;
+    tracking?: {
+        type: string;
+        name: string;
+    };
 }
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -46,6 +51,7 @@ export const SocialSmartDialog: React.FC<SocialSmartDialogProps> = ({
     onClose,
     links,
     t,
+    tracking,
 }) => {
     if (!isOpen) return null;
 
@@ -88,6 +94,13 @@ export const SocialSmartDialog: React.FC<SocialSmartDialogProps> = ({
                             href={link.url}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={() => {
+                                trackEvent('select_content', {
+                                    content_type: tracking?.type ?? 'social_link',
+                                    content_name: tracking?.name ?? link.label,
+                                    item_id: link.label,
+                                });
+                            }}
                             className="border-glass-border/5 group flex w-full items-center gap-3 rounded-xl border bg-glass-bg/5 p-3 transition-all hover:border-primary/50 hover:bg-glass-bg/10"
                         >
                             {iconMap[link.icon] && (

@@ -7,7 +7,9 @@ import { getImage } from 'astro:assets';
 import { ClientRouter } from 'astro:transitions';
 
 import logoImage from '../assets/logo.webp';
-import Analytics from '../components/Analytics.astro';
+import AnalyticsHead from '../components/AnalyticsHead.astro';
+import { ConsentController } from '../components/ConsentController';
+import { CookieBanner } from '../components/CookieBanner';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import SEOHead from '../components/SEOHead.astro';
@@ -113,7 +115,11 @@ const copyrightDate =
 
             checkLanguage();
         </script>
-        <Analytics id="G-LMT1M9750Q" />
+        <AnalyticsHead
+            gaId="G-LMT1M9750Q"
+            fbPixelId={import.meta.env.PUBLIC_FACEBOOK_PIXEL_ID}
+            tiktokPixelId={import.meta.env.PUBLIC_TIKTOK_PIXEL_ID}
+        />
         <SEOHead title={title} description={description} />
         <ClientRouter />
     </head>
@@ -121,6 +127,8 @@ const copyrightDate =
     <body
         class="bg-background font-sans text-main antialiased selection:bg-primary selection:text-inverse"
     >
+        <ConsentController client:load />
+        <CookieBanner client:load lang={lang} />
         <a
             href="#main-content"
             class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-background focus:p-4 focus:text-primary focus:outline-none"

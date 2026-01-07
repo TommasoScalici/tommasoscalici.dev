@@ -1,7 +1,7 @@
 {
     "$schema": "node_modules/wrangler/config-schema.json",
     "name": "tommasoscalici-dev",
-    "compatibility_date": "2026-01-01",
+    "compatibility_date": "2025-12-10",
     "compatibility_flags": [
         "nodejs_compat",
         "disable_nodejs_process_v2"
