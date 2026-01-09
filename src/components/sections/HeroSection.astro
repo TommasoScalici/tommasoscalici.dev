@@ -88,8 +88,8 @@ const bio = bioEntry.data;
                             <Image
                                 src={profileImage}
                                 alt="Tommaso Scalici"
-                                width={400}
-                                height={400}
+                                widths={[240, 384, 768]}
+                                sizes="(max-width: 768px) 240px, (max-width: 1024px) 256px, (max-width: 1280px) 320px, 384px"
                                 quality="mid"
                                 format="webp"
                                 loading="eager"

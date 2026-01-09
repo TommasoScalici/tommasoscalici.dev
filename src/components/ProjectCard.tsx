@@ -1,5 +1,5 @@
-import { Code2, ExternalLink } from 'lucide-react';
 import React from 'react';
+import { LuCode, LuExternalLink } from 'react-icons/lu';
 import { SiGithub, SiGoogleplay } from 'react-icons/si';
 
 import type { Project } from '../data/types';
@@ -18,7 +18,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 <div className="relative z-10 flex h-full flex-col">
                     <div className="mb-4 flex items-start justify-between">
                         <div className="rounded-lg border border-surface bg-background/50 p-3 transition-colors group-hover:border-primary/30">
-                            <Code2 className="h-6 w-6 text-primary" />
+                            <LuCode className="h-6 w-6 text-primary" />
                         </div>
                         <div className="flex gap-2">
                             {project.repoUrl && (
@@ -51,7 +51,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                                     className="rounded-full p-2 text-muted transition-colors hover:bg-glass-bg/5 hover:text-white"
                                     aria-label="View Live Demo"
                                 >
-                                    <ExternalLink className="h-5 w-5" />
+                                    <LuExternalLink className="h-5 w-5" />
                                 </a>
                             )}
                         </div>

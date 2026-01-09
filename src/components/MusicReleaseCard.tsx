@@ -1,5 +1,5 @@
-import { Play } from 'lucide-react';
 import React, { useState } from 'react';
+import { LuPlay } from 'react-icons/lu';
 
 import { platformOrder, platforms } from '../data/platforms';
 import type { MusicRelease, PlatformLinks } from '../data/types';
@@ -113,7 +113,7 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
                             {isUpcoming ? (
                                 release.presaveLink ? (
                                     <>
-                                        <Play className="h-4 w-4 fill-current transition-transform group-hover:scale-110" />
+                                        <LuPlay className="h-4 w-4 fill-current transition-transform group-hover:scale-110" />
                                         <span>{t['card.presave']}</span>
                                     </>
                                 ) : (
@@ -123,7 +123,7 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
                                 )
                             ) : (
                                 <>
-                                    <Play className="h-4 w-4 fill-current transition-transform group-hover:scale-110" />
+                                    <LuPlay className="h-4 w-4 fill-current transition-transform group-hover:scale-110" />
                                     <span>{t['card.listenNow']}</span>
                                 </>
                             )}

@@ -1,7 +1,7 @@
-import { X } from 'lucide-react';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { FaDeezer } from 'react-icons/fa';
+import { LuX } from 'react-icons/lu';
 import {
     SiAmazon,
     SiApplemusic,
@@ -64,7 +64,7 @@ export const SmartLinkDialog: React.FC<SmartLinkDialogProps> = ({
 
             {/* Dialog Card */}
             <div
-                className="animate-in zoom-in-95 border-glass-border relative w-full max-w-sm rounded-2xl border bg-white p-6 shadow-2xl duration-200 dark:bg-background"
+                className="border-glass-border relative w-full max-w-sm rounded-2xl border bg-white p-6 shadow-2xl duration-200 animate-in zoom-in-95 dark:bg-background"
                 role="dialog"
                 aria-modal="true"
             >
@@ -74,7 +74,7 @@ export const SmartLinkDialog: React.FC<SmartLinkDialogProps> = ({
                     className="absolute right-4 top-4 text-muted transition-colors hover:text-main"
                     aria-label="Close"
                 >
-                    <X className="h-5 w-5" />
+                    <LuX className="h-5 w-5" />
                 </button>
 
                 {/* Header */}

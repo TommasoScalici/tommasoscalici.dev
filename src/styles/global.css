@@ -57,8 +57,9 @@
 
 @layer utilities {
     .animate-text-shimmer {
-        background-size: 200% 100%;
+        background-size: 200% auto;
         animation: text-shimmer 3s linear infinite;
+        will-change: background-position;
     }
 
     .animate-float {

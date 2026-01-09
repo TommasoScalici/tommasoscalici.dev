@@ -1,6 +1,12 @@
 ---
-import '@fontsource/inter';
-import '@fontsource/jetbrains-mono';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/500.css';
+import '@fontsource/jetbrains-mono/600.css';
+import '@fontsource/jetbrains-mono/700.css';
 import '../styles/global.css';
 
 import { getImage } from 'astro:assets';
@@ -115,11 +121,7 @@ const copyrightDate =
 
             checkLanguage();
         </script>
-        <AnalyticsHead
-            gaId="G-LMT1M9750Q"
-            fbPixelId={import.meta.env.PUBLIC_FACEBOOK_PIXEL_ID}
-            tiktokPixelId={import.meta.env.PUBLIC_TIKTOK_PIXEL_ID}
-        />
+        <AnalyticsHead gaId="G-LMT1M9750Q" />
         <SEOHead title={title} description={description} />
         <ClientRouter />
     </head>

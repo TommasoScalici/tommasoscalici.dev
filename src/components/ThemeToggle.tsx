@@ -1,5 +1,5 @@
-import { Moon, Sun } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
+import { LuMoon, LuSun } from 'react-icons/lu';
 
 export const ThemeToggle: React.FC = () => {
     const [theme, setTheme] = useState<'dark' | 'light'>(() => {
@@ -41,7 +41,7 @@ export const ThemeToggle: React.FC = () => {
             aria-label="Toggle Theme"
             className="border-glass-border flex items-center justify-center rounded-full border bg-white/70 p-2 text-main transition-all duration-300 hover:bg-glass-bg/10 hover:text-primary dark:border-white/10 dark:bg-white/5"
         >
-            {theme === 'dark' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+            {theme === 'dark' ? <LuMoon className="h-5 w-5" /> : <LuSun className="h-5 w-5" />}
         </button>
     );
 };

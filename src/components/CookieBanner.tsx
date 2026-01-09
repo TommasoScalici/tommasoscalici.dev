@@ -40,7 +40,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ lang = defaultLang }
     if (!isVisible) return null;
 
     return (
-        <div className="animate-in slide-in-from-bottom fixed bottom-4 left-4 right-4 z-50 mx-auto flex max-w-lg flex-col gap-4 rounded-2xl border border-white/10 bg-black/80 p-5 shadow-glass-light backdrop-blur-xl duration-500 will-change-transform md:right-4 md:ml-auto md:mr-0">
+        <div className="fixed bottom-4 left-4 right-4 z-50 mx-auto flex max-w-lg flex-col gap-4 rounded-2xl border border-white/10 bg-black/80 p-5 shadow-glass-light backdrop-blur-xl duration-500 will-change-transform animate-in slide-in-from-bottom md:right-4 md:ml-auto md:mr-0">
             <div className="space-y-2">
                 <h3 className="text-sm font-bold text-white">{t['cookie.title']}</h3>
                 <p className="text-xs leading-relaxed text-gray-300">{t['cookie.text']}</p>

@@ -25,7 +25,6 @@ export default defineConfig({
         },
     },
     image: {
-        domains: ['f4.bcbits.com', 'googleusercontent.com', 'i.scdn.co'],
         remotePatterns: [{ protocol: 'https' }],
     },
 });

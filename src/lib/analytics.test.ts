@@ -57,7 +57,7 @@ describe('analytics', () => {
     it('should map click_deep_link to correct platform events', () => {
         trackEvent('click_deep_link');
 
-        expect(window.fbq).toHaveBeenCalledWith('track', 'Lead', undefined);
+        expect(window.fbq).toHaveBeenCalledWith('track', 'ClickButton', undefined);
         expect(window.ttq.track).toHaveBeenCalledWith('ClickButton', {});
     });
 

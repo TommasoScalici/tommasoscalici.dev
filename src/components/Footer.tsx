@@ -1,5 +1,5 @@
-import { MoreHorizontal, Music } from 'lucide-react';
 import React, { useState } from 'react';
+import { LuEllipsis, LuMusic } from 'react-icons/lu';
 import { SiGithub, SiInstagram, SiLinkedin } from 'react-icons/si';
 
 import { artistLinks } from '../data/artistLinks';
@@ -76,7 +76,7 @@ export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
                         className="text-muted transition-colors hover:text-secondary"
                         aria-label="Music Platforms"
                     >
-                        <Music className="h-5 w-5" />
+                        <LuMusic className="h-5 w-5" />
                     </button>
 
                     <a
@@ -103,7 +103,7 @@ export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
                         className="text-muted transition-colors hover:text-main"
                         aria-label="More Socials"
                     >
-                        <MoreHorizontal className="h-5 w-5" />
+                        <LuEllipsis className="h-5 w-5" />
                     </button>
                 </div>
             </div>

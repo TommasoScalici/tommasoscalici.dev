@@ -52,7 +52,6 @@
         "@fontsource/jetbrains-mono": "^5.2.8",
         "astro": "^5.16.6",
         "astro-seo": "^0.8.4",
-        "lucide-react": "^0.562.0",
         "react": "^19.2.3",
         "react-dom": "^19.2.3",
         "react-icons": "^5.5.0"
@@ -76,6 +75,7 @@
         "prettier-plugin-astro": "^0.14.1",
         "prettier-plugin-tailwindcss": "^0.7.2",
         "semantic-release": "^25.0.2",
+        "tailwindcss-animate": "^1.0.7",
         "typescript-eslint": "^8.51.0",
         "vitest": "^4.0.16",
         "wrangler": "^4.54.0"
