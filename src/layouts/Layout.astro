@@ -52,9 +52,12 @@ const navItems = [
 ];
 
 const targetLang = lang === 'en' ? 'it' : 'en';
-const targetLangUrl = getRelativeLocaleUrl(
+// Use helper to generate cleaner URL
+import { getLocalizedUrl } from '../lib/seo';
+const targetLangUrl = getLocalizedUrl(
+    Astro.url.pathname,
+    Astro.site ?? Astro.url.origin,
     targetLang,
-    Astro.url.pathname.replace(/^\/it\//, '/') || '/',
 );
 const currentYear = new Date().getFullYear();
 const startYear = 2010; // Career start

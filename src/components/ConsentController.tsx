@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import { getGtagConsentPayload, getPixelConsentAction } from '../lib/analytics-utils';
 import { getConsent } from '../lib/consent';
 
 export const ConsentController: React.FC = () => {
@@ -8,15 +9,14 @@ export const ConsentController: React.FC = () => {
             const consent = getConsent();
             const isUpdateEvent = !!event;
 
+            // Common payloads
+            const gtagPayload = getGtagConsentPayload(consent);
+            const pixelAction = getPixelConsentAction(consent);
+
             if (consent === 'granted') {
                 // GA4: Grant Consent
                 if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-                    window.gtag('consent', 'update', {
-                        ad_storage: 'granted',
-                        ad_user_data: 'granted',
-                        ad_personalization: 'granted',
-                        analytics_storage: 'granted',
-                    });
+                    window.gtag('consent', 'update', gtagPayload);
 
                     // Only trigger page_view if this is a reactive update (user just accepted)
                     // If it's initial load, the head script already handles the page_view.
@@ -27,7 +27,7 @@ export const ConsentController: React.FC = () => {
 
                 // Meta Pixel: Grant Consent
                 if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
-                    window.fbq('consent', 'grant');
+                    window.fbq('consent', pixelAction);
                     if (isUpdateEvent) {
                         window.fbq('track', 'PageView');
                     }
@@ -52,17 +52,12 @@ export const ConsentController: React.FC = () => {
 
                 // GA4: Deny Consent
                 if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-                    window.gtag('consent', 'update', {
-                        ad_storage: 'denied',
-                        ad_user_data: 'denied',
-                        ad_personalization: 'denied',
-                        analytics_storage: 'denied',
-                    });
+                    window.gtag('consent', 'update', gtagPayload);
                 }
 
                 // Meta Pixel: Revoke Consent
                 if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
-                    window.fbq('consent', 'revoke');
+                    window.fbq('consent', pixelAction);
                 }
 
                 // TikTok Pixel: Disable Cookie

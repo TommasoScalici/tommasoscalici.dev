@@ -3,6 +3,7 @@ import { FiExternalLink } from 'react-icons/fi';
 
 import { usesData } from '../../data/uses';
 import Layout from '../../layouts/Layout.astro';
+import { getLocalizedContent } from '../../lib/i18n-utils';
 
 interface Props {
     title: string;
@@ -14,14 +15,12 @@ interface Props {
 
 const { title, description, heroTitle, heroSubtitle, lang } = Astro.props;
 
-// Helper to get localized string
+// Helper to get localized string (adapter to match component expectations)
 const getLocalized = (
     content: string | Record<string, string> | undefined,
     fallbackKey: 'en' | 'it' = 'en',
 ) => {
-    if (!content) return '';
-    if (typeof content === 'string') return content;
-    return content[lang] || content[fallbackKey] || '';
+    return getLocalizedContent(content, lang, fallbackKey);
 };
 ---
 

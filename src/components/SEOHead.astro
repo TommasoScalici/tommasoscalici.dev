@@ -11,14 +11,15 @@ interface Props {
 
 const { title, description, image = '/og-image.webp' } = Astro.props;
 
+import { getLocalizedUrl } from '../lib/seo';
+
 // 1. Canonical & Hreflang Logic
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const path = Astro.url.pathname;
-// Remove language prefix for alternates generation
-const purePath = path.replace(/^\/it\//, '/').replace(/\/$/, '') || '';
 
-const enUrl = new URL(purePath || '/', Astro.site).toString();
-const itUrl = new URL(`/it${purePath ? '/' + purePath : ''}/`, Astro.site).toString();
+const site = Astro.site ?? Astro.url.origin;
+const enUrl = getLocalizedUrl(path, site, 'en');
+const itUrl = getLocalizedUrl(path, site, 'it');
 
 // 2. The Identity Graph Data
 const identitySchema = getIdentitySchema(
