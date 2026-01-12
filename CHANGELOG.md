@@ -1,3 +1,10 @@
+## [1.13.4](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.13.3...v1.13.4) (2026-01-12)
+
+
+### Bug Fixes
+
+* fixed pages indexing issues, added tests and ([33ab6ad](https://github.com/TommasoScalici/tommasoscalici.dev/commit/33ab6adb35accd756f3a7a53a6f28f6f03091c54))
+
 ## [1.13.3](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.13.2...v1.13.3) (2026-01-07)
 
 
