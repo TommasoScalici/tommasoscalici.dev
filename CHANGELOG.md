@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.13.4...v1.14.0) (2026-01-16)
+
+
+### Features
+
+* enhance SEO data and optimize profile image loading strategies ([961eaf5](https://github.com/TommasoScalici/tommasoscalici.dev/commit/961eaf51642e9b413b2e82c625fb11326112cd2c))
+
 ## [1.13.4](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.13.3...v1.13.4) (2026-01-12)
 
 
