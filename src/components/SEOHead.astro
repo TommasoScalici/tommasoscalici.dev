@@ -21,11 +21,19 @@ const site = Astro.site ?? Astro.url.origin;
 const enUrl = getLocalizedUrl(path, site, 'en');
 const itUrl = getLocalizedUrl(path, site, 'it');
 
+import { getImage } from 'astro:assets';
+
+import profileImage from '../assets/profile.webp';
+
+const optimizedProfile = await getImage({
+    src: profileImage,
+    format: 'webp',
+    width: 800,
+});
+const profileUrl = new URL(optimizedProfile.src, site).toString();
+
 // 2. The Identity Graph Data
-const identitySchema = getIdentitySchema(
-    canonicalURL,
-    new URL('assets/profile.webp', Astro.site).toString(),
-);
+const identitySchema = getIdentitySchema(canonicalURL, profileUrl);
 ---
 
 <script is:inline type="application/ld+json" set:html={JSON.stringify(identitySchema)} />
@@ -46,7 +54,7 @@ const identitySchema = getIdentitySchema(
     extend={{
         link: [
             { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
-            { rel: 'icon', href: '/apple-touch-icon.png', type: 'image/png' },
+            { rel: 'icon', href: '/apple-touch-icon.png', type: 'image/png', sizes: '180x180' },
             { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
             // Hreflangs
             { rel: 'alternate', hreflang: 'en', href: enUrl },

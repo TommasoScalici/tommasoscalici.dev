@@ -5,6 +5,15 @@ export const getIdentitySchema = (url: URL, image: string, worksForName = 'BC So
     url: url.toString(),
     image,
     jobTitle: ['Senior Software Engineer', 'Music Producer'],
+    knowsAbout: [
+        'Software Architecture',
+        'TypeScript',
+        'React',
+        'Astro Framework',
+        'Tailwind CSS',
+        'Progressive Metal',
+        'Music Production',
+    ],
     worksFor: { '@type': 'Organization', name: worksForName },
     sameAs: [
         // Tech & Dev
