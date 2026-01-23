@@ -1,3 +1,15 @@
+# [1.15.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.14.0...v1.15.0) (2026-01-23)
+
+
+### Bug Fixes
+
+* provide required pixel environment variables to CI/CD pipeline ([f8d5bb9](https://github.com/TommasoScalici/tommasoscalici.dev/commit/f8d5bb91f1021e7a1c6cb0f69f33ce630a8b64f5))
+
+
+### Features
+
+* 100/100 lighthouse recovery, strict type safety (no-any), bundle/font optimization, view transitions, and GDPR/legal updates ([0ce8661](https://github.com/TommasoScalici/tommasoscalici.dev/commit/0ce8661075ae00712c4078c6f93e570bfc993c87))
+
 # [1.14.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.13.4...v1.14.0) (2026-01-16)
 
 
