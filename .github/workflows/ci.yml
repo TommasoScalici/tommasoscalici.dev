@@ -35,6 +35,9 @@ jobs:
               run: npm run lint
 
             - name: Build
+              env:
+                  PUBLIC_TIKTOK_PIXEL_ID: ${{ secrets.PUBLIC_TIKTOK_PIXEL_ID }}
+                  PUBLIC_FACEBOOK_PIXEL_ID: ${{ secrets.PUBLIC_FACEBOOK_PIXEL_ID }}
               run: npm run build
 
     release:
