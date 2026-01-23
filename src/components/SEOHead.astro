@@ -1,7 +1,7 @@
 ---
 import { SEO } from 'astro-seo';
 
-import { getIdentitySchema, musicSchema } from '../data/json-ld';
+import { getCombinedSchema } from '../data/json-ld';
 
 interface Props {
     title: string;
@@ -30,26 +30,37 @@ const optimizedProfile = await getImage({
     format: 'webp',
     width: 800,
 });
-const profileUrl = new URL(optimizedProfile.src, site).toString();
+const siteUrl = site.toString();
+const profileUrl = new URL(optimizedProfile.src, siteUrl).toString();
+const ogImageUrl = new URL(image, siteUrl).toString();
 
 // 2. The Identity Graph Data
-const identitySchema = getIdentitySchema(canonicalURL, profileUrl);
+const combinedSchema = getCombinedSchema(canonicalURL, profileUrl);
 ---
 
-<script is:inline type="application/ld+json" set:html={JSON.stringify(identitySchema)} />
-<script is:inline type="application/ld+json" set:html={JSON.stringify(musicSchema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(combinedSchema)} />
 
 <SEO
     title={title}
     description={description}
     canonical={canonicalURL.toString()}
     openGraph={{
-        basic: { title, type: 'website', image },
+        basic: {
+            title,
+            type: 'website',
+            image: ogImageUrl,
+        },
+        image: {
+            alt: title,
+            width: 1200,
+            height: 630,
+        },
         optional: { locale: Astro.currentLocale === 'it' ? 'it_IT' : 'en_US' },
     }}
     twitter={{
         creator: '@Tommaso_Scalici',
         card: 'summary_large_image',
+        image: ogImageUrl,
     }}
     extend={{
         link: [

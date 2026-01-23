@@ -3,7 +3,7 @@
     "version": "1.14.0",
     "description": "Personal portfolio and music showcase bridging software engineering and progressive metal.",
     "author": "Tommaso Scalici",
-    "license": "UNLICENSED",
+    "license": "MIT",
     "private": true,
     "repository": {
         "type": "git",

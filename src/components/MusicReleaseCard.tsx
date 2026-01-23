@@ -104,7 +104,7 @@ export const MusicReleaseCard: React.FC<MusicReleaseCardProps> = ({ release, t }
                         <button
                             onClick={handleListenClick}
                             disabled={isUpcoming && !release.presaveLink}
-                            className={`inline-flex transform items-center gap-2 rounded-full bg-secondary/90 px-4 py-2 text-sm font-medium text-white transition-all duration-300 ${
+                            className={`inline-flex transform items-center gap-2 rounded-full bg-secondary/90 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 ${
                                 isUpcoming && !release.presaveLink
                                     ? 'translate-y-0 cursor-not-allowed bg-gray-700 text-gray-400 opacity-100 hover:bg-gray-700'
                                     : 'translate-y-4 opacity-0 hover:scale-105 hover:bg-secondary hover:shadow-[0_0_25px_rgba(255,255,255,0.6)] hover:brightness-110 group-hover:translate-y-0 group-hover:opacity-100'

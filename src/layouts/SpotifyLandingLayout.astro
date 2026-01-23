@@ -1,16 +1,14 @@
 ---
 import '@fontsource/inter/400.css';
-import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import '@fontsource/jetbrains-mono/400.css';
-import '@fontsource/jetbrains-mono/500.css';
-import '@fontsource/jetbrains-mono/600.css';
 import '@fontsource/jetbrains-mono/700.css';
 import '../styles/global.css';
 
 import type { ImageMetadata } from 'astro';
 import { getImage, Image } from 'astro:assets';
+import { PUBLIC_FACEBOOK_PIXEL_ID, PUBLIC_TIKTOK_PIXEL_ID } from 'astro:env/client';
 
 import AnalyticsHead from '../components/AnalyticsHead.astro';
 import { ConsentController } from '../components/ConsentController';
@@ -27,6 +25,15 @@ const { title, description, coverImage, theme } = Astro.props;
 
 // Optimize image for background and SEO
 const optimizedBg = await getImage({ src: coverImage, format: 'webp' });
+
+// Optimize cover image for LCP preloading
+const optimizedCover = await getImage({
+    src: coverImage,
+    width: 300,
+    height: 300,
+    format: 'webp',
+    quality: 'high',
+});
 
 // Theme Configuration
 const themeConfig = {
@@ -53,10 +60,7 @@ const gradientClasses =
 <html lang="en" class="dark">
     <head>
         <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{title}</title>
 
         <meta name="description" content={description} />
@@ -65,10 +69,32 @@ const gradientClasses =
         <meta property="og:image" content={optimizedBg.src} />
         <meta property="og:type" content="music.playlist" />
 
+        <link
+            rel="preload"
+            href="/fonts/inter-latin-400-normal.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="preload"
+            href="/fonts/inter-latin-700-normal.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="preload"
+            href={optimizedCover.src}
+            as="image"
+            type="image/webp"
+            fetchpriority="high"
+        />
+
         <AnalyticsHead
             gaId="G-LMT1M9750Q"
-            fbPixelId={import.meta.env.PUBLIC_FACEBOOK_PIXEL_ID}
-            tiktokPixelId={import.meta.env.PUBLIC_TIKTOK_PIXEL_ID}
+            fbPixelId={PUBLIC_FACEBOOK_PIXEL_ID}
+            tiktokPixelId={PUBLIC_TIKTOK_PIXEL_ID}
         />
 
         <style>
@@ -88,8 +114,8 @@ const gradientClasses =
         class="relative flex h-screen items-center justify-center overflow-hidden font-sans text-white"
         style={theme === 'lofi' ? 'background-color: #0d1117;' : 'background-color: #050505;'}
     >
-        <ConsentController client:load />
-        <CookieBanner client:load lang="en" />
+        <ConsentController client:idle />
+        <CookieBanner client:idle lang="en" />
         <div
             class="absolute left-0 top-0 -z-10 h-full w-full scale-110 bg-cover bg-center bg-no-repeat"
             style={`${currentTheme.bgBlur} background-image: url('${optimizedBg.src}');`}
@@ -112,6 +138,7 @@ const gradientClasses =
                             width={300}
                             height={300}
                             loading="eager"
+                            fetchpriority="high"
                             class="relative h-full w-full rounded-xl object-cover"
                             style={currentTheme.coverShadow}
                             alt={`${title} Cover`}
@@ -122,6 +149,7 @@ const gradientClasses =
                             width={300}
                             height={300}
                             loading="eager"
+                            fetchpriority="high"
                             class="relative h-full w-full rounded-xl object-cover"
                             style={currentTheme.coverShadow}
                             alt={`${title} Cover`}

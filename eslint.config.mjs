@@ -13,9 +13,27 @@ import tseslint from 'typescript-eslint';
 /** @type {import('eslint').Linter.Config[]} */
 export default [
     js.configs.recommended,
-    ...tseslint.configs.strictTypeChecked,
-    ...tseslint.configs.stylisticTypeChecked,
-    ...eslintPluginAstro.configs.recommended,
+    // TypeScript Rules (targeted to TS/JS files)
+    ...tseslint.configs.strictTypeChecked.map((config) => ({
+        ...config,
+        files: ['**/*.{js,mjs,cjs,ts,tsx}'],
+    })),
+    ...tseslint.configs.stylisticTypeChecked.map((config) => ({
+        ...config,
+        files: ['**/*.{js,mjs,cjs,ts,tsx}'],
+    })),
+    // Astro Rules
+    ...eslintPluginAstro.configs['flat/recommended'],
+
+    // Global and Custom Rules
+    {
+        plugins: {
+            '@typescript-eslint': tseslint.plugin,
+        },
+        rules: {
+            '@typescript-eslint/no-explicit-any': 'error',
+        },
+    },
 
     // Import Sorting
     {

@@ -19,6 +19,7 @@ export interface SmartLink {
     url: string;
     icon: string;
     color: string;
+    hoverBorder: string;
 }
 
 interface SmartLinkDialogProps {
@@ -100,11 +101,9 @@ export const SmartLinkDialog: React.FC<SmartLinkDialogProps> = ({
                                     item_id: link.label, // Stores the specific platform clicked (Spotify, Apple...)
                                 });
                             }}
-                            className="border-glass-border/5 group flex w-full items-center gap-3 rounded-xl border bg-glass-bg/5 p-3 transition-all hover:border-primary/50 hover:bg-glass-bg/10"
+                            className={`border-glass-border/5 group flex w-full items-center gap-3 rounded-xl border bg-glass-bg/5 p-3 transition-all hover:bg-glass-bg/10 ${link.hoverBorder}`}
                         >
-                            <span
-                                className={`text-muted transition-colors group-hover:text-primary ${link.color}`}
-                            >
+                            <span className={`text-muted transition-colors ${link.color}`}>
                                 {iconMap[link.icon]}
                             </span>
                             <span className="font-medium text-muted group-hover:text-main">

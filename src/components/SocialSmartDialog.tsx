@@ -21,6 +21,7 @@ export interface SocialLink {
     url: string;
     icon: string;
     color: string;
+    hoverBorder: string;
 }
 
 interface SocialSmartDialogProps {
@@ -101,10 +102,12 @@ export const SocialSmartDialog: React.FC<SocialSmartDialogProps> = ({
                                     item_id: link.label,
                                 });
                             }}
-                            className="border-glass-border/5 group flex w-full items-center gap-3 rounded-xl border bg-glass-bg/5 p-3 transition-all hover:border-primary/50 hover:bg-glass-bg/10"
+                            className={`border-glass-border/5 group flex w-full items-center gap-3 rounded-xl border bg-glass-bg/5 p-3 transition-all hover:bg-glass-bg/10 ${link.hoverBorder}`}
                         >
                             {iconMap[link.icon] && (
-                                <span className="h-6 w-6 text-gray-400 transition-colors group-hover:text-primary">
+                                <span
+                                    className={`h-6 w-6 text-gray-400 transition-colors ${link.color}`}
+                                >
                                     {iconMap[link.icon]}
                                 </span>
                             )}

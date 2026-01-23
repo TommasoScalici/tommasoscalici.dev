@@ -7,21 +7,42 @@ import { ProjectCard } from '../ProjectCard';
 const projects = await getCollection('projects');
 // Sort by title or any other criteria if needed. For now default sort.
 
-interface Props {
-    lang?: string;
-}
-
 const { lang = defaultLang } = Astro.props;
 const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
 
 type ProjectEntry = CollectionEntry<'projects'>;
+
+const localizedProjects = projects.map((project: ProjectEntry) => {
+    const data = project.data;
+    const localizedTitle =
+        typeof data.title === 'string'
+            ? data.title
+            : (data.title as Record<string, string>)[lang] ||
+              (data.title as Record<string, string>)[defaultLang] ||
+              '';
+    const localizedDescription =
+        typeof data.description === 'string'
+            ? data.description
+            : (data.description as Record<string, string>)[lang] ||
+              (data.description as Record<string, string>)[defaultLang] ||
+              '';
+
+    return {
+        ...data,
+        title: localizedTitle,
+        description: localizedDescription,
+    };
+});
 ---
 
 <section id="projects" class="bg-white/50 px-6 py-32 dark:bg-transparent">
     <div class="mx-auto max-w-7xl">
         <div class="mb-16 flex items-end justify-between">
             <div>
-                <h2 class="mb-4 font-mono text-4xl font-bold md:text-5xl">
+                <h2
+                    class="mb-4 font-mono text-4xl font-bold md:text-5xl"
+                    transition:name="projects-header"
+                >
                     <span class="text-primary">01.</span>
                     {t['section.projects.title']}
                 </h2>
@@ -32,29 +53,7 @@ type ProjectEntry = CollectionEntry<'projects'>;
         </div>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {
-                projects.map((project: ProjectEntry) => {
-                    const data = project.data;
-                    const localizedTitle =
-                        typeof data.title === 'string'
-                            ? data.title
-                            : data.title[lang] || data.title[defaultLang] || '';
-                    const localizedDescription =
-                        typeof data.description === 'string'
-                            ? data.description
-                            : data.description[lang] || data.description[defaultLang] || '';
-
-                    return (
-                        <ProjectCard
-                            project={{
-                                ...data,
-                                title: localizedTitle,
-                                description: localizedDescription,
-                            }}
-                        />
-                    );
-                })
-            }
+            {localizedProjects.map((project) => <ProjectCard project={project} />)}
         </div>
     </div>
 </section>

@@ -52,7 +52,7 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc, targetL
                         <a
                             key={item.href}
                             href={item.href}
-                            className="text-sm font-medium text-muted transition-colors hover:text-main hover:drop-shadow-[0_0_8px_rgba(0,243,255,0.5)]"
+                            className="text-sm font-semibold text-muted transition-colors hover:text-main hover:drop-shadow-[0_0_8px_rgba(0,243,255,0.5)]"
                         >
                             {item.label}
                         </a>
@@ -107,7 +107,7 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc, targetL
                             <a
                                 key={item.href}
                                 href={item.href}
-                                className="text-lg font-medium text-gray-300 transition-colors hover:text-primary"
+                                className="text-lg font-semibold text-gray-300 transition-colors hover:text-primary"
                                 onClick={() => {
                                     setIsOpen(false);
                                 }}

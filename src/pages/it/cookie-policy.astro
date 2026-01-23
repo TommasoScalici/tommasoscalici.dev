@@ -1,0 +1,16 @@
+---
+import { getEntry } from 'astro:content';
+
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+const entry = await getEntry('legal', 'cookie-policy.it');
+if (!entry) {
+    return Astro.redirect('/404');
+}
+
+const { Content } = await entry.render();
+---
+
+<LegalLayout title={entry.data.title} description={entry.data.description} lang="it">
+    <Content />
+</LegalLayout>

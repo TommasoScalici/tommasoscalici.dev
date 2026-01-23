@@ -5,6 +5,7 @@ export interface SmartLink {
     url: string;
     icon: string;
     color: string;
+    hoverBorder: string;
 }
 
 export const artistLinks: SmartLink[] = [

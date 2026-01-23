@@ -1,5 +1,4 @@
-// Ideally we could share this type, but re-declaring for loosely coupled utility is fine
-export type ConsentStatus = 'granted' | 'denied' | 'pending';
+import type { ConsentStatus } from './consent';
 
 export interface GtagConsentSettings {
     ad_storage: 'granted' | 'denied';

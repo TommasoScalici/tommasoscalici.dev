@@ -9,7 +9,6 @@ A personal portfolio website that bridges the worlds of software engineering and
 - **Framework:** [Astro 5](https://astro.build) (SSG Mode)
 - **UI Library:** [React 19](https://react.dev)
 - **Styling:** [Tailwind CSS 3](https://tailwindcss.com) & [Lucide React](https://lucide.dev)
-- **Performance:** [Partytown](https://partytown.builder.io) (Analytics off-main-thread)
 - **Typography:** Inter & JetBrains Mono (via [@fontsource](https://fontsource.org))
 - **Deployment:** [Cloudflare Pages](https://pages.cloudflare.com) via GitHub Actions
 

@@ -5,11 +5,9 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 import { defaultLang, ui } from '../../i18n/ui';
 import { MusicReleaseCard } from '../MusicReleaseCard';
 
-const musicReleases = await getCollection('music');
-
-interface Props {
-    lang: string;
-}
+const musicReleases = (await getCollection('music')).sort(
+    (a, b) => parseInt(b.data.year) - parseInt(a.data.year),
+);
 
 const { lang } = Astro.props;
 const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
@@ -51,7 +49,10 @@ const optimizedMusicReleases = await Promise.all(
     <div class="relative z-10 mx-auto max-w-7xl">
         <div class="mb-16 flex items-end justify-between">
             <div>
-                <h2 class="mb-4 font-mono text-4xl font-bold md:text-5xl">
+                <h2
+                    class="mb-4 font-mono text-4xl font-bold md:text-5xl"
+                    transition:name="music-header"
+                >
                     <span class="text-secondary">02.</span>
                     {t['section.music.title']}
                 </h2>

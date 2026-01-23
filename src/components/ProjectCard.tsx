@@ -69,7 +69,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                         {project.techStack.map((tech) => (
                             <span
                                 key={tech}
-                                className="rounded-full border border-surface bg-black/5 px-3 py-1 font-mono text-xs font-medium text-muted transition-colors group-hover:border-primary/20 group-hover:text-primary/90 dark:bg-white/5"
+                                className="rounded-full border border-surface bg-black/5 px-3 py-1 font-mono text-xs font-semibold text-muted transition-colors group-hover:border-primary/20 group-hover:text-primary/90 dark:bg-white/5"
                             >
                                 {tech}
                             </span>
