@@ -29,7 +29,7 @@
         gtag('js', new Date());
 
         // Use Cloudflare Gateway for reporting
-        gtag('config', gaId, { transport_url: '/metrics' });
+        gtag('config', gaId, { transport_url: window.location.origin + '/metrics' });
 
         // Optimization: Inherit consent -> load script immediately
         if (savedConsent === 'granted') {
