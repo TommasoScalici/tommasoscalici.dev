@@ -26,13 +26,14 @@
         "build": "astro build",
         "check": "astro check",
         "dev": "astro dev",
-        "preview:local": "npx wrangler pages dev dist",
-        "preview:cloudflare": "npx wrangler pages deployment tail --project-name=tommasoscalici-dev",
-        "lint": "eslint . --fix",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
         "format": "prettier --write .",
         "test": "vitest run",
         "test:watch": "vitest",
-        "prepare": "husky"
+        "prepare": "husky",
+        "preview:cloudflare": "npx wrangler pages deployment tail --project-name=tommasoscalici-dev",
+        "preview:local": "npx wrangler pages dev dist"
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx,astro}": [
