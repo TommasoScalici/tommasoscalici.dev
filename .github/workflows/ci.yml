@@ -24,15 +24,20 @@ jobs:
             - name: Install dependencies
               run: npm ci
 
+            - name: Lint
+              run: npm run lint
+
+            - name: Check Formatting
+              run: npm run format:check
+
             - name: Generate Content Types
               run: npx astro sync
 
-            - name: Check Formatting
-              # We use a custom script or just run prettier with --check
-              run: npx prettier --check .
+            - name: Type Check (Astro)
+              run: npm run check
 
-            - name: Lint
-              run: npm run lint
+            - name: Run Tests
+              run: npm test
 
             - name: Build
               env:

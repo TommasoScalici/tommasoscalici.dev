@@ -26,15 +26,6 @@ const { title, description, coverImage, theme } = Astro.props;
 // Optimize image for background and SEO
 const optimizedBg = await getImage({ src: coverImage, format: 'webp' });
 
-// Optimize cover image for LCP preloading
-const optimizedCover = await getImage({
-    src: coverImage,
-    width: 300,
-    height: 300,
-    format: 'webp',
-    quality: 'high',
-});
-
 // Theme Configuration
 const themeConfig = {
     prog: {
@@ -68,28 +59,6 @@ const gradientClasses =
         <meta property="og:description" content={description} />
         <meta property="og:image" content={optimizedBg.src} />
         <meta property="og:type" content="music.playlist" />
-
-        <link
-            rel="preload"
-            href="/fonts/inter-latin-400-normal.woff2"
-            as="font"
-            type="font/woff2"
-            crossorigin="anonymous"
-        />
-        <link
-            rel="preload"
-            href="/fonts/inter-latin-700-normal.woff2"
-            as="font"
-            type="font/woff2"
-            crossorigin="anonymous"
-        />
-        <link
-            rel="preload"
-            href={optimizedCover.src}
-            as="image"
-            type="image/webp"
-            fetchpriority="high"
-        />
 
         <AnalyticsHead
             gaId="G-LMT1M9750Q"
