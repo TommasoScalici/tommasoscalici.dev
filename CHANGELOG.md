@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.15.0...v1.15.1) (2026-01-28)
+
+
+### Bug Fixes
+
+* resolve landing page CSP issues and remove redundant preloads ([a4eebc3](https://github.com/TommasoScalici/tommasoscalici.dev/commit/a4eebc34a97b62a98ef0d02acf50f912ad45fe77))
+
 # [1.15.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.14.0...v1.15.0) (2026-01-23)
 
 
