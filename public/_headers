@@ -6,10 +6,6 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
-# Cache hashed static assets (JS, CSS) for 1 year (immutable)
-/_astro/*
-  Cache-Control: public, max-age=31536000, immutable
-
 # Cache fonts for 1 year (immutable)
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
@@ -27,6 +23,10 @@
   Cache-Control: public, max-age=604800
 /*.ico
   Cache-Control: public, max-age=604800
+
+# Cache hashed static assets (JS, CSS) for 1 year (immutable)
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
 
 # HTML pages - short cache with revalidation
 /*.html
