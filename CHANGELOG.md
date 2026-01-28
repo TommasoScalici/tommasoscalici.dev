@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.15.1...v1.16.0) (2026-01-28)
+
+
+### Features
+
+* refactor GA4 to use Cloudflare Gateway proxy ([f0a2c39](https://github.com/TommasoScalici/tommasoscalici.dev/commit/f0a2c39d7bc657844ff4b08d9e9cb29d21181188))
+
 ## [1.15.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.15.0...v1.15.1) (2026-01-28)
 
 
