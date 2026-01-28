@@ -1,3 +1,10 @@
+## [1.16.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.16.0...v1.16.1) (2026-01-28)
+
+
+### Bug Fixes
+
+* use absolute transport_url for GA4 proxy to prevent hostname resolution errors ([6bab9cd](https://github.com/TommasoScalici/tommasoscalici.dev/commit/6bab9cd6781d0f25c14d28ea9ed47c816bcf5e99))
+
 # [1.16.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.15.1...v1.16.0) (2026-01-28)
 
 
