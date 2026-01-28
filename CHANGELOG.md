@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.16.1...v1.17.0) (2026-01-28)
+
+
+### Features
+
+* upgrade dependencies and optimize performance ([93bbe30](https://github.com/TommasoScalici/tommasoscalici.dev/commit/93bbe308d6e7a85a2625e081382d7705ebe9f15a))
+
 ## [1.16.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.16.0...v1.16.1) (2026-01-28)
 
 
