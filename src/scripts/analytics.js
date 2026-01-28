@@ -27,7 +27,19 @@
         });
 
         gtag('js', new Date());
-        gtag('config', gaId);
+
+        // Use Cloudflare Gateway for reporting
+        gtag('config', gaId, { transport_url: '/metrics' });
+
+        // Optimization: Inherit consent -> load script immediately
+        if (savedConsent === 'granted') {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.async = true;
+            script.src = '/metrics/gtag/js?id=' + gaId;
+            var firstScript = document.getElementsByTagName('script')[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+        }
     }
 
     // --- Meta Pixel ---

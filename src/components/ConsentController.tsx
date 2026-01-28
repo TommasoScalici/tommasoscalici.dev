@@ -18,6 +18,24 @@ export const ConsentController: React.FC = () => {
                 if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
                     window.gtag('consent', 'update', gtagPayload);
 
+                    // Dynamically inject GA4 script if not already present (via Proxy)
+                    if (window.ANALYTICS_CONFIG?.gaId) {
+                        const gaId = window.ANALYTICS_CONFIG.gaId;
+                        // Check if script is already present to prevent duplicates (analytics.js may have added it)
+                        const existingScript = document.querySelector(
+                            `script[src*="/metrics/gtag/js?id=${gaId}"]`,
+                        );
+
+                        if (!existingScript) {
+                            const script = document.createElement('script');
+                            script.type = 'text/javascript';
+                            script.async = true;
+                            script.src = `/metrics/gtag/js?id=${gaId}`;
+                            const firstScript = document.getElementsByTagName('script')[0];
+                            firstScript.parentNode?.insertBefore(script, firstScript);
+                        }
+                    }
+
                     // Only trigger page_view if this is a reactive update (user just accepted)
                     // If it's initial load, the head script already handles the page_view.
                     if (isUpdateEvent) {

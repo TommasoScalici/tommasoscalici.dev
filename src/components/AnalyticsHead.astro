@@ -28,6 +28,3 @@ const hasAnalytics = [gaId, fbPixelId, tiktokPixelId].some((id) => !!id);
         </>
     )
 }
-
-<!-- Google Analytics 4 (Async Loader) -->
-{gaId && <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />}
