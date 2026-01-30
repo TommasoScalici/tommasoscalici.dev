@@ -9,8 +9,10 @@ const isTest = process.env.VITEST === 'true';
 export default defineConfig({
     site: 'https://tommasoscalici.dev',
     integrations: [react(), tailwind({ applyBaseStyles: false }), sitemap()],
+    trailingSlash: 'always',
     output: 'static',
     build: {
+        format: 'directory',
         inlineStylesheets: 'always',
     },
     adapter: cloudflare({
