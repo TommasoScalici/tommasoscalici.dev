@@ -50,6 +50,44 @@ export const getIdentitySchema = (url: URL, image: string, worksForName = 'BC So
 export const musicReleases = [
     {
         '@type': 'MusicAlbum',
+        '@id': 'https://open.spotify.com/album/0z5dDG3w9PfgQ8DOxiiMfa',
+        url: 'https://open.spotify.com/album/0z5dDG3w9PfgQ8DOxiiMfa',
+        name: 'Sinestesie',
+        byArtist: { '@id': 'https://tommasoscalici.dev/#person' },
+        datePublished: '2026-02-06',
+        albumReleaseType: 'https://schema.org/EPRelease',
+        image: 'https://tommasoscalici.dev/assets/album_covers/sinestesie.webp',
+        numTracks: 4,
+        genre: ['Instrumental', 'Progressive Rock', 'Progressive Metal', 'Experimental'],
+        track: [
+            {
+                '@type': 'MusicRecording',
+                name: 'Pareidolie Silenziose',
+                duration: 'PT5M49S',
+                isrcCode: 'GXJBS2531458',
+            },
+            {
+                '@type': 'MusicRecording',
+                name: 'Echi Di Velluto',
+                duration: 'PT2M39S',
+                isrcCode: 'GXJBS2531461',
+            },
+            {
+                '@type': 'MusicRecording',
+                name: 'Discromia Violenta',
+                duration: 'PT4M19S',
+                isrcCode: 'GXJBS2531460',
+            },
+            {
+                '@type': 'MusicRecording',
+                name: 'Immagine Residua',
+                duration: 'PT2M14S',
+                isrcCode: 'GXJBS2531459',
+            },
+        ],
+    },
+    {
+        '@type': 'MusicAlbum',
         '@id': 'https://open.spotify.com/album/28mIion9ys60E5GbX5CpLS',
         url: 'https://open.spotify.com/album/28mIion9ys60E5GbX5CpLS',
         name: 'Random Access Thoughts',

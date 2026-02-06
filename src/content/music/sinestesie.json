@@ -4,6 +4,12 @@
     "genre": "Experimental / Prog",
     "coverImage": "../../assets/album_covers/sinestesie.webp",
     "type": "EP",
-    "isUpcoming": true,
-    "presaveLink": "https://ditto.fm/sinestesie"
+    "links": {
+        "spotify": "https://open.spotify.com/album/0z5dDG3w9PfgQ8DOxiiMfa",
+        "deezer": "https://www.deezer.com/album/881908142",
+        "tidal": "https://tidal.com/browse/album/483804043",
+        "amazon": "https://music.amazon.com/albums/B0GB211RB9",
+        "youtube": "https://music.youtube.com/playlist?list=OLAK5uy_n-sI5YNQHnABarkL-nZK2X9qOS07xVO80",
+        "bandcamp": "https://tommasoscalici.bandcamp.com/album/sinestesie"
+    }
 }
