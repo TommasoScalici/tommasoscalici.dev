@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.17.0...v1.18.0) (2026-02-11)
+
+
+### Features
+
+* improved Hero section component and JSON-LD structured data for identity and music releases ([7ef3bd4](https://github.com/TommasoScalici/tommasoscalici.dev/commit/7ef3bd4589210abfdbb7359d1544090903dfcf2e))
+
 # [1.17.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.16.1...v1.17.0) (2026-01-28)
 
 
