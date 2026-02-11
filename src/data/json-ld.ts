@@ -58,7 +58,13 @@ export const musicReleases = [
         albumReleaseType: 'https://schema.org/EPRelease',
         image: 'https://tommasoscalici.dev/assets/album_covers/sinestesie.webp',
         numTracks: 4,
-        genre: ['Instrumental', 'Progressive Rock', 'Progressive Metal', 'Experimental'],
+        genre: [
+            'Instrumental',
+            'Progressive Rock',
+            'Progressive Metal',
+            'Experimental',
+            'Math Rock',
+        ],
         track: [
             {
                 '@type': 'MusicRecording',
