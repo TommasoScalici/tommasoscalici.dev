@@ -1,4 +1,4 @@
-/// <reference types="astro/client" />
+/// <reference types="astro/client" /> // Astro types
 /// <reference path="../.astro/types.d.ts" />
 
 interface ImportMetaEnv {

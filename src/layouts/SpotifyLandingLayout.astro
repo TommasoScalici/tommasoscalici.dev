@@ -8,7 +8,6 @@ import { getImage, Image } from 'astro:assets';
 import { PUBLIC_FACEBOOK_PIXEL_ID, PUBLIC_TIKTOK_PIXEL_ID } from 'astro:env/client';
 
 import AnalyticsHead from '../components/AnalyticsHead.astro';
-import { ConsentController } from '../components/ConsentController';
 import { CookieBanner } from '../components/CookieBanner';
 
 interface Props {
@@ -21,7 +20,11 @@ interface Props {
 const { title, description, coverImage, theme } = Astro.props;
 
 // Optimize image for background and SEO
-const optimizedBg = await getImage({ src: coverImage, format: 'webp' });
+const optimizedBg = await getImage({ src: coverImage, format: 'webp', width: 400 });
+
+// Canonical URL
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const themeColor = theme === 'lofi' ? '#0d1117' : '#050505';
 
 // Theme Configuration
 const themeConfig = {
@@ -51,11 +54,25 @@ const gradientClasses =
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{title}</title>
 
+        <!-- SEO -->
         <meta name="description" content={description} />
+        <meta name="robots" content="noindex, nofollow" />
+        <link rel="canonical" href={canonicalURL.toString()} />
+        <meta name="theme-color" content={themeColor} />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/apple-touch-icon.png" type="image/png" sizes="180x180" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+        <!-- Open Graph -->
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={optimizedBg.src} />
         <meta property="og:type" content="music.playlist" />
+
+        <!-- Preconnect to analytics domains -->
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        <link rel="dns-prefetch" href="https://analytics.tiktok.com" />
 
         <AnalyticsHead
             gaId="G-LMT1M9750Q"
@@ -80,8 +97,80 @@ const gradientClasses =
         class="relative flex h-screen items-center justify-center overflow-hidden font-sans text-white"
         style={theme === 'lofi' ? 'background-color: #0d1117;' : 'background-color: #050505;'}
     >
-        <ConsentController client:idle />
         <CookieBanner client:idle lang="en" />
+        <script is:inline>
+            (function initConsentController() {
+                function updateConsent(isUpdate) {
+                    var consent = localStorage.getItem('user-consent') || 'pending';
+                    var grantedStatus = consent === 'granted' ? 'granted' : 'denied';
+                    var gtagPayload = {
+                        ad_storage: grantedStatus,
+                        ad_user_data: grantedStatus,
+                        ad_personalization: grantedStatus,
+                        analytics_storage: grantedStatus,
+                    };
+
+                    if (consent === 'granted') {
+                        if (typeof window.gtag === 'function') {
+                            window.gtag('consent', 'update', gtagPayload);
+                            if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.gaId) {
+                                var gaId = window.ANALYTICS_CONFIG.gaId;
+                                if (
+                                    !document.querySelector(
+                                        'script[src*="/metrics/gtag/js?id=' + gaId + '"]',
+                                    )
+                                ) {
+                                    var s = document.createElement('script');
+                                    s.type = 'text/javascript';
+                                    s.async = true;
+                                    s.src = '/metrics/gtag/js?id=' + gaId;
+                                    var f = document.getElementsByTagName('script')[0];
+                                    f.parentNode.insertBefore(s, f);
+                                }
+                            }
+                            if (isUpdate) window.gtag('event', 'page_view');
+                        }
+                        if (typeof window.fbq === 'function') {
+                            window.fbq('consent', 'grant');
+                            if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.fbPixelId) {
+                                window.fbq(
+                                    'set',
+                                    'autoConfig',
+                                    false,
+                                    window.ANALYTICS_CONFIG.fbPixelId,
+                                );
+                            }
+                            if (isUpdate) window.fbq('track', 'PageView');
+                        }
+                        if (window.ttq) {
+                            window.ttq.enableCookie();
+                            if (
+                                isUpdate &&
+                                window.ANALYTICS_CONFIG &&
+                                window.ANALYTICS_CONFIG.tiktokPixelId
+                            ) {
+                                var pId = window.ANALYTICS_CONFIG.tiktokPixelId;
+                                if (!window.ttq._i || !window.ttq._i[pId]) {
+                                    window.ttq.load(pId, {
+                                        auto_collect: false,
+                                    });
+                                }
+                                window.ttq.page();
+                            }
+                        }
+                    } else {
+                        if (typeof window.gtag === 'function')
+                            window.gtag('consent', 'update', gtagPayload);
+                        if (typeof window.fbq === 'function') window.fbq('consent', 'revoke');
+                        if (window.ttq) window.ttq.disableCookie();
+                    }
+                }
+                updateConsent(false);
+                window.addEventListener('consent-update', function () {
+                    updateConsent(true);
+                });
+            })();
+        </script>
         <div
             class="absolute left-0 top-0 -z-10 h-full w-full scale-110 bg-cover bg-center bg-no-repeat"
             style={`${currentTheme.bgBlur} background-image: url('${optimizedBg.src}');`}
@@ -94,34 +183,19 @@ const gradientClasses =
         >
             <div class="group relative mx-auto mb-5 aspect-square w-full rounded-xl">
                 <div
-                    class={`absolute -inset-1 animate-spin-slow rounded-xl bg-gradient-to-r opacity-75 blur-lg transition duration-1000 group-hover:duration-200 group-hover:opacity-100 ${gradientClasses}`}
+                    class={`absolute -inset-1 animate-spin-slow rounded-xl bg-gradient-to-r opacity-75 blur-lg ${gradientClasses}`}
                 >
                 </div>
-                {
-                    typeof coverImage === 'string' ? (
-                        <Image
-                            src={coverImage}
-                            width={300}
-                            height={300}
-                            loading="eager"
-                            fetchpriority="high"
-                            class="relative h-full w-full rounded-xl object-cover"
-                            style={currentTheme.coverShadow}
-                            alt={`${title} Cover`}
-                        />
-                    ) : (
-                        <Image
-                            src={coverImage}
-                            width={300}
-                            height={300}
-                            loading="eager"
-                            fetchpriority="high"
-                            class="relative h-full w-full rounded-xl object-cover"
-                            style={currentTheme.coverShadow}
-                            alt={`${title} Cover`}
-                        />
-                    )
-                }
+                <Image
+                    src={coverImage}
+                    width={300}
+                    height={300}
+                    loading="eager"
+                    fetchpriority="high"
+                    class="relative h-full w-full rounded-xl object-cover"
+                    style={currentTheme.coverShadow}
+                    alt={`${title} Cover`}
+                />
             </div>
 
             <slot />
@@ -132,6 +206,7 @@ const gradientClasses =
                 Curated by <a
                     href="https://tommasoscalici.dev"
                     target="_blank"
+                    rel="noopener noreferrer"
                     class="border-b border-transparent bg-transparent font-semibold text-inherit no-underline outline-none transition-colors duration-200 hover:border-white hover:text-white"
                     >Tommaso Scalici</a
                 >

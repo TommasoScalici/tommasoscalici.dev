@@ -6,16 +6,24 @@
  * @returns A clean path with leading and ending slashes (e.g., '/uses/') or '/' for root.
  */
 export const normalizePath = (pathname: string): string => {
-    // 1. Remove localized prefix if present (e.g. /it/ -> /)
-    let clean = pathname.replace(/^\/it\//, '/');
+    let path = pathname;
+    // 1. Remove trailing slash temporarily to simplify segment check
+    if (path.endsWith('/')) {
+        path = path.slice(0, -1);
+    }
+    // 2. Remove leading slash
+    if (path.startsWith('/')) {
+        path = path.slice(1);
+    }
 
-    // 2. Remove leading slash for easier processing
-    clean = clean.replace(/^\//, '');
+    // Now path is "it/privacy-policy" or "privacy-policy" or "it" or ""
 
-    // 3. Remove trailing slash
-    clean = clean.replace(/\/$/, '');
+    const segments = path.split('/');
+    if (segments[0] === 'it') {
+        segments.shift(); // Remove 'it'
+    }
 
-    // 4. Return root '/' if empty, or '/path/' otherwise
+    const clean = segments.join('/');
     return clean ? `/${clean}/` : '/';
 };
 

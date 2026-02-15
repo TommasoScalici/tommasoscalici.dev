@@ -1,11 +1,13 @@
 ---
-import { getEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 
 import LegalLayout from '../../layouts/LegalLayout.astro';
 
-const entry = await getEntry('legal', 'cookie-policy.it');
+const entries = await getCollection('legal');
+const entry = entries.find((e) => e.id.startsWith('cookie-policy.it'));
+
 if (!entry) {
-    return Astro.redirect('/404');
+    return Astro.redirect('/it/');
 }
 
 const { Content } = await entry.render();

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { SiSpotify } from 'react-icons/si';
 
 import { useSpotifyDeepLink } from '../hooks/useSpotifyDeepLink';
@@ -15,67 +15,6 @@ export const SpotifyDeepLinkButton: React.FC<SpotifyDeepLinkButtonProps> = ({
 }) => {
     const [label, setLabel] = useState('OPEN IN SPOTIFY');
     const [isOpening, setIsOpening] = useState(false);
-    const [buttonAnimation, setButtonAnimation] = useState('');
-
-    useEffect(() => {
-        const controller = new AbortController();
-        const { signal } = controller;
-
-        const runAnimationSequence = async () => {
-            try {
-                // First shake after 3s
-                await new Promise((resolve, reject) => {
-                    const timeout = setTimeout(resolve, 3000);
-                    signal.addEventListener('abort', () => {
-                        clearTimeout(timeout);
-                        reject(new DOMException('Aborted', 'AbortError'));
-                    });
-                });
-
-                setButtonAnimation('animate-shake');
-
-                await new Promise((resolve, reject) => {
-                    const timeout = setTimeout(resolve, 800);
-                    signal.addEventListener('abort', () => {
-                        clearTimeout(timeout);
-                        reject(new DOMException('Aborted', 'AbortError'));
-                    });
-                }); // Shake duration
-
-                setButtonAnimation('');
-
-                // Second shake after 2s pause
-                await new Promise((resolve, reject) => {
-                    const timeout = setTimeout(resolve, 2000);
-                    signal.addEventListener('abort', () => {
-                        clearTimeout(timeout);
-                        reject(new DOMException('Aborted', 'AbortError'));
-                    });
-                });
-
-                setButtonAnimation('animate-shake');
-
-                await new Promise((resolve, reject) => {
-                    const timeout = setTimeout(resolve, 800);
-                    signal.addEventListener('abort', () => {
-                        clearTimeout(timeout);
-                        reject(new DOMException('Aborted', 'AbortError'));
-                    });
-                });
-
-                setButtonAnimation('');
-            } catch (error) {
-                // Ignore abort errors
-                if ((error as Error).name !== 'AbortError') throw error;
-            }
-        };
-
-        void runAnimationSequence();
-
-        return () => {
-            controller.abort();
-        };
-    }, []);
 
     const { handleDeepLink } = useSpotifyDeepLink({
         eventName,
@@ -107,9 +46,10 @@ export const SpotifyDeepLinkButton: React.FC<SpotifyDeepLinkButtonProps> = ({
     return (
         <button
             onClick={handleClick}
-            className={`group flex w-full transform items-center justify-center gap-3 rounded-full bg-spotify px-8 py-4 font-bold text-black shadow-[0_0_20px_rgba(29,185,84,0.3)] transition-all hover:scale-105 hover:bg-spotify-hover hover:shadow-[0_0_30px_rgba(29,185,84,0.5)] ${buttonAnimation} ${
+            className={`group flex w-full transform animate-shake items-center justify-center gap-3 rounded-full bg-spotify px-8 py-4 font-bold text-black shadow-[0_0_20px_rgba(29,185,84,0.3)] transition-all hover:scale-105 hover:bg-spotify-hover hover:shadow-[0_0_30px_rgba(29,185,84,0.5)] ${
                 isOpening ? 'cursor-wait opacity-75' : ''
             }`}
+            style={{ animationDelay: '3s' }}
         >
             <SiSpotify className="h-6 w-6" />
             <span className="tracking-wide">{label}</span>

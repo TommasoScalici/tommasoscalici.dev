@@ -1,3 +1,5 @@
+import { getConsent } from './consent';
+
 export type EventName =
     | 'view_item' // User lands on the page (viewing the "Product")
     | 'select_content' // User clicks a specific platform (e.g. Apple Music) or "Listen"
@@ -26,10 +28,16 @@ const EVENT_MAP: Record<EventName, { fb: string; tt: string }> = {
 export const trackEvent = (eventName: EventName, data?: EventData) => {
     if (typeof window === 'undefined') return;
 
+    const consent = getConsent();
+
     // 1. Google Analytics 4 (Always try to fire if loaded)
+    // GA4 handles its own consent internally via gtag('consent', ...)
     if (typeof window.gtag === 'function') {
         window.gtag('event', eventName, data);
     }
+
+    // Strict check for Facebook and TikTok pixels
+    if (consent !== 'granted') return;
 
     // 2. Meta Pixel (Facebook)
     if (typeof window.fbq === 'function') {
