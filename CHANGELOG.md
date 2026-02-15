@@ -1,3 +1,10 @@
+## [1.18.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.18.0...v1.18.1) (2026-02-15)
+
+
+### Performance Improvements
+
+* optimize lighthouse scores & hardened pixel tracking. inlined consent logic, added missing SEO tags, disabled auto-collection, and enforced strict consent checks in unified tracking. ([19523a8](https://github.com/TommasoScalici/tommasoscalici.dev/commit/19523a8c0b7c3ead6bba751a07e54b3c473ab17c))
+
 # [1.18.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.17.0...v1.18.0) (2026-02-11)
 
 
