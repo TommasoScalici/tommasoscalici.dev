@@ -27,21 +27,21 @@ export const Footer: React.FC<FooterProps> = ({ lang, t, copyrightDate }) => {
                         &copy; {copyrightDate} Tommaso Scalici. {t['footer.copyright']}
                     </span>
                     <a
-                        href={lang === 'en' ? '/uses' : `/${lang}/uses`}
+                        href={lang === 'en' ? '/uses/' : `/${lang}/uses/`}
                         className="rounded-full border border-primary/20 bg-white/5 px-3 py-1 text-xs font-bold tracking-wide text-primary shadow-[0_0_10px_rgba(0,243,255,0.1)] transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-primary-glow"
                         aria-label={t['footer.uses']}
                     >
                         {t['footer.uses']}
                     </a>
                     <a
-                        href={lang === 'en' ? '/privacy-policy' : `/${lang}/privacy-policy`}
+                        href={lang === 'en' ? '/privacy-policy/' : `/${lang}/privacy-policy/`}
                         className="rounded-full border border-secondary/20 bg-white/5 px-3 py-1 text-xs font-bold tracking-wide text-secondary shadow-[0_0_10px_rgba(255,0,85,0.1)] transition-all hover:border-secondary/50 hover:bg-secondary/10 hover:shadow-secondary-glow"
                         aria-label={t['footer.privacy']}
                     >
                         {t['footer.privacy']}
                     </a>
                     <a
-                        href={lang === 'en' ? '/cookie-policy' : `/${lang}/cookie-policy`}
+                        href={lang === 'en' ? '/cookie-policy/' : `/${lang}/cookie-policy/`}
                         className="rounded-full border border-secondary/20 bg-white/5 px-3 py-1 text-xs font-bold tracking-wide text-secondary shadow-[0_0_10px_rgba(255,0,85,0.1)] transition-all hover:border-secondary/50 hover:bg-secondary/10 hover:shadow-secondary-glow"
                         aria-label={t['cookie.title']}
                     >

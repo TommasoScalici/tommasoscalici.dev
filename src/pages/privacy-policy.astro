@@ -3,9 +3,11 @@ import { getEntry } from 'astro:content';
 
 import LegalLayout from '../layouts/LegalLayout.astro';
 
-const entry = await getEntry('legal', 'privacy-policy');
+const entry =
+    (await getEntry('legal', 'privacy-policy')) || (await getEntry('legal', 'privacy-policy.md'));
+
 if (!entry) {
-    return Astro.redirect('/404');
+    return Astro.redirect('/');
 }
 
 const { Content } = await entry.render();

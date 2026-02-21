@@ -74,6 +74,7 @@
             fbq('consent', 'grant');
         }
 
+        fbq('set', 'autoConfig', false, fbPixelId);
         fbq('init', fbPixelId);
         fbq('track', 'PageView');
     }
@@ -136,11 +137,27 @@
 
             if (cookieEnabled) {
                 ttq.enableCookie();
-                ttq.load(tiktokPixelId);
+                ttq.load(tiktokPixelId, { auto_collect: false });
                 ttq.page();
             } else {
                 ttq.disableCookie();
             }
         })(window, 'ttq');
     }
+
+    // --- Back/Forward Cache Compatibility ---
+    // Re-fire page views when restored from bfcache
+    window.addEventListener('pageshow', function (event) {
+        if (event.persisted) {
+            if (gaId && typeof window.gtag === 'function') {
+                window.gtag('event', 'page_view');
+            }
+            if (fbPixelId && typeof window.fbq === 'function') {
+                window.fbq('track', 'PageView');
+            }
+            if (tiktokPixelId && window.ttq) {
+                window.ttq.page();
+            }
+        }
+    });
 })();

@@ -24,7 +24,7 @@ export const Header: React.FC<HeaderProps> = ({ lang, navItems, logoSrc, targetL
         <header className="fixed left-0 right-0 top-0 z-50 border-b border-surface bg-background/70 backdrop-blur-xl">
             <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
                 <a
-                    href={lang === 'en' ? '/' : `/${lang}`}
+                    href={lang === 'en' ? '/' : `/${lang}/`}
                     className="group flex items-center font-mono text-xl font-bold tracking-tighter transition-colors"
                 >
                     <img

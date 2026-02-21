@@ -24,6 +24,22 @@ describe('analytics', () => {
         const mockFbq = vi.fn();
         const mockTtqTrack = vi.fn();
 
+        // Mock localStorage
+        let storage: Record<string, string> = { 'user-consent': 'granted' };
+        vi.stubGlobal('localStorage', {
+            getItem: vi.fn((key: string) => storage[key] || null),
+            setItem: vi.fn((key: string, value: string) => {
+                storage[key] = value;
+            }),
+            removeItem: vi.fn((key: string) => {
+                // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+                delete storage[key];
+            }),
+            clear: vi.fn(() => {
+                storage = {};
+            }),
+        });
+
         vi.stubGlobal('window', {
             gtag: mockGtag,
             fbq: mockFbq,
@@ -77,5 +93,17 @@ describe('analytics', () => {
             content_ids: ['123', '456'],
             content_id: '123', // Extracted first ID
         });
+    });
+
+    it('should NOT track to Facebook or TikTok if consent is not granted', () => {
+        localStorage.setItem('user-consent', 'denied');
+        trackEvent('view_item', { content_name: 'Test Item' });
+
+        // GA4 should STILL be tracked (it handles consent internally)
+        expect(window.gtag).toHaveBeenCalled();
+
+        // Facebook and TikTok should NOT be tracked
+        expect(window.fbq).not.toHaveBeenCalled();
+        expect(window.ttq.track).not.toHaveBeenCalled();
     });
 });
