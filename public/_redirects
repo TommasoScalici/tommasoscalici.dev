@@ -1,0 +1,6 @@
+# Redirect /index.html to root
+/index.html  /  301
+
+# Redirect /en/ prefix to unprefixed equivalent (EN is the default locale)
+/en/*  /:splat  301
+/en/   /  301
