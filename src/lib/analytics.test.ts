@@ -24,8 +24,10 @@ describe('analytics', () => {
         const mockFbq = vi.fn();
         const mockTtqTrack = vi.fn();
 
-        // Mock localStorage
+        // Mock localStorage and sessionStorage
         let storage: Record<string, string> = { 'user-consent': 'granted' };
+        let sessionStore: Record<string, string> = {};
+
         vi.stubGlobal('localStorage', {
             getItem: vi.fn((key: string) => storage[key] || null),
             setItem: vi.fn((key: string, value: string) => {
@@ -37,6 +39,20 @@ describe('analytics', () => {
             }),
             clear: vi.fn(() => {
                 storage = {};
+            }),
+        });
+
+        vi.stubGlobal('sessionStorage', {
+            getItem: vi.fn((key: string) => sessionStore[key] || null),
+            setItem: vi.fn((key: string, value: string) => {
+                sessionStore[key] = value;
+            }),
+            removeItem: vi.fn((key: string) => {
+                // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+                delete sessionStore[key];
+            }),
+            clear: vi.fn(() => {
+                sessionStore = {};
             }),
         });
 
@@ -119,5 +135,23 @@ describe('analytics', () => {
         // Facebook and TikTok should NOT be tracked
         expect(window.fbq).not.toHaveBeenCalled();
         expect(window.ttq.track).not.toHaveBeenCalled();
+    });
+
+    it('should NOT track TikTok if traffic origin is meta', () => {
+        sessionStorage.setItem('traffic_origin', 'meta');
+        trackEvent('view_item');
+
+        expect(window.gtag).toHaveBeenCalled();
+        expect(window.fbq).toHaveBeenCalled();
+        expect(window.ttq.track).not.toHaveBeenCalled();
+    });
+
+    it('should NOT track Meta if traffic origin is tiktok', () => {
+        sessionStorage.setItem('traffic_origin', 'tiktok');
+        trackEvent('view_item');
+
+        expect(window.gtag).toHaveBeenCalled();
+        expect(window.ttq.track).toHaveBeenCalled();
+        expect(window.fbq).not.toHaveBeenCalled();
     });
 });

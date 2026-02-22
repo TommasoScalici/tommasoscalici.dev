@@ -39,14 +39,17 @@ export const trackEvent = (eventName: EventName, data?: EventData) => {
     // Strict check for Facebook and TikTok pixels
     if (consent !== 'granted') return;
 
+    // Determine traffic origin from isolated session
+    const trafficOrigin = sessionStorage.getItem('traffic_origin');
+
     // 2. Meta Pixel (Facebook)
-    if (typeof window.fbq === 'function') {
+    if (trafficOrigin !== 'tiktok' && typeof window.fbq === 'function') {
         const fbName = EVENT_MAP[eventName].fb;
         window.fbq('track', fbName, data);
     }
 
     // 3. TikTok Pixel
-    if (window.ttq && typeof window.ttq.track === 'function') {
+    if (trafficOrigin !== 'meta' && window.ttq && typeof window.ttq.track === 'function') {
         const ttName = EVENT_MAP[eventName].tt;
         const ttData = { ...data };
 

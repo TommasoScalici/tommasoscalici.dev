@@ -3,6 +3,22 @@
     const config = window.ANALYTICS_CONFIG || {};
     const { gaId, fbPixelId, tiktokPixelId } = config;
 
+    // Traffic Origin Isolation
+    const urlParams = new URL(window.location.href).searchParams;
+    const utmSource = urlParams.get('utm_source')?.toLowerCase() || '';
+
+    let trafficOrigin = sessionStorage.getItem('traffic_origin');
+
+    if (!trafficOrigin && utmSource) {
+        if (['facebook', 'fb', 'ig', 'instagram'].includes(utmSource)) {
+            trafficOrigin = 'meta';
+            sessionStorage.setItem('traffic_origin', 'meta');
+        } else if (['tiktok', 'tt'].includes(utmSource)) {
+            trafficOrigin = 'tiktok';
+            sessionStorage.setItem('traffic_origin', 'tiktok');
+        }
+    }
+
     // --- Google Analytics 4 ---
     if (gaId) {
         window.dataLayer = window.dataLayer || [];
@@ -43,7 +59,7 @@
     }
 
     // --- Meta Pixel ---
-    if (fbPixelId) {
+    if (fbPixelId && trafficOrigin !== 'tiktok') {
         !(function (f, b, e, v, n, t, s) {
             if (f.fbq) return;
             n = f.fbq = function () {
@@ -80,7 +96,7 @@
     }
 
     // --- TikTok Pixel ---
-    if (tiktokPixelId) {
+    if (tiktokPixelId && trafficOrigin !== 'meta') {
         !(function (w, t) {
             w.TiktokAnalyticsObject = t;
             var ttq = (w[t] = w[t] || []);
@@ -152,10 +168,10 @@
             if (gaId && typeof window.gtag === 'function') {
                 window.gtag('event', 'page_view');
             }
-            if (fbPixelId && typeof window.fbq === 'function') {
+            if (fbPixelId && trafficOrigin !== 'tiktok' && typeof window.fbq === 'function') {
                 window.fbq('track', 'PageView');
             }
-            if (tiktokPixelId && window.ttq) {
+            if (tiktokPixelId && trafficOrigin !== 'meta' && window.ttq) {
                 window.ttq.page();
             }
         }
