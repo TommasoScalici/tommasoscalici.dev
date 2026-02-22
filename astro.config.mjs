@@ -3,8 +3,6 @@ import tailwind from '@astrojs/tailwind';
 import { defineConfig, envField } from 'astro/config';
 import icon from 'astro-icon';
 
-
-
 export default defineConfig({
     site: 'https://tommasoscalici.dev',
     integrations: [tailwind({ applyBaseStyles: false }), sitemap(), icon()],
