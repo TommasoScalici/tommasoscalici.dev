@@ -3,7 +3,7 @@ import { getImage } from 'astro:assets';
 import { type CollectionEntry, getEntry } from 'astro:content';
 
 import { defaultLang, ui } from '../../i18n/ui';
-import { PlaylistCard } from '../PlaylistCard';
+import PlaylistCard from '../cards/PlaylistCard.astro';
 
 interface Props {
     lang: string;
@@ -61,11 +61,7 @@ const optimizedPlaylists = await Promise.all(
         </div>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {
-                optimizedPlaylists.map((playlist) => (
-                    <PlaylistCard client:visible playlist={playlist} t={t} />
-                ))
-            }
+            {optimizedPlaylists.map((playlist) => <PlaylistCard playlist={playlist} t={t} />)}
         </div>
     </div>
 </section>

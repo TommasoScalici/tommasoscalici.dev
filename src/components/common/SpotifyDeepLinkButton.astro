@@ -1,0 +1,87 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+    playlistId: string;
+    eventName: string;
+    className?: string;
+}
+
+const { playlistId, eventName, className = '' } = Astro.props;
+---
+
+<button
+    type="button"
+    data-spotify-deep-link
+    data-playlist-id={playlistId}
+    data-event-name={eventName}
+    class={`group flex w-full transform animate-shake items-center justify-center gap-3 rounded-full bg-spotify px-8 py-4 font-bold text-black shadow-[0_0_20px_rgba(29,185,84,0.3)] transition-all hover:scale-105 hover:bg-spotify-hover hover:shadow-[0_0_30px_rgba(29,185,84,0.5)] ${className}`}
+    style="animation-delay: 3s;"
+>
+    <Icon name="simple-icons:spotify" class="h-6 w-6" />
+    <span class="label-text tracking-wide">OPEN IN SPOTIFY</span>
+</button>
+
+<script>
+    class SpotifyDeepLinkManager {
+        constructor() {
+            const btns = document.querySelectorAll<HTMLButtonElement>('[data-spotify-deep-link]');
+            for (const btn of btns) {
+                btn.addEventListener('click', this.#handleClick);
+            }
+        }
+
+        #handleClick = (e: MouseEvent) => {
+            e.preventDefault();
+            const btn = e.currentTarget as HTMLButtonElement;
+            const playlistId = btn.getAttribute('data-playlist-id');
+            const eventName = btn.getAttribute('data-event-name') || 'Spotify Playlist';
+            const labelEl = btn.querySelector('.label-text');
+
+            if (labelEl) labelEl.textContent = 'Opening...';
+            btn.classList.add('cursor-wait', 'opacity-75');
+
+            if (typeof window !== 'undefined' && window.fbq) {
+                window.fbq('track', 'ViewContent', {
+                    content_name: eventName,
+                    content_category: 'Spotify Playlist Deep Link',
+                });
+            }
+
+            const isMobile = /Mobi/i.test(navigator.userAgent);
+            const intentUrl = `intent://playlist/${playlistId}#Intent;scheme=spotify;package=com.spotify.music;end`;
+            const webUrl = `https://open.spotify.com/playlist/${playlistId}`;
+            const fallbackUrl = `spotify:playlist:${playlistId}`;
+
+            if (isMobile) {
+                const isAndroid = /Android/i.test(navigator.userAgent);
+                if (isAndroid) {
+                    window.location.href = intentUrl;
+                } else {
+                    window.location.href = fallbackUrl;
+                }
+                setTimeout(() => {
+                    window.location.href = webUrl;
+                }, 2000);
+            } else {
+                window.location.href = webUrl;
+            }
+
+            if (!isMobile) {
+                setTimeout(() => {
+                    if (labelEl) labelEl.textContent = 'Play on Spotify';
+                    btn.classList.remove('cursor-wait', 'opacity-75');
+                }, 2500);
+            } else {
+                setTimeout(() => {
+                    btn.classList.remove('cursor-wait', 'opacity-75');
+                    if (labelEl) labelEl.textContent = 'OPEN IN SPOTIFY';
+                }, 2000);
+            }
+        };
+    }
+
+    if (!window.customElements.get('spotify-deep-link-init')) {
+        new SpotifyDeepLinkManager();
+    }
+</script>

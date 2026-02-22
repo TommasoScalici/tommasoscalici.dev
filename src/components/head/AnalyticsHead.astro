@@ -5,7 +5,7 @@ interface Props {
     tiktokPixelId?: string;
 }
 
-import analyticsScript from '../scripts/analytics.js?raw';
+import analyticsScript from '../../scripts/analytics.js?raw';
 
 const { gaId, fbPixelId, tiktokPixelId } = Astro.props;
 const hasAnalytics = [gaId, fbPixelId, tiktokPixelId].some((id) => !!id);

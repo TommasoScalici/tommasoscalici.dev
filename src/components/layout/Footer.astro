@@ -1,0 +1,162 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import { artistLinks } from '../../data/artistLinks';
+import { secondarySocials } from '../../data/socials';
+import SmartLinkDialog from '../dialogs/SmartLinkDialog.astro';
+import SocialSmartDialog from '../dialogs/SocialSmartDialog.astro';
+
+interface Props {
+    lang: string;
+    t: Record<string, string>;
+    copyrightDate: string;
+}
+
+const { lang, t, copyrightDate } = Astro.props;
+---
+
+<footer
+    class="border-glass-border mt-20 border-t bg-white/70 backdrop-blur-md dark:border-surface dark:bg-black/50"
+>
+    <div
+        class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-8 md:flex-row"
+    >
+        <p class="flex items-center gap-4 font-mono text-sm text-muted">
+            <span>
+                &copy; {copyrightDate} Tommaso Scalici. {t['footer.copyright']}
+            </span>
+            <a
+                href={lang === 'en' ? '/uses/' : `/${lang}/uses/`}
+                class="rounded-full border border-primary/20 bg-white/5 px-3 py-1 text-xs font-bold tracking-wide text-primary shadow-[0_0_10px_rgba(0,243,255,0.1)] transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-primary-glow"
+                aria-label={t['footer.uses']}
+            >
+                {t['footer.uses']}
+            </a>
+            <a
+                href={lang === 'en' ? '/privacy-policy/' : `/${lang}/privacy-policy/`}
+                class="rounded-full border border-secondary/20 bg-white/5 px-3 py-1 text-xs font-bold tracking-wide text-secondary shadow-[0_0_10px_rgba(255,0,85,0.1)] transition-all hover:border-secondary/50 hover:bg-secondary/10 hover:shadow-secondary-glow"
+                aria-label={t['footer.privacy']}
+            >
+                {t['footer.privacy']}
+            </a>
+            <a
+                href={lang === 'en' ? '/cookie-policy/' : `/${lang}/cookie-policy/`}
+                class="rounded-full border border-secondary/20 bg-white/5 px-3 py-1 text-xs font-bold tracking-wide text-secondary shadow-[0_0_10px_rgba(255,0,85,0.1)] transition-all hover:border-secondary/50 hover:bg-secondary/10 hover:shadow-secondary-glow"
+                aria-label={t['cookie.title']}
+            >
+                {t['cookie.title']}
+            </a>
+        </p>
+
+        <div class="flex gap-6">
+            <a
+                href="https://github.com/TommasoScalici"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track-footer="GitHub"
+                class="text-muted transition-colors hover:text-primary"
+                aria-label="GitHub"
+            >
+                <Icon name="simple-icons:github" class="h-5 w-5" />
+            </a>
+            <a
+                href="https://www.linkedin.com/in/tommasoscalici"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track-footer="LinkedIn"
+                class="text-muted transition-colors hover:text-primary"
+                aria-label="LinkedIn"
+            >
+                <Icon name="simple-icons:linkedin" class="h-5 w-5" />
+            </a>
+
+            <button
+                type="button"
+                data-dialog-trigger="artist-links-dialog"
+                class="text-muted transition-colors hover:text-secondary"
+                aria-label="Music Platforms"
+            >
+                <Icon name="lucide:music" class="h-5 w-5" />
+            </button>
+
+            <a
+                href="https://www.instagram.com/tommasoscalici91"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track-footer="Instagram"
+                class="text-muted transition-colors hover:text-secondary"
+                aria-label="Instagram"
+            >
+                <Icon name="simple-icons:instagram" class="h-5 w-5" />
+            </a>
+
+            <button
+                type="button"
+                data-dialog-trigger="social-links-dialog"
+                class="text-muted transition-colors hover:text-main"
+                aria-label="More Socials"
+            >
+                <Icon name="lucide:ellipsis" class="h-5 w-5" />
+            </button>
+        </div>
+    </div>
+
+    <SmartLinkDialog
+        id="artist-links-dialog"
+        links={artistLinks}
+        title={t['dialog.choosePlatform'] || 'Choose Platform'}
+        trackingType="artist_profile"
+        trackingName="Tommaso Scalici"
+        trackingId="tommaso-scalici"
+    />
+
+    <SocialSmartDialog
+        id="social-links-dialog"
+        links={secondarySocials}
+        title={t['dialog.connectEverywhere'] || 'Connect'}
+        trackingType="social_link"
+        trackingName="Tommaso Scalici"
+    />
+</footer>
+
+<script>
+    import { trackEvent } from '../../lib/analytics';
+
+    class FooterManager {
+        constructor() {
+            const trackLinks = document.querySelectorAll<HTMLAnchorElement>('[data-track-footer]');
+            for (const link of trackLinks) {
+                link.addEventListener('click', this.#handleTrackClick);
+            }
+
+            const dialogTriggers =
+                document.querySelectorAll<HTMLButtonElement>('[data-dialog-trigger]');
+            for (const btn of dialogTriggers) {
+                btn.addEventListener('click', this.#handleDialogOpen);
+            }
+        }
+
+        #handleTrackClick = (e: MouseEvent) => {
+            const el = e.currentTarget as HTMLAnchorElement;
+            const item = el.getAttribute('data-track-footer') || '';
+            trackEvent('select_content', {
+                content_type: 'social_link',
+                content_name: item,
+                item_id: item,
+            });
+        };
+
+        #handleDialogOpen = (e: MouseEvent) => {
+            const el = e.currentTarget as HTMLButtonElement;
+            const dialogId = el.getAttribute('data-dialog-trigger');
+            if (dialogId) {
+                const dialog = document.getElementById(dialogId) as HTMLDialogElement | null;
+                if (dialog) dialog.showModal();
+            }
+        };
+    }
+
+    if (!window.customElements.get('footer-manager-init')) {
+        new FooterManager();
+    }
+</script>

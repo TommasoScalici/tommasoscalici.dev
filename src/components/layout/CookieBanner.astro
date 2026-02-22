@@ -1,0 +1,81 @@
+---
+import { defaultLang, ui } from '../../i18n/ui';
+
+interface Props {
+    lang?: string;
+}
+
+const { lang = defaultLang } = Astro.props;
+const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
+---
+
+<cookie-banner data-lang={lang} class="hidden">
+    <div
+        class="fixed bottom-4 left-4 right-4 z-[9999] mx-auto flex max-w-lg flex-col gap-4 rounded-2xl border border-white/10 bg-black/80 p-5 shadow-glass-light backdrop-blur-xl duration-500 will-change-transform animate-in slide-in-from-bottom md:right-4 md:ml-auto md:mr-0"
+    >
+        <div class="space-y-2">
+            <h3 class="text-sm font-bold text-white">{t['cookie.title']}</h3>
+            <p class="text-xs leading-relaxed text-gray-300">{t['cookie.text']}</p>
+        </div>
+        <div class="flex gap-3">
+            <button
+                type="button"
+                data-consent="denied"
+                class="flex-1 rounded-lg border border-white/10 bg-transparent py-2 text-xs font-bold text-gray-400 transition-colors hover:bg-white/5 hover:text-white"
+            >
+                {t['cookie.deny']}
+            </button>
+            <button
+                type="button"
+                data-consent="granted"
+                class="flex-1 rounded-lg bg-primary py-2 text-xs font-bold text-black transition-transform hover:scale-105 hover:brightness-110"
+            >
+                {t['cookie.accept']}
+            </button>
+        </div>
+    </div>
+</cookie-banner>
+
+<script>
+    import { getConsent, setConsent } from '../../lib/consent';
+
+    class CookieBanner extends HTMLElement {
+        connectedCallback() {
+            this.#checkConsent();
+
+            const buttons = this.querySelectorAll<HTMLButtonElement>('button[data-consent]');
+            for (const btn of buttons) {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const consent = btn.getAttribute('data-consent') as 'granted' | 'denied';
+                    setConsent(consent);
+                    this.classList.add('hidden');
+                });
+            }
+
+            window.addEventListener('consent-update', this.#checkConsent);
+            window.addEventListener('show-cookie-banner', this.#showBanner);
+        }
+
+        disconnectedCallback() {
+            window.removeEventListener('consent-update', this.#checkConsent);
+            window.removeEventListener('show-cookie-banner', this.#showBanner);
+        }
+
+        #checkConsent = () => {
+            if (getConsent() === 'pending') {
+                setTimeout(() => {
+                    this.classList.remove('hidden');
+                }, 1000);
+            } else {
+                this.classList.add('hidden');
+            }
+        };
+
+        #showBanner = () => {
+            this.classList.remove('hidden');
+        };
+    }
+
+    customElements.define('cookie-banner', CookieBanner);
+</script>

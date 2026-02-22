@@ -31,6 +31,16 @@ describe('seo utils', () => {
         it('should handle nested paths', () => {
             expect(normalizePath('/blog/post-1')).toBe('/blog/post-1/');
             expect(normalizePath('/it/blog/post-1/')).toBe('/blog/post-1/');
+            expect(normalizePath('/it/foo/bar/baz')).toBe('/foo/bar/baz/');
+        });
+
+        it('should not strip english locale prefix (not supported structurally as prefix)', () => {
+            expect(normalizePath('/en/about')).toBe('/en/about/');
+        });
+
+        it('should handle paths with query parameters or fragments if accidentally passed', () => {
+            expect(normalizePath('/it/uses?query=1')).toBe('/uses?query=1/');
+            expect(normalizePath('/blog#fragment')).toBe('/blog#fragment/');
         });
     });
 

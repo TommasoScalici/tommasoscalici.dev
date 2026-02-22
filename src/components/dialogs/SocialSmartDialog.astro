@@ -1,0 +1,112 @@
+---
+import { Icon } from 'astro-icon/components';
+
+export interface SocialLink {
+    label: string;
+    url: string;
+    icon: string;
+    color: string;
+    hoverBorder: string;
+}
+
+interface Props {
+    id: string;
+    links: SocialLink[];
+    title: string;
+    trackingType: string;
+    trackingName: string;
+}
+
+const { id, links, title, trackingType, trackingName } = Astro.props;
+
+const iconMapping: Record<string, string> = {
+    spotify: 'simple-icons:spotify',
+    facebook: 'simple-icons:facebook',
+    x: 'simple-icons:x',
+    tiktok: 'simple-icons:tiktok',
+    threads: 'simple-icons:threads',
+    telegram: 'simple-icons:telegram',
+    googleplay: 'simple-icons:googleplay',
+    lastfm: 'simple-icons:lastdotfm',
+    steam: 'simple-icons:steam',
+};
+---
+
+<dialog
+    id={id}
+    class="border-glass-border fixed inset-0 m-auto w-[90%] max-w-sm rounded-2xl border bg-white p-6 shadow-2xl backdrop:bg-black/60 backdrop:backdrop-blur-sm open:animate-in open:zoom-in-95 dark:bg-background"
+>
+    <!-- Close Button -->
+    <form method="dialog">
+        <button
+            type="submit"
+            class="absolute right-4 top-4 text-muted transition-colors hover:text-main"
+            aria-label="Close"
+        >
+            <Icon name="lucide:x" class="h-5 w-5" />
+        </button>
+    </form>
+
+    <!-- Header -->
+    <div class="mb-6 flex flex-col items-center">
+        <h3 class="font-mono text-lg font-bold text-main">
+            {title}
+        </h3>
+    </div>
+
+    <!-- Links Grid -->
+    <div class="custom-scrollbar flex max-h-[60vh] flex-col gap-3 overflow-y-auto pr-2">
+        {
+            links.map((link) => (
+                <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-track-social
+                    data-track-type={trackingType}
+                    data-track-name={trackingName}
+                    data-track-item={link.label}
+                    class={`border-glass-border/5 group flex w-full items-center gap-3 rounded-xl border bg-glass-bg/5 p-3 transition-all hover:bg-glass-bg/10 ${link.hoverBorder}`}
+                >
+                    <span class={`h-6 w-6 text-gray-400 transition-colors ${link.color}`}>
+                        <Icon
+                            name={iconMapping[link.icon] || 'lucide:link'}
+                            class="h-full w-full"
+                        />
+                    </span>
+                    <span class="font-medium text-muted group-hover:text-main">{link.label}</span>
+                </a>
+            ))
+        }
+    </div>
+</dialog>
+
+<script>
+    import { trackEvent } from '../../lib/analytics';
+
+    class SocialSmartDialogManager {
+        constructor() {
+            const links = document.querySelectorAll<HTMLAnchorElement>('[data-track-social]');
+            for (const link of links) {
+                link.addEventListener('click', this.#handleClick);
+            }
+        }
+
+        #handleClick = (e: MouseEvent) => {
+            const el = e.currentTarget as HTMLAnchorElement;
+            const type = el.getAttribute('data-track-type') || 'social_link';
+            const name = el.getAttribute('data-track-name') || '';
+            const item = el.getAttribute('data-track-item') || '';
+
+            trackEvent('select_content', {
+                content_type: type,
+                content_name: name,
+                item_id: item,
+            });
+        };
+    }
+
+    if (!window.customElements.get('social-smart-init')) {
+        new SocialSmartDialogManager();
+    }
+</script>

@@ -3,7 +3,7 @@ import { getImage } from 'astro:assets';
 import { type CollectionEntry, getCollection } from 'astro:content';
 
 import { defaultLang, ui } from '../../i18n/ui';
-import { MusicReleaseCard } from '../MusicReleaseCard';
+import MusicReleaseCard from '../cards/MusicReleaseCard.astro';
 
 const musicReleases = (await getCollection('music')).sort(
     (a, b) => parseInt(b.data.year) - parseInt(a.data.year),
@@ -63,11 +63,7 @@ const optimizedMusicReleases = await Promise.all(
         </div>
 
         <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {
-                optimizedMusicReleases.map((release) => (
-                    <MusicReleaseCard client:visible release={release} t={t} />
-                ))
-            }
+            {optimizedMusicReleases.map((release) => <MusicReleaseCard release={release} t={t} />)}
         </div>
     </div>
 </section>

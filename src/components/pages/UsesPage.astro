@@ -1,5 +1,5 @@
 ---
-import { FiExternalLink } from 'react-icons/fi';
+import { Icon } from 'astro-icon/components';
 
 import { usesData } from '../../data/uses';
 import Layout from '../../layouts/Layout.astro';
@@ -68,7 +68,10 @@ const getLocalized = (
                                                     class="track-uses-link flex items-center gap-1 font-bold text-main transition-colors hover:underline group-hover/link:text-primary dark:text-white"
                                                 >
                                                     {item.name}
-                                                    <FiExternalLink className="w-3 h-3 text-muted" />
+                                                    <Icon
+                                                        name="lucide:external-link"
+                                                        class="h-3 w-3 text-muted"
+                                                    />
                                                 </a>
                                             ) : (
                                                 <span class="font-bold text-main dark:text-white">

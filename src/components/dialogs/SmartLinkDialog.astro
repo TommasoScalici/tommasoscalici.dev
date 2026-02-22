@@ -1,0 +1,130 @@
+---
+import { Icon } from 'astro-icon/components';
+
+export interface SmartLink {
+    label: string;
+    url: string;
+    icon: string;
+    color: string;
+    hoverBorder: string;
+}
+
+interface Props {
+    id: string;
+    links: SmartLink[];
+    title: string;
+    trackingType: string;
+    trackingName: string;
+    trackingId: string;
+}
+
+const { id, links, title, trackingType, trackingName, trackingId } = Astro.props;
+
+const iconMapping: Record<string, string> = {
+    spotify: 'simple-icons:spotify',
+    apple: 'simple-icons:applemusic',
+    youtube: 'simple-icons:youtubemusic',
+    amazon: 'simple-icons:amazon',
+    tidal: 'simple-icons:tidal',
+    deezer: 'simple-icons:deezer',
+    bandcamp: 'simple-icons:bandcamp',
+};
+---
+
+<dialog
+    id={id}
+    class="border-glass-border fixed inset-0 m-auto w-[90%] max-w-sm rounded-2xl border bg-white p-6 shadow-2xl backdrop:bg-black/60 backdrop:backdrop-blur-sm open:animate-in open:zoom-in-95 dark:bg-background"
+>
+    <!-- Close Button -->
+    <form method="dialog">
+        <button
+            type="submit"
+            class="absolute right-4 top-4 text-muted transition-colors hover:text-main"
+            aria-label="Close"
+        >
+            <Icon name="lucide:x" class="h-5 w-5" />
+        </button>
+    </form>
+
+    <!-- Header -->
+    <div class="mb-6 flex flex-col items-center">
+        <h3 class="font-mono text-lg font-bold text-main">
+            {title}
+        </h3>
+    </div>
+
+    <!-- Links Grid -->
+    <div class="flex flex-col gap-3">
+        {
+            links.map((link) => (
+                <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-track-link
+                    data-track-type={trackingType}
+                    data-track-name={trackingName}
+                    data-track-ids={trackingId}
+                    data-track-item={link.label}
+                    class={`border-glass-border/5 group flex w-full items-center gap-3 rounded-xl border bg-glass-bg/5 p-3 transition-all hover:bg-glass-bg/10 ${link.hoverBorder}`}
+                >
+                    <span class={`text-muted transition-colors ${link.color}`}>
+                        <Icon
+                            name={iconMapping[link.icon] || 'simple-icons:spotify'}
+                            class="h-5 w-5"
+                        />
+                    </span>
+                    <span class="font-medium text-muted group-hover:text-main">{link.label}</span>
+                </a>
+            ))
+        }
+    </div>
+</dialog>
+
+<script>
+    import { trackEvent } from '../../lib/analytics';
+
+    class SmartLinkDialogManager {
+        constructor() {
+            const links = document.querySelectorAll<HTMLAnchorElement>('[data-track-link]');
+            for (const link of links) {
+                link.addEventListener('click', this.#handleClick);
+            }
+
+            // Also click on backdrop to close dialogs
+            const dialogs = document.querySelectorAll<HTMLDialogElement>('dialog');
+            for (const dialog of dialogs) {
+                dialog.addEventListener('click', (e) => {
+                    const rect = dialog.getBoundingClientRect();
+                    const isInDialog =
+                        rect.top <= e.clientY &&
+                        e.clientY <= rect.top + rect.height &&
+                        rect.left <= e.clientX &&
+                        e.clientX <= rect.left + rect.width;
+                    if (!isInDialog) {
+                        dialog.close();
+                    }
+                });
+            }
+        }
+
+        #handleClick = (e: MouseEvent) => {
+            const el = e.currentTarget as HTMLAnchorElement;
+            const type = el.getAttribute('data-track-type') || 'platform_link';
+            const name = el.getAttribute('data-track-name') || '';
+            const ids = el.getAttribute('data-track-ids');
+            const item = el.getAttribute('data-track-item') || '';
+
+            trackEvent('select_content', {
+                content_type: type,
+                content_name: name,
+                content_ids: ids ? [ids] : undefined,
+                item_id: item,
+            });
+        };
+    }
+
+    if (!window.customElements.get('smartlink-manager-init')) {
+        new SmartLinkDialogManager();
+    }
+</script>

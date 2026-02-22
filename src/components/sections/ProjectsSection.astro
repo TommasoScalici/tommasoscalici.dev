@@ -2,7 +2,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 
 import { defaultLang, ui } from '../../i18n/ui';
-import { ProjectCard } from '../ProjectCard';
+import ProjectCard from '../cards/ProjectCard.astro';
 
 const projects = await getCollection('projects');
 // Sort by title or any other criteria if needed. For now default sort.

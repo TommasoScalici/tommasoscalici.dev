@@ -36,5 +36,29 @@ describe('i18n-utils', () => {
             };
             expect(getLocalizedContent(content, 'it', 'en')).toBe('');
         });
+
+        it('should correctly return nested objects if the value is an object', () => {
+            const content = {
+                en: { title: 'Hello', description: 'World' },
+                it: { title: 'Ciao', description: 'Mondo' },
+            };
+            expect(getLocalizedContent(content, 'en')).toEqual({
+                title: 'Hello',
+                description: 'World',
+            });
+            expect(getLocalizedContent(content, 'it')).toEqual({
+                title: 'Ciao',
+                description: 'Mondo',
+            });
+        });
+
+        it('should correctly handle arrays if provided as content', () => {
+            // Arrays are typeof 'object', so the function tries to index them by lang
+            // Since arrays don't have 'en' or 'it' keys, it will return empty string.
+            const content = ['Hello', 'World'];
+            expect(getLocalizedContent(content as unknown as Record<string, string>, 'en')).toBe(
+                '',
+            );
+        });
     });
 });

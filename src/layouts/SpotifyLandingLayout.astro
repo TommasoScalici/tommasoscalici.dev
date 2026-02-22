@@ -7,8 +7,8 @@ import type { ImageMetadata } from 'astro';
 import { getImage, Image } from 'astro:assets';
 import { PUBLIC_FACEBOOK_PIXEL_ID, PUBLIC_TIKTOK_PIXEL_ID } from 'astro:env/client';
 
-import AnalyticsHead from '../components/AnalyticsHead.astro';
-import { CookieBanner } from '../components/CookieBanner';
+import AnalyticsHead from '../components/head/AnalyticsHead.astro';
+import CookieBanner from '../components/layout/CookieBanner.astro';
 
 interface Props {
     title: string;
@@ -97,7 +97,7 @@ const gradientClasses =
         class="relative flex h-screen items-center justify-center overflow-hidden font-sans text-white"
         style={theme === 'lofi' ? 'background-color: #0d1117;' : 'background-color: #050505;'}
     >
-        <CookieBanner client:idle lang="en" />
+        <CookieBanner lang="en" />
         <script is:inline>
             (function initConsentController() {
                 function updateConsent(isUpdate) {

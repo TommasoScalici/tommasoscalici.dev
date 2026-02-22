@@ -1,0 +1,51 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<theme-toggle>
+    <button
+        type="button"
+        aria-label="Toggle Theme"
+        class="border-glass-border flex items-center justify-center rounded-full border bg-white/70 p-2 text-main transition-all duration-300 hover:bg-glass-bg/10 hover:text-primary dark:border-white/10 dark:bg-white/5"
+    >
+        <Icon name="lucide:moon" class="block h-5 w-5 dark:hidden" />
+        <Icon name="lucide:sun" class="hidden h-5 w-5 dark:block" />
+    </button>
+</theme-toggle>
+
+<script>
+    class ThemeToggle extends HTMLElement {
+        #button: HTMLButtonElement | null = null;
+        #isDark: boolean = false;
+
+        connectedCallback() {
+            this.#button = this.querySelector('button');
+            if (!this.#button) throw new Error('ThemeToggle: trigger button missing');
+
+            this.#button.addEventListener('click', this.#handleClick);
+        }
+
+        disconnectedCallback() {
+            if (this.#button) {
+                this.#button.removeEventListener('click', this.#handleClick);
+            }
+        }
+
+        #handleClick = (e: MouseEvent) => {
+            e.preventDefault();
+            this.#isDark = document.documentElement.classList.contains('dark');
+
+            if (this.#isDark) {
+                document.documentElement.setAttribute('data-theme', 'light');
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        };
+    }
+
+    customElements.define('theme-toggle', ThemeToggle);
+</script>

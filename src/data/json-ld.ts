@@ -1,4 +1,4 @@
-export const getIdentitySchema = (url: URL, image: string, worksForName = 'BC Soft S.r.l.') => ({
+const getIdentitySchema = (url: URL, image: string, worksForName = 'BC Soft S.r.l.') => ({
     '@type': 'Person',
     '@id': `${url.origin}/#person`,
     name: 'Tommaso Scalici',
@@ -47,7 +47,7 @@ export const getIdentitySchema = (url: URL, image: string, worksForName = 'BC So
     ],
 });
 
-export const musicReleases = [
+const musicReleases = [
     {
         '@type': 'MusicAlbum',
         '@id': 'https://open.spotify.com/album/0z5dDG3w9PfgQ8DOxiiMfa',

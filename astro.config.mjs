@@ -1,14 +1,14 @@
 import cloudflare from '@astrojs/cloudflare';
-import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import { defineConfig, envField } from 'astro/config';
+import icon from 'astro-icon';
 
 const isTest = process.env.VITEST === 'true';
 
 export default defineConfig({
     site: 'https://tommasoscalici.dev',
-    integrations: [react(), tailwind({ applyBaseStyles: false }), sitemap()],
+    integrations: [tailwind({ applyBaseStyles: false }), sitemap(), icon()],
     trailingSlash: 'always',
     output: 'static',
     build: {

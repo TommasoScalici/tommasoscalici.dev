@@ -1,8 +1,5 @@
 import js from '@eslint/js';
 import eslintPluginAstro from 'eslint-plugin-astro';
-import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
-import reactPlugin from 'eslint-plugin-react';
-import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -46,30 +43,6 @@ export default [
         },
     },
 
-    // React Configuration
-    {
-        files: ['**/*.{jsx,tsx}'],
-        ...reactPlugin.configs.flat.recommended,
-        ...reactPlugin.configs.flat['jsx-runtime'],
-        plugins: {
-            react: reactPlugin,
-            'react-hooks': reactHooksPlugin,
-            'jsx-a11y': jsxA11yPlugin,
-        },
-        rules: {
-            ...reactHooksPlugin.configs.recommended.rules,
-            ...jsxA11yPlugin.configs.recommended.rules,
-            'react/prop-types': 'off', // Not needed with TypeScript
-            '@typescript-eslint/no-explicit-any': 'error',
-            // Strict rules enabled!
-        },
-        settings: {
-            react: {
-                version: 'detect',
-            },
-        },
-    },
-
     // Global Settings
     {
         languageOptions: {
@@ -96,6 +69,7 @@ export default [
             'wrangler.jsonc',
             '.prettierrc.mjs',
             'release.config.mjs',
+            'eslint.config.mjs',
         ],
     },
     {

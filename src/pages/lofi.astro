@@ -1,5 +1,5 @@
 ---
-import { SpotifyDeepLinkButton } from '../components/SpotifyDeepLinkButton';
+import SpotifyDeepLinkButton from '../components/common/SpotifyDeepLinkButton.astro';
 import SpotifyLandingLayout from '../layouts/SpotifyLandingLayout.astro';
 
 const title = 'Coding Lofi | Focus Music for Devs';
@@ -37,5 +37,5 @@ const playlistId = '0yF9pJ62XkAgxDGMlbyenf';
         > & <span class="highlight">Deep Work</span>.
     </p>
 
-    <SpotifyDeepLinkButton client:visible playlistId={playlistId} eventName="Coding Lofi" />
+    <SpotifyDeepLinkButton playlistId={playlistId} eventName="Coding Lofi" />
 </SpotifyLandingLayout>

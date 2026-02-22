@@ -6,13 +6,6 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
-# Cache fonts for 1 year (immutable)
-/fonts/*
-  Cache-Control: public, max-age=31536000, immutable
-
-# Cache images for 1 year
-/assets/*
-  Cache-Control: public, max-age=31536000, immutable
 
 # Cache other static assets for 1 week
 /*.webp

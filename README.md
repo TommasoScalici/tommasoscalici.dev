@@ -7,8 +7,8 @@ A personal portfolio website that bridges the worlds of software engineering and
 ## 🚀 Tech Stack
 
 - **Framework:** [Astro 5](https://astro.build) (SSG Mode)
-- **UI Library:** [React 19](https://react.dev)
-- **Styling:** [Tailwind CSS 3](https://tailwindcss.com) & [Lucide React](https://lucide.dev)
+- **UI Architecture:** Native Web Components (Vanilla TypeScript)
+- **Styling:** [Tailwind CSS 3](https://tailwindcss.com) & [Lucide Icons](https://lucide.dev)
 - **Typography:** Inter & JetBrains Mono (via [@fontsource](https://fontsource.org))
 - **Deployment:** [Cloudflare Pages](https://pages.cloudflare.com) via GitHub Actions
 
@@ -17,7 +17,7 @@ A personal portfolio website that bridges the worlds of software engineering and
 - **💯 Excellence:** Achieved **100/100/100/100** on Google Lighthouse (Performance, Accessibility, Best Practices, SEO).
 - **🎨 UX/UI:** Responsive design with **Dark/Light Mode**, glassmorphism effects, and smooth animations.
 - **🌍 Bilingual:** Fully localized content in English and Italian (`/` and `/it`).
-- **🚀 Performance:** Critical CSS inlining, Font optimization, LCP prioritization, and Partytown.
+- **🚀 Performance:** Critical CSS inlining, Font optimization, and LCP prioritization.
 - **🔒 Type Safety:** Strict TypeScript + Zod content schemas.
 - **🎵 Music Integration:** Pre-save functionality and smart link routing for music releases.
 
@@ -27,8 +27,9 @@ A personal portfolio website that bridges the worlds of software engineering and
 /
 ├── public/           # Static assets
 ├── src/
-│   ├── components/   # React & Astro UI components (Header, Cards, etc.)
-│   ├── data/         # Data files for Bio, Music, and Projects
+│   ├── components/   # Astro & Web Components (Header, Cards, etc.)
+│   ├── content/      # Managed content (Bio, Music, Projects, Legal)
+│   ├── data/         # Data files and constants
 │   ├── layouts/      # Base page layouts
 │   ├── pages/        # Route definitions (including /it/ sub-routes)
 │   └── styles/       # Global styles (Tailwind directives)

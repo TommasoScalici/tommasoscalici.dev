@@ -1,0 +1,224 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+    lang: string;
+    navItems: { label: string; href: string }[];
+    logoSrc: string;
+    targetLangUrl: string;
+}
+
+const { lang, navItems, logoSrc, targetLangUrl } = Astro.props;
+---
+
+<site-header>
+    <header
+        class="fixed left-0 right-0 top-0 z-50 border-b border-surface bg-background/70 backdrop-blur-xl"
+    >
+        <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+            <a
+                href={lang === 'en' ? '/' : `/${lang}/`}
+                class="group flex items-center font-mono text-xl font-bold tracking-tighter transition-colors"
+            >
+                <img
+                    src={logoSrc}
+                    alt="TS Circuit Logo"
+                    width={48}
+                    height={48}
+                    loading="eager"
+                    fetchpriority="high"
+                    class="mr-3 h-12 w-auto object-contain"
+                />
+                <div class="flex flex-col leading-none sm:flex-row sm:leading-normal">
+                    <span class="text-main transition-colors group-hover:text-primary">
+                        TOMMASO
+                    </span>
+                    <span class="text-main transition-colors group-hover:text-secondary sm:ml-2">
+                        SCALICI
+                    </span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden items-center gap-8 lg:flex">
+                {
+                    navItems.map((item) => (
+                        <a
+                            href={item.href}
+                            class="text-sm font-semibold text-muted transition-colors hover:text-main hover:drop-shadow-[0_0_8px_rgba(0,243,255,0.5)]"
+                        >
+                            {item.label}
+                        </a>
+                    ))
+                }
+            </nav>
+
+            <!-- Mobile/Tablet Controls -->
+            <div class="flex items-center gap-4">
+                <!-- Utility Buttons -->
+                <div class="hidden items-center gap-4 border-l border-white/10 pl-6 md:flex">
+                    <a
+                        href={targetLangUrl}
+                        data-lang-switch
+                        class="border-glass-border flex items-center gap-2 rounded-full border bg-white/70 px-3 py-1.5 font-mono text-xs text-muted transition-all hover:border-primary/50 hover:text-primary dark:border-white/10 dark:bg-white/5"
+                        aria-label="Switch Language"
+                    >
+                        <Icon name="lucide:languages" class="h-3.5 w-3.5" />
+                        <span>{lang === 'en' ? 'IT' : 'EN'}</span>
+                    </a>
+
+                    <ThemeToggle />
+
+                    <button
+                        type="button"
+                        data-cookie-btn
+                        class="text-muted transition-colors hover:text-primary"
+                        aria-label="Cookie Settings"
+                    >
+                        <Icon name="lucide:cookie" class="h-5 w-5" />
+                    </button>
+                </div>
+
+                <!-- Hamburger Button -->
+                <div class="flex items-center gap-4 lg:hidden">
+                    <button
+                        type="button"
+                        data-menu-btn
+                        class="text-muted hover:text-main"
+                        aria-label="Menu"
+                        aria-expanded="false"
+                    >
+                        <Icon name="lucide:menu" class="menu-open-hidden block h-6 w-6" />
+                        <Icon name="lucide:x" class="menu-open-block hidden h-6 w-6" />
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Overlay -->
+        <div
+            data-mobile-menu
+            class="absolute left-0 right-0 top-16 hidden flex-col border-b border-surface bg-black/95 p-6 backdrop-blur-xl animate-in slide-in-from-top-5 lg:hidden"
+        >
+            <div class="flex flex-col gap-6">
+                {
+                    navItems.map((item) => (
+                        <a
+                            href={item.href}
+                            class="mobile-nav-link text-lg font-semibold text-gray-300 transition-colors hover:text-primary"
+                        >
+                            {item.label}
+                        </a>
+                    ))
+                }
+            </div>
+
+            <div class="md:hidden">
+                <div class="my-6 h-px w-full bg-white/10"></div>
+
+                <div class="flex items-center justify-between gap-4">
+                    <a
+                        href={targetLangUrl}
+                        data-lang-switch
+                        class="border-glass-border flex items-center gap-2 rounded-full border bg-white/5 px-4 py-2 font-mono text-sm text-muted transition-all active:border-primary/50 active:text-primary dark:border-white/10"
+                    >
+                        <Icon name="lucide:languages" class="h-4 w-4" />
+                        <span>{lang === 'en' ? 'Italiano' : 'English'}</span>
+                    </a>
+
+                    <div class="flex items-center gap-4">
+                        <ThemeToggle />
+                        <button
+                            type="button"
+                            data-cookie-btn
+                            data-close-menu
+                            class="rounded-full bg-white/5 p-2 text-muted transition-colors active:text-primary"
+                            aria-label="Cookie Settings"
+                        >
+                            <Icon name="lucide:cookie" class="h-5 w-5" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</site-header>
+
+<script>
+    class SiteHeader extends HTMLElement {
+        #menuBtn: HTMLButtonElement | null = null;
+        #mobileMenu: HTMLDivElement | null = null;
+        #isOpen: boolean = false;
+
+        connectedCallback() {
+            this.#menuBtn = this.querySelector('[data-menu-btn]');
+            this.#mobileMenu = this.querySelector('[data-mobile-menu]');
+
+            if (this.#menuBtn && this.#mobileMenu) {
+                this.#menuBtn.addEventListener('click', this.#toggleMenu);
+            }
+
+            const langSwitches = this.querySelectorAll<HTMLAnchorElement>('[data-lang-switch]');
+            for (const langSwitch of langSwitches) {
+                langSwitch.addEventListener('click', this.#handleLangSwitch);
+            }
+
+            const cookieBtns = this.querySelectorAll<HTMLButtonElement>('[data-cookie-btn]');
+            for (const btn of cookieBtns) {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.dispatchEvent(new Event('show-cookie-banner'));
+                    if (btn.hasAttribute('data-close-menu')) {
+                        this.#closeMenu();
+                    }
+                });
+            }
+
+            const mobileNavLinks = this.querySelectorAll<HTMLAnchorElement>('.mobile-nav-link');
+            for (const link of mobileNavLinks) {
+                link.addEventListener('click', () => this.#closeMenu());
+            }
+        }
+
+        #toggleMenu = () => {
+            this.#isOpen = !this.#isOpen;
+            if (this.#isOpen) {
+                this.#mobileMenu?.classList.remove('hidden');
+                this.#mobileMenu?.classList.add('flex');
+                if (this.#menuBtn) {
+                    this.#menuBtn.setAttribute('aria-expanded', 'true');
+                    this.#menuBtn.querySelector('.menu-open-hidden')?.classList.add('hidden');
+                    this.#menuBtn.querySelector('.menu-open-hidden')?.classList.remove('block');
+                    this.#menuBtn.querySelector('.menu-open-block')?.classList.remove('hidden');
+                    this.#menuBtn.querySelector('.menu-open-block')?.classList.add('block');
+                }
+            } else {
+                this.#closeMenu();
+            }
+        };
+
+        #closeMenu = () => {
+            this.#isOpen = false;
+            this.#mobileMenu?.classList.add('hidden');
+            this.#mobileMenu?.classList.remove('flex');
+            if (this.#menuBtn) {
+                this.#menuBtn.setAttribute('aria-expanded', 'false');
+                this.#menuBtn.querySelector('.menu-open-hidden')?.classList.remove('hidden');
+                this.#menuBtn.querySelector('.menu-open-hidden')?.classList.add('block');
+                this.#menuBtn.querySelector('.menu-open-block')?.classList.add('hidden');
+                this.#menuBtn.querySelector('.menu-open-block')?.classList.remove('block');
+            }
+        };
+
+        #handleLangSwitch = (e: MouseEvent) => {
+            const url = new URL((e.currentTarget as HTMLAnchorElement).href);
+            const isItalian = url.pathname.startsWith('/it');
+            const newLang = isItalian ? 'it' : 'en';
+            localStorage.setItem('lang', newLang);
+        };
+    }
+
+    customElements.define('site-header', SiteHeader);
+</script>

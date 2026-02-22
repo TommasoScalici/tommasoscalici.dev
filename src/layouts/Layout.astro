@@ -7,11 +7,11 @@ import { getImage } from 'astro:assets';
 import { ClientRouter } from 'astro:transitions';
 
 import logoImage from '../assets/logo.webp';
-import AnalyticsHead from '../components/AnalyticsHead.astro';
-import { CookieBanner } from '../components/CookieBanner';
-import { Footer } from '../components/Footer';
-import { Header } from '../components/Header';
-import SEOHead from '../components/SEOHead.astro';
+import AnalyticsHead from '../components/head/AnalyticsHead.astro';
+import SEOHead from '../components/head/SEOHead.astro';
+import CookieBanner from '../components/layout/CookieBanner.astro';
+import Footer from '../components/layout/Footer.astro';
+import Header from '../components/layout/Header.astro';
 import { defaultLang, ui } from '../i18n/ui';
 
 const optimizedLogo = await getImage({
@@ -129,7 +129,7 @@ const copyrightDate =
     <body
         class="bg-background font-sans text-main antialiased selection:bg-primary selection:text-inverse"
     >
-        <CookieBanner client:idle lang={lang} />
+        <CookieBanner lang={lang} />
         <script is:inline>
             (function initConsentController() {
                 function updateConsent(isUpdate) {
@@ -210,7 +210,6 @@ const copyrightDate =
             {t['nav.skipToContent']}
         </a>
         <Header
-            client:idle
             lang={lang}
             navItems={navItems}
             logoSrc={optimizedLogo.src}
@@ -230,6 +229,6 @@ const copyrightDate =
             <slot />
         </main>
 
-        <Footer client:visible lang={lang} t={t} copyrightDate={copyrightDate} />
+        <Footer lang={lang} t={t} copyrightDate={copyrightDate} />
     </body>
 </html>

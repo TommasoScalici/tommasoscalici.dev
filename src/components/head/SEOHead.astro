@@ -1,7 +1,7 @@
 ---
 import { SEO } from 'astro-seo';
 
-import { getCombinedSchema } from '../data/json-ld';
+import { getCombinedSchema } from '../../data/json-ld';
 
 interface Props {
     title: string;
@@ -11,7 +11,7 @@ interface Props {
 
 const { title, description, image = '/og-image.webp' } = Astro.props;
 
-import { getLocalizedUrl } from '../lib/seo';
+import { getLocalizedUrl } from '../../lib/seo';
 
 // 1. Canonical & Hreflang Logic
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -23,7 +23,7 @@ const itUrl = getLocalizedUrl(path, site, 'it');
 
 import { getImage } from 'astro:assets';
 
-import profileImage from '../assets/profile.webp';
+import profileImage from '../../assets/profile.webp';
 
 const optimizedProfile = await getImage({
     src: profileImage,

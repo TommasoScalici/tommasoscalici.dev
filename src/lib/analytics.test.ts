@@ -77,6 +77,20 @@ describe('analytics', () => {
         expect(window.ttq.track).toHaveBeenCalledWith('ClickButton', {});
     });
 
+    it('should map select_content to correct platform events', () => {
+        trackEvent('select_content', { content_name: 'Apple Music' });
+
+        expect(window.gtag).toHaveBeenCalledWith('event', 'select_content', {
+            content_name: 'Apple Music',
+        });
+        expect(window.fbq).toHaveBeenCalledWith('track', 'ViewContent', {
+            content_name: 'Apple Music',
+        });
+        expect(window.ttq.track).toHaveBeenCalledWith('ViewContent', {
+            content_name: 'Apple Music',
+        });
+    });
+
     it('should handle missing platforms gracefully', () => {
         vi.stubGlobal('window', {}); // No analytics functions
 
