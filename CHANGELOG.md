@@ -5,6 +5,13 @@
 
 * Add redirects for `index.html` and `/en/` paths. ([b0a7591](https://github.com/TommasoScalici/tommasoscalici.dev/commit/b0a7591d65bd89ab84d2c913649e729093b860d2))
 
+# [1.19.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.18.1...v1.19.0) (2026-02-22)
+
+
+### Features
+
+* Add redirects for `index.html` and `/en/` paths. ([b0a7591](https://github.com/TommasoScalici/tommasoscalici.dev/commit/b0a7591d65bd89ab84d2c913649e729093b860d2))
+
 ## [1.18.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.18.0...v1.18.1) (2026-02-15)
 
 
