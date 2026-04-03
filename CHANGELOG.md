@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.19.0...v1.20.0) (2026-04-03)
+
+
+### Features
+
+* migration to TailwindCSS v4 and other improvements and refactoring. ([5f4ce6d](https://github.com/TommasoScalici/tommasoscalici.dev/commit/5f4ce6d9ffd67d069880490d254c8740b7b757c6))
+
 # [1.19.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.18.1...v1.19.0) (2026-02-22)
 
 
