@@ -1,3 +1,5 @@
+import type { ImageMetadata } from 'astro';
+
 export interface Project {
     title: string;
     description: string; // Supports Markdown or simple text
@@ -22,7 +24,7 @@ export interface MusicRelease {
     title: string;
     year: string;
     genre: string;
-    coverImage: string | ImageMetadata;
+    coverImage: ImageMetadata;
     coverImageSet?: {
         avif: string;
         webp: string;

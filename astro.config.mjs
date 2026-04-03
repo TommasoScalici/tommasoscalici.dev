@@ -1,11 +1,14 @@
 import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, envField } from 'astro/config';
 import icon from 'astro-icon';
 
 export default defineConfig({
     site: 'https://tommasoscalici.dev',
-    integrations: [tailwind({ applyBaseStyles: false }), sitemap(), icon()],
+    integrations: [sitemap(), icon()],
+    vite: {
+        plugins: [tailwindcss()],
+    },
     trailingSlash: 'always',
     output: 'static',
     build: {

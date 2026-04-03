@@ -1,4 +1,6 @@
 ---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 
 import ThemeToggle from './ThemeToggle.astro';
@@ -6,7 +8,7 @@ import ThemeToggle from './ThemeToggle.astro';
 interface Props {
     lang: string;
     navItems: { label: string; href: string }[];
-    logoSrc: string;
+    logoSrc: ImageMetadata;
     targetLangUrl: string;
 }
 
@@ -15,27 +17,26 @@ const { lang, navItems, logoSrc, targetLangUrl } = Astro.props;
 
 <site-header>
     <header
-        class="fixed left-0 right-0 top-0 z-50 border-b border-surface bg-background/70 backdrop-blur-xl"
+        class="border-surface bg-background/70 fixed top-0 right-0 left-0 z-50 border-b backdrop-blur-xl"
     >
         <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
             <a
                 href={lang === 'en' ? '/' : `/${lang}/`}
                 class="group flex items-center font-mono text-xl font-bold tracking-tighter transition-colors"
             >
-                <img
+                <Image
                     src={logoSrc}
                     alt="TS Circuit Logo"
                     width={48}
                     height={48}
                     loading="eager"
-                    fetchpriority="high"
                     class="mr-3 h-12 w-auto object-contain"
                 />
                 <div class="flex flex-col leading-none sm:flex-row sm:leading-normal">
-                    <span class="text-main transition-colors group-hover:text-primary">
+                    <span class="text-main group-hover:text-primary transition-colors">
                         TOMMASO
                     </span>
-                    <span class="text-main transition-colors group-hover:text-secondary sm:ml-2">
+                    <span class="text-main group-hover:text-secondary transition-colors sm:ml-2">
                         SCALICI
                     </span>
                 </div>
@@ -47,7 +48,7 @@ const { lang, navItems, logoSrc, targetLangUrl } = Astro.props;
                     navItems.map((item) => (
                         <a
                             href={item.href}
-                            class="text-sm font-semibold text-muted transition-colors hover:text-main hover:drop-shadow-[0_0_8px_rgba(0,243,255,0.5)]"
+                            class="text-muted hover:text-main text-sm font-semibold transition-colors hover:drop-shadow-[0_0_8px_rgba(0,243,255,0.5)]"
                         >
                             {item.label}
                         </a>
@@ -62,7 +63,9 @@ const { lang, navItems, logoSrc, targetLangUrl } = Astro.props;
                     <a
                         href={targetLangUrl}
                         data-lang-switch
-                        class="border-glass-border flex items-center gap-2 rounded-full border bg-white/70 px-3 py-1.5 font-mono text-xs text-muted transition-all hover:border-primary/50 hover:text-primary dark:border-white/10 dark:bg-white/5"
+                        data-astro-scroll="manual"
+                        data-astro-history="replace"
+                        class="border-glass-border text-muted hover:border-primary/50 hover:text-primary flex items-center gap-2 rounded-full border bg-white/70 px-3 py-1.5 font-mono text-xs transition-all dark:border-white/10 dark:bg-white/5"
                         aria-label="Switch Language"
                     >
                         <Icon name="lucide:languages" class="h-3.5 w-3.5" />
@@ -74,7 +77,7 @@ const { lang, navItems, logoSrc, targetLangUrl } = Astro.props;
                     <button
                         type="button"
                         data-cookie-btn
-                        class="text-muted transition-colors hover:text-primary"
+                        class="text-muted hover:text-primary transition-colors"
                         aria-label="Cookie Settings"
                     >
                         <Icon name="lucide:cookie" class="h-5 w-5" />
@@ -100,14 +103,14 @@ const { lang, navItems, logoSrc, targetLangUrl } = Astro.props;
         <!-- Mobile Nav Overlay -->
         <div
             data-mobile-menu
-            class="absolute left-0 right-0 top-16 hidden flex-col border-b border-surface bg-black/95 p-6 backdrop-blur-xl animate-in slide-in-from-top-5 lg:hidden"
+            class="border-surface slide-in-from-top-5 absolute top-16 right-0 left-0 hidden flex-col border-b bg-black/95 p-6 backdrop-blur-xl lg:hidden"
         >
             <div class="flex flex-col gap-6">
                 {
                     navItems.map((item) => (
                         <a
                             href={item.href}
-                            class="mobile-nav-link text-lg font-semibold text-gray-300 transition-colors hover:text-primary"
+                            class="mobile-nav-link hover:text-primary text-lg font-semibold text-gray-300 transition-colors"
                         >
                             {item.label}
                         </a>
@@ -122,7 +125,9 @@ const { lang, navItems, logoSrc, targetLangUrl } = Astro.props;
                     <a
                         href={targetLangUrl}
                         data-lang-switch
-                        class="border-glass-border flex items-center gap-2 rounded-full border bg-white/5 px-4 py-2 font-mono text-sm text-muted transition-all active:border-primary/50 active:text-primary dark:border-white/10"
+                        data-astro-scroll="manual"
+                        data-astro-history="replace"
+                        class="border-glass-border text-muted active:border-primary/50 active:text-primary flex items-center gap-2 rounded-full border bg-white/5 px-4 py-2 font-mono text-sm transition-all dark:border-white/10"
                     >
                         <Icon name="lucide:languages" class="h-4 w-4" />
                         <span>{lang === 'en' ? 'Italiano' : 'English'}</span>
@@ -134,7 +139,7 @@ const { lang, navItems, logoSrc, targetLangUrl } = Astro.props;
                             type="button"
                             data-cookie-btn
                             data-close-menu
-                            class="rounded-full bg-white/5 p-2 text-muted transition-colors active:text-primary"
+                            class="text-muted active:text-primary rounded-full bg-white/5 p-2 transition-colors"
                             aria-label="Cookie Settings"
                         >
                             <Icon name="lucide:cookie" class="h-5 w-5" />
@@ -213,8 +218,20 @@ const { lang, navItems, logoSrc, targetLangUrl } = Astro.props;
         };
 
         #handleLangSwitch = (e: MouseEvent) => {
-            const url = new URL((e.currentTarget as HTMLAnchorElement).href);
-            const isItalian = url.pathname.startsWith('/it');
+            const btn = e.currentTarget as HTMLAnchorElement;
+            const targetUrl = new URL(btn.href);
+
+            // Save state for seamless restoration in Layout.astro
+            sessionStorage.setItem('lang-switch-scroll', window.scrollY.toString());
+
+            if (window.location.hash) {
+                sessionStorage.setItem('lang-switch-hash', window.location.hash);
+                // Strip hash for the transition to prevent the browser from jump-scrolling
+                targetUrl.hash = '';
+                btn.href = targetUrl.toString();
+            }
+
+            const isItalian = targetUrl.pathname.startsWith('/it');
             const newLang = isItalian ? 'it' : 'en';
             localStorage.setItem('lang', newLang);
         };

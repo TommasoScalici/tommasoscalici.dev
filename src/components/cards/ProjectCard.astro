@@ -11,21 +11,21 @@ const { project } = Astro.props;
 ---
 
 <div
-    class="border-glass-border group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-white/70 shadow-glass-light backdrop-blur-xl transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(0,243,255,0.15)] dark:border-white/10 dark:bg-white/5 dark:shadow-none"
+    class="border-glass-border group shadow-glass-light hover:border-primary/50 relative flex h-full flex-col overflow-hidden rounded-2xl border bg-white/70 backdrop-blur-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,255,0.15)] dark:border-white/10 dark:bg-white/5 dark:shadow-none"
 >
     <div class="relative flex h-full flex-col p-6">
         <!-- Hover Gradient Effect -->
         <div
-            class="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+            class="from-primary/5 pointer-events-none absolute inset-0 bg-linear-to-br to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         >
         </div>
 
         <div class="relative z-10 flex h-full flex-col">
             <div class="mb-4 flex items-start justify-between">
                 <div
-                    class="rounded-lg border border-surface bg-background/50 p-3 transition-colors group-hover:border-primary/30"
+                    class="border-surface bg-background/50 group-hover:border-primary/30 rounded-lg border p-3 transition-colors"
                 >
-                    <Icon name="lucide:code" class="h-6 w-6 text-primary" />
+                    <Icon name="lucide:code" class="text-primary h-6 w-6" />
                 </div>
                 <div class="flex gap-2">
                     {
@@ -34,7 +34,7 @@ const { project } = Astro.props;
                                 href={project.repoUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="rounded-full p-2 text-muted transition-colors hover:bg-glass-bg/5 hover:text-white"
+                                class="text-muted hover:bg-glass-bg/5 rounded-full p-2 transition-colors hover:text-white"
                                 aria-label="View Source Code"
                             >
                                 <Icon name="simple-icons:github" class="h-5 w-5" />
@@ -47,7 +47,7 @@ const { project } = Astro.props;
                                 href={project.playStoreUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="rounded-full p-2 text-muted transition-colors hover:bg-glass-bg/5 hover:text-white"
+                                class="text-muted hover:bg-glass-bg/5 rounded-full p-2 transition-colors hover:text-white"
                                 aria-label="View on Google Play"
                             >
                                 <Icon name="simple-icons:googleplay" class="h-5 w-5" />
@@ -60,7 +60,7 @@ const { project } = Astro.props;
                                 href={project.demoUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="rounded-full p-2 text-muted transition-colors hover:bg-glass-bg/5 hover:text-white"
+                                class="text-muted hover:bg-glass-bg/5 rounded-full p-2 transition-colors hover:text-white"
                                 aria-label="View Live Demo"
                             >
                                 <Icon name="lucide:external-link" class="h-5 w-5" />
@@ -71,19 +71,19 @@ const { project } = Astro.props;
             </div>
 
             <h3
-                class="mb-2 font-mono text-xl font-bold text-main transition-colors group-hover:text-primary"
+                class="text-main group-hover:text-primary mb-2 font-mono text-xl font-bold transition-colors"
             >
                 {project.title}
             </h3>
 
-            <p class="mb-6 flex-grow text-sm leading-relaxed text-muted">
+            <p class="text-muted mb-6 grow text-sm leading-relaxed">
                 {project.description}
             </p>
 
             <div class="mt-auto flex flex-wrap gap-2">
                 {
                     project.techStack.map((tech) => (
-                        <span class="rounded-full border border-surface bg-black/5 px-3 py-1 font-mono text-xs font-semibold text-muted transition-colors group-hover:border-primary/20 group-hover:text-primary/90 dark:bg-white/5">
+                        <span class="border-surface text-muted group-hover:border-primary/20 group-hover:text-primary/90 rounded-full border bg-black/5 px-3 py-1 font-mono text-xs font-semibold transition-colors dark:bg-white/5">
                             {tech}
                         </span>
                     ))

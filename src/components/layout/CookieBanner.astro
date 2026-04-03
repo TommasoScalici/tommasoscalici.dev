@@ -11,7 +11,7 @@ const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
 
 <cookie-banner data-lang={lang} class="hidden">
     <div
-        class="fixed bottom-4 left-4 right-4 z-[9999] mx-auto flex max-w-lg flex-col gap-4 rounded-2xl border border-white/10 bg-black/80 p-5 shadow-glass-light backdrop-blur-xl duration-500 will-change-transform animate-in slide-in-from-bottom md:right-4 md:ml-auto md:mr-0"
+        class="shadow-glass-light animate-in slide-in-from-bottom fixed right-4 bottom-4 left-4 z-[9999] mx-auto flex max-w-lg flex-col gap-4 rounded-2xl border border-white/10 bg-black/80 p-5 backdrop-blur-xl duration-500 will-change-transform md:right-4 md:mr-0 md:ml-auto"
     >
         <div class="space-y-2">
             <h3 class="text-sm font-bold text-white">{t['cookie.title']}</h3>
@@ -28,7 +28,7 @@ const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
             <button
                 type="button"
                 data-consent="granted"
-                class="flex-1 rounded-lg bg-primary py-2 text-xs font-bold text-black transition-transform hover:scale-105 hover:brightness-110"
+                class="bg-primary flex-1 rounded-lg py-2 text-xs font-bold text-black transition-transform hover:scale-105 hover:brightness-110"
             >
                 {t['cookie.accept']}
             </button>

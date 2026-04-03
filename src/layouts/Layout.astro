@@ -3,7 +3,6 @@ import '@fontsource-variable/inter';
 import '@fontsource-variable/jetbrains-mono';
 import '../styles/global.css';
 
-import { getImage } from 'astro:assets';
 import { ClientRouter } from 'astro:transitions';
 
 import logoImage from '../assets/logo.webp';
@@ -13,13 +12,6 @@ import CookieBanner from '../components/layout/CookieBanner.astro';
 import Footer from '../components/layout/Footer.astro';
 import Header from '../components/layout/Header.astro';
 import { defaultLang, ui } from '../i18n/ui';
-
-const optimizedLogo = await getImage({
-    src: logoImage,
-    width: 64, // Slightly larger for high DPR
-    height: 64,
-    format: 'webp',
-});
 
 interface Props {
     title: string;
@@ -87,6 +79,32 @@ const copyrightDate =
             applyTheme();
             document.addEventListener('astro:after-swap', applyTheme);
 
+            // Maintain scroll and hash after language switches for an "in-place translation" effect
+            if ('history' in window && 'scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+
+            document.addEventListener('astro:after-swap', () => {
+                const envScroll = sessionStorage.getItem('lang-switch-scroll');
+                const envHash = sessionStorage.getItem('lang-switch-hash');
+
+                if (envScroll !== null) {
+                    // Temporarily disable smooth scrolling to instantly snap to the saved position
+                    document.documentElement.classList.remove('scroll-smooth');
+                    window.scrollTo(0, parseInt(envScroll));
+                    // Force a reflow or wait for the next frame to re-enable
+                    requestAnimationFrame(() => {
+                        document.documentElement.classList.add('scroll-smooth');
+                    });
+                    sessionStorage.removeItem('lang-switch-scroll');
+                }
+
+                if (envHash) {
+                    history.replaceState(null, '', window.location.pathname + envHash);
+                    sessionStorage.removeItem('lang-switch-hash');
+                }
+            });
+
             // Language Persistence
             function checkLanguage() {
                 if (typeof localStorage === 'undefined' || typeof window === 'undefined') return;
@@ -127,7 +145,7 @@ const copyrightDate =
     </head>
 
     <body
-        class="bg-background font-sans text-main antialiased selection:bg-primary selection:text-inverse"
+        class="bg-background text-main selection:bg-primary selection:text-inverse font-sans antialiased"
     >
         <CookieBanner lang={lang} />
         <script is:inline>
@@ -205,24 +223,19 @@ const copyrightDate =
         </script>
         <a
             href="#main-content"
-            class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-background focus:p-4 focus:text-primary focus:outline-none"
+            class="focus:bg-background focus:text-primary sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:outline-none"
         >
             {t['nav.skipToContent']}
         </a>
-        <Header
-            lang={lang}
-            navItems={navItems}
-            logoSrc={optimizedLogo.src}
-            targetLangUrl={targetLangUrl}
-        />
+        <Header lang={lang} navItems={navItems} logoSrc={logoImage} targetLangUrl={targetLangUrl} />
 
         <main id="main-content" class="relative min-h-screen overflow-hidden pt-20">
             <div
-                class="pointer-events-none fixed left-1/4 top-0 -z-10 h-96 w-96 rounded-full bg-primary/10 blur-[128px]"
+                class="bg-primary/10 pointer-events-none fixed top-0 left-1/4 -z-10 h-96 w-96 rounded-full blur-[128px]"
             >
             </div>
             <div
-                class="pointer-events-none fixed bottom-0 right-1/4 -z-10 h-96 w-96 rounded-full bg-secondary/10 blur-[128px]"
+                class="bg-secondary/10 pointer-events-none fixed right-1/4 bottom-0 -z-10 h-96 w-96 rounded-full blur-[128px]"
             >
             </div>
 

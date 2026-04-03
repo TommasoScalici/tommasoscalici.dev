@@ -28,22 +28,22 @@ const bio = bioEntry.data;
                 {/* Text Content */}
                 <div class="max-w-4xl">
                     <h1
-                        class="mb-8 font-mono text-4xl font-bold leading-none tracking-tighter md:text-5xl lg:text-7xl"
+                        class="mb-8 font-mono text-4xl leading-none font-bold tracking-tighter md:text-5xl lg:text-7xl"
                     >
                         <span
-                            class="block animate-pulse bg-gradient-to-r from-gray-600 via-primary to-blue-400 bg-clip-text pb-2 text-transparent dark:from-white dark:via-primary dark:to-blue-400"
+                            class="via-primary dark:via-primary block animate-pulse bg-gradient-to-r from-gray-600 to-blue-400 bg-clip-text pb-2 text-transparent dark:from-white dark:to-blue-400"
                         >
                             {bio.heroTitle}
                         </span>
                         <span
-                            class="block animate-pulse bg-gradient-to-r from-gray-600 via-secondary to-purple-500 bg-clip-text pb-2 text-transparent dark:from-white dark:via-secondary dark:to-purple-500"
+                            class="via-secondary dark:via-secondary block animate-pulse bg-gradient-to-r from-gray-600 to-purple-500 bg-clip-text pb-2 text-transparent dark:from-white dark:to-purple-500"
                         >
                             {bio.heroSubtitle}
                         </span>
                     </h1>
 
                     <p
-                        class="mb-10 max-w-2xl border-l-2 border-primary/50 pl-6 text-xl leading-relaxed text-muted md:text-2xl"
+                        class="border-primary/50 text-muted mb-10 max-w-2xl border-l-2 pl-6 text-xl leading-relaxed md:text-2xl"
                     >
                         {bio.description}
                     </p>
@@ -51,19 +51,19 @@ const bio = bioEntry.data;
                     <div class="flex flex-wrap gap-4">
                         <a
                             href="#projects"
-                            class="rounded-full border border-primary px-8 py-3 font-bold text-primary transition-all duration-300 hover:bg-primary/10 hover:shadow-primary-glow"
+                            class="border-primary text-primary hover:bg-primary/10 hover:shadow-primary-glow rounded-full border px-8 py-3 font-bold transition-all duration-300"
                         >
                             {t['hero.viewProjects']}
                         </a>
                         <a
                             href="#music"
-                            class="rounded-full border border-secondary px-8 py-3 font-bold text-secondary transition-all duration-300 hover:bg-secondary/10 hover:shadow-secondary-glow"
+                            class="border-secondary text-secondary hover:bg-secondary/10 hover:shadow-secondary-glow rounded-full border px-8 py-3 font-bold transition-all duration-300"
                         >
                             {t['hero.listenMusic']}
                         </a>
                         <a
                             href="#playlists"
-                            class="border-glass-border hover:border-glass-border/30 rounded-full border bg-white/70 px-8 py-3 font-bold text-muted transition-all duration-300 hover:bg-glass-bg/15 hover:text-main dark:border-white/10 dark:bg-white/5"
+                            class="border-glass-border hover:border-glass-border/30 text-muted hover:bg-glass-bg/15 hover:text-main rounded-full border bg-white/70 px-8 py-3 font-bold transition-all duration-300 dark:border-white/10 dark:bg-white/5"
                         >
                             {t['hero.enterFlow']}
                         </a>
@@ -77,13 +77,13 @@ const bio = bioEntry.data;
                     <div class="relative h-48 w-48 md:h-64 md:w-64 lg:h-80 lg:w-80 xl:h-96 xl:w-96">
                         {/* Glow Effect */}
                         <div
-                            class="absolute inset-0 rotate-6 transform rounded-[2rem] bg-gradient-to-tr from-primary/30 to-secondary/30 blur-3xl"
+                            class="from-primary/30 to-secondary/30 absolute inset-0 rotate-6 transform rounded-[2rem] bg-gradient-to-tr blur-3xl"
                         >
                         </div>
 
                         {/* Image Container */}
                         <div
-                            class="border-glass-border/10 absolute inset-0 -rotate-3 transform overflow-hidden rounded-[2rem] border bg-white/40 shadow-2xl ring-1 ring-white/20 backdrop-blur-sm transition-all duration-500 hover:rotate-0 hover:border-primary/50 hover:shadow-primary-glow-hover dark:border-white/10 dark:bg-black/40"
+                            class="border-glass-border/10 hover:border-primary/50 hover:shadow-primary-glow-hover absolute inset-0 -rotate-3 transform overflow-hidden rounded-[2rem] border bg-white/40 shadow-2xl ring-1 ring-white/20 backdrop-blur-sm transition-all duration-500 hover:rotate-0 dark:border-white/10 dark:bg-black/40"
                         >
                             <Image
                                 src={profileImage}
@@ -117,7 +117,7 @@ const bio = bioEntry.data;
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="duration-600 h-10 w-10 animate-bounce text-main transition-colors hover:text-primary"
+                class="text-main hover:text-primary h-10 w-10 animate-bounce transition-colors duration-600"
             >
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"
                 ></path>

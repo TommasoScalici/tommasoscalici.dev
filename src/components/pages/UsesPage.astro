@@ -31,7 +31,7 @@ const getLocalized = (
             <h1 class="mb-4 text-4xl font-bold tracking-tight md:text-6xl">
                 {heroTitle}
             </h1>
-            <p class="max-w-2xl text-xl text-muted">{heroSubtitle}</p>
+            <p class="text-muted max-w-2xl text-xl">{heroSubtitle}</p>
         </div>
 
         {/* Grid Layout */}
@@ -65,22 +65,22 @@ const getLocalized = (
                                                     data-track-category={getLocalized(
                                                         category.title,
                                                     )}
-                                                    class="track-uses-link flex items-center gap-1 font-bold text-main transition-colors hover:underline group-hover/link:text-primary dark:text-white"
+                                                    class="track-uses-link text-main group-hover/link:text-primary flex items-center gap-1 font-bold transition-colors hover:underline dark:text-white"
                                                 >
                                                     {item.name}
                                                     <Icon
                                                         name="lucide:external-link"
-                                                        class="h-3 w-3 text-muted"
+                                                        class="text-muted h-3 w-3"
                                                     />
                                                 </a>
                                             ) : (
-                                                <span class="font-bold text-main dark:text-white">
+                                                <span class="text-main font-bold dark:text-white">
                                                     {item.name}
                                                 </span>
                                             )}
                                         </div>
                                         {item.description && (
-                                            <p class="text-sm leading-relaxed text-muted">
+                                            <p class="text-muted text-sm leading-relaxed">
                                                 {getLocalized(item.description)}
                                             </p>
                                         )}

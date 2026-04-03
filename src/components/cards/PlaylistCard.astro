@@ -1,14 +1,12 @@
 ---
+import type { ImageMetadata } from 'astro';
+import { Picture } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 
 interface Playlist {
     title: string;
     description: string;
-    coverImage: string;
-    coverImageSet?: {
-        avif: string;
-        webp: string;
-    };
+    coverImage: ImageMetadata;
     spotifyId: string;
     genre: string;
 }
@@ -27,35 +25,26 @@ const { playlist, t } = Astro.props;
     href={playlist.spotifyId ? `https://open.spotify.com/playlist/${playlist.spotifyId}` : '#'}
     target="_blank"
     rel="noopener noreferrer"
-    class="border-glass-border group relative aspect-square overflow-hidden rounded-2xl border bg-white/70 shadow-glass-light backdrop-blur-xl transition-all duration-300 hover:border-primary/50 hover:shadow-primary-glow dark:border-white/10 dark:bg-white/5 dark:shadow-none"
+    class="border-glass-border group shadow-glass-light hover:border-primary/50 hover:shadow-primary-glow relative aspect-square overflow-hidden rounded-2xl border bg-white/70 backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-white/5 dark:shadow-none"
 >
     <!-- Background Image -->
-    <picture class="absolute inset-0 h-full w-full">
-        {
-            playlist.coverImageSet && (
-                <>
-                    <source srcset={playlist.coverImageSet.avif} type="image/avif" />
-                    <source srcset={playlist.coverImageSet.webp} type="image/webp" />
-                </>
-            )
-        }
-        <img
-            src={playlist.coverImageSet ? playlist.coverImageSet.webp : playlist.coverImage}
-            alt={playlist.title}
-            width={320}
-            height={180}
-            loading="lazy"
-            class="h-full w-full object-cover opacity-80 transition-all duration-500 group-hover:scale-105 group-hover:opacity-40"
-        />
-    </picture>
+    <Picture
+        src={playlist.coverImage}
+        alt={playlist.title}
+        width={400}
+        height={400}
+        formats={['avif', 'webp']}
+        loading="lazy"
+        class="absolute inset-0 h-full w-full object-cover opacity-80 transition-all duration-500 group-hover:scale-105 group-hover:opacity-40"
+    />
 
     <!-- Gradient Overlay -->
-    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+    <div class="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent"></div>
 
     <!-- Content Overlay -->
     <div class="absolute inset-0 z-10 flex flex-col justify-end p-6">
-        <span class="mb-1 font-mono text-xs text-primary">{playlist.genre}</span>
-        <h3 class="mb-1 text-xl font-bold leading-tight text-white">
+        <span class="text-primary mb-1 font-mono text-xs">{playlist.genre}</span>
+        <h3 class="mb-1 text-xl leading-tight font-bold text-white">
             {playlist.title}
         </h3>
         <p class="line-clamp-2 text-xs text-gray-400">{playlist.description}</p>
@@ -70,10 +59,10 @@ const { playlist, t } = Astro.props;
         >
             <Icon
                 name="simple-icons:spotify"
-                class="h-12 w-12 text-spotify drop-shadow-[0_0_15px_rgba(29,185,84,0.6)]"
+                class="text-spotify h-12 w-12 drop-shadow-[0_0_15px_rgba(29,185,84,0.6)]"
             />
             <span
-                class="animate-text-shimmer bg-gradient-to-r from-spotify via-white to-spotify bg-clip-text text-sm font-bold tracking-widest text-transparent"
+                class="animate-text-shimmer from-spotify to-spotify bg-linear-to-r via-white bg-clip-text text-sm font-bold tracking-widest text-transparent"
             >
                 {t['card.playOnSpotify']}
             </span>
@@ -82,7 +71,7 @@ const { playlist, t } = Astro.props;
 
     <!-- Top Right Badge -->
     <div
-        class="border-glass-border/10 absolute right-0 top-0 m-3 rounded border bg-black/50 px-2 py-1 font-mono text-[10px] text-gray-300 backdrop-blur-md"
+        class="border-glass-border/10 absolute top-0 right-0 m-3 rounded border bg-black/50 px-2 py-1 font-mono text-[10px] text-gray-300 backdrop-blur-md"
     >
         PLAYLIST
     </div>
@@ -109,7 +98,7 @@ const { playlist, t } = Astro.props;
         };
     }
     // Initialize once
-    if (!window.customElements.get('playlist-link-init')) {
+    document.addEventListener('astro:page-load', () => {
         new PlaylistLink();
-    }
+    });
 </script>

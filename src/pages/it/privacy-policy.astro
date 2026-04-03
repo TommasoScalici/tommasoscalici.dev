@@ -1,16 +1,16 @@
 ---
-import { getCollection } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 
 import LegalLayout from '../../layouts/LegalLayout.astro';
 
-const entries = await getCollection('legal');
-const entry = entries.find((e) => e.id.startsWith('privacy-policy.it'));
+const entry =
+    (await getEntry('legal', 'privacy-policyit')) || (await getEntry('legal', 'privacy-policy.it'));
 
 if (!entry) {
-    return Astro.redirect('/it/');
+    return Astro.redirect('/');
 }
 
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
 <LegalLayout title={entry.data.title} description={entry.data.description} lang="it">

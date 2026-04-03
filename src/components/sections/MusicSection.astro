@@ -1,6 +1,5 @@
 ---
-import { getImage } from 'astro:assets';
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { getCollection } from 'astro:content';
 
 import { defaultLang, ui } from '../../i18n/ui';
 import MusicReleaseCard from '../cards/MusicReleaseCard.astro';
@@ -11,38 +10,12 @@ const musicReleases = (await getCollection('music')).sort(
 
 const { lang } = Astro.props;
 const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
-
-// Optimize Music Images
-const optimizedMusicReleases = await Promise.all(
-    musicReleases.map(async (release: CollectionEntry<'music'>) => {
-        const webpImage = await getImage({
-            src: release.data.coverImage,
-            format: 'webp',
-            width: 300,
-            height: 300,
-        });
-        const avifImage = await getImage({
-            src: release.data.coverImage,
-            format: 'avif',
-            width: 300,
-            height: 300,
-        });
-        return {
-            ...release.data,
-            coverImage: webpImage.src,
-            coverImageSet: {
-                webp: webpImage.src,
-                avif: avifImage.src,
-            },
-        };
-    }),
-);
 ---
 
 <section id="music" class="relative overflow-hidden px-6 py-32">
     {/* Background Gradient */}
     <div
-        class="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-secondary/5 to-transparent"
+        class="via-secondary/5 pointer-events-none absolute inset-0 bg-linear-to-b from-transparent to-transparent"
     >
     </div>
 
@@ -63,7 +36,7 @@ const optimizedMusicReleases = await Promise.all(
         </div>
 
         <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {optimizedMusicReleases.map((release) => <MusicReleaseCard release={release} t={t} />)}
+            {musicReleases.map((release) => <MusicReleaseCard release={release.data} t={t} />)}
         </div>
     </div>
 </section>

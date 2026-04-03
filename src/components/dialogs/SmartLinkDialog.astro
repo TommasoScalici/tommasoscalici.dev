@@ -33,13 +33,13 @@ const iconMapping: Record<string, string> = {
 
 <dialog
     id={id}
-    class="border-glass-border fixed inset-0 m-auto w-[90%] max-w-sm rounded-2xl border bg-white p-6 shadow-2xl backdrop:bg-black/60 backdrop:backdrop-blur-sm open:animate-in open:zoom-in-95 dark:bg-background"
+    class="border-glass-border open:zoom-in-95 dark:bg-background fixed inset-0 m-auto w-[90%] max-w-sm rounded-2xl border bg-white p-6 shadow-2xl backdrop:bg-black/60 backdrop:backdrop-blur-sm"
 >
     <!-- Close Button -->
     <form method="dialog">
         <button
             type="submit"
-            class="absolute right-4 top-4 text-muted transition-colors hover:text-main"
+            class="text-muted hover:text-main absolute top-4 right-4 transition-colors"
             aria-label="Close"
         >
             <Icon name="lucide:x" class="h-5 w-5" />
@@ -48,7 +48,7 @@ const iconMapping: Record<string, string> = {
 
     <!-- Header -->
     <div class="mb-6 flex flex-col items-center">
-        <h3 class="font-mono text-lg font-bold text-main">
+        <h3 class="text-main font-mono text-lg font-bold">
             {title}
         </h3>
     </div>
@@ -66,7 +66,7 @@ const iconMapping: Record<string, string> = {
                     data-track-name={trackingName}
                     data-track-ids={trackingId}
                     data-track-item={link.label}
-                    class={`border-glass-border/5 group flex w-full items-center gap-3 rounded-xl border bg-glass-bg/5 p-3 transition-all hover:bg-glass-bg/10 ${link.hoverBorder}`}
+                    class={`border-glass-border/5 group bg-glass-bg/5 hover:bg-glass-bg/10 flex w-full items-center gap-3 rounded-xl border p-3 transition-all ${link.hoverBorder}`}
                 >
                     <span class={`text-muted transition-colors ${link.color}`}>
                         <Icon
@@ -74,7 +74,7 @@ const iconMapping: Record<string, string> = {
                             class="h-5 w-5"
                         />
                     </span>
-                    <span class="font-medium text-muted group-hover:text-main">{link.label}</span>
+                    <span class="text-muted group-hover:text-main font-medium">{link.label}</span>
                 </a>
             ))
         }
@@ -124,7 +124,7 @@ const iconMapping: Record<string, string> = {
         };
     }
 
-    if (!window.customElements.get('smartlink-manager-init')) {
+    document.addEventListener('astro:page-load', () => {
         new SmartLinkDialogManager();
-    }
+    });
 </script>

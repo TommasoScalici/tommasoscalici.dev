@@ -81,7 +81,7 @@ const { playlistId, eventName, className = '' } = Astro.props;
         };
     }
 
-    if (!window.customElements.get('spotify-deep-link-init')) {
+    document.addEventListener('astro:page-load', () => {
         new SpotifyDeepLinkManager();
-    }
+    });
 </script>

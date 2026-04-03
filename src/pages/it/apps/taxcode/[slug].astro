@@ -1,19 +1,19 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
 
 import LegalLayout from '../../../../layouts/LegalLayout.astro';
 
 export async function getStaticPaths() {
     // Fetch all legal docs
     const allLegal = await getCollection('legal');
-    // Filter for Italian docs related to 'taxcode' (end with .it.md)
+    // Filter for Italian docs related to 'taxcode' (IDs ending in 'it')
     const taxCodeDocs = allLegal.filter(
-        (doc) => doc.id.startsWith('taxcode/') && doc.id.endsWith('.it.md'),
+        (doc) => doc.id.startsWith('taxcode/') && doc.id.endsWith('it'),
     );
 
     return taxCodeDocs.map((doc) => {
-        // Extract slug from filename (e.g., 'taxcode/data-deletion.it.md' -> 'data-deletion')
-        const slug = doc.id.split('/').pop()?.replace('.it.md', '') ?? '';
+        // Extract slug from ID (e.g., 'taxcode/data-deletionit' -> 'data-deletion')
+        const slug = doc.id.split('/').pop()?.replace('it', '') ?? '';
         return {
             params: { slug },
             props: { doc },
@@ -26,7 +26,7 @@ interface Props {
 }
 
 const { doc } = Astro.props;
-const { Content } = await doc.render();
+const { Content } = await render(doc);
 ---
 
 <LegalLayout title={doc.data.title} description={doc.data.description} lang="it">

@@ -9,6 +9,7 @@ import { PUBLIC_FACEBOOK_PIXEL_ID, PUBLIC_TIKTOK_PIXEL_ID } from 'astro:env/clie
 
 import AnalyticsHead from '../components/head/AnalyticsHead.astro';
 import CookieBanner from '../components/layout/CookieBanner.astro';
+import { normalizePath } from '../lib/seo';
 
 interface Props {
     title: string;
@@ -23,7 +24,7 @@ const { title, description, coverImage, theme } = Astro.props;
 const optimizedBg = await getImage({ src: coverImage, format: 'webp', width: 400 });
 
 // Canonical URL
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = new URL(normalizePath(Astro.url.pathname), Astro.site);
 const themeColor = theme === 'lofi' ? '#0d1117' : '#050505';
 
 // Theme Configuration
@@ -172,7 +173,7 @@ const gradientClasses =
             })();
         </script>
         <div
-            class="absolute left-0 top-0 -z-10 h-full w-full scale-110 bg-cover bg-center bg-no-repeat"
+            class="absolute top-0 left-0 -z-10 h-full w-full scale-110 bg-cover bg-center bg-no-repeat"
             style={`${currentTheme.bgBlur} background-image: url('${optimizedBg.src}');`}
         >
         </div>
@@ -183,7 +184,7 @@ const gradientClasses =
         >
             <div class="group relative mx-auto mb-5 aspect-square w-full rounded-xl">
                 <div
-                    class={`absolute -inset-1 animate-spin-slow rounded-xl bg-gradient-to-r opacity-75 blur-lg ${gradientClasses}`}
+                    class={`absolute -inset-1 animate-spin-slow rounded-xl bg-linear-to-r opacity-75 blur-lg ${gradientClasses}`}
                 >
                 </div>
                 <Image
@@ -207,7 +208,7 @@ const gradientClasses =
                     href="https://tommasoscalici.dev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="border-b border-transparent bg-transparent font-semibold text-inherit no-underline outline-none transition-colors duration-200 hover:border-white hover:text-white"
+                    class="border-b border-transparent bg-transparent font-semibold text-inherit no-underline transition-colors duration-200 outline-none hover:border-white hover:text-white"
                     >Tommaso Scalici</a
                 >
             </div>

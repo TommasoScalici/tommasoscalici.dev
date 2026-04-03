@@ -117,14 +117,14 @@ export const usesData: UsesCategory[] = [
                 },
                 url: 'https://artist.tools/?via=tommaso',
             },
-            {
-                name: 'PlaylistHub',
-                description: {
-                    en: 'AI tool to get into playlists and grow your fanbase organically.',
-                    it: 'Strumento AI per entrare in playlist SEO e far crescere organicamente la tua fanbase.',
-                },
-                url: 'https://playlisthub.io/?via=tommaso',
-            },
+            // {
+            //     name: 'PlaylistHub',
+            //     description: {
+            //         en: 'AI tool to get into playlists and grow your fanbase organically.',
+            //         it: 'Strumento AI per entrare in playlist SEO e far crescere organicamente la tua fanbase.',
+            //     },
+            //     url: 'https://playlisthub.io/?via=tommaso',
+            // },
             {
                 name: 'SubmitLink',
                 description: {

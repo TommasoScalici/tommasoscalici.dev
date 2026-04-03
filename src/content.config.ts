@@ -1,4 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
+import { defineCollection } from 'astro:content';
 
 // ============= SHARED SCHEMAS =============
 
@@ -12,13 +14,9 @@ const safeString = (minLength = 1, maxLength = 500) =>
 
 // Helper for safe URL validation with protocol restriction
 const safeUrl = () =>
-    z
-        .string()
-        .trim()
-        .url('Must be a valid URL')
-        .refine((url) => url.startsWith('https://'), {
-            message: 'URL must use HTTPS protocol for security',
-        });
+    z.url({ message: 'Must be a valid URL' }).refine((url) => url.startsWith('https://'), {
+        message: 'URL must use HTTPS protocol for security',
+    });
 
 // Shared multilingual string schema (for i18n content)
 const multilingualString = (minLength = 1, maxLength = 500) =>
@@ -56,7 +54,7 @@ const yearSchema = z
 // ============= COLLECTIONS =============
 
 const projects = defineCollection({
-    type: 'data',
+    loader: glob({ pattern: '**/*.json', base: './src/content/projects' }),
     schema: z.object({
         title: multilingualString(1, 200),
         description: multilingualString(10, 1000),
@@ -71,7 +69,7 @@ const projects = defineCollection({
 });
 
 const music = defineCollection({
-    type: 'data',
+    loader: glob({ pattern: '**/*.json', base: './src/content/music' }),
     schema: ({ image }) =>
         z
             .object({
@@ -101,7 +99,7 @@ const music = defineCollection({
 });
 
 const bio = defineCollection({
-    type: 'data',
+    loader: glob({ pattern: '**/*.json', base: './src/content/bio' }),
     schema: z.object({
         heroTitle: safeString(5, 200),
         heroSubtitle: safeString(5, 200),
@@ -114,7 +112,7 @@ const bio = defineCollection({
 });
 
 const playlists = defineCollection({
-    type: 'data',
+    loader: glob({ pattern: '**/*.json', base: './src/content/playlists' }),
     schema: ({ image }) =>
         z
             .array(
@@ -135,7 +133,7 @@ const playlists = defineCollection({
 });
 
 const legal = defineCollection({
-    type: 'content',
+    loader: glob({ pattern: '**/*.md', base: './src/content/legal' }),
     schema: z.object({
         title: safeString(5, 200),
         description: safeString(20, 1000),

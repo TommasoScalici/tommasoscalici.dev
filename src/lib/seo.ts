@@ -18,7 +18,7 @@ export const normalizePath = (pathname: string): string => {
 
     // Now path is "it/privacy-policy" or "privacy-policy" or "it" or ""
 
-    const segments = path.split('/');
+    const segments = path.split('/').filter((s) => s.length > 0);
     if (segments[0] === 'it') {
         segments.shift(); // Remove 'it'
     }

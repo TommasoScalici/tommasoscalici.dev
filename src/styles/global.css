@@ -1,114 +1,197 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* Fonts */
+    --font-sans:
+        'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-mono:
+        'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+        'Courier New', monospace;
+
+    /* Cyber-Noir Palette */
+    --color-background: var(--theme-background);
+    --color-primary: var(--theme-primary);
+    --color-secondary: var(--theme-secondary);
+    --color-surface: var(--theme-surface);
+    --color-main: var(--theme-main);
+    --color-muted: var(--theme-muted);
+    --color-inverse: var(--theme-inverse);
+    --color-glass-bg: var(--theme-glass-bg);
+
+    /* Brand Colors */
+    --color-spotify: #1db954;
+    --color-spotify-hover: #1ed760;
+    --color-facebook: #1877f2;
+    --color-tiktok: #ff0050;
+    --color-telegram: #26a5e4;
+    --color-googleplay: #3bccff;
+    --color-lastfm: #d51007;
+    --color-steam: #1b2838;
+    --color-apple: #fa243c;
+    --color-youtube: #ff0000;
+    --color-amazon: #25d1da;
+    --color-deezer: #a238ff;
+    --color-bandcamp: #629aa9;
+
+    /* Shadows & Glows */
+    --shadow-primary-glow: 0 0 20px rgba(0, 243, 255, 0.3);
+    --shadow-primary-glow-hover: 0 0 50px rgba(0, 243, 255, 0.4);
+    --shadow-secondary-glow: 0 0 20px rgba(255, 0, 85, 0.3);
+    --shadow-glass-light: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+
+    /* Custom Animations */
+    --animate-shake: shake 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    --animate-spin-slow: spin 8s linear infinite;
+    --animate-text-shimmer: text-shimmer 3s linear infinite;
+    --animate-float: float 6s ease-in-out infinite;
+
+    /* Specific tailwindcss-animate combinations used in codebase */
+    --animate-in: enter 0.3s ease-out;
+    --animate-slide-in-top-5: slide-in-top-5 0.3s ease-out;
+    --animate-slide-in-bottom: slide-in-bottom 0.3s ease-out;
+    --animate-zoom-in-95: zoom-in-95 0.3s ease-out;
+
+    @keyframes zoom-in-95 {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes slide-in-top-5 {
+        from {
+            opacity: 0;
+            transform: translateY(-5%);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slide-in-bottom {
+        from {
+            opacity: 0;
+            transform: translateY(100%);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes text-shimmer {
+        from {
+            background-position: 200% center;
+        }
+        to {
+            background-position: -200% center;
+        }
+    }
+
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    @keyframes shake {
+        0%,
+        100% {
+            transform: translateX(0);
+        }
+        10%,
+        30%,
+        50%,
+        70%,
+        90% {
+            transform: translateX(-4px);
+        }
+        20%,
+        40%,
+        60%,
+        80% {
+            transform: translateX(4px);
+        }
+    }
+
+    @keyframes enter {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+}
 
 @layer base {
     :root {
         /* Cyber-Noir Palette (Default) */
-        --color-background: 5 5 5;
-        /* #050505 */
-        --color-primary: 0 243 255;
-        /* #00f3ff */
-        --color-secondary: 255 0 85;
-        /* #ff0055 */
-        --color-surface: 255 255 255;
-        /* White base for surface opacity */
-        --color-text-main: 255 255 255;
-        /* White */
-        --color-text-muted: 156 163 175;
-        /* Gray-400 */
-        --color-text-inverse: 0 0 0;
-        /* Black text on neon buttons */
-        --color-glass-border: 255 255 255;
-        /* White for dark mode borders */
-        --color-glass-bg: 255 255 255;
-        /* White for dark mode glass */
+        --theme-background: rgb(5 5 5);
+        --theme-primary: rgb(0 243 255);
+        --theme-secondary: rgb(255 0 85);
+        --theme-surface: rgb(255 255 255 / 0.05); /* Using explicit opacity from original theme */
+        --theme-main: rgb(255 255 255);
+        --theme-muted: rgb(156 163 175);
+        --theme-inverse: rgb(0 0 0);
+        --theme-glass-border: rgb(255 255 255); /* Assuming previous usages worked with this */
+        --theme-glass-bg: rgb(255 255 255);
     }
 
     html[data-theme='light'] {
-        /* BACKGROUND: Cool Light Grey (Zinc-50) instead of blinding White */
-        --color-background: 248 250 252;
-
-        /* PRIMARY: Deep Teal (Cyan-600 equivalent) - Readable on white but keeps the "Cyan" soul */
-        --color-primary: 8 145 178;
-
-        /* SECONDARY: Vivid Berry (Pink-600 equivalent) - Readable on white */
-        --color-secondary: 219 39 119;
-
-        /* SURFACE: Pure White (used for cards) */
-        --color-surface: 255 255 255;
-
-        /* TEXT: Soft Black (Zinc-900) and Slate-500 for muted */
-        --color-text-main: 24 24 27;
-        --color-text-muted: 100 116 139;
-        --color-text-inverse: 255 255 255;
-
-        /* GLASS BORDERS: Slate-200 (Visible definition) */
-        --color-glass-border: 203 213 225;
-
-        /* GLASS BG: White tint */
-        --color-glass-bg: 255 255 255;
+        --theme-background: rgb(248 250 252);
+        --theme-primary: rgb(8 145 178);
+        --theme-secondary: rgb(219 39 119);
+        --theme-surface: rgb(255 255 255);
+        --theme-main: rgb(24 24 27);
+        --theme-muted: rgb(100 116 139);
+        --theme-inverse: rgb(255 255 255);
+        --theme-glass-border: rgb(203 213 225);
+        --theme-glass-bg: rgb(255 255 255);
     }
 
     body {
-        @apply bg-background font-sans text-main antialiased transition-colors duration-300;
+        @apply bg-background text-main font-sans antialiased transition-colors duration-300;
+    }
+
+    button,
+    [role='button'] {
+        cursor: pointer;
     }
 }
 
-@layer utilities {
-    .animate-text-shimmer {
-        background-size: 200% auto;
-        animation: text-shimmer 3s linear infinite;
-        will-change: background-position;
-    }
-
-    .animate-float {
-        animation: float 6s ease-in-out infinite;
-        will-change: transform;
-    }
+/* Custom Utilities for complexity not handled by simple @theme */
+@utility animate-text-shimmer {
+    background-size: 200% auto;
+    will-change: background-position;
 }
 
-@keyframes text-shimmer {
-    from {
-        background-position: 200% center;
-    }
-
-    to {
-        background-position: -200% center;
-    }
+@utility animate-float {
+    will-change: transform;
 }
 
-@keyframes float {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-20px);
-    }
+/* Slide/Zoom utilities with built-in entry effect, since v4 doesn't auto-stack animations on the same class easily. */
+@utility slide-in-from-top-5 {
+    animation: slide-in-top-5 0.3s ease-out forwards;
 }
 
-@keyframes shake {
-    0%,
-    100% {
-        transform: translateX(0);
-    }
-    10%,
-    30%,
-    50%,
-    70%,
-    90% {
-        transform: translateX(-4px);
-    }
-    20%,
-    40%,
-    60%,
-    80% {
-        transform: translateX(4px);
-    }
+@utility slide-in-from-bottom {
+    animation: slide-in-bottom 0.3s ease-out forwards;
 }
 
-.animate-shake {
-    animation: shake 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+@utility zoom-in-95 {
+    animation: zoom-in-95 0.3s ease-out forwards;
 }

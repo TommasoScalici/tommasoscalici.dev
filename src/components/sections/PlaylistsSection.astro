@@ -1,6 +1,5 @@
 ---
-import { getImage } from 'astro:assets';
-import { type CollectionEntry, getEntry } from 'astro:content';
+import { getEntry } from 'astro:content';
 
 import { defaultLang, ui } from '../../i18n/ui';
 import PlaylistCard from '../cards/PlaylistCard.astro';
@@ -17,32 +16,6 @@ const playlistEntry = await getEntry('playlists', lang);
 if (!playlistEntry) {
     throw new Error(`Playlist entry for locale ${lang} not found.`);
 }
-
-// Optimize Playlist Images
-const optimizedPlaylists = await Promise.all(
-    playlistEntry.data.map(async (playlist: CollectionEntry<'playlists'>['data'][number]) => {
-        const webpImage = await getImage({
-            src: playlist.coverImage,
-            format: 'webp',
-            width: 320,
-            height: 180,
-        });
-        const avifImage = await getImage({
-            src: playlist.coverImage,
-            format: 'avif',
-            width: 320,
-            height: 180,
-        });
-        return {
-            ...playlist,
-            coverImage: webpImage.src,
-            coverImageSet: {
-                webp: webpImage.src,
-                avif: avifImage.src,
-            },
-        };
-    }),
-);
 ---
 
 <section id="playlists" class="bg-white/50 px-6 py-32 dark:bg-transparent">
@@ -61,7 +34,7 @@ const optimizedPlaylists = await Promise.all(
         </div>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {optimizedPlaylists.map((playlist) => <PlaylistCard playlist={playlist} t={t} />)}
+            {playlistEntry.data.map((playlist) => <PlaylistCard playlist={playlist} t={t} />)}
         </div>
     </div>
 </section>

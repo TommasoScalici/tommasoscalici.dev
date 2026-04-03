@@ -11,10 +11,10 @@ interface Props {
 
 const { title, description, image = '/og-image.webp' } = Astro.props;
 
-import { getLocalizedUrl } from '../../lib/seo';
+import { getLocalizedUrl, normalizePath } from '../../lib/seo';
 
 // 1. Canonical & Hreflang Logic
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = new URL(normalizePath(Astro.url.pathname), Astro.site);
 const path = Astro.url.pathname;
 
 const site = Astro.site ?? Astro.url.origin;
