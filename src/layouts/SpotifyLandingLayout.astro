@@ -124,7 +124,8 @@ const gradientClasses =
                                     var s = document.createElement('script');
                                     s.type = 'text/javascript';
                                     s.async = true;
-                                    s.src = '/metrics/gtag/js?id=' + gaId;
+                                    s.crossOrigin = 'anonymous';
+                                    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
                                     var f = document.getElementsByTagName('script')[0];
                                     f.parentNode.insertBefore(s, f);
                                 }

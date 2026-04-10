@@ -45,14 +45,20 @@
         gtag('js', new Date());
 
         // Use Cloudflare Gateway for reporting
-        gtag('config', gaId, { transport_url: window.location.origin + '/metrics' });
+        gtag('config', gaId, {
+            transport_url: window.location.origin + '/metrics',
+            allow_google_signals: false,
+            allow_ad_personalization_signals: false,
+            restricted_data_processing: true,
+        });
 
         // Optimization: Inherit consent -> load script immediately
         if (savedConsent === 'granted') {
             var script = document.createElement('script');
             script.type = 'text/javascript';
             script.async = true;
-            script.src = '/metrics/gtag/js?id=' + gaId;
+            script.crossOrigin = 'anonymous';
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
             var firstScript = document.getElementsByTagName('script')[0];
             firstScript.parentNode.insertBefore(script, firstScript);
         }
@@ -72,6 +78,7 @@
             n.queue = [];
             t = b.createElement(e);
             t.async = !0;
+            t.crossOrigin = 'anonymous';
             t.src = v;
             s = b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t, s);
@@ -138,6 +145,7 @@
                     var o = document.createElement('script');
                     ((o.type = 'text/javascript'),
                         (o.async = !0),
+                        (o.crossOrigin = 'anonymous'),
                         (o.src = i + '?sdkid=' + e + '&lib=' + t));
                     var a = document.getElementsByTagName('script')[0];
                     a.parentNode.insertBefore(o, a);

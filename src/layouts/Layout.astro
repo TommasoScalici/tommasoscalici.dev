@@ -42,7 +42,7 @@ const navItems = [
 const targetLang = lang === 'en' ? 'it' : 'en';
 // Generate a relative path for the language switcher (not absolute URL)
 import { normalizePath } from '../lib/seo';
-const cleanPath = normalizePath(Astro.url.pathname);
+const cleanPath = normalizePath(Astro.url.pathname, true);
 const targetLangUrl = targetLang === 'it' ? `/it${cleanPath}` : cleanPath;
 const currentYear = new Date().getFullYear();
 const startYear = 2010; // Career start
@@ -173,7 +173,8 @@ const copyrightDate =
                                     var s = document.createElement('script');
                                     s.type = 'text/javascript';
                                     s.async = true;
-                                    s.src = '/metrics/gtag/js?id=' + gaId;
+                                    s.crossOrigin = 'anonymous';
+                                    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
                                     var f = document.getElementsByTagName('script')[0];
                                     f.parentNode.insertBefore(s, f);
                                 }

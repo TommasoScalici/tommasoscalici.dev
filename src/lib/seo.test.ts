@@ -4,42 +4,44 @@ import { getLocalizedUrl, normalizePath } from './seo';
 
 describe('seo utils', () => {
     describe('normalizePath', () => {
-        it('should normalize root path', () => {
-            expect(normalizePath('/')).toBe('/');
+        describe('default (preserve language)', () => {
+            it('should normalize root path', () => {
+                expect(normalizePath('/')).toBe('/');
+            });
+
+            it('should normalize italian root path without stripping', () => {
+                expect(normalizePath('/it/')).toBe('/it/');
+            });
+
+            it('should normalize simple path', () => {
+                expect(normalizePath('/uses')).toBe('/uses/');
+            });
+
+            it('should normalize italian path without stripping', () => {
+                expect(normalizePath('/it/uses')).toBe('/it/uses/');
+            });
+
+            it('should handle nested paths', () => {
+                expect(normalizePath('/it/blog/post-1/')).toBe('/it/blog/post-1/');
+            });
         });
 
-        it('should normalize italian root path', () => {
-            expect(normalizePath('/it/')).toBe('/');
-        });
+        describe('stripLanguage: true', () => {
+            it('should strip italian root path', () => {
+                expect(normalizePath('/it/', true)).toBe('/');
+            });
 
-        it('should normalize simple path', () => {
-            expect(normalizePath('/uses')).toBe('/uses/');
-        });
+            it('should strip italian simple path', () => {
+                expect(normalizePath('/it/uses', true)).toBe('/uses/');
+            });
 
-        it('should normalize simple path with trailing slash', () => {
-            expect(normalizePath('/uses/')).toBe('/uses/');
-        });
-
-        it('should normalize italian path', () => {
-            expect(normalizePath('/it/uses')).toBe('/uses/');
-        });
-
-        it('should normalize italian path with trailing slash', () => {
-            expect(normalizePath('/it/uses/')).toBe('/uses/');
-        });
-
-        it('should handle nested paths', () => {
-            expect(normalizePath('/blog/post-1')).toBe('/blog/post-1/');
-            expect(normalizePath('/it/blog/post-1/')).toBe('/blog/post-1/');
-            expect(normalizePath('/it/foo/bar/baz')).toBe('/foo/bar/baz/');
-        });
-
-        it('should not strip english locale prefix (not supported structurally as prefix)', () => {
-            expect(normalizePath('/en/about')).toBe('/en/about/');
+            it('should handle nested paths', () => {
+                expect(normalizePath('/it/blog/post-1/', true)).toBe('/blog/post-1/');
+            });
         });
 
         it('should handle paths with query parameters or fragments if accidentally passed', () => {
-            expect(normalizePath('/it/uses?query=1')).toBe('/uses?query=1/');
+            expect(normalizePath('/it/uses?query=1', true)).toBe('/uses?query=1/');
             expect(normalizePath('/blog#fragment')).toBe('/blog#fragment/');
         });
     });

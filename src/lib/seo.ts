@@ -1,11 +1,12 @@
 /**
- * Normalizes a path by removing the language prefix (if present)
- * and ensuring consistent slashes.
+ * Normalizes a path by ensuring consistent slashes and optionally removing
+ * the language prefix.
  *
  * @param pathname The path to normalize (e.g., '/it/uses/', '/uses', '/')
- * @returns A clean path with leading and ending slashes (e.g., '/uses/') or '/' for root.
+ * @param stripLanguage Whether to remove the language prefix ('/it') from the path.
+ * @returns A clean path with leading and ending slashes (e.g., '/it/uses/', '/uses/') or '/' for root.
  */
-export const normalizePath = (pathname: string): string => {
+export const normalizePath = (pathname: string, stripLanguage = false): string => {
     let path = pathname;
     // 1. Remove trailing slash temporarily to simplify segment check
     if (path.endsWith('/')) {
@@ -19,7 +20,8 @@ export const normalizePath = (pathname: string): string => {
     // Now path is "it/privacy-policy" or "privacy-policy" or "it" or ""
 
     const segments = path.split('/').filter((s) => s.length > 0);
-    if (segments[0] === 'it') {
+
+    if (stripLanguage && segments[0] === 'it') {
         segments.shift(); // Remove 'it'
     }
 
@@ -36,7 +38,7 @@ export const normalizePath = (pathname: string): string => {
  * @returns The fully qualified URL.
  */
 export const getLocalizedUrl = (pathname: string, site: URL | string, locale: string): string => {
-    const cleanPath = normalizePath(pathname);
+    const cleanPath = normalizePath(pathname, true);
     const siteUrl = new URL(site);
 
     if (locale === 'it') {
