@@ -1,3 +1,10 @@
+## [1.20.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.20.0...v1.20.1) (2026-04-10)
+
+
+### Performance Improvements
+
+* optimize Lighthouse scores & fix i18n SEO. Load GA4 from official CDN, preserve /it/ prefix in canonical URLs via normalizePath, and add robust tracker checks. ([43a094f](https://github.com/TommasoScalici/tommasoscalici.dev/commit/43a094f1a4a2d6203977e3a15e764b406c604112))
+
 # [1.20.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.19.0...v1.20.0) (2026-04-03)
 
 
