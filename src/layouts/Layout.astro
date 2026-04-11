@@ -228,7 +228,13 @@ const copyrightDate =
         >
             {t['nav.skipToContent']}
         </a>
-        <Header lang={lang} navItems={navItems} logoSrc={logoImage} targetLangUrl={targetLangUrl} />
+        <Header
+            lang={lang}
+            t={t}
+            navItems={navItems}
+            logoSrc={logoImage}
+            targetLangUrl={targetLangUrl}
+        />
 
         <main id="main-content" class="relative min-h-screen overflow-hidden pt-20">
             <div

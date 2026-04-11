@@ -135,6 +135,15 @@
             opacity: 1;
         }
     }
+
+    @keyframes border-beam {
+        0% {
+            offset-distance: 0%;
+        }
+        100% {
+            offset-distance: 100%;
+        }
+    }
 }
 
 @layer base {
@@ -194,4 +203,19 @@
 
 @utility zoom-in-95 {
     animation: zoom-in-95 0.3s ease-out forwards;
+}
+
+@utility cta-shimmer {
+    background: linear-gradient(
+        45deg,
+        var(--theme-primary) 0%,
+        var(--theme-secondary) 50%,
+        var(--theme-primary) 100%
+    );
+    background-size: 200% auto;
+    animation: text-shimmer 3s linear infinite;
+}
+
+@utility animate-border-beam {
+    animation: border-beam 4s linear infinite;
 }

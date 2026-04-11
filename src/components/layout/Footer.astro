@@ -19,34 +19,36 @@ const { lang, t, copyrightDate } = Astro.props;
     class="border-glass-border dark:border-surface mt-20 border-t bg-white/70 backdrop-blur-md dark:bg-black/50"
 >
     <div
-        class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-8 md:flex-row"
+        class="mx-auto flex max-w-7xl flex-col items-center gap-8 px-6 py-10 md:flex-row md:justify-between md:py-8"
     >
-        <p class="text-muted flex items-center gap-4 font-mono text-sm">
-            <span>
+        <div class="flex flex-col items-center gap-6 md:items-start md:gap-4">
+            <p class="text-muted text-center font-mono text-xs sm:text-sm md:text-left">
                 &copy; {copyrightDate} Tommaso Scalici. {t['footer.copyright']}
-            </span>
-            <a
-                href={lang === 'en' ? '/uses/' : `/${lang}/uses/`}
-                class="border-primary/20 text-primary hover:border-primary/50 hover:bg-primary/10 hover:shadow-primary-glow rounded-full border bg-white/5 px-3 py-1 text-xs font-bold tracking-wide shadow-[0_0_10px_rgba(0,243,255,0.1)] transition-all"
-                aria-label={t['footer.uses']}
-            >
-                {t['footer.uses']}
-            </a>
-            <a
-                href={lang === 'en' ? '/privacy-policy/' : `/${lang}/privacy-policy/`}
-                class="border-secondary/20 text-secondary hover:border-secondary/50 hover:bg-secondary/10 hover:shadow-secondary-glow rounded-full border bg-white/5 px-3 py-1 text-xs font-bold tracking-wide shadow-[0_0_10px_rgba(255,0,85,0.1)] transition-all"
-                aria-label={t['footer.privacy']}
-            >
-                {t['footer.privacy']}
-            </a>
-            <a
-                href={lang === 'en' ? '/cookie-policy/' : `/${lang}/cookie-policy/`}
-                class="border-secondary/20 text-secondary hover:border-secondary/50 hover:bg-secondary/10 hover:shadow-secondary-glow rounded-full border bg-white/5 px-3 py-1 text-xs font-bold tracking-wide shadow-[0_0_10px_rgba(255,0,85,0.1)] transition-all"
-                aria-label={t['cookie.title']}
-            >
-                {t['cookie.title']}
-            </a>
-        </p>
+            </p>
+            <nav class="flex flex-wrap justify-center gap-3 md:justify-start">
+                <a
+                    href={lang === 'en' ? '/uses/' : `/${lang}/uses/`}
+                    class="border-primary/20 text-primary hover:border-primary/50 hover:bg-primary/10 hover:shadow-primary-glow rounded-full border bg-white/5 px-3 py-1.5 text-xs font-bold tracking-wide shadow-[0_0_10px_rgba(0,243,255,0.1)] transition-all sm:py-1"
+                    aria-label={t['footer.uses']}
+                >
+                    {t['footer.uses']}
+                </a>
+                <a
+                    href={lang === 'en' ? '/privacy-policy/' : `/${lang}/privacy-policy/`}
+                    class="border-secondary/20 text-secondary hover:border-secondary/50 hover:bg-secondary/10 hover:shadow-secondary-glow rounded-full border bg-white/5 px-3 py-1.5 text-xs font-bold tracking-wide shadow-[0_0_10px_rgba(255,0,85,0.1)] transition-all sm:py-1"
+                    aria-label={t['footer.privacy']}
+                >
+                    {t['footer.privacy']}
+                </a>
+                <a
+                    href={lang === 'en' ? '/cookie-policy/' : `/${lang}/cookie-policy/`}
+                    class="border-secondary/20 text-secondary hover:border-secondary/50 hover:bg-secondary/10 hover:shadow-secondary-glow rounded-full border bg-white/5 px-3 py-1.5 text-xs font-bold tracking-wide shadow-[0_0_10px_rgba(255,0,85,0.1)] transition-all sm:py-1"
+                    aria-label={t['cookie.title']}
+                >
+                    {t['cookie.title']}
+                </a>
+            </nav>
+        </div>
 
         <div class="flex gap-6">
             <a

@@ -7,12 +7,13 @@ import ThemeToggle from './ThemeToggle.astro';
 
 interface Props {
     lang: string;
+    t: Record<string, string>;
     navItems: { label: string; href: string }[];
     logoSrc: ImageMetadata;
     targetLangUrl: string;
 }
 
-const { lang, navItems, logoSrc, targetLangUrl } = Astro.props;
+const { lang, t, navItems, logoSrc, targetLangUrl } = Astro.props;
 ---
 
 <site-header>
@@ -58,6 +59,26 @@ const { lang, navItems, logoSrc, targetLangUrl } = Astro.props;
 
             <!-- Mobile/Tablet Controls -->
             <div class="flex items-center gap-4">
+                <!-- Submit Your Music CTA (Desktop) -->
+                <a
+                    href="https://submitl.ink/c/tommasoscalici"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-track-cta="Submit Music Header"
+                    class="cta-shimmer group hover:shadow-primary-glow relative hidden items-center justify-center overflow-hidden rounded-full p-px transition-all hover:scale-105 md:flex"
+                >
+                    <span
+                        class="flex items-center gap-2 rounded-full bg-black px-4 py-1.5 transition-colors group-hover:bg-transparent"
+                    >
+                        <Icon name="lucide:music" class="text-primary h-3.5 w-3.5" />
+                        <span
+                            class="font-mono text-[10px] font-bold tracking-tight whitespace-nowrap"
+                        >
+                            {t['nav.submitMusic']}
+                        </span>
+                    </span>
+                </a>
+
                 <!-- Utility Buttons -->
                 <div class="hidden items-center gap-4 border-l border-white/10 pl-6 md:flex">
                     <a
@@ -84,8 +105,28 @@ const { lang, navItems, logoSrc, targetLangUrl } = Astro.props;
                     </button>
                 </div>
 
-                <!-- Hamburger Button -->
+                <!-- Hamburger/Mobile CTA -->
                 <div class="flex items-center gap-4 lg:hidden">
+                    <!-- Submit Your Music CTA (Mobile) -->
+                    <a
+                        href="https://submitl.ink/c/tommasoscalici"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-track-cta="Submit Music Header Mobile"
+                        class="cta-shimmer group relative flex items-center justify-center overflow-hidden rounded-full p-px transition-all hover:scale-105 active:scale-95 md:hidden"
+                    >
+                        <span
+                            class="flex items-center gap-1.5 rounded-full bg-black px-2.5 py-2 transition-colors sm:gap-2 sm:px-3 sm:py-1.5"
+                        >
+                            <Icon name="lucide:music" class="text-primary h-3.5 w-3.5" />
+                            <span
+                                class="max-w-[80px] text-center font-mono text-[9px] leading-[1.1] font-bold tracking-tighter sm:max-w-none sm:text-left sm:text-[10px] sm:leading-tight sm:tracking-tight sm:whitespace-nowrap"
+                            >
+                                {t['nav.submitMusic']}
+                            </span>
+                        </span>
+                    </a>
+
                     <button
                         type="button"
                         data-menu-btn
@@ -152,6 +193,8 @@ const { lang, navItems, logoSrc, targetLangUrl } = Astro.props;
 </site-header>
 
 <script>
+    import { trackEvent } from '../../lib/analytics';
+
     class SiteHeader extends HTMLElement {
         #menuBtn: HTMLButtonElement | null = null;
         #mobileMenu: HTMLDivElement | null = null;
@@ -184,6 +227,11 @@ const { lang, navItems, logoSrc, targetLangUrl } = Astro.props;
             const mobileNavLinks = this.querySelectorAll<HTMLAnchorElement>('.mobile-nav-link');
             for (const link of mobileNavLinks) {
                 link.addEventListener('click', () => this.#closeMenu());
+            }
+
+            const ctaLinks = this.querySelectorAll<HTMLAnchorElement>('[data-track-cta]');
+            for (const link of ctaLinks) {
+                link.addEventListener('click', this.#handleTrackClick);
             }
         }
 
@@ -234,6 +282,16 @@ const { lang, navItems, logoSrc, targetLangUrl } = Astro.props;
             const isItalian = targetUrl.pathname.startsWith('/it');
             const newLang = isItalian ? 'it' : 'en';
             localStorage.setItem('lang', newLang);
+        };
+
+        #handleTrackClick = (e: MouseEvent) => {
+            const el = e.currentTarget as HTMLAnchorElement;
+            const item = el.getAttribute('data-track-cta') || '';
+            trackEvent('select_content', {
+                content_type: 'cta_button',
+                content_name: item,
+                item_id: item,
+            });
         };
     }
 
