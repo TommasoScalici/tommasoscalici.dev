@@ -1,3 +1,10 @@
+# [1.21.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.20.1...v1.21.0) (2026-04-11)
+
+
+### Features
+
+* add localized submit music cta with shimmer effect, fix footer/header responsiveness for mobile (SE) & tablet, and update all dependencies to latest versions. ([4447af4](https://github.com/TommasoScalici/tommasoscalici.dev/commit/4447af4c2878a559b75d12db3699f2ecd374e599))
+
 ## [1.20.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.20.0...v1.20.1) (2026-04-10)
 
 
