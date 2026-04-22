@@ -8,6 +8,9 @@ export default defineConfig({
     integrations: [sitemap(), icon()],
     vite: {
         plugins: [tailwindcss()],
+        build: {
+            sourcemap: true,
+        },
     },
     trailingSlash: 'always',
     output: 'static',

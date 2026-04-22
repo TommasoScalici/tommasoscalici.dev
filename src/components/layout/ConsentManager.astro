@@ -1,0 +1,69 @@
+<script is:inline>
+    (function initConsentController() {
+        function updateConsent(isUpdate) {
+            var consent = localStorage.getItem('user-consent') || 'pending';
+            var grantedStatus = consent === 'granted' ? 'granted' : 'denied';
+            var gtagPayload = {
+                ad_storage: grantedStatus,
+                ad_user_data: grantedStatus,
+                ad_personalization: grantedStatus,
+                analytics_storage: grantedStatus,
+            };
+
+            if (consent === 'granted') {
+                if (typeof window.gtag === 'function') {
+                    window.gtag('consent', 'update', gtagPayload);
+                    if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.gaId) {
+                        var gaId = window.ANALYTICS_CONFIG.gaId;
+                        if (
+                            !document.querySelector(
+                                'script[src*="/metrics/gtag/js?id=' + gaId + '"]',
+                            )
+                        ) {
+                            var s = document.createElement('script');
+                            s.type = 'text/javascript';
+                            s.async = true;
+                            s.crossOrigin = 'anonymous';
+                            s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+                            var f = document.getElementsByTagName('script')[0];
+                            f.parentNode.insertBefore(s, f);
+                        }
+                    }
+                    if (isUpdate) window.gtag('event', 'page_view');
+                }
+                if (typeof window.fbq === 'function') {
+                    window.fbq('consent', 'grant');
+                    if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.fbPixelId) {
+                        window.fbq('set', 'autoConfig', false, window.ANALYTICS_CONFIG.fbPixelId);
+                    }
+                    if (isUpdate) window.fbq('track', 'PageView');
+                }
+                if (window.ttq) {
+                    window.ttq.enableCookie();
+                    if (
+                        isUpdate &&
+                        window.ANALYTICS_CONFIG &&
+                        window.ANALYTICS_CONFIG.tiktokPixelId
+                    ) {
+                        var pId = window.ANALYTICS_CONFIG.tiktokPixelId;
+                        if (!window.ttq._i || !window.ttq._i[pId]) {
+                            window.ttq.load(pId, {
+                                auto_collect: false,
+                            });
+                        }
+                        window.ttq.page();
+                    }
+                }
+            } else {
+                if (typeof window.gtag === 'function')
+                    window.gtag('consent', 'update', gtagPayload);
+                if (typeof window.fbq === 'function') window.fbq('consent', 'revoke');
+                if (window.ttq) window.ttq.disableCookie();
+            }
+        }
+        updateConsent(false);
+        window.addEventListener('consent-update', function () {
+            updateConsent(true);
+        });
+    })();
+</script>

@@ -1,17 +1,12 @@
 ---
-import '@fontsource-variable/inter';
-import '@fontsource-variable/jetbrains-mono';
-import '../styles/global.css';
-
 import { ClientRouter } from 'astro:transitions';
 
 import logoImage from '../assets/logo.webp';
-import AnalyticsHead from '../components/head/AnalyticsHead.astro';
 import SEOHead from '../components/head/SEOHead.astro';
-import CookieBanner from '../components/layout/CookieBanner.astro';
 import Footer from '../components/layout/Footer.astro';
 import Header from '../components/layout/Header.astro';
 import { defaultLang, ui } from '../i18n/ui';
+import BaseLayout from './BaseLayout.astro';
 
 interface Props {
     title: string;
@@ -52,10 +47,8 @@ const copyrightDate =
         : `${startYear.toString()} - ${currentYear.toString()}`;
 ---
 
-<!doctype html>
-<html lang={lang} class="scroll-smooth">
-    <head>
-        <meta charset="UTF-8" />
+<BaseLayout title={title} lang={lang}>
+    <Fragment slot="head">
         <script is:inline>
             // Prevent FOUC
             function getTheme() {
@@ -135,93 +128,13 @@ const copyrightDate =
 
             checkLanguage();
         </script>
-        <AnalyticsHead gaId="G-LMT1M9750Q" />
-        <!-- Preconnect to analytics domains -->
-        <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-        <link rel="dns-prefetch" href="https://connect.facebook.net" />
-        <link rel="dns-prefetch" href="https://analytics.tiktok.com" />
         <SEOHead title={title} description={description} />
         <ClientRouter />
-    </head>
+    </Fragment>
 
-    <body
+    <div
         class="bg-background text-main selection:bg-primary selection:text-inverse font-sans antialiased"
     >
-        <CookieBanner lang={lang} />
-        <script is:inline>
-            (function initConsentController() {
-                function updateConsent(isUpdate) {
-                    var consent = localStorage.getItem('user-consent') || 'pending';
-                    var grantedStatus = consent === 'granted' ? 'granted' : 'denied';
-                    var gtagPayload = {
-                        ad_storage: grantedStatus,
-                        ad_user_data: grantedStatus,
-                        ad_personalization: grantedStatus,
-                        analytics_storage: grantedStatus,
-                    };
-
-                    if (consent === 'granted') {
-                        if (typeof window.gtag === 'function') {
-                            window.gtag('consent', 'update', gtagPayload);
-                            if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.gaId) {
-                                var gaId = window.ANALYTICS_CONFIG.gaId;
-                                if (
-                                    !document.querySelector(
-                                        'script[src*="/metrics/gtag/js?id=' + gaId + '"]',
-                                    )
-                                ) {
-                                    var s = document.createElement('script');
-                                    s.type = 'text/javascript';
-                                    s.async = true;
-                                    s.crossOrigin = 'anonymous';
-                                    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
-                                    var f = document.getElementsByTagName('script')[0];
-                                    f.parentNode.insertBefore(s, f);
-                                }
-                            }
-                            if (isUpdate) window.gtag('event', 'page_view');
-                        }
-                        if (typeof window.fbq === 'function') {
-                            window.fbq('consent', 'grant');
-                            if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.fbPixelId) {
-                                window.fbq(
-                                    'set',
-                                    'autoConfig',
-                                    false,
-                                    window.ANALYTICS_CONFIG.fbPixelId,
-                                );
-                            }
-                            if (isUpdate) window.fbq('track', 'PageView');
-                        }
-                        if (window.ttq) {
-                            window.ttq.enableCookie();
-                            if (
-                                isUpdate &&
-                                window.ANALYTICS_CONFIG &&
-                                window.ANALYTICS_CONFIG.tiktokPixelId
-                            ) {
-                                var pId = window.ANALYTICS_CONFIG.tiktokPixelId;
-                                if (!window.ttq._i || !window.ttq._i[pId]) {
-                                    window.ttq.load(pId, {
-                                        auto_collect: false,
-                                    });
-                                }
-                                window.ttq.page();
-                            }
-                        }
-                    } else {
-                        if (typeof window.gtag === 'function')
-                            window.gtag('consent', 'update', gtagPayload);
-                        if (typeof window.fbq === 'function') window.fbq('consent', 'revoke');
-                        if (window.ttq) window.ttq.disableCookie();
-                    }
-                }
-                updateConsent(false);
-                window.addEventListener('consent-update', function () {
-                    updateConsent(true);
-                });
-            })();
-        </script>
         <a
             href="#main-content"
             class="focus:bg-background focus:text-primary sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:outline-none"
@@ -250,5 +163,5 @@ const copyrightDate =
         </main>
 
         <Footer lang={lang} t={t} copyrightDate={copyrightDate} />
-    </body>
-</html>
+    </div>
+</BaseLayout>

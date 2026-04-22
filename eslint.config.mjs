@@ -65,6 +65,7 @@ export default [
         ignores: [
             'dist/**',
             '.astro/**',
+            '.wrangler/**',
             'node_modules/**',
             'wrangler.jsonc',
             '.prettierrc.mjs',

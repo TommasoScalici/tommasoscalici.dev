@@ -12,7 +12,7 @@ export const getLocalizedContent = <T = string>(
     fallbackLang = 'en',
 ): T | string => {
     if (!content) return '';
-    if (typeof content !== 'object') return content as T;
+    if (typeof content !== 'object') return content;
 
     const record = content as Record<string, T>;
     if (lang in record) return record[lang];

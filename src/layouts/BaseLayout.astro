@@ -1,0 +1,43 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+
+import AnalyticsHead from '../components/head/AnalyticsHead.astro';
+import ConsentManager from '../components/layout/ConsentManager.astro';
+import CookieBanner from '../components/layout/CookieBanner.astro';
+
+interface Props {
+    title: string;
+    lang?: string;
+    gaId?: string;
+    fbPixelId?: string;
+    tiktokPixelId?: string;
+}
+
+const { title, lang = 'en', gaId = 'G-LMT1M9750Q', fbPixelId, tiktokPixelId } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{title}</title>
+
+        <!-- Preconnect to analytics domains -->
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        <link rel="dns-prefetch" href="https://analytics.tiktok.com" />
+
+        <AnalyticsHead gaId={gaId} fbPixelId={fbPixelId} tiktokPixelId={tiktokPixelId} />
+
+        <slot name="head" />
+    </head>
+    <body class="bg-background text-main antialiased">
+        <CookieBanner lang={lang} />
+        <ConsentManager />
+
+        <slot />
+    </body>
+</html>

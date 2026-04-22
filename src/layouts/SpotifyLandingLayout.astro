@@ -1,15 +1,10 @@
 ---
-import '@fontsource-variable/inter';
-import '@fontsource-variable/jetbrains-mono';
-import '../styles/global.css';
-
 import type { ImageMetadata } from 'astro';
 import { getImage, Image } from 'astro:assets';
 import { PUBLIC_FACEBOOK_PIXEL_ID, PUBLIC_TIKTOK_PIXEL_ID } from 'astro:env/client';
 
-import AnalyticsHead from '../components/head/AnalyticsHead.astro';
-import CookieBanner from '../components/layout/CookieBanner.astro';
 import { normalizePath } from '../lib/seo';
+import BaseLayout from './BaseLayout.astro';
 
 interface Props {
     title: string;
@@ -48,13 +43,12 @@ const gradientClasses =
         : 'from-[#00f3ff] via-[#ff0055] to-[#00f3ff]';
 ---
 
-<!doctype html>
-<html lang="en" class="dark">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{title}</title>
-
+<BaseLayout
+    title={title}
+    fbPixelId={PUBLIC_FACEBOOK_PIXEL_ID}
+    tiktokPixelId={PUBLIC_TIKTOK_PIXEL_ID}
+>
+    <Fragment slot="head">
         <!-- SEO -->
         <meta name="description" content={description} />
         <meta name="robots" content="noindex, nofollow" />
@@ -70,17 +64,6 @@ const gradientClasses =
         <meta property="og:image" content={optimizedBg.src} />
         <meta property="og:type" content="music.playlist" />
 
-        <!-- Preconnect to analytics domains -->
-        <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-        <link rel="dns-prefetch" href="https://connect.facebook.net" />
-        <link rel="dns-prefetch" href="https://analytics.tiktok.com" />
-
-        <AnalyticsHead
-            gaId="G-LMT1M9750Q"
-            fbPixelId={PUBLIC_FACEBOOK_PIXEL_ID}
-            tiktokPixelId={PUBLIC_TIKTOK_PIXEL_ID}
-        />
-
         <style>
             @keyframes floatUp {
                 from {
@@ -93,86 +76,12 @@ const gradientClasses =
                 }
             }
         </style>
-    </head>
-    <body
+    </Fragment>
+
+    <div
         class="relative flex h-screen items-center justify-center overflow-hidden font-sans text-white"
         style={theme === 'lofi' ? 'background-color: #0d1117;' : 'background-color: #050505;'}
     >
-        <CookieBanner lang="en" />
-        <script is:inline>
-            (function initConsentController() {
-                function updateConsent(isUpdate) {
-                    var consent = localStorage.getItem('user-consent') || 'pending';
-                    var grantedStatus = consent === 'granted' ? 'granted' : 'denied';
-                    var gtagPayload = {
-                        ad_storage: grantedStatus,
-                        ad_user_data: grantedStatus,
-                        ad_personalization: grantedStatus,
-                        analytics_storage: grantedStatus,
-                    };
-
-                    if (consent === 'granted') {
-                        if (typeof window.gtag === 'function') {
-                            window.gtag('consent', 'update', gtagPayload);
-                            if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.gaId) {
-                                var gaId = window.ANALYTICS_CONFIG.gaId;
-                                if (
-                                    !document.querySelector(
-                                        'script[src*="/metrics/gtag/js?id=' + gaId + '"]',
-                                    )
-                                ) {
-                                    var s = document.createElement('script');
-                                    s.type = 'text/javascript';
-                                    s.async = true;
-                                    s.crossOrigin = 'anonymous';
-                                    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
-                                    var f = document.getElementsByTagName('script')[0];
-                                    f.parentNode.insertBefore(s, f);
-                                }
-                            }
-                            if (isUpdate) window.gtag('event', 'page_view');
-                        }
-                        if (typeof window.fbq === 'function') {
-                            window.fbq('consent', 'grant');
-                            if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.fbPixelId) {
-                                window.fbq(
-                                    'set',
-                                    'autoConfig',
-                                    false,
-                                    window.ANALYTICS_CONFIG.fbPixelId,
-                                );
-                            }
-                            if (isUpdate) window.fbq('track', 'PageView');
-                        }
-                        if (window.ttq) {
-                            window.ttq.enableCookie();
-                            if (
-                                isUpdate &&
-                                window.ANALYTICS_CONFIG &&
-                                window.ANALYTICS_CONFIG.tiktokPixelId
-                            ) {
-                                var pId = window.ANALYTICS_CONFIG.tiktokPixelId;
-                                if (!window.ttq._i || !window.ttq._i[pId]) {
-                                    window.ttq.load(pId, {
-                                        auto_collect: false,
-                                    });
-                                }
-                                window.ttq.page();
-                            }
-                        }
-                    } else {
-                        if (typeof window.gtag === 'function')
-                            window.gtag('consent', 'update', gtagPayload);
-                        if (typeof window.fbq === 'function') window.fbq('consent', 'revoke');
-                        if (window.ttq) window.ttq.disableCookie();
-                    }
-                }
-                updateConsent(false);
-                window.addEventListener('consent-update', function () {
-                    updateConsent(true);
-                });
-            })();
-        </script>
         <div
             class="absolute top-0 left-0 -z-10 h-full w-full scale-110 bg-cover bg-center bg-no-repeat"
             style={`${currentTheme.bgBlur} background-image: url('${optimizedBg.src}');`}
@@ -214,5 +123,5 @@ const gradientClasses =
                 >
             </div>
         </div>
-    </body>
-</html>
+    </div>
+</BaseLayout>
