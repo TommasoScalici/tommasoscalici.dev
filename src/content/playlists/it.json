@@ -2,28 +2,24 @@
     {
         "title": "Coding Lofi ☕",
         "description": "Musica focus progettata per sviluppatori. Python, JS, C++ & Deep Work.",
-        "coverImage": "../../assets/playlist_covers/coding-lofi.webp",
         "spotifyId": "0yF9pJ62XkAgxDGMlbyenf",
         "genre": "Focus / Lofi"
     },
     {
         "title": "Modern Prog ⚡",
         "description": "Il meglio del Progressive Metal Strumentale Moderno. Djent, Math Rock & Riff Pesanti.",
-        "coverImage": "../../assets/playlist_covers/modern-prog.webp",
         "spotifyId": "32xYNI24QWMWfSgG1xZgjI",
         "genre": "Metal Strumentale"
     },
     {
         "title": "Prog Odyssey 🌌",
         "description": "Un viaggio attraverso l'evoluzione del Progressive Rock e Metal.",
-        "coverImage": "../../assets/playlist_covers/prog-odyssey.webp",
         "spotifyId": "7sO9HU4rqRAnF7A15zqc5K",
         "genre": "Prog Rock / Metal"
     },
     {
         "title": "Heavy Riffs 🎸",
         "description": "Una solida raccolta dei migliori Riff Pesanti dal Hard Rock, Metal & Alternative.",
-        "coverImage": "../../assets/playlist_covers/heavy-riffs.webp",
         "spotifyId": "49NveLmBkE159Zt6g0Novv",
         "genre": "Hard Rock / Metal"
     }

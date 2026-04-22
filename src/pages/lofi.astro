@@ -4,8 +4,14 @@ import SpotifyLandingLayout from '../layouts/SpotifyLandingLayout.astro';
 
 const title = 'Coding Lofi | Focus Music for Devs';
 const description = 'Focus music designed for Developers. Python, JS, C++ & Deep Work.';
-import coverImage from '../assets/playlist_covers/coding-lofi.webp';
 const playlistId = '0yF9pJ62XkAgxDGMlbyenf';
+
+// Fetch thumbnail at build time
+const response = await fetch(
+    `https://open.spotify.com/oembed?url=https://open.spotify.com/playlist/${playlistId}`,
+);
+const oEmbedData = (response.ok ? await response.json() : {}) as Record<string, string>;
+const coverImage = oEmbedData.thumbnail_url ?? '';
 ---
 
 <SpotifyLandingLayout title={title} description={description} coverImage={coverImage} theme="lofi">

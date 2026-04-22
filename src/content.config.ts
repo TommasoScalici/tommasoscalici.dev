@@ -1,3 +1,6 @@
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { defineCollection } from 'astro:content';
@@ -14,9 +17,12 @@ const safeString = (minLength = 1, maxLength = 500) =>
 
 // Helper for safe URL validation with protocol restriction
 const safeUrl = () =>
-    z.url({ message: 'Must be a valid URL' }).refine((url) => url.startsWith('https://'), {
-        message: 'URL must use HTTPS protocol for security',
-    });
+    z
+        .string()
+        .regex(/^https:\/\/[^\s/$.?#].[^\s]*$/, { message: 'Must be a valid HTTPS URL' })
+        .refine((url) => url.startsWith('https://'), {
+            message: 'URL must use HTTPS protocol for security',
+        });
 
 // Shared multilingual string schema (for i18n content)
 const multilingualString = (minLength = 1, maxLength = 500) =>
@@ -112,14 +118,58 @@ const bio = defineCollection({
 });
 
 const playlists = defineCollection({
-    loader: glob({ pattern: '**/*.json', base: './src/content/playlists' }),
-    schema: ({ image }) =>
-        z
+    loader: async () => {
+        const locales = ['en', 'it'];
+        const base = './src/content/playlists';
+        const entries = [];
+
+        for (const lang of locales) {
+            const filePath = join(base, `${lang}.json`);
+            try {
+                const content = await readFile(filePath, 'utf-8');
+                const playlistData = JSON.parse(content) as {
+                    spotifyId: string;
+                    title: string;
+                    description: string;
+                    genre: string;
+                    [key: string]: string | number | boolean | undefined;
+                }[];
+
+                // Fetch thumbnails for each playlist in the array
+                const enrichedPlaylists = await Promise.all(
+                    playlistData.map(async (playlist) => {
+                        const response = await fetch(
+                            `https://open.spotify.com/oembed?url=https://open.spotify.com/playlist/${playlist.spotifyId}`,
+                        );
+                        const oEmbedData = (response.ok ? await response.json() : {}) as Partial<
+                            Record<string, string>
+                        >;
+                        return {
+                            ...playlist,
+                            coverImage: oEmbedData.thumbnail_url ?? '',
+                        };
+                    }),
+                );
+
+                entries.push({
+                    id: lang,
+                    playlists: enrichedPlaylists,
+                });
+            } catch (error) {
+                console.error(`Error loading playlists for ${lang}:`, error);
+            }
+        }
+        return entries;
+    },
+    schema: z.object({
+        playlists: z
             .array(
                 z.object({
                     title: safeString(1, 200),
                     description: safeString(10, 500),
-                    coverImage: image(),
+                    coverImage: z.string().regex(/^https:\/\/[^\s/$.?#].[^\s]*$/, {
+                        message: 'Invalid Spotify thumbnail URL',
+                    }),
                     spotifyId: z
                         .string()
                         .trim()
@@ -130,6 +180,7 @@ const playlists = defineCollection({
                 }),
             )
             .min(1, 'At least one playlist must be defined'),
+    }),
 });
 
 const legal = defineCollection({

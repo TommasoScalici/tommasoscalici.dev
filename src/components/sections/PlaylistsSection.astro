@@ -34,7 +34,11 @@ if (!playlistEntry) {
         </div>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {playlistEntry.data.map((playlist) => <PlaylistCard playlist={playlist} t={t} />)}
+            {
+                playlistEntry.data.playlists.map((playlist) => (
+                    <PlaylistCard playlist={playlist} t={t} />
+                ))
+            }
         </div>
     </div>
 </section>

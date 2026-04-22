@@ -86,12 +86,20 @@ export const usesData: UsesCategory[] = [
                 url: 'https://www.guitar-pro.com/',
             },
             {
-                name: 'Suno Studio',
+                name: 'Fender Studio',
                 description: {
-                    en: 'AI Music generation experiments.',
-                    it: 'Esperimenti di generazione musicale AI.',
+                    en: 'A great professional DAW with AI features for musicians.',
+                    it: "Un'ottima DAW professionale con funzionalità AI per musicisti.",
                 },
-                url: 'https://suno.com/',
+                url: 'https://it.fender.com/pages/fender-studio',
+            },
+            {
+                name: 'Google Flow Music',
+                description: {
+                    en: 'The future of collaborative music creation.',
+                    it: 'Il futuro della creazione musicale collaborativa.',
+                },
+                url: 'https://www.flowmusic.app/invite/GRDKS4',
             },
         ],
     },
@@ -132,6 +140,14 @@ export const usesData: UsesCategory[] = [
                     it: 'Smart link e piattaforma di submission. Inviami la tua musica qui!',
                 },
                 url: 'https://www.submitlink.io/c/tommasoscalici?via=tommasoscalici&s=tommasoscalici.dev',
+            },
+            {
+                name: 'Groover',
+                description: {
+                    en: 'Get your music heard by professional curators and labels.',
+                    it: 'Fai ascoltare la tua musica a curatori e label professionisti.',
+                },
+                url: 'https://groover.co/band/referral/2-TOMMASO-64CA8/',
             },
         ],
     },
