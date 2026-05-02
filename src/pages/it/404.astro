@@ -1,0 +1,29 @@
+---
+import { ui } from '../../i18n/ui';
+import Layout from '../../layouts/Layout.astro';
+
+const lang = 'it';
+const t = ui[lang];
+
+const title = '404 | Pagina Non Trovata';
+const description = 'La pagina che stai cercando non esiste.';
+---
+
+<Layout title={title} description={description} lang={lang}>
+    <div class="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
+        <h1
+            class="mb-4 bg-linear-to-r from-cyan-500 to-purple-600 bg-clip-text font-mono text-9xl font-bold text-transparent"
+        >
+            404
+        </h1>
+        <p class="text-muted mb-8 text-xl md:text-2xl">
+            {t['404.message'] || 'Sembra che tu abbia raggiunto un vicolo cieco in Matrix.'}
+        </p>
+        <a
+            href="/it/"
+            class="border-primary text-primary hover:bg-primary/10 hover:shadow-primary-glow rounded-full border px-8 py-3 font-bold transition-all duration-300"
+        >
+            {t['404.backHome'] || 'Torna alla Home'}
+        </a>
+    </div>
+</Layout>

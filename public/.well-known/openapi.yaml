@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+    title: Tommaso Scalici Portfolio API
+    description: API providing structured data about Tommaso Scalici's projects, music, and professional bio.
+    version: 1.0.0
+    contact:
+        name: Tommaso Scalici
+        email: tommaso.scalici.1991@gmail.com
+        url: https://tommasoscalici.dev
+servers:
+    - url: https://tommasoscalici.dev
+      description: Production server
+paths:
+    /api/projects.json:
+        get:
+            operationId: getProjects
+            summary: Get all software projects
+            description: Returns a list of all software projects including tech stack and repository links.
+            responses:
+                '200':
+                    description: A list of software projects
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/CollectionEntryProject'
+    /api/music.json:
+        get:
+            operationId: getMusic
+            summary: Get all musical releases
+            description: Returns a list of all musical releases including genre, year, and streaming links.
+            responses:
+                '200':
+                    description: A list of musical releases
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/CollectionEntryMusic'
+    /api/bio.json:
+        get:
+            operationId: getBio
+            summary: Get professional biography
+            description: Returns the professional biography and role information for the portfolio owner.
+            responses:
+                '200':
+                    description: Biography and role information
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/CollectionEntryBio'
+components:
+    schemas:
+        MultilingualString:
+            oneOf:
+                - type: string
+                - type: object
+                  properties:
+                      en:
+                          type: string
+                      it:
+                          type: string
+        CollectionEntryProject:
+            type: object
+            properties:
+                id:
+                    type: string
+                data:
+                    type: object
+                    properties:
+                        title:
+                            $ref: '#/components/schemas/MultilingualString'
+                        description:
+                            $ref: '#/components/schemas/MultilingualString'
+                        techStack:
+                            type: array
+                            items:
+                                type: string
+                        featured:
+                            type: boolean
+                        repoUrl:
+                            type: string
+                            format: uri
+                        playStoreUrl:
+                            type: string
+                            format: uri
+        CollectionEntryMusic:
+            type: object
+            properties:
+                id:
+                    type: string
+                data:
+                    type: object
+                    properties:
+                        title:
+                            type: string
+                        year:
+                            type: string
+                        genre:
+                            type: string
+                        type:
+                            type: string
+                            enum: [Album, EP, Single]
+                        isUpcoming:
+                            type: boolean
+                        presaveLink:
+                            type: string
+                            format: uri
+                        links:
+                            type: object
+                            properties:
+                                spotify: { type: string, format: uri }
+                                apple: { type: string, format: uri }
+                                deezer: { type: string, format: uri }
+                                tidal: { type: string, format: uri }
+                                amazon: { type: string, format: uri }
+                                youtube: { type: string, format: uri }
+                                bandcamp: { type: string, format: uri }
+        CollectionEntryBio:
+            type: object
+            properties:
+                id:
+                    type: string
+                data:
+                    type: object
+                    properties:
+                        heroTitle: { type: string }
+                        heroSubtitle: { type: string }
+                        role: { type: string }
+                        title: { type: string }
+                        description: { type: string }
+                        paragraph1: { type: string }
+                        paragraph2: { type: string }

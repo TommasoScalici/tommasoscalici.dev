@@ -1,0 +1,36 @@
+{
+    "name": "Tommaso Scalici Portfolio API Catalog",
+    "description": "Catalog of available pages and data for the Tommaso Scalici portfolio.",
+    "endpoints": [
+        {
+            "path": "/",
+            "method": "GET",
+            "description": "Home page with hero section and overview."
+        },
+        {
+            "path": "/it/",
+            "method": "GET",
+            "description": "Pagina iniziale in italiano."
+        },
+        {
+            "path": "/api/projects.json",
+            "method": "GET",
+            "description": "JSON data for software projects."
+        },
+        {
+            "path": "/api/music.json",
+            "method": "GET",
+            "description": "JSON data for musical releases."
+        },
+        {
+            "path": "/api/bio.json",
+            "method": "GET",
+            "description": "JSON data for biography and role information."
+        },
+        {
+            "path": "/llms.txt",
+            "method": "GET",
+            "description": "Structured summary for LLMs."
+        }
+    ]
+}

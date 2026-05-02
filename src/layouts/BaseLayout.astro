@@ -3,6 +3,13 @@ import '@fontsource-variable/inter';
 import '@fontsource-variable/jetbrains-mono';
 import '../styles/global.css';
 
+import {
+    ENABLE_FACEBOOK_PIXEL,
+    ENABLE_TIKTOK_PIXEL,
+    PUBLIC_FACEBOOK_PIXEL_ID,
+    PUBLIC_TIKTOK_PIXEL_ID,
+} from 'astro:env/client';
+
 import AnalyticsHead from '../components/head/AnalyticsHead.astro';
 import ConsentManager from '../components/layout/ConsentManager.astro';
 import CookieBanner from '../components/layout/CookieBanner.astro';
@@ -11,11 +18,9 @@ interface Props {
     title: string;
     lang?: string;
     gaId?: string;
-    fbPixelId?: string;
-    tiktokPixelId?: string;
 }
 
-const { title, lang = 'en', gaId = 'G-LMT1M9750Q', fbPixelId, tiktokPixelId } = Astro.props;
+const { title, lang = 'en', gaId = 'G-LMT1M9750Q' } = Astro.props;
 ---
 
 <!doctype html>
@@ -27,10 +32,16 @@ const { title, lang = 'en', gaId = 'G-LMT1M9750Q', fbPixelId, tiktokPixelId } = 
 
         <!-- Preconnect to analytics domains -->
         <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-        <link rel="dns-prefetch" href="https://connect.facebook.net" />
-        <link rel="dns-prefetch" href="https://analytics.tiktok.com" />
+        {ENABLE_FACEBOOK_PIXEL && <link rel="dns-prefetch" href="https://connect.facebook.net" />}
+        {ENABLE_TIKTOK_PIXEL && <link rel="dns-prefetch" href="https://analytics.tiktok.com" />}
 
-        <AnalyticsHead gaId={gaId} fbPixelId={fbPixelId} tiktokPixelId={tiktokPixelId} />
+        <AnalyticsHead
+            gaId={gaId}
+            fbPixelId={PUBLIC_FACEBOOK_PIXEL_ID}
+            tiktokPixelId={PUBLIC_TIKTOK_PIXEL_ID}
+            enableFbPixel={ENABLE_FACEBOOK_PIXEL}
+            enableTiktokPixel={ENABLE_TIKTOK_PIXEL}
+        />
 
         <slot name="head" />
     </head>

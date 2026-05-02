@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1",
+    "name_for_model": "TommasoScaliciPortfolio",
+    "name_for_human": "Tommaso Scalici Portfolio",
+    "description_for_model": "Access structured data about Tommaso Scalici, a Senior Software Engineer and Musician. This API provides information on software projects, tech stacks, musical releases, and biographical details.",
+    "description_for_human": "Explore the projects and music of Tommaso Scalici.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "https://tommasoscalici.dev/.well-known/openapi.yaml",
+        "is_user_authenticated": false
+    },
+    "logo_url": "https://tommasoscalici.dev/apple-touch-icon.png",
+    "contact_email": "tommaso.scalici.1991@gmail.com",
+    "legal_info_url": "https://tommasoscalici.dev/privacy-policy/"
+}

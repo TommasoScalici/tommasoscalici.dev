@@ -38,6 +38,8 @@ export const ui = {
             'I use analytics to optimize the user flow and understand how my audience interacts with my projects. No personal data is sold.',
         'cookie.deny': 'Deny',
         'cookie.accept': 'Accept',
+        '404.message': "Looks like you've reached a dead end in the matrix.",
+        '404.backHome': 'Back to Home',
     },
     it: {
         'nav.home': 'Home',
@@ -72,6 +74,8 @@ export const ui = {
             'Utilizzo strumenti di analisi per ottimizzare il flusso utente e capire come il mio pubblico interagisce con i miei progetti. Nessun dato personale viene venduto.',
         'cookie.deny': 'Rifiuta',
         'cookie.accept': 'Accetta',
+        '404.message': 'Sembra che tu abbia raggiunto un vicolo cieco in Matrix.',
+        '404.backHome': 'Torna alla Home',
     },
 } as const;
 

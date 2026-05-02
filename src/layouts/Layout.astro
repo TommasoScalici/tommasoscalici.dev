@@ -128,6 +128,26 @@ const copyrightDate =
 
             checkLanguage();
         </script>
+        <!-- Machine Readability & Agent Discovery -->
+        <link
+            rel="alternate"
+            type="application/json"
+            href="/api/projects.json"
+            title="Projects Data (JSON)"
+        />
+        <link
+            rel="alternate"
+            type="application/json"
+            href="/api/music.json"
+            title="Music Data (JSON)"
+        />
+        <link
+            rel="service"
+            type="application/yaml"
+            href="/.well-known/openapi.yaml"
+            title="API Specification (OpenAPI)"
+        />
+        <link rel="help" href="/llms.txt" title="LLM Documentation" />
         <SEOHead title={title} description={description} />
         <ClientRouter />
     </Fragment>

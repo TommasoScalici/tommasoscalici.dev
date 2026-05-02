@@ -1,0 +1,31 @@
+{
+    "mcp_version": "1.0",
+    "name": "tommasoscalici.dev",
+    "description": "Portfolio of Tommaso Scalici",
+    "capabilities": {
+        "resources": [
+            {
+                "uri": "https://tommasoscalici.dev/llms.txt",
+                "name": "Profile Summary",
+                "mimeType": "text/plain"
+            },
+            {
+                "uri": "https://tommasoscalici.dev/.well-known/api-catalog.json",
+                "name": "API Catalog",
+                "mimeType": "application/json"
+            },
+            {
+                "uri": "https://tommasoscalici.dev/api/projects.json",
+                "name": "Projects Data",
+                "mimeType": "application/json",
+                "documentation": "https://tommasoscalici.dev/.well-known/openapi.yaml"
+            },
+            {
+                "uri": "https://tommasoscalici.dev/api/music.json",
+                "name": "Music Data",
+                "mimeType": "application/json",
+                "documentation": "https://tommasoscalici.dev/.well-known/openapi.yaml"
+            }
+        ]
+    }
+}

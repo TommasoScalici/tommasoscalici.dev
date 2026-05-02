@@ -1,0 +1,6 @@
+Contact: mailto:tommaso.scalici.1991@gmail.com
+Expires: 2027-01-01T00:00:00.000Z
+Preferred-Languages: en, it
+Canonical: https://tommasoscalici.dev/.well-known/security.txt
+Policy: https://tommasoscalici.dev/privacy-policy/
+Hiring: https://tommasoscalici.dev/#projects

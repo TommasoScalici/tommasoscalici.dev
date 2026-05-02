@@ -1,6 +1,5 @@
 ---
 import { getImage, Picture } from 'astro:assets';
-import { PUBLIC_FACEBOOK_PIXEL_ID, PUBLIC_TIKTOK_PIXEL_ID } from 'astro:env/client';
 
 import { normalizePath } from '../lib/seo';
 import BaseLayout from './BaseLayout.astro';
@@ -47,11 +46,7 @@ const gradientClasses =
         : 'from-[#00f3ff] via-[#ff0055] to-[#00f3ff]';
 ---
 
-<BaseLayout
-    title={title}
-    fbPixelId={PUBLIC_FACEBOOK_PIXEL_ID}
-    tiktokPixelId={PUBLIC_TIKTOK_PIXEL_ID}
->
+<BaseLayout title={title}>
     <Fragment slot="head">
         <!-- SEO -->
         <meta name="description" content={description} />

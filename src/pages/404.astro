@@ -1,0 +1,49 @@
+---
+import { defaultLang, ui } from '../i18n/ui';
+import Layout from '../layouts/Layout.astro';
+
+const lang = defaultLang;
+const t = ui[lang];
+const itT = ui['it'];
+
+const title = '404 | Page Not Found';
+const description = 'The page you are looking for does not exist.';
+---
+
+<Layout title={title} description={description} lang={lang}>
+    <div class="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
+        <h1
+            class="mb-4 bg-linear-to-r from-cyan-500 to-purple-600 bg-clip-text font-mono text-9xl font-bold text-transparent"
+        >
+            404
+        </h1>
+        <p id="error-message" class="text-muted mb-8 text-xl md:text-2xl">
+            {t['404.message']}
+        </p>
+        <a
+            id="back-home"
+            href="/"
+            class="border-primary text-primary hover:bg-primary/10 hover:shadow-primary-glow rounded-full border px-8 py-3 font-bold transition-all duration-300"
+        >
+            {t['404.backHome']}
+        </a>
+    </div>
+
+    <script
+        is:inline
+        define:vars={{ itMessage: itT['404.message'], itBackHome: itT['404.backHome'] }}
+    >
+        // Client-side localization for 404 page
+        const path = window.location.pathname;
+        if (path.startsWith('/it/')) {
+            const messageEl = document.getElementById('error-message');
+            const linkEl = document.getElementById('back-home');
+            if (messageEl) messageEl.textContent = itMessage;
+            if (linkEl) {
+                linkEl.textContent = itBackHome;
+                linkEl.href = '/it/';
+            }
+            document.title = '404 | Pagina Non Trovata';
+        }
+    </script>
+</Layout>

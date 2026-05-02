@@ -1,0 +1,34 @@
+# Tommaso Scalici
+
+Senior Software Engineer & Prog Metal Musician.
+
+## Bio
+Senior Software Engineer specialized in Flutter, React, Astro, and Cloud AI, with an enterprise background in .NET, Azure, and SharePoint. Based in Palermo, Italy. Combines engineering rigor with artistic creativity from progressive metal composition.
+
+## Skills
+- **Frontend**: Flutter, React, Astro, Tailwind CSS
+- **Backend/Enterprise**: .NET, Azure, SharePoint, Cloud Architectures
+- **AI**: Cloud AI integration, LLM-based tools
+- **Music**: Prog Metal composition, Soundtrack design, 7-string guitar
+
+## Projects
+- **Tax Code Flutter**: Italian fiscal code calculator with a focus on UI/UX.
+- **Smart Spotify Playlist Curator**: AI-driven tool for managing Spotify playlists.
+- **MathExtensions**: Specialized C# library for mathematical operations.
+- **MVVMExtensions**: Library to simplify MVVM patterns in .NET applications.
+- **tommasoscalici.dev**: This portfolio, built with Astro and Tailwind CSS.
+
+## Socials & Contact
+- **LinkedIn**: https://www.linkedin.com/in/tommasoscalici
+- **GitHub**: https://github.com/TommasoScalici
+- **Instagram**: https://www.instagram.com/tommasoscalici91
+- **Email**: tommaso [dot] scalici [dot] 1991 [at] gmail [dot] com (for inquiries and collaborations)
+
+## Music
+- **Inner Thoughts**: Progressive metal project.
+- **Sinestesie**: Atmospheric soundscapes.
+- **Random Access Thoughts**: Experimental tracks.
+
+## Machine Readable Data
+- **API Catalog**: https://tommasoscalici.dev/.well-known/api-catalog.json
+- **MCP Config**: https://tommasoscalici.dev/.well-known/mcp/config.json

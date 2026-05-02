@@ -6,5 +6,11 @@
         "nodejs_compat",
         "disable_nodejs_process_v2"
     ],
-    "pages_build_output_dir": "./dist"
+    "pages_build_output_dir": "./dist",
+    "vars": {
+        "PUBLIC_FACEBOOK_PIXEL_ID": "266069036512109",
+        "PUBLIC_TIKTOK_PIXEL_ID": "D5EOGDBC77UEEICND2UG",
+        "ENABLE_FACEBOOK_PIXEL": false,
+        "ENABLE_TIKTOK_PIXEL": false
+    }
 }

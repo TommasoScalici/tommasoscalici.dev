@@ -3,12 +3,22 @@ interface Props {
     gaId?: string;
     fbPixelId?: string;
     tiktokPixelId?: string;
+    enableFbPixel?: boolean;
+    enableTiktokPixel?: boolean;
 }
 
 import analyticsScript from '../../scripts/analytics.js?raw';
 
-const { gaId, fbPixelId, tiktokPixelId } = Astro.props;
-const hasAnalytics = [gaId, fbPixelId, tiktokPixelId].some((id) => !!id);
+const {
+    gaId,
+    fbPixelId,
+    tiktokPixelId,
+    enableFbPixel = false,
+    enableTiktokPixel = false,
+} = Astro.props;
+const hasAnalytics = [gaId, enableFbPixel && fbPixelId, enableTiktokPixel && tiktokPixelId].some(
+    (id) => !!id,
+);
 ---
 
 <!-- Analytics Configuration -->{
@@ -19,8 +29,8 @@ const hasAnalytics = [gaId, fbPixelId, tiktokPixelId].some((id) => !!id);
                 set:html={`
                 window.ANALYTICS_CONFIG = {
                     gaId: ${JSON.stringify(gaId)},
-                    fbPixelId: ${JSON.stringify(fbPixelId)},
-                    tiktokPixelId: ${JSON.stringify(tiktokPixelId)},
+                    fbPixelId: ${JSON.stringify(enableFbPixel ? fbPixelId : undefined)},
+                    tiktokPixelId: ${JSON.stringify(enableTiktokPixel ? tiktokPixelId : undefined)},
                 };
             `}
             />
