@@ -1,3 +1,15 @@
+# [1.22.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.21.0...v1.22.0) (2026-05-02)
+
+
+### Bug Fixes
+
+* add explicit CollectionEntry types in API endpoints to satisfy no-unsafe-assignment ([42931f8](https://github.com/TommasoScalici/tommasoscalici.dev/commit/42931f8e1e422c5672cf3d53459d5d53f43136e1))
+
+
+### Features
+
+* add agent readiness, privacy-first analytics, localized 404 & hero cleanup ([6852140](https://github.com/TommasoScalici/tommasoscalici.dev/commit/6852140839e1b877ff59d94f8baf9cf5ab6a26ef))
+
 # [1.21.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.20.1...v1.21.0) (2026-04-11)
 
 
