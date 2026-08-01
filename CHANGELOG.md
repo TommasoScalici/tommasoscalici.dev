@@ -1,3 +1,10 @@
+# [1.24.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.23.0...v1.24.0) (2026-08-01)
+
+
+### Features
+
+* add releaseDate field and sort discography chronologically descending ([eeadfb1](https://github.com/TommasoScalici/tommasoscalici.dev/commit/eeadfb1393dbd3c38b38a738ea3426a2974858a1))
+
 # [1.23.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.22.0...v1.23.0) (2026-08-01)
 
 
