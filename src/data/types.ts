@@ -23,6 +23,7 @@ export interface PlatformLinks {
 export interface MusicRelease {
     title: string;
     year: string;
+    releaseDate?: string;
     genre: string;
     coverImage: ImageMetadata;
     coverImageSet?: {

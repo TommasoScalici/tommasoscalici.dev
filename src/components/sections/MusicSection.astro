@@ -4,9 +4,11 @@ import { getCollection } from 'astro:content';
 import { defaultLang, ui } from '../../i18n/ui';
 import MusicReleaseCard from '../cards/MusicReleaseCard.astro';
 
-const musicReleases = (await getCollection('music')).sort(
-    (a, b) => parseInt(b.data.year) - parseInt(a.data.year),
-);
+const musicReleases = (await getCollection('music')).sort((a, b) => {
+    const dateA = a.data.releaseDate ?? a.data.year;
+    const dateB = b.data.releaseDate ?? b.data.year;
+    return dateB.localeCompare(dateA);
+});
 
 const { lang } = Astro.props;
 const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];

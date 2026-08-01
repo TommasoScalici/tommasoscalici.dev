@@ -81,6 +81,10 @@ const music = defineCollection({
             .object({
                 title: safeString(1, 200),
                 year: yearSchema,
+                releaseDate: z
+                    .string()
+                    .regex(/^\d{4}-\d{2}-\d{2}$/, 'Must be YYYY-MM-DD format')
+                    .optional(),
                 genre: safeString(1, 100),
                 coverImage: image(),
                 type: z.enum(['Album', 'EP', 'Single']),
