@@ -83,7 +83,7 @@ export const usesData: UsesCategory[] = [
                     en: 'For composition and transcription.',
                     it: 'Per composizione e trascrizione.',
                 },
-                url: 'https://www.guitar-pro.com/',
+                url: 'https://www.guitar-pro.com/?ae=1200',
             },
             {
                 name: 'Fender Studio',
@@ -124,6 +124,22 @@ export const usesData: UsesCategory[] = [
                     it: 'Proteggi la tua musica da playlist bot e stream falsi.',
                 },
                 url: 'https://artist.tools/?via=tommaso',
+            },
+            {
+                name: 'Songstats',
+                description: {
+                    en: 'Music analytics platform for artists and record labels.',
+                    it: 'Piattaforma di analytics musicale per artisti ed etichette discografiche.',
+                },
+                url: 'https://songstats.com/app?ref=TOMMASOSCALICI',
+            },
+            {
+                name: 'PlaylistPanda',
+                description: {
+                    en: 'Submit your music to independent Spotify playlist curators.',
+                    it: 'Invia la tua musica a curatori indipendenti di playlist Spotify.',
+                },
+                url: 'https://playlistpanda.com/c/tommaso-scalici?ref=cmpv54w9b000704jnxq0d5ljw',
             },
             // {
             //     name: 'PlaylistHub',

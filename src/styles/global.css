@@ -180,6 +180,12 @@
     [role='button'] {
         cursor: pointer;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto !important;
+        }
+    }
 }
 
 /* Custom Utilities for complexity not handled by simple @theme */

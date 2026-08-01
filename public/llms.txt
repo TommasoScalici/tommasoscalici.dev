@@ -1,34 +1,37 @@
 # Tommaso Scalici
 
-Senior Software Engineer & Prog Metal Musician.
+> Senior Software Engineer & Prog Metal Musician bridging software engineering and progressive metal. Based in Palermo, Italy.
 
-## Bio
-Senior Software Engineer specialized in Flutter, React, Astro, and Cloud AI, with an enterprise background in .NET, Azure, and SharePoint. Based in Palermo, Italy. Combines engineering rigor with artistic creativity from progressive metal composition.
+## Overview
+Senior Software Engineer specialized in Flutter, React, Astro, and Cloud AI, with an enterprise background in .NET, Azure, and SharePoint. Combines engineering rigor with artistic creativity from progressive metal composition.
 
-## Skills
-- **Frontend**: Flutter, React, Astro, Tailwind CSS
-- **Backend/Enterprise**: .NET, Azure, SharePoint, Cloud Architectures
-- **AI**: Cloud AI integration, LLM-based tools
-- **Music**: Prog Metal composition, Soundtrack design, 7-string guitar
+## Core Capabilities & Technical Skills
+- **Frontend**: [Flutter](https://flutter.dev), [React](https://react.dev), [Astro](https://astro.build), [Tailwind CSS](https://tailwindcss.com)
+- **Backend & Cloud**: .NET, C#, Azure, SharePoint, Cloud Architectures
+- **Artificial Intelligence**: Cloud AI integration, LLM-based tools, agentic workflows
+- **Music & Production**: Prog Metal composition, Soundtrack design, 7-string guitar
 
-## Projects
-- **Tax Code Flutter**: Italian fiscal code calculator with a focus on UI/UX.
-- **Smart Spotify Playlist Curator**: AI-driven tool for managing Spotify playlists.
-- **MathExtensions**: Specialized C# library for mathematical operations.
-- **MVVMExtensions**: Library to simplify MVVM patterns in .NET applications.
-- **tommasoscalici.dev**: This portfolio, built with Astro and Tailwind CSS.
+## Featured Projects
+- [Tax Code Flutter](https://tommasoscalici.dev/apps/taxcode/privacy-policy/): Italian fiscal code calculator built with Flutter focusing on clean architecture and UI/UX.
+- [Smart Spotify Playlist Curator](https://github.com/TommasoScalici/smart-spotify-playlist-curator): AI-driven tool for organizing and curating Spotify playlists.
+- [MathExtensions](https://github.com/TommasoScalici/MathExtensions): Specialized C# extension library for high-performance mathematical operations.
+- [MVVMExtensions](https://github.com/TommasoScalici/MVVMExtensions): Lightweight library simplifying the Model-View-ViewModel pattern in .NET applications.
+- [tommasoscalici.dev](https://tommasoscalici.dev): Personal portfolio website built with Astro 7, TypeScript, and Tailwind CSS v4.
 
-## Socials & Contact
-- **LinkedIn**: https://www.linkedin.com/in/tommasoscalici
-- **GitHub**: https://github.com/TommasoScalici
-- **Instagram**: https://www.instagram.com/tommasoscalici91
-- **Email**: tommaso [dot] scalici [dot] 1991 [at] gmail [dot] com (for inquiries and collaborations)
+## Social & Professional Links
+- [LinkedIn Profile](https://www.linkedin.com/in/tommasoscalici): Professional background and enterprise engineering experience.
+- [GitHub Profile](https://github.com/TommasoScalici): Open-source repositories and code projects.
+- [Instagram Profile](https://www.instagram.com/tommasoscalici91): Personal and music updates.
+- [Email Contact](mailto:tommaso.scalici.1991@gmail.com): Direct contact for engineering and music collaborations.
 
-## Music
-- **Inner Thoughts**: Progressive metal project.
-- **Sinestesie**: Atmospheric soundscapes.
-- **Random Access Thoughts**: Experimental tracks.
+## Discography & Music Projects
+- [Inner Thoughts](https://tommasoscalici.dev/prog): Progressive metal project featuring complex rhythms and technical guitar work.
+- [Sinestesie](https://tommasoscalici.dev/lofi): Atmospheric ambient and lofi soundscapes.
+- [Random Access Thoughts](https://tommasoscalici.dev/prog): Experimental music tracks and instrumental improvisations.
 
-## Machine Readable Data
-- **API Catalog**: https://tommasoscalici.dev/.well-known/api-catalog.json
-- **MCP Config**: https://tommasoscalici.dev/.well-known/mcp/config.json
+## Machine Readable Endpoints & Specifications
+- [Projects Data API](https://tommasoscalici.dev/api/projects.json): JSON endpoint exposing structured project metadata.
+- [Music Data API](https://tommasoscalici.dev/api/music.json): JSON endpoint exposing structured discography metadata.
+- [API Catalog](https://tommasoscalici.dev/.well-known/api-catalog.json): Standardized API discovery specification catalog.
+- [OpenAPI Spec](https://tommasoscalici.dev/.well-known/openapi.yaml): Full OpenAPI v3 specification for site endpoints.
+- [MCP Config](https://tommasoscalici.dev/.well-known/mcp/config.json): Model Context Protocol configuration for AI agents.
