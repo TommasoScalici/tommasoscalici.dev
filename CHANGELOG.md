@@ -1,3 +1,10 @@
+# [1.23.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.22.0...v1.23.0) (2026-08-01)
+
+
+### Features
+
+* upgrade to Astro 7 & Vite 8, fix security vulnerabilities, add upcoming album & playlist, update referral links ([ea759c6](https://github.com/TommasoScalici/tommasoscalici.dev/commit/ea759c605df34413c86a0bfd4cfbd12f3bd60a7c))
+
 # [1.22.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.21.0...v1.22.0) (2026-05-02)
 
 
