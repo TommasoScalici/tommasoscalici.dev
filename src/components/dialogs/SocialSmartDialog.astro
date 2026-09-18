@@ -49,35 +49,28 @@ const iconMapping: Record<string, string> = {
 
     <!-- Header -->
     <div class="mb-6 flex flex-col items-center">
-        <h3 class="text-main font-mono text-lg font-bold">
-            {title}
-        </h3>
+        <h3 class="text-main font-mono text-lg font-bold">{title}</h3>
     </div>
 
     <!-- Links Grid -->
     <div class="custom-scrollbar flex max-h-[60vh] flex-col gap-3 overflow-y-auto pr-2">
-        {
-            links.map((link) => (
-                <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-track-social
-                    data-track-type={trackingType}
-                    data-track-name={trackingName}
-                    data-track-item={link.label}
-                    class={`border-glass-border/5 group bg-glass-bg/5 hover:bg-glass-bg/10 flex w-full items-center gap-3 rounded-xl border p-3 transition-all ${link.hoverBorder}`}
-                >
-                    <span class={`h-6 w-6 text-gray-400 transition-colors ${link.color}`}>
-                        <Icon
-                            name={iconMapping[link.icon] || 'lucide:link'}
-                            class="h-full w-full"
-                        />
-                    </span>
-                    <span class="text-muted group-hover:text-main font-medium">{link.label}</span>
-                </a>
-            ))
-        }
+        {links.map((link) => (
+            <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track-social
+                data-track-type={trackingType}
+                data-track-name={trackingName}
+                data-track-item={link.label}
+                class={`border-glass-border/5 group bg-glass-bg/5 hover:bg-glass-bg/10 flex w-full items-center gap-3 rounded-xl border p-3 transition-all ${link.hoverBorder}`}
+            >
+                <span class={`h-6 w-6 text-gray-400 transition-colors ${link.color}`}>
+                    <Icon name={iconMapping[link.icon] || 'lucide:link'} class="h-full w-full" />
+                </span>
+                <span class="text-muted group-hover:text-main font-medium">{link.label}</span>
+            </a>
+        ))}
     </div>
 </dialog>
 

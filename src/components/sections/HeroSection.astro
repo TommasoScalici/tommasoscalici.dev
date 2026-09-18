@@ -27,24 +27,16 @@ const bio = bioEntry.data;
             <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-[3fr_2fr] lg:gap-12">
                 {/* Text Content */}
                 <div class="max-w-4xl">
-                    <h1
-                        class="mb-8 font-mono text-4xl leading-none font-bold tracking-tighter md:text-5xl lg:text-7xl"
-                    >
-                        <span
-                            class="via-primary dark:via-primary block animate-pulse bg-linear-to-r from-gray-600 to-blue-400 bg-clip-text pb-2 text-transparent dark:from-white dark:to-blue-400"
-                        >
+                    <h1 class="mb-8 font-mono text-4xl leading-none font-bold tracking-tighter md:text-5xl lg:text-7xl">
+                        <span class="via-primary dark:via-primary block animate-pulse bg-linear-to-r from-gray-600 to-blue-400 bg-clip-text pb-2 text-transparent dark:from-white dark:to-blue-400">
                             {bio.heroTitle}
                         </span>
-                        <span
-                            class="via-secondary dark:via-secondary block animate-pulse bg-linear-to-r from-gray-600 to-purple-500 bg-clip-text pb-2 text-transparent dark:from-white dark:to-purple-500"
-                        >
+                        <span class="via-secondary dark:via-secondary block animate-pulse bg-linear-to-r from-gray-600 to-purple-500 bg-clip-text pb-2 text-transparent dark:from-white dark:to-purple-500">
                             {bio.heroSubtitle}
                         </span>
                     </h1>
 
-                    <p
-                        class="border-primary/50 text-muted mb-10 max-w-2xl border-l-2 pl-6 text-xl leading-relaxed md:text-2xl"
-                    >
+                    <p class="border-primary/50 text-muted mb-10 max-w-2xl border-l-2 pl-6 text-xl leading-relaxed md:text-2xl">
                         {bio.description}
                     </p>
 
@@ -71,20 +63,13 @@ const bio = bioEntry.data;
                 </div>
 
                 {/* Profile Image */}
-                <div
-                    class="animate-float relative order-first mb-8 flex items-center justify-center md:order-last md:mb-0 md:justify-end"
-                >
+                <div class="animate-float relative order-first mb-8 flex items-center justify-center md:order-last md:mb-0 md:justify-end">
                     <div class="relative h-48 w-48 md:h-64 md:w-64 lg:h-80 lg:w-80 xl:h-96 xl:w-96">
                         {/* Glow Effect */}
-                        <div
-                            class="from-primary/30 to-secondary/30 absolute inset-0 rotate-6 transform rounded-4xl bg-linear-to-tr blur-3xl"
-                        >
-                        </div>
+                        <div class="from-primary/30 to-secondary/30 absolute inset-0 rotate-6 transform rounded-4xl bg-linear-to-tr blur-3xl"></div>
 
                         {/* Image Container */}
-                        <div
-                            class="border-glass-border/10 hover:border-primary/50 hover:shadow-primary-glow-hover absolute inset-0 -rotate-3 transform overflow-hidden rounded-4xl border bg-white/40 shadow-2xl ring-1 ring-white/20 backdrop-blur-sm transition-all duration-500 hover:rotate-0 dark:border-white/10 dark:bg-black/40"
-                        >
+                        <div class="border-glass-border/10 hover:border-primary/50 hover:shadow-primary-glow-hover absolute inset-0 -rotate-3 transform overflow-hidden rounded-4xl border bg-white/40 shadow-2xl ring-1 ring-white/20 backdrop-blur-sm transition-all duration-500 hover:rotate-0 dark:border-white/10 dark:bg-black/40">
                             <Image
                                 src={profileImage}
                                 alt="Tommaso Scalici"
@@ -119,7 +104,10 @@ const bio = bioEntry.data;
                 stroke="currentColor"
                 class="text-main hover:text-primary h-10 w-10 animate-bounce transition-colors duration-600"
             >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
                 ></path>
             </svg>
         </a>

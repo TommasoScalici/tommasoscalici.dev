@@ -28,69 +28,63 @@ const getLocalized = (
     <section class="mx-auto min-h-screen max-w-7xl px-6 py-20">
         {/* Hero */}
         <div class="mb-16 text-center md:text-left">
-            <h1 class="mb-4 text-4xl font-bold tracking-tight md:text-6xl">
-                {heroTitle}
-            </h1>
+            <h1 class="mb-4 text-4xl font-bold tracking-tight md:text-6xl">{heroTitle}</h1>
             <p class="text-muted max-w-2xl text-xl">{heroSubtitle}</p>
         </div>
 
         {/* Grid Layout */}
         <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {
-                usesData.map((category, index) => {
-                    // Determine header color based on index or title (Adaptive palette)
-                    // Cyan for Dev (0), Purple for Music (1), Green/Gold for Growth (2)
-                    let titleColorClass = 'text-cyan-600 dark:text-cyan-400';
-                    if (index === 1) titleColorClass = 'text-purple-600 dark:text-purple-400';
-                    if (index === 2) titleColorClass = 'text-emerald-600 dark:text-emerald-400';
+            {usesData.map((category, index) => {
+                // Determine header color based on index or title (Adaptive palette)
+                // Cyan for Dev (0), Purple for Music (1), Green/Gold for Growth (2)
+                let titleColorClass = 'text-cyan-600 dark:text-cyan-400';
+                if (index === 1) titleColorClass = 'text-purple-600 dark:text-purple-400';
+                if (index === 2) titleColorClass = 'text-emerald-600 dark:text-emerald-400';
 
-                    let containerClass =
-                        'rounded-xl p-6 transition-colors group relative overflow-hidden bg-white/70 border border-glass-border shadow-glass-light backdrop-blur-xl dark:bg-white/5 dark:border-white/5 dark:shadow-none';
+                let containerClass =
+                    'rounded-xl p-6 transition-colors group relative overflow-hidden bg-white/70 border border-glass-border shadow-glass-light backdrop-blur-xl dark:bg-white/5 dark:border-white/5 dark:shadow-none';
 
-                    return (
-                        <div class={containerClass}>
-                            <h2 class={`mb-6 font-mono text-xl font-bold ${titleColorClass}`}>
-                                {getLocalized(category.title)}
-                            </h2>
-                            <ul class="space-y-6">
-                                {category.items.map((item) => (
-                                    <li class="flex flex-col gap-1">
-                                        <div class="flex items-center gap-2">
-                                            {item.url ? (
-                                                <a
-                                                    href={item.url}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    data-track-name={item.name}
-                                                    data-track-category={getLocalized(
-                                                        category.title,
-                                                    )}
-                                                    class="track-uses-link text-main group-hover/link:text-primary flex items-center gap-1 font-bold transition-colors hover:underline dark:text-white"
-                                                >
-                                                    {item.name}
-                                                    <Icon
-                                                        name="lucide:external-link"
-                                                        class="text-muted h-3 w-3"
-                                                    />
-                                                </a>
-                                            ) : (
-                                                <span class="text-main font-bold dark:text-white">
-                                                    {item.name}
-                                                </span>
-                                            )}
-                                        </div>
-                                        {item.description && (
-                                            <p class="text-muted text-sm leading-relaxed">
-                                                {getLocalized(item.description)}
-                                            </p>
+                return (
+                    <div class={containerClass}>
+                        <h2 class={`mb-6 font-mono text-xl font-bold ${titleColorClass}`}>
+                            {getLocalized(category.title)}
+                        </h2>
+                        <ul class="space-y-6">
+                            {category.items.map((item) => (
+                                <li class="flex flex-col gap-1">
+                                    <div class="flex items-center gap-2">
+                                        {item.url ? (
+                                            <a
+                                                href={item.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                data-track-name={item.name}
+                                                data-track-category={getLocalized(category.title)}
+                                                class="track-uses-link text-main group-hover/link:text-primary flex items-center gap-1 font-bold transition-colors hover:underline dark:text-white"
+                                            >
+                                                {item.name}
+                                                <Icon
+                                                    name="lucide:external-link"
+                                                    class="text-muted h-3 w-3"
+                                                />
+                                            </a>
+                                        ) : (
+                                            <span class="text-main font-bold dark:text-white">
+                                                {item.name}
+                                            </span>
                                         )}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    );
-                })
-            }
+                                    </div>
+                                    {item.description && (
+                                        <p class="text-muted text-sm leading-relaxed">
+                                            {getLocalized(item.description)}
+                                        </p>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                );
+            })}
         </div>
     </section>
 

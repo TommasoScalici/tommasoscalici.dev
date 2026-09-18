@@ -4,8 +4,8 @@
         "it": "Questo sito!"
     },
     "description": {
-        "en": "The site you're viewing right now.",
-        "it": "Il sito che stai visitando in questo momento."
+        "en": "Personal portfolio & music showcase built with Astro 7, TypeScript, and Tailwind CSS v4. Features a zero-JS by default architecture, Cloudflare Pages hosting, and a high-performance Cyber-Noir glassmorphic design.",
+        "it": "Portfolio personale e showcase musicale realizzato con Astro 7, TypeScript e Tailwind CSS v4. Architettura zero-JS di default, hosting su Cloudflare Pages ed estetica Cyber-Noir in glassmorphism ad alte prestazioni."
     },
     "techStack": ["Astro", "TypeScript", "Tailwind CSS", "Cloudflare"],
     "featured": true,

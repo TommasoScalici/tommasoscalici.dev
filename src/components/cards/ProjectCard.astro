@@ -10,84 +10,65 @@ interface Props {
 const { project } = Astro.props;
 ---
 
-<div
-    class="border-glass-border group shadow-glass-light hover:border-primary/50 relative flex h-full flex-col overflow-hidden rounded-2xl border bg-white/70 backdrop-blur-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,255,0.15)] dark:border-white/10 dark:bg-white/5 dark:shadow-none"
->
+<div class="border-glass-border group shadow-glass-light hover:border-primary/50 relative flex h-full flex-col overflow-hidden rounded-2xl border bg-white/70 backdrop-blur-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,255,0.15)] dark:border-white/10 dark:bg-white/5 dark:shadow-none">
     <div class="relative flex h-full flex-col p-6">
         <!-- Hover Gradient Effect -->
-        <div
-            class="from-primary/5 pointer-events-none absolute inset-0 bg-linear-to-br to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        >
-        </div>
+        <div class="from-primary/5 pointer-events-none absolute inset-0 bg-linear-to-br to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
 
         <div class="relative z-10 flex h-full flex-col">
             <div class="mb-4 flex items-start justify-between">
-                <div
-                    class="border-surface bg-background/50 group-hover:border-primary/30 rounded-lg border p-3 transition-colors"
-                >
+                <div class="border-surface bg-background/50 group-hover:border-primary/30 rounded-lg border p-3 transition-colors">
                     <Icon name="lucide:code" class="text-primary h-6 w-6" />
                 </div>
                 <div class="flex gap-2">
-                    {
-                        project.repoUrl && (
-                            <a
-                                href={project.repoUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="text-muted hover:bg-glass-bg/5 rounded-full p-2 transition-colors hover:text-white"
-                                aria-label="View Source Code"
-                            >
-                                <Icon name="simple-icons:github" class="h-5 w-5" />
-                            </a>
-                        )
-                    }
-                    {
-                        project.playStoreUrl && (
-                            <a
-                                href={project.playStoreUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="text-muted hover:bg-glass-bg/5 rounded-full p-2 transition-colors hover:text-white"
-                                aria-label="View on Google Play"
-                            >
-                                <Icon name="simple-icons:googleplay" class="h-5 w-5" />
-                            </a>
-                        )
-                    }
-                    {
-                        project.demoUrl && (
-                            <a
-                                href={project.demoUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="text-muted hover:bg-glass-bg/5 rounded-full p-2 transition-colors hover:text-white"
-                                aria-label="View Live Demo"
-                            >
-                                <Icon name="lucide:external-link" class="h-5 w-5" />
-                            </a>
-                        )
-                    }
+                    {project.repoUrl && (
+                        <a
+                            href={project.repoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-muted hover:bg-glass-bg/5 rounded-full p-2 transition-colors hover:text-white"
+                            aria-label="View Source Code"
+                        >
+                            <Icon name="simple-icons:github" class="h-5 w-5" />
+                        </a>
+                    )}
+                    {project.playStoreUrl && (
+                        <a
+                            href={project.playStoreUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-muted hover:bg-glass-bg/5 rounded-full p-2 transition-colors hover:text-white"
+                            aria-label="View on Google Play"
+                        >
+                            <Icon name="simple-icons:googleplay" class="h-5 w-5" />
+                        </a>
+                    )}
+                    {project.demoUrl && (
+                        <a
+                            href={project.demoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-muted hover:bg-glass-bg/5 rounded-full p-2 transition-colors hover:text-white"
+                            aria-label="View Live Demo"
+                        >
+                            <Icon name="lucide:external-link" class="h-5 w-5" />
+                        </a>
+                    )}
                 </div>
             </div>
 
-            <h3
-                class="text-main group-hover:text-primary mb-2 font-mono text-xl font-bold transition-colors"
-            >
+            <h3 class="text-main group-hover:text-primary mb-2 font-mono text-xl font-bold transition-colors">
                 {project.title}
             </h3>
 
-            <p class="text-muted mb-6 grow text-sm leading-relaxed">
-                {project.description}
-            </p>
+            <p class="text-muted mb-6 grow text-sm leading-relaxed">{project.description}</p>
 
             <div class="mt-auto flex flex-wrap gap-2">
-                {
-                    project.techStack.map((tech) => (
-                        <span class="border-surface text-muted group-hover:border-primary/20 group-hover:text-primary/90 rounded-full border bg-black/5 px-3 py-1 font-mono text-xs font-semibold transition-colors dark:bg-white/5">
-                            {tech}
-                        </span>
-                    ))
-                }
+                {project.techStack.map((tech) => (
+                    <span class="border-surface text-muted group-hover:border-primary/20 group-hover:text-primary/90 rounded-full border bg-black/5 px-3 py-1 font-mono text-xs font-semibold transition-colors dark:bg-white/5">
+                        {tech}
+                    </span>
+                ))}
             </div>
         </div>
     </div>

@@ -31,16 +31,12 @@ const dialogId = `dialog-${release.title.toLowerCase().replace(/[^a-z0-9]/g, '-'
 const trackingId = release.title.toLowerCase().replace(/[^a-z0-9]/g, '-');
 ---
 
-<div
-    class="border-glass-border group shadow-glass-light hover:border-secondary/50 hover:shadow-secondary-glow relative aspect-square overflow-hidden rounded-2xl border bg-white/70 backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-white/5 dark:shadow-none"
->
-    {
-        isUpcoming && (
-            <div class="border-primary text-primary shadow-primary-glow absolute top-0 right-0 z-10 m-4 rounded-md border bg-black/50 px-3 py-1 text-xs font-bold uppercase backdrop-blur-sm">
-                {t['card.comingSoon']}
-            </div>
-        )
-    }
+<div class="border-glass-border group shadow-glass-light hover:border-secondary/50 hover:shadow-secondary-glow relative aspect-square overflow-hidden rounded-2xl border bg-white/70 backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-white/5 dark:shadow-none">
+    {isUpcoming && (
+        <div class="border-primary text-primary shadow-primary-glow absolute top-0 right-0 z-10 m-4 rounded-md border bg-black/50 px-3 py-1 text-xs font-bold uppercase backdrop-blur-sm">
+            {t['card.comingSoon']}
+        </div>
+    )}
 
     <Picture
         src={release.coverImage}
@@ -58,24 +54,15 @@ const trackingId = release.title.toLowerCase().replace(/[^a-z0-9]/g, '-');
 
     <div
         class={`absolute inset-0 bg-linear-to-t from-black via-black/50 to-transparent opacity-90 transition-opacity duration-500 ${!isUpcoming ? 'group-hover:opacity-30' : ''}`}
-    >
-    </div>
+    ></div>
 
-    <div
-        class="absolute inset-0 flex flex-col justify-end p-6 drop-shadow-md transition-all duration-300 group-hover:drop-shadow-xl"
-    >
-        <div
-            class="translate-y-4 transform transition-transform duration-500 group-hover:translate-y-0"
-        >
-            <span
-                class="text-secondary group-hover:text-primary mb-1 block font-mono text-xs tracking-wider uppercase transition-all duration-300 group-hover:font-bold"
-            >
+    <div class="absolute inset-0 flex flex-col justify-end p-6 drop-shadow-md transition-all duration-300 group-hover:drop-shadow-xl">
+        <div class="translate-y-4 transform transition-transform duration-500 group-hover:translate-y-0">
+            <span class="text-secondary group-hover:text-primary mb-1 block font-mono text-xs tracking-wider uppercase transition-all duration-300 group-hover:font-bold">
                 {release.genre}
                 {release.year ? ` • ${release.year}` : ''}
             </span>
-            <h3 class="mb-1 text-2xl leading-tight font-bold text-white">
-                {release.title}
-            </h3>
+            <h3 class="mb-1 text-2xl leading-tight font-bold text-white">{release.title}</h3>
             <p class="mb-4 text-sm text-gray-400">{release.type}</p>
 
             <button
@@ -92,48 +79,44 @@ const trackingId = release.title.toLowerCase().replace(/[^a-z0-9]/g, '-');
                         : 'translate-y-4 opacity-0 hover:scale-105 hover:bg-secondary hover:shadow-[0_0_25px_rgba(255,255,255,0.6)] hover:brightness-110 group-hover:translate-y-0 group-hover:opacity-100'
                 }`}
             >
-                {
-                    isUpcoming ? (
-                        release.presaveLink ? (
-                            <>
-                                <Icon
-                                    name="lucide:play"
-                                    class="h-4 w-4 fill-current transition-transform group-hover:scale-110"
-                                />
-                                <span>{t['card.presave']}</span>
-                            </>
-                        ) : (
-                            <span>
-                                {t['card.comingYear']} {release.year}
-                            </span>
-                        )
-                    ) : (
+                {isUpcoming ? (
+                    release.presaveLink ? (
                         <>
                             <Icon
                                 name="lucide:play"
                                 class="h-4 w-4 fill-current transition-transform group-hover:scale-110"
                             />
-                            <span>{t['card.listenNow']}</span>
+                            <span>{t['card.presave']}</span>
                         </>
+                    ) : (
+                        <span>
+                            {t['card.comingYear']} {release.year}
+                        </span>
                     )
-                }
+                ) : (
+                    <>
+                        <Icon
+                            name="lucide:play"
+                            class="h-4 w-4 fill-current transition-transform group-hover:scale-110"
+                        />
+                        <span>{t['card.listenNow']}</span>
+                    </>
+                )}
             </button>
         </div>
     </div>
 </div>
 
-{
-    !isUpcoming && (
-        <SmartLinkDialog
-            id={dialogId}
-            title={t['dialog.choosePlatform'] || 'Choose Platform'}
-            links={albumLinks}
-            trackingType="music_release"
-            trackingName={release.title}
-            trackingId={trackingId}
-        />
-    )
-}
+{!isUpcoming && (
+    <SmartLinkDialog
+        id={dialogId}
+        title={t['dialog.choosePlatform'] || 'Choose Platform'}
+        links={albumLinks}
+        trackingType="music_release"
+        trackingName={release.title}
+        trackingId={trackingId}
+    />
+)}
 
 <script>
     import { trackEvent } from '../../lib/analytics';

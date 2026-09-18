@@ -43,7 +43,7 @@ const currentTheme = themeConfig[theme];
 const gradientClasses =
     theme === 'lofi'
         ? 'from-indigo-500 via-sky-500 to-indigo-500'
-        : 'from-[#00f3ff] via-[#ff0055] to-[#00f3ff]';
+        : 'from-primary via-secondary to-primary';
 ---
 
 <BaseLayout title={title}>
@@ -84,18 +84,16 @@ const gradientClasses =
         <div
             class="absolute top-0 left-0 -z-10 h-full w-full scale-110 bg-cover bg-center bg-no-repeat"
             style={`${currentTheme.bgBlur} background-image: url('${optimizedBg.src}');`}
-        >
-        </div>
+        ></div>
 
         <div
-            class="w-[90%] max-w-[380px] rounded-3xl p-[30px_20px] text-center"
+            class="w-[90%] max-w-95 rounded-3xl p-[30px_20px] text-center"
             style={`${currentTheme.card} animation: floatUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);`}
         >
             <div class="group relative mx-auto mb-5 aspect-square w-full rounded-xl">
                 <div
                     class={`absolute -inset-1 animate-spin-slow rounded-xl bg-linear-to-r opacity-75 blur-lg ${gradientClasses}`}
-                >
-                </div>
+                ></div>
                 <Picture
                     src={coverImage}
                     alt={`${title} Cover`}
@@ -115,13 +113,15 @@ const gradientClasses =
             <div
                 class={`mt-5 text-[11px] ${theme === 'lofi' ? 'text-[#484f58]' : 'text-[#666]'} border-none outline-none bg-transparent`}
             >
-                Curated by <a
+                Curated by{' '}
+                <a
                     href="https://tommasoscalici.dev"
                     target="_blank"
                     rel="noopener noreferrer"
                     class="border-b border-transparent bg-transparent font-semibold text-inherit no-underline transition-colors duration-200 outline-none hover:border-white hover:text-white"
-                    >Tommaso Scalici</a
                 >
+                    Tommaso Scalici
+                </a>
             </div>
         </div>
     </div>

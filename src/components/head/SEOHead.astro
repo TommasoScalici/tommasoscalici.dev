@@ -38,8 +38,7 @@ const ogImageUrl = new URL(image, siteUrl).toString();
 const combinedSchema = getCombinedSchema(canonicalURL, profileUrl);
 ---
 
-<script is:inline type="application/ld+json" set:html={JSON.stringify(combinedSchema)} />
-
+<script is:inline type="application/ld+json" set:html={JSON.stringify(combinedSchema)}></script>
 <SEO
     title={title}
     description={description}

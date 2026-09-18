@@ -21,20 +21,19 @@ const hasAnalytics = [gaId, enableFbPixel && fbPixelId, enableTiktokPixel && tik
 );
 ---
 
-<!-- Analytics Configuration -->{
-    hasAnalytics && (
-        <>
-            <script
-                is:inline
-                set:html={`
+<!-- Analytics Configuration -->
+{hasAnalytics && (
+    <>
+        <script
+            is:inline
+            set:html={`
                 window.ANALYTICS_CONFIG = {
                     gaId: ${JSON.stringify(gaId)},
                     fbPixelId: ${JSON.stringify(enableFbPixel ? fbPixelId : undefined)},
                     tiktokPixelId: ${JSON.stringify(enableTiktokPixel ? tiktokPixelId : undefined)},
                 };
             `}
-            />
-            <script is:inline set:html={analyticsScript} />
-        </>
-    )
-}
+        ></script>
+        <script is:inline set:html={analyticsScript}></script>
+    </>
+)}

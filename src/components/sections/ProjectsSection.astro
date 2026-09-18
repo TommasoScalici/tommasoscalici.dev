@@ -46,14 +46,14 @@ const localizedProjects = projects.map((project: ProjectEntry) => {
                     <span class="text-primary">01.</span>
                     {t['section.projects.title']}
                 </h2>
-                <p class="text-muted">
-                    {t['section.projects.subtitle']}
-                </p>
+                <p class="text-muted">{t['section.projects.subtitle']}</p>
             </div>
         </div>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {localizedProjects.map((project) => <ProjectCard project={project} />)}
+            {localizedProjects.map((project) => (
+                <ProjectCard project={project} />
+            ))}
         </div>
     </div>
 </section>

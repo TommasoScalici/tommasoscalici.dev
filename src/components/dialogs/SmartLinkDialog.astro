@@ -48,36 +48,29 @@ const iconMapping: Record<string, string> = {
 
     <!-- Header -->
     <div class="mb-6 flex flex-col items-center">
-        <h3 class="text-main font-mono text-lg font-bold">
-            {title}
-        </h3>
+        <h3 class="text-main font-mono text-lg font-bold">{title}</h3>
     </div>
 
     <!-- Links Grid -->
     <div class="flex flex-col gap-3">
-        {
-            links.map((link) => (
-                <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-track-link
-                    data-track-type={trackingType}
-                    data-track-name={trackingName}
-                    data-track-ids={trackingId}
-                    data-track-item={link.label}
-                    class={`border-glass-border/5 group bg-glass-bg/5 hover:bg-glass-bg/10 flex w-full items-center gap-3 rounded-xl border p-3 transition-all ${link.hoverBorder}`}
-                >
-                    <span class={`text-muted transition-colors ${link.color}`}>
-                        <Icon
-                            name={iconMapping[link.icon] || 'simple-icons:spotify'}
-                            class="h-5 w-5"
-                        />
-                    </span>
-                    <span class="text-muted group-hover:text-main font-medium">{link.label}</span>
-                </a>
-            ))
-        }
+        {links.map((link) => (
+            <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track-link
+                data-track-type={trackingType}
+                data-track-name={trackingName}
+                data-track-ids={trackingId}
+                data-track-item={link.label}
+                class={`border-glass-border/5 group bg-glass-bg/5 hover:bg-glass-bg/10 flex w-full items-center gap-3 rounded-xl border p-3 transition-all ${link.hoverBorder}`}
+            >
+                <span class={`text-muted transition-colors ${link.color}`}>
+                    <Icon name={iconMapping[link.icon] || 'simple-icons:spotify'} class="h-5 w-5" />
+                </span>
+                <span class="text-muted group-hover:text-main font-medium">{link.label}</span>
+            </a>
+        ))}
     </div>
 </dialog>
 
