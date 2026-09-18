@@ -1,3 +1,10 @@
+# [1.25.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.24.0...v1.25.0) (2026-09-18)
+
+
+### Features
+
+* upgrade dependencies, refresh personal brand and redesign open graph card ([c7c80f0](https://github.com/TommasoScalici/tommasoscalici.dev/commit/c7c80f01ab5f4893e48f52a3d755f5ed13aff73f))
+
 # [1.24.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.23.0...v1.24.0) (2026-08-01)
 
 
