@@ -1,3 +1,10 @@
+## [1.26.2](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.26.1...v1.26.2) (2026-09-22)
+
+
+### Bug Fixes
+
+* **a11y:** decode Cloudflare obfuscated emails on client navigation ([577961d](https://github.com/TommasoScalici/tommasoscalici.dev/commit/577961d75fe4249d48019368cad4d26cfa5973d8))
+
 ## [1.26.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.26.0...v1.26.1) (2026-09-22)
 
 
