@@ -29,5 +29,4 @@ Allow: /
 User-agent: meta-externalagent
 Allow: /
 
-Disallow: /apps/
 Sitemap: https://tommasoscalici.dev/sitemap-index.xml
