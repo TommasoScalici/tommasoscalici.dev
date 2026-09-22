@@ -76,7 +76,7 @@ const trackingId = release.title.toLowerCase().replace(/[^a-z0-9]/g, '-');
                 class={`inline-flex transform items-center gap-2 rounded-full bg-secondary/90 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 border-none outline-none ${
                     isUpcoming && !release.presaveLink
                         ? 'translate-y-0 cursor-not-allowed bg-gray-700 text-gray-400 opacity-100 hover:bg-gray-700'
-                        : 'translate-y-4 opacity-0 hover:scale-105 hover:bg-secondary hover:shadow-[0_0_25px_rgba(255,255,255,0.6)] hover:brightness-110 group-hover:translate-y-0 group-hover:opacity-100'
+                        : 'hover:bg-secondary hover:shadow-secondary-glow translate-y-4 opacity-0 transition-all hover:scale-105 hover:brightness-110 group-hover:translate-y-0 group-hover:opacity-100'
                 }`}
             >
                 {isUpcoming ? (

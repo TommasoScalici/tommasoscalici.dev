@@ -2,6 +2,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 
 import { defaultLang, ui } from '../../i18n/ui';
+import { getLocalizedContent } from '../../lib/i18n-utils';
 import ProjectCard from '../cards/ProjectCard.astro';
 
 const projects = await getCollection('projects');
@@ -14,23 +15,23 @@ type ProjectEntry = CollectionEntry<'projects'>;
 
 const localizedProjects = projects.map((project: ProjectEntry) => {
     const data = project.data;
-    const localizedTitle =
-        typeof data.title === 'string'
-            ? data.title
-            : (data.title as Record<string, string>)[lang] ||
-              (data.title as Record<string, string>)[defaultLang] ||
-              '';
-    const localizedDescription =
-        typeof data.description === 'string'
-            ? data.description
-            : (data.description as Record<string, string>)[lang] ||
-              (data.description as Record<string, string>)[defaultLang] ||
-              '';
+    const title = getLocalizedContent(data.title, lang, defaultLang);
+    const description = getLocalizedContent(data.description, lang, defaultLang);
+
+    let demoUrl: string | undefined;
+    if (typeof data.demoUrl === 'string') {
+        demoUrl =
+            data.demoUrl.startsWith('/') && lang === 'it' ? `/it${data.demoUrl}` : data.demoUrl;
+    } else if (data.demoUrl) {
+        const localized = getLocalizedContent(data.demoUrl, lang, defaultLang);
+        demoUrl = localized || undefined;
+    }
 
     return {
         ...data,
-        title: localizedTitle,
-        description: localizedDescription,
+        title,
+        description,
+        demoUrl,
     };
 });
 ---
@@ -52,7 +53,14 @@ const localizedProjects = projects.map((project: ProjectEntry) => {
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {localizedProjects.map((project) => (
-                <ProjectCard project={project} />
+                <ProjectCard
+                    project={project}
+                    labels={{
+                        viewSource: t['aria.viewSource'],
+                        viewPlayStore: t['aria.viewPlayStore'],
+                        viewProject: t['aria.viewProject'],
+                    }}
+                />
             ))}
         </div>
     </div>

@@ -12,7 +12,7 @@ Senior Software Engineer specialized in Flutter, React, Astro, and Cloud AI, wit
 - **Music & Production**: Prog Metal composition, Soundtrack design, 7-string guitar
 
 ## Featured Projects
-- [Tax Code Flutter](https://tommasoscalici.dev/apps/taxcode/privacy-policy/): Italian fiscal code calculator built with Flutter focusing on clean architecture and UI/UX.
+- [Tax Code Flutter](https://tommasoscalici.dev/apps/taxcode/): Italian fiscal code calculator built with Flutter focusing on clean architecture and UI/UX.
 - [Smart Spotify Playlist Curator](https://github.com/TommasoScalici/smart-spotify-playlist-curator): AI-driven tool for organizing and curating Spotify playlists.
 - [MathExtensions](https://github.com/TommasoScalici/MathExtensions): Specialized C# extension library for high-performance mathematical operations.
 - [MVVMExtensions](https://github.com/TommasoScalici/MVVMExtensions): Lightweight library simplifying the Model-View-ViewModel pattern in .NET applications.
@@ -22,7 +22,7 @@ Senior Software Engineer specialized in Flutter, React, Astro, and Cloud AI, wit
 - [LinkedIn Profile](https://www.linkedin.com/in/tommasoscalici): Professional background and enterprise engineering experience.
 - [GitHub Profile](https://github.com/TommasoScalici): Open-source repositories and code projects.
 - [Instagram Profile](https://www.instagram.com/tommasoscalici91): Personal and music updates.
-- [Email Contact](mailto:tommaso.scalici.1991@gmail.com): Direct contact for engineering and music collaborations.
+- [Email Contact](mailto:contact@tommasoscalici.dev): Direct contact for engineering and music collaborations.
 
 ## Discography & Music Projects
 - [Inner Thoughts](https://tommasoscalici.dev/prog): Progressive metal project featuring complex rhythms and technical guitar work.

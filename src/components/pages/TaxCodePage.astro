@@ -1,0 +1,224 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import { TAX_CODE_CONFIG, TAX_CODE_STRINGS } from '../../data/taxcode';
+import Layout from '../../layouts/Layout.astro';
+import { getLocalizedContent } from '../../lib/i18n-utils';
+
+interface Props {
+    lang: 'en' | 'it';
+}
+
+const { lang } = Astro.props;
+
+const getLocalized = (
+    content: string | Record<string, string> | undefined,
+    fallbackKey: 'en' | 'it' = 'en',
+) => {
+    return getLocalizedContent(content, lang, fallbackKey);
+};
+
+const title = getLocalized(TAX_CODE_STRINGS.seo.title);
+const description = getLocalized(TAX_CODE_STRINGS.seo.description);
+const basePath = lang === 'it' ? '/it/apps/taxcode' : '/apps/taxcode';
+---
+
+<Layout title={title} description={description} lang={lang}>
+    <!-- Hero Section -->
+    <section class="relative px-6 pt-12 pb-16 md:pt-20 md:pb-24">
+        <div class="mx-auto max-w-5xl text-center">
+            <!-- Platform Badges -->
+            <div class="mb-6 flex flex-wrap items-center justify-center gap-2">
+                <span class="border-primary/30 bg-primary/10 text-primary inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-mono text-xs font-semibold">
+                    <Icon name="lucide:smartphone" class="h-3.5 w-3.5" />
+                    {TAX_CODE_STRINGS.hero.badges.android}
+                </span>
+                <span class="border-primary/30 bg-primary/10 text-primary inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-mono text-xs font-semibold">
+                    <Icon name="lucide:watch" class="h-3.5 w-3.5" />
+                    {TAX_CODE_STRINGS.hero.badges.wearOs}
+                </span>
+                <span class="border-surface text-muted inline-flex items-center gap-1.5 rounded-full border bg-black/5 px-3 py-1 font-mono text-xs font-semibold dark:bg-white/5">
+                    <Icon name="lucide:zap" class="h-3.5 w-3.5" />
+                    {TAX_CODE_STRINGS.hero.badges.flutter}
+                </span>
+                <span class="border-surface text-muted inline-flex items-center gap-1.5 rounded-full border bg-black/5 px-3 py-1 font-mono text-xs font-semibold dark:bg-white/5">
+                    <Icon name="lucide:shield" class="h-3.5 w-3.5" />
+                    {TAX_CODE_STRINGS.hero.badges.offlineFirst}
+                </span>
+            </div>
+
+            <!-- Main App Name (Strictly matching Google OAuth Console name) -->
+            <h1 class="text-main mb-4 font-mono text-4xl font-black tracking-tight md:text-6xl lg:text-7xl">
+                {TAX_CODE_STRINGS.hero.appNamePrefix}{' '}
+                <span class="text-primary">{TAX_CODE_STRINGS.hero.appNameSuffix}</span>
+            </h1>
+
+            <!-- Subtitle explaining app purpose -->
+            <p class="text-muted mx-auto mb-8 max-w-3xl text-lg leading-relaxed md:text-xl">
+                {getLocalized(TAX_CODE_STRINGS.hero.subtitle)}
+            </p>
+
+            <!-- Call To Actions -->
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a
+                    href={TAX_CODE_CONFIG.playStoreUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="bg-primary hover:shadow-primary-glow-hover text-inverse inline-flex items-center gap-2 rounded-xl px-6 py-3.5 font-mono text-sm font-bold transition-all duration-300 hover:scale-105"
+                >
+                    <Icon name="simple-icons:googleplay" class="h-5 w-5" />
+                    {getLocalized(TAX_CODE_STRINGS.hero.ctaPlayStore)}
+                </a>
+                <a
+                    href={TAX_CODE_CONFIG.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="border-glass-border hover:border-primary/50 text-main inline-flex items-center gap-2 rounded-xl border bg-white/70 px-6 py-3.5 font-mono text-sm font-semibold backdrop-blur-xl transition-all duration-300 hover:scale-105 dark:border-white/10 dark:bg-white/5"
+                >
+                    <Icon name="simple-icons:github" class="h-5 w-5" />
+                    {getLocalized(TAX_CODE_STRINGS.hero.ctaGitHub)}
+                </a>
+            </div>
+
+            <!-- Quick Legal Notice / Gov Disclaimer -->
+            <p class="text-muted mt-6 text-xs">{getLocalized(TAX_CODE_STRINGS.hero.disclaimer)}</p>
+        </div>
+    </section>
+
+    <!-- Key Features Grid -->
+    <section class="relative px-6 py-12 md:py-16">
+        <div class="mx-auto max-w-5xl">
+            <div class="mb-12 text-center">
+                <h2 class="text-main font-mono text-2xl font-bold tracking-tight md:text-3xl">
+                    {getLocalized(TAX_CODE_STRINGS.features.sectionTitle)}
+                </h2>
+                <p class="text-muted mt-2 text-sm md:text-base">
+                    {getLocalized(TAX_CODE_STRINGS.features.sectionSubtitle)}
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {TAX_CODE_STRINGS.features.items.map((feature) => (
+                    <div class="border-glass-border group hover:border-primary/50 hover:shadow-primary-glow relative flex flex-col rounded-2xl border bg-white/70 p-6 backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-white/5">
+                        <div class="border-surface bg-background/50 group-hover:border-primary/30 mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl border transition-colors">
+                            <Icon name={feature.icon} class="text-primary h-6 w-6" />
+                        </div>
+                        <h3 class="text-main group-hover:text-primary mb-2 font-mono text-lg font-bold transition-colors">
+                            {getLocalized(feature.title)}
+                        </h3>
+                        <p class="text-muted grow text-sm leading-relaxed">
+                            {getLocalized(feature.description)}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Google OAuth & Data Transparency Section -->
+    <section class="relative px-6 py-12 md:py-16">
+        <div class="mx-auto max-w-4xl">
+            <div class="border-glass-border shadow-glass-light relative overflow-hidden rounded-3xl border bg-white/70 p-8 backdrop-blur-xl md:p-12 dark:border-white/10 dark:bg-white/5 dark:shadow-none">
+                <div class="mb-6 flex items-center gap-3">
+                    <div class="border-primary/30 bg-primary/10 inline-flex h-10 w-10 items-center justify-center rounded-xl border">
+                        <Icon name="lucide:key-round" class="text-primary h-5 w-5" />
+                    </div>
+                    <div>
+                        <h2 class="text-main font-mono text-xl font-bold md:text-2xl">
+                            {getLocalized(TAX_CODE_STRINGS.oauth.title)}
+                        </h2>
+                        <p class="text-muted text-xs">
+                            {getLocalized(TAX_CODE_STRINGS.oauth.subtitle)}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-sm leading-relaxed text-muted">
+                    <p>
+                        <strong class="text-main">
+                            {getLocalized(TAX_CODE_STRINGS.oauth.p1Label)}
+                        </strong>{' '}
+                        {getLocalized(TAX_CODE_STRINGS.oauth.p1Text)}
+                    </p>
+                    <p>
+                        <strong class="text-main">
+                            {getLocalized(TAX_CODE_STRINGS.oauth.p2Label)}
+                        </strong>{' '}
+                        {getLocalized(TAX_CODE_STRINGS.oauth.p2Part1)}
+                        <code class="text-primary font-mono text-xs">openid</code>,{' '}
+                        <code class="text-primary font-mono text-xs">profile</code>,{' '}
+                        <code class="text-primary font-mono text-xs">email</code>
+                        {getLocalized(TAX_CODE_STRINGS.oauth.p2Part2)}
+                    </p>
+                    <p>
+                        <strong class="text-main">
+                            {getLocalized(TAX_CODE_STRINGS.oauth.p3Label)}
+                        </strong>{' '}
+                        {getLocalized(TAX_CODE_STRINGS.oauth.p3Part1)}
+                        <a
+                            href={TAX_CODE_CONFIG.googleUserPolicyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-primary hover:text-secondary underline"
+                        >
+                            {TAX_CODE_STRINGS.oauth.policyLinkText}
+                        </a>
+                        .
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legal & Policies Section -->
+    <section class="relative px-6 py-12 pb-24 md:py-16 md:pb-32">
+        <div class="mx-auto max-w-5xl">
+            <div class="mb-10 text-center">
+                <h2 class="text-main font-mono text-2xl font-bold tracking-tight md:text-3xl">
+                    {getLocalized(TAX_CODE_STRINGS.legal.sectionTitle)}
+                </h2>
+                <p class="text-muted mt-2 text-sm md:text-base">
+                    {getLocalized(TAX_CODE_STRINGS.legal.sectionSubtitle)}
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                {TAX_CODE_STRINGS.legal.links.map((link) => (
+                    <a
+                        href={`${basePath}/${link.slug}/`}
+                        class="border-glass-border group hover:border-primary/50 hover:shadow-primary-glow relative flex flex-col rounded-2xl border bg-white/70 p-6 backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-white/5"
+                    >
+                        <div class="border-surface bg-background/50 group-hover:border-primary/30 mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border transition-colors">
+                            <Icon name={link.icon} class="text-primary h-5 w-5" />
+                        </div>
+                        <h3 class="text-main group-hover:text-primary mb-2 font-mono text-lg font-bold transition-colors">
+                            {getLocalized(link.title)}
+                        </h3>
+                        <p class="text-muted mb-4 grow text-xs leading-relaxed">
+                            {getLocalized(link.description)}
+                        </p>
+                        <span class="text-primary inline-flex items-center gap-1 font-mono text-xs font-semibold group-hover:underline">
+                            {getLocalized(TAX_CODE_STRINGS.legal.readDocument)}
+                            <Icon name="lucide:arrow-right" class="h-3.5 w-3.5" />
+                        </span>
+                    </a>
+                ))}
+            </div>
+
+            <!-- Support & Contact -->
+            <div class="text-muted mt-12 text-center text-xs">
+                <p>
+                    {getLocalized(TAX_CODE_STRINGS.contact.developerLabel)}{' '}
+                    <strong class="text-main">{TAX_CODE_CONFIG.developerName}</strong> •{' '}
+                    {getLocalized(TAX_CODE_STRINGS.contact.supportLabel)}{' '}
+                    <a
+                        href={`mailto:${TAX_CODE_CONFIG.supportEmail}`}
+                        class="text-primary hover:text-secondary underline"
+                    >
+                        {TAX_CODE_CONFIG.supportEmail}
+                    </a>
+                </p>
+            </div>
+        </div>
+    </section>
+</Layout>

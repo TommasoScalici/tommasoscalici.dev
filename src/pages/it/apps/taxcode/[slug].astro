@@ -12,8 +12,12 @@ export async function getStaticPaths() {
     );
 
     return taxCodeDocs.map((doc) => {
-        // Extract slug from ID (e.g., 'taxcode/data-deletionit' -> 'data-deletion')
-        const slug = doc.id.split('/').pop()?.replace('it', '') ?? '';
+        // Extract slug from ID (e.g., 'taxcode/data-deletion.it' -> 'data-deletion')
+        const slug =
+            doc.id
+                .split('/')
+                .pop()
+                ?.replace(/\.?it$/, '') ?? '';
         return {
             params: { slug },
             props: { doc },

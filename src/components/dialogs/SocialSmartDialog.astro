@@ -15,9 +15,10 @@ interface Props {
     title: string;
     trackingType: string;
     trackingName: string;
+    closeLabel?: string;
 }
 
-const { id, links, title, trackingType, trackingName } = Astro.props;
+const { id, links, title, trackingType, trackingName, closeLabel = 'Close' } = Astro.props;
 
 const iconMapping: Record<string, string> = {
     spotify: 'simple-icons:spotify',
@@ -41,7 +42,7 @@ const iconMapping: Record<string, string> = {
         <button
             type="submit"
             class="text-muted hover:text-main absolute top-4 right-4 transition-colors"
-            aria-label="Close"
+            aria-label={closeLabel}
         >
             <Icon name="lucide:x" class="h-5 w-5" />
         </button>

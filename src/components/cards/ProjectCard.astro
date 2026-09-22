@@ -5,12 +5,21 @@ import type { Project } from '../../data/types';
 
 interface Props {
     project: Project;
+    labels?: {
+        viewSource?: string;
+        viewPlayStore?: string;
+        viewProject?: string;
+    };
 }
 
-const { project } = Astro.props;
+const { project, labels } = Astro.props;
+const isExternalDemo = project.demoUrl?.startsWith('http');
+const viewSourceLabel = labels?.viewSource || 'View Source Code';
+const viewPlayStoreLabel = labels?.viewPlayStore || 'View on Google Play';
+const viewProjectLabel = labels?.viewProject || 'View Project Page';
 ---
 
-<div class="border-glass-border group shadow-glass-light hover:border-primary/50 relative flex h-full flex-col overflow-hidden rounded-2xl border bg-white/70 backdrop-blur-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,255,0.15)] dark:border-white/10 dark:bg-white/5 dark:shadow-none">
+<div class="border-glass-border group shadow-glass-light hover:border-primary/50 hover:shadow-primary-glow relative flex h-full flex-col overflow-hidden rounded-2xl border bg-white/70 backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-white/5 dark:shadow-none">
     <div class="relative flex h-full flex-col p-6">
         <!-- Hover Gradient Effect -->
         <div class="from-primary/5 pointer-events-none absolute inset-0 bg-linear-to-br to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
@@ -27,7 +36,7 @@ const { project } = Astro.props;
                             target="_blank"
                             rel="noopener noreferrer"
                             class="text-muted hover:bg-glass-bg/5 rounded-full p-2 transition-colors hover:text-white"
-                            aria-label="View Source Code"
+                            aria-label={viewSourceLabel}
                         >
                             <Icon name="simple-icons:github" class="h-5 w-5" />
                         </a>
@@ -38,7 +47,7 @@ const { project } = Astro.props;
                             target="_blank"
                             rel="noopener noreferrer"
                             class="text-muted hover:bg-glass-bg/5 rounded-full p-2 transition-colors hover:text-white"
-                            aria-label="View on Google Play"
+                            aria-label={viewPlayStoreLabel}
                         >
                             <Icon name="simple-icons:googleplay" class="h-5 w-5" />
                         </a>
@@ -46,10 +55,10 @@ const { project } = Astro.props;
                     {project.demoUrl && (
                         <a
                             href={project.demoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            target={isExternalDemo ? '_blank' : undefined}
+                            rel={isExternalDemo ? 'noopener noreferrer' : undefined}
                             class="text-muted hover:bg-glass-bg/5 rounded-full p-2 transition-colors hover:text-white"
-                            aria-label="View Live Demo"
+                            aria-label={viewProjectLabel}
                         >
                             <Icon name="lucide:external-link" class="h-5 w-5" />
                         </a>
@@ -57,9 +66,20 @@ const { project } = Astro.props;
                 </div>
             </div>
 
-            <h3 class="text-main group-hover:text-primary mb-2 font-mono text-xl font-bold transition-colors">
-                {project.title}
-            </h3>
+            {project.demoUrl ? (
+                <a
+                    href={project.demoUrl}
+                    target={isExternalDemo ? '_blank' : undefined}
+                    rel={isExternalDemo ? 'noopener noreferrer' : undefined}
+                    class="text-main group-hover:text-primary mb-2 block font-mono text-xl font-bold transition-colors hover:underline"
+                >
+                    {project.title}
+                </a>
+            ) : (
+                <h3 class="text-main group-hover:text-primary mb-2 font-mono text-xl font-bold transition-colors">
+                    {project.title}
+                </h3>
+            )}
 
             <p class="text-muted mb-6 grow text-sm leading-relaxed">{project.description}</p>
 

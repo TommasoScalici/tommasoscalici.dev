@@ -10,7 +10,7 @@ Su tommasoscalici.dev, rispetto la tua privacy e mi impegno a proteggerla. Quest
 ## 1. Titolare del Trattamento
 
 Tommaso Scalici  
-Email: tommaso.scalici.1991 [at] gmail [dot] com
+Email: <a href="mailto:contact@tommasoscalici.dev">contact@tommasoscalici.dev</a>
 
 ## 2. Informazioni Raccolte
 
@@ -48,4 +48,4 @@ Se ti trovi nell'Area Economica Europea (AEE), hai determinati diritti ai sensi 
 
 ## 7. Contatti
 
-In caso di domande su questa informativa, contattami all'indirizzo tommaso.scalici.1991 [at] gmail [dot] com.
+In caso di domande su questa informativa, contattami all'indirizzo <a href="mailto:contact@tommasoscalici.dev">contact@tommasoscalici.dev</a>.

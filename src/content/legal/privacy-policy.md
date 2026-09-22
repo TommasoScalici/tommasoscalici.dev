@@ -10,7 +10,7 @@ At tommasoscalici.dev, I respect your privacy and am committed to protecting it.
 ## 1. Data Controller
 
 Tommaso Scalici  
-Email: tommaso.scalici.1991 [at] gmail [dot] com
+Email: <a href="mailto:contact@tommasoscalici.dev">contact@tommasoscalici.dev</a>
 
 ## 2. Information I Collect
 
@@ -48,4 +48,4 @@ If you are located in the European Economic Area (EEA), you have certain rights 
 
 ## 7. Contact
 
-If you have any questions about this policy, please contact me at tommaso.scalici.1991 [at] gmail [dot] com.
+If you have any questions about this policy, please contact me at <a href="mailto:contact@tommasoscalici.dev">contact@tommasoscalici.dev</a>.

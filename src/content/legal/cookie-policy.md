@@ -36,4 +36,4 @@ You can control and manage cookies in various ways. Please keep in mind that rem
 
 ## 4. Contact Us
 
-If you have any questions about our use of cookies, please contact us at tommaso.scalici.1991 [at] gmail [dot] com.
+If you have any questions about our use of cookies, please contact us at <a href="mailto:contact@tommasoscalici.dev">contact@tommasoscalici.dev</a>.

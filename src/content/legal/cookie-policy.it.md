@@ -36,4 +36,4 @@ Puoi controllare e gestire i cookie in vari modi. Tieni presente che la rimozion
 
 ## 4. Contattaci
 
-In caso di domande sull'uso dei cookie, contattaci all'indirizzo tommaso.scalici.1991 [at] gmail [dot] com.
+In caso di domande sull'uso dei cookie, contattaci all'indirizzo <a href="mailto:contact@tommasoscalici.dev">contact@tommasoscalici.dev</a>.

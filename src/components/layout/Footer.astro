@@ -24,21 +24,21 @@ const { lang, t, copyrightDate } = Astro.props;
             <nav class="flex flex-wrap justify-center gap-3 md:justify-start">
                 <a
                     href={lang === 'en' ? '/uses/' : `/${lang}/uses/`}
-                    class="border-primary/20 text-primary hover:border-primary/50 hover:bg-primary/10 hover:shadow-primary-glow rounded-full border bg-white/5 px-3 py-1.5 text-xs font-bold tracking-wide shadow-[0_0_10px_rgba(0,243,255,0.1)] transition-all sm:py-1"
+                    class="border-primary/20 text-primary hover:border-primary/50 hover:bg-primary/10 hover:shadow-primary-glow shadow-primary-glow-subtle rounded-full border bg-white/5 px-3 py-1.5 text-xs font-bold tracking-wide transition-all sm:py-1"
                     aria-label={t['footer.uses']}
                 >
                     {t['footer.uses']}
                 </a>
                 <a
                     href={lang === 'en' ? '/privacy-policy/' : `/${lang}/privacy-policy/`}
-                    class="border-secondary/20 text-secondary hover:border-secondary/50 hover:bg-secondary/10 hover:shadow-secondary-glow rounded-full border bg-white/5 px-3 py-1.5 text-xs font-bold tracking-wide shadow-[0_0_10px_rgba(255,0,85,0.1)] transition-all sm:py-1"
+                    class="border-secondary/20 text-secondary hover:border-secondary/50 hover:bg-secondary/10 hover:shadow-secondary-glow shadow-secondary-glow-subtle rounded-full border bg-white/5 px-3 py-1.5 text-xs font-bold tracking-wide transition-all sm:py-1"
                     aria-label={t['footer.privacy']}
                 >
                     {t['footer.privacy']}
                 </a>
                 <a
                     href={lang === 'en' ? '/cookie-policy/' : `/${lang}/cookie-policy/`}
-                    class="border-secondary/20 text-secondary hover:border-secondary/50 hover:bg-secondary/10 hover:shadow-secondary-glow rounded-full border bg-white/5 px-3 py-1.5 text-xs font-bold tracking-wide shadow-[0_0_10px_rgba(255,0,85,0.1)] transition-all sm:py-1"
+                    class="border-secondary/20 text-secondary hover:border-secondary/50 hover:bg-secondary/10 hover:shadow-secondary-glow shadow-secondary-glow-subtle rounded-full border bg-white/5 px-3 py-1.5 text-xs font-bold tracking-wide transition-all sm:py-1"
                     aria-label={t['cookie.title']}
                 >
                     {t['cookie.title']}
@@ -72,7 +72,7 @@ const { lang, t, copyrightDate } = Astro.props;
                 type="button"
                 data-dialog-trigger="artist-links-dialog"
                 class="text-muted hover:text-secondary transition-colors"
-                aria-label="Music Platforms"
+                aria-label={t['aria.musicPlatforms'] || 'Music Platforms'}
             >
                 <Icon name="lucide:music" class="h-5 w-5" />
             </button>
@@ -92,7 +92,7 @@ const { lang, t, copyrightDate } = Astro.props;
                 type="button"
                 data-dialog-trigger="social-links-dialog"
                 class="text-muted hover:text-main transition-colors"
-                aria-label="More Socials"
+                aria-label={t['aria.moreSocials'] || 'More Socials'}
             >
                 <Icon name="lucide:ellipsis" class="h-5 w-5" />
             </button>
@@ -106,6 +106,7 @@ const { lang, t, copyrightDate } = Astro.props;
         trackingType="artist_profile"
         trackingName="Tommaso Scalici"
         trackingId="tommaso-scalici"
+        closeLabel={t['aria.close'] || 'Close'}
     />
 
     <SocialSmartDialog
@@ -114,6 +115,7 @@ const { lang, t, copyrightDate } = Astro.props;
         title={t['dialog.connectEverywhere'] || 'Connect'}
         trackingType="social_link"
         trackingName="Tommaso Scalici"
+        closeLabel={t['aria.close'] || 'Close'}
     />
 </footer>
 

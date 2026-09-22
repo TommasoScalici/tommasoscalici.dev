@@ -15,7 +15,7 @@ const { playlistId, eventName, className = '' } = Astro.props;
     data-spotify-deep-link
     data-playlist-id={playlistId}
     data-event-name={eventName}
-    class={`group flex w-full transform animate-shake items-center justify-center gap-3 rounded-full bg-spotify px-8 py-4 font-bold text-black shadow-[0_0_20px_rgba(29,185,84,0.3)] transition-all hover:scale-105 hover:bg-spotify-hover hover:shadow-[0_0_30px_rgba(29,185,84,0.5)] ${className}`}
+    class={`group flex w-full transform animate-shake items-center justify-center gap-3 rounded-full bg-spotify px-8 py-4 font-bold text-black shadow-spotify-glow transition-all hover:scale-105 hover:bg-spotify-hover hover:shadow-spotify-glow-hover ${className}`}
     style="animation-delay: 3s;"
 >
     <Icon name="simple-icons:spotify" class="h-6 w-6" />

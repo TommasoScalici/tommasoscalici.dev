@@ -46,7 +46,7 @@ const { lang, t, navItems, logoSrc, targetLangUrl } = Astro.props;
                 {navItems.map((item) => (
                     <a
                         href={item.href}
-                        class="text-muted hover:text-main text-sm font-semibold transition-colors hover:drop-shadow-[0_0_8px_rgba(0,243,255,0.5)]"
+                        class="text-muted hover:text-main text-sm font-semibold transition-colors hover:drop-shadow-primary-glow"
                     >
                         {item.label}
                     </a>
@@ -79,19 +79,19 @@ const { lang, t, navItems, logoSrc, targetLangUrl } = Astro.props;
                         data-astro-scroll="manual"
                         data-astro-history="replace"
                         class="border-glass-border text-muted hover:border-primary/50 hover:text-primary flex items-center gap-2 rounded-full border bg-white/70 px-3 py-1.5 font-mono text-xs transition-all dark:border-white/10 dark:bg-white/5"
-                        aria-label="Switch Language"
+                        aria-label={t['aria.switchLanguage'] || 'Switch Language'}
                     >
                         <Icon name="lucide:languages" class="h-3.5 w-3.5" />
                         <span>{lang === 'en' ? 'IT' : 'EN'}</span>
                     </a>
 
-                    <ThemeToggle />
+                    <ThemeToggle ariaLabel={t['aria.toggleTheme']} />
 
                     <button
                         type="button"
                         data-cookie-btn
                         class="text-muted hover:text-primary transition-colors"
-                        aria-label="Cookie Settings"
+                        aria-label={t['aria.cookieSettings'] || 'Cookie Settings'}
                     >
                         <Icon name="lucide:cookie" class="h-5 w-5" />
                     </button>
@@ -119,7 +119,7 @@ const { lang, t, navItems, logoSrc, targetLangUrl } = Astro.props;
                         type="button"
                         data-menu-btn
                         class="text-muted hover:text-main"
-                        aria-label="Menu"
+                        aria-label={t['aria.menu'] || 'Menu'}
                         aria-expanded="false"
                     >
                         <Icon name="lucide:menu" class="menu-open-hidden block h-6 w-6" />
@@ -161,13 +161,13 @@ const { lang, t, navItems, logoSrc, targetLangUrl } = Astro.props;
                     </a>
 
                     <div class="flex items-center gap-4">
-                        <ThemeToggle />
+                        <ThemeToggle ariaLabel={t['aria.toggleTheme']} />
                         <button
                             type="button"
                             data-cookie-btn
                             data-close-menu
                             class="text-muted active:text-primary rounded-full bg-white/5 p-2 transition-colors"
-                            aria-label="Cookie Settings"
+                            aria-label={t['aria.cookieSettings'] || 'Cookie Settings'}
                         >
                             <Icon name="lucide:cookie" class="h-5 w-5" />
                         </button>

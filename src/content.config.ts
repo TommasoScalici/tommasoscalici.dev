@@ -24,6 +24,15 @@ const safeUrl = () =>
             message: 'URL must use HTTPS protocol for security',
         });
 
+// Helper for safe internal route or HTTPS URL validation
+const safeRouteOrUrl = (minLength = 1, maxLength = 500) =>
+    z.union([
+        safeUrl(),
+        safeString(minLength, maxLength).refine((val) => val.startsWith('/'), {
+            message: 'Internal route must start with /',
+        }),
+    ]);
+
 // Shared multilingual string schema (for i18n content)
 const multilingualString = (minLength = 1, maxLength = 500) =>
     z.union([
@@ -71,6 +80,9 @@ const projects = defineCollection({
         featured: z.boolean().default(false),
         repoUrl: safeUrl(),
         playStoreUrl: safeUrl().optional(),
+        demoUrl: z
+            .union([safeRouteOrUrl(1, 200), z.record(z.enum(['en', 'it']), safeRouteOrUrl(1, 200))])
+            .optional(),
     }),
 });
 
