@@ -176,4 +176,54 @@ const copyrightDate =
 
         <Footer lang={lang} t={t} copyrightDate={copyrightDate} />
     </div>
+
+    <script>
+        const decodeHexEmail = (hex: string): string => {
+            let email = '';
+            const r = parseInt(hex.substring(0, 2), 16);
+            for (let n = 2; n < hex.length; n += 2) {
+                email += String.fromCharCode(parseInt(hex.slice(n, n + 2), 16) ^ r);
+            }
+            return email;
+        };
+
+        const decodeCloudflareEmails = () => {
+            const elements = document.querySelectorAll<HTMLElement>('[data-cfemail]');
+            for (const el of elements) {
+                const encoded = el.getAttribute('data-cfemail');
+                if (!encoded) continue;
+                try {
+                    const email = decodeHexEmail(encoded);
+                    el.textContent = email;
+                    if (el instanceof HTMLAnchorElement) {
+                        el.href = `mailto:${email}`;
+                    } else if (el.parentElement instanceof HTMLAnchorElement) {
+                        el.parentElement.href = `mailto:${email}`;
+                    }
+                    el.removeAttribute('data-cfemail');
+                } catch {
+                    // Ignore decoding error
+                }
+            }
+
+            const cfLinks = document.querySelectorAll<HTMLAnchorElement>(
+                'a[href^="/cdn-cgi/l/email-protection#"]',
+            );
+            for (const link of cfLinks) {
+                const hash = link.href.split('#')[1];
+                if (!hash) continue;
+                try {
+                    const email = decodeHexEmail(hash);
+                    link.href = `mailto:${email}`;
+                    if (link.textContent?.includes('[email protected]')) {
+                        link.textContent = email;
+                    }
+                } catch {
+                    // Ignore decoding error
+                }
+            }
+        };
+
+        document.addEventListener('astro:page-load', decodeCloudflareEmails);
+    </script>
 </BaseLayout>
