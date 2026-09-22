@@ -1,3 +1,10 @@
+# [1.26.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.25.0...v1.26.0) (2026-09-22)
+
+
+### Features
+
+* add Tax Code app landing and legal pages, harmonize design tokens and i18n accessibility ([6d66236](https://github.com/TommasoScalici/tommasoscalici.dev/commit/6d662364382e9756ebc0d34c521a66ebc720ea5e))
+
 # [1.25.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.24.0...v1.25.0) (2026-09-18)
 
 
