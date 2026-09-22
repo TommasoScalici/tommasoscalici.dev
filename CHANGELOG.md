@@ -1,3 +1,10 @@
+## [1.26.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.26.0...v1.26.1) (2026-09-22)
+
+
+### Bug Fixes
+
+* **seo:** remove Disallow /apps/ from robots.txt to permit Google OAuth verification crawler ([5df2a6a](https://github.com/TommasoScalici/tommasoscalici.dev/commit/5df2a6a7c8984e78792fbf75fad6cef7fb968e89))
+
 # [1.26.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.25.0...v1.26.0) (2026-09-22)
 
 
