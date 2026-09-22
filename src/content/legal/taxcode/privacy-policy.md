@@ -11,11 +11,13 @@ We are deeply committed to user privacy and data security. The App is designed o
 
 <hr class="my-8 border-white/10" />
 
-## 1. Data Controller Information
+## 1. Data Controller & Application Information
 
-- **Name / Developer:** Tommaso Scalici
-- **Website:** <a href="https://tommasoscalici.dev" target="_blank" rel="noopener noreferrer">https://tommasoscalici.dev</a>
-- **Contact Email:** <a href="mailto:contact@tommasoscalici.dev">contact@tommasoscalici.dev</a>
+- **Application Name:** Tax Code by Tommaso Scalici
+- **Application Home Page:** <a href="https://tommasoscalici.dev/apps/taxcode/">https://tommasoscalici.dev/apps/taxcode/</a>
+- **Developer / Data Controller:** Tommaso Scalici
+- **Developer Website:** <a href="https://tommasoscalici.dev" target="_blank" rel="noopener noreferrer">https://tommasoscalici.dev</a>
+- **Support & Inquiries Email:** <a href="mailto:contact@tommasoscalici.dev">contact@tommasoscalici.dev</a>
 
 <hr class="my-8 border-white/10" />
 

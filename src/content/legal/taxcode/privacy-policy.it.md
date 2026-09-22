@@ -11,11 +11,13 @@ La tutela della privacy e la sicurezza delle informazioni costituiscono un princ
 
 <hr class="my-8 border-white/10" />
 
-## 1. Dati del Titolare del Trattamento
+## 1. Dati del Titolare e Informazioni sull'Applicazione
 
-- **Sviluppatore / Titolare:** Tommaso Scalici
-- **Sito Web:** <a href="https://tommasoscalici.dev/it/" target="_blank" rel="noopener noreferrer">https://tommasoscalici.dev/it/</a>
-- **E-mail di Contatto:** <a href="mailto:contact@tommasoscalici.dev">contact@tommasoscalici.dev</a>
+- **Nome dell'Applicazione:** Tax Code by Tommaso Scalici
+- **Home Page dell'Applicazione:** <a href="https://tommasoscalici.dev/it/apps/taxcode/">https://tommasoscalici.dev/it/apps/taxcode/</a>
+- **Sviluppatore / Titolare del Trattamento:** Tommaso Scalici
+- **Sito Web dello Sviluppatore:** <a href="https://tommasoscalici.dev/it/" target="_blank" rel="noopener noreferrer">https://tommasoscalici.dev/it/</a>
+- **E-mail di Assistenza e Contatto:** <a href="mailto:contact@tommasoscalici.dev">contact@tommasoscalici.dev</a>
 
 <hr class="my-8 border-white/10" />
 
