@@ -15,11 +15,7 @@
                     window.gtag('consent', 'update', gtagPayload);
                     if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.gaId) {
                         var gaId = window.ANALYTICS_CONFIG.gaId;
-                        if (
-                            !document.querySelector(
-                                'script[src*="/metrics/gtag/js?id=' + gaId + '"]',
-                            )
-                        ) {
+                        if (!document.querySelector('script[src*="gtag/js?id=' + gaId + '"]')) {
                             var s = document.createElement('script');
                             s.type = 'text/javascript';
                             s.async = true;

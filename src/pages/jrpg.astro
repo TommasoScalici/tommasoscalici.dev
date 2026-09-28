@@ -1,0 +1,61 @@
+---
+import SpotifyDeepLinkButton from '../components/common/SpotifyDeepLinkButton.astro';
+import SpotifyLandingLayout from '../layouts/SpotifyLandingLayout.astro';
+
+const title = 'Anime & JRPG Boss Battles | Epic Soundtracks & Battle Themes';
+const description =
+    'Epic symphonic, orchestral, and heavy battle themes from anime, JRPGs, and game soundtracks.';
+const playlistId = '0B9L4giAynskXuohTu4MgI';
+
+// Fetch thumbnail at build time
+const response = await fetch(
+    `https://open.spotify.com/oembed?url=https://open.spotify.com/playlist/${playlistId}`,
+);
+const oEmbedData = (response.ok ? await response.json() : {}) as Record<string, string>;
+const coverImage = oEmbedData.thumbnail_url ?? '';
+---
+
+<SpotifyLandingLayout title={title} description={description} coverImage={coverImage} theme="jrpg">
+    <style>
+        /* Typography */
+        h1 {
+            font-size: 23px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+            text-transform: uppercase;
+        }
+        .subtitle {
+            color: #a89bb9;
+            font-size: 14px;
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+        .highlight {
+            color: #fb7185;
+            font-weight: 700;
+            text-shadow: 0 0 12px rgba(251, 113, 133, 0.45);
+        }
+        .highlight-purple {
+            color: #c084fc;
+            font-weight: 700;
+            text-shadow: 0 0 12px rgba(192, 132, 252, 0.45);
+        }
+        .highlight-amber {
+            color: #fbbf24;
+            font-weight: 700;
+            text-shadow: 0 0 12px rgba(251, 191, 36, 0.45);
+        }
+    </style>
+
+    <h1>Anime & JRPG Boss Battles ⚔️</h1>
+    <p class="subtitle">
+        Epic battle themes, orchestrations & heavy riffs.
+        <br />
+        <span class="highlight">Final Fantasy</span>, <span class="highlight-purple">Persona</span>,{' '}
+        <span class="highlight-amber">Evangelion</span>, <span class="highlight">Death Note</span> &{' '}
+        <span class="highlight-purple">Attack on Titan</span>.
+    </p>
+
+    <SpotifyDeepLinkButton playlistId={playlistId} eventName="Anime & JRPG Boss Battles" />
+</SpotifyLandingLayout>

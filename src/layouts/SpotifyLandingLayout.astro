@@ -8,7 +8,7 @@ interface Props {
     title: string;
     description: string;
     coverImage: string;
-    theme: 'lofi' | 'prog';
+    theme: 'lofi' | 'prog' | 'jrpg';
 }
 
 const { title, description, coverImage, theme } = Astro.props;
@@ -23,7 +23,7 @@ const optimizedBg = await getImage({
 
 // Canonical URL
 const canonicalURL = new URL(normalizePath(Astro.url.pathname), Astro.site);
-const themeColor = theme === 'lofi' ? '#0d1117' : '#050505';
+const themeColor = theme === 'lofi' ? '#0d1117' : theme === 'jrpg' ? '#0a0514' : '#050505';
 
 // Theme Configuration
 const themeConfig = {
@@ -37,16 +37,23 @@ const themeConfig = {
         card: 'background: rgba(22, 27, 34, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5);',
         coverShadow: 'box-shadow: 0 8px 20px rgba(0,0,0,0.4);',
     },
+    jrpg: {
+        bgBlur: 'filter: blur(28px) brightness(0.32);',
+        card: 'background: rgba(14, 10, 26, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(244, 63, 94, 0.3); box-shadow: 0 0 45px rgba(225, 29, 72, 0.2), 0 0 25px rgba(168, 85, 247, 0.15);',
+        coverShadow: 'box-shadow: 0 12px 35px rgba(0,0,0,0.7);',
+    },
 };
 
 const currentTheme = themeConfig[theme];
 const gradientClasses =
     theme === 'lofi'
         ? 'from-indigo-500 via-sky-500 to-indigo-500'
-        : 'from-primary via-secondary to-primary';
+        : theme === 'jrpg'
+          ? 'from-rose-500 via-purple-600 to-amber-400'
+          : 'from-primary via-secondary to-primary';
 ---
 
-<BaseLayout title={title}>
+<BaseLayout title={title} hideCookieBanner={true} autoConsent={true}>
     <Fragment slot="head">
         <!-- SEO -->
         <meta name="description" content={description} />
@@ -79,7 +86,13 @@ const gradientClasses =
 
     <div
         class="relative flex h-screen items-center justify-center overflow-hidden font-sans text-white"
-        style={theme === 'lofi' ? 'background-color: #0d1117;' : 'background-color: #050505;'}
+        style={
+            theme === 'lofi'
+                ? 'background-color: #0d1117;'
+                : theme === 'jrpg'
+                  ? 'background-color: #0a0514;'
+                  : 'background-color: #050505;'
+        }
     >
         <div
             class="absolute top-0 left-0 -z-10 h-full w-full scale-110 bg-cover bg-center bg-no-repeat"
@@ -111,7 +124,13 @@ const gradientClasses =
             <slot />
 
             <div
-                class={`mt-5 text-[11px] ${theme === 'lofi' ? 'text-[#484f58]' : 'text-[#666]'} border-none outline-none bg-transparent`}
+                class={`mt-5 text-[11px] ${
+                    theme === 'lofi'
+                        ? 'text-[#484f58]'
+                        : theme === 'jrpg'
+                          ? 'text-[#9c8eb9]'
+                          : 'text-[#666]'
+                } border-none outline-none bg-transparent`}
             >
                 Curated by{' '}
                 <a
@@ -122,6 +141,9 @@ const gradientClasses =
                 >
                     Tommaso Scalici
                 </a>
+                <p class="mt-1.5 text-[9px] opacity-60">
+                    This page uses cookies for analytics & music deep-linking.
+                </p>
             </div>
         </div>
     </div>

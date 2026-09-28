@@ -10,7 +10,7 @@
     "vars": {
         "PUBLIC_FACEBOOK_PIXEL_ID": "266069036512109",
         "PUBLIC_TIKTOK_PIXEL_ID": "D5EOGDBC77UEEICND2UG",
-        "ENABLE_FACEBOOK_PIXEL": false,
+        "ENABLE_FACEBOOK_PIXEL": true,
         "ENABLE_TIKTOK_PIXEL": false
     }
 }
