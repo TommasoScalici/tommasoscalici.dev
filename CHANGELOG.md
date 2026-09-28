@@ -1,3 +1,10 @@
+# [1.27.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.26.2...v1.27.0) (2026-09-28)
+
+
+### Features
+
+* add JRPG & Anime Boss Battles landing and optimize Meta Pixel smart linking ([adeab93](https://github.com/TommasoScalici/tommasoscalici.dev/commit/adeab935ae8fc06d1ae826e89c3928fa1ddc37d7))
+
 ## [1.26.2](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.26.1...v1.26.2) (2026-09-22)
 
 
