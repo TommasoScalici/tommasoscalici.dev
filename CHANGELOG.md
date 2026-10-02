@@ -1,3 +1,10 @@
+# [1.28.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.27.1...v1.28.0) (2026-10-02)
+
+
+### Features
+
+* **music:** release The Milky Way: Trajectory with streaming links ([3ab3fdd](https://github.com/TommasoScalici/tommasoscalici.dev/commit/3ab3fdd440c1b94f5ab24abfefd5c967c21e53ac))
+
 ## [1.27.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.27.0...v1.27.1) (2026-10-02)
 
 
