@@ -5,6 +5,7 @@ interface Props {
     tiktokPixelId?: string;
     enableFbPixel?: boolean;
     enableTiktokPixel?: boolean;
+    autoConsent?: boolean;
 }
 
 import analyticsScript from '../../scripts/analytics.js?raw';
@@ -15,6 +16,7 @@ const {
     tiktokPixelId,
     enableFbPixel = false,
     enableTiktokPixel = false,
+    autoConsent = false,
 } = Astro.props;
 const hasAnalytics = [gaId, enableFbPixel && fbPixelId, enableTiktokPixel && tiktokPixelId].some(
     (id) => !!id,
@@ -31,6 +33,7 @@ const hasAnalytics = [gaId, enableFbPixel && fbPixelId, enableTiktokPixel && tik
                     gaId: ${JSON.stringify(gaId)},
                     fbPixelId: ${JSON.stringify(enableFbPixel ? fbPixelId : undefined)},
                     tiktokPixelId: ${JSON.stringify(enableTiktokPixel ? tiktokPixelId : undefined)},
+                    autoConsent: ${Boolean(autoConsent)},
                 };
             `}
         ></script>

@@ -6,14 +6,24 @@
     // Traffic Origin Isolation
     const urlParams = new URL(window.location.href).searchParams;
     const utmSource = urlParams.get('utm_source')?.toLowerCase() || '';
+    const fbclid = urlParams.get('fbclid');
+    const ttclid = urlParams.get('ttclid');
 
     let trafficOrigin = sessionStorage.getItem('traffic_origin');
 
-    if (!trafficOrigin && utmSource) {
-        if (['facebook', 'fb', 'ig', 'instagram'].includes(utmSource)) {
+    if (!trafficOrigin) {
+        if (
+            ['facebook', 'fb', 'ig', 'instagram', 'meta'].includes(utmSource) ||
+            fbclid ||
+            /facebook|instagram/i.test(document.referrer)
+        ) {
             trafficOrigin = 'meta';
             sessionStorage.setItem('traffic_origin', 'meta');
-        } else if (['tiktok', 'tt'].includes(utmSource)) {
+        } else if (
+            ['tiktok', 'tt'].includes(utmSource) ||
+            ttclid ||
+            /tiktok/i.test(document.referrer)
+        ) {
             trafficOrigin = 'tiktok';
             sessionStorage.setItem('traffic_origin', 'tiktok');
         }
@@ -27,12 +37,14 @@
         }
         window.gtag = gtag;
 
-        let savedConsent = 'denied';
-        try {
-            if (localStorage.getItem('user-consent') === 'granted') {
-                savedConsent = 'granted';
-            }
-        } catch (e) {}
+        let savedConsent = config.autoConsent ? 'granted' : 'denied';
+        if (!config.autoConsent) {
+            try {
+                if (localStorage.getItem('user-consent') === 'granted') {
+                    savedConsent = 'granted';
+                }
+            } catch (e) {}
+        }
 
         gtag('consent', 'default', {
             ad_storage: savedConsent,
@@ -78,18 +90,19 @@
             n.queue = [];
             t = b.createElement(e);
             t.async = !0;
-            t.crossOrigin = 'anonymous';
             t.src = v;
             s = b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t, s);
         })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
 
-        let savedConsent = 'revoke';
-        try {
-            if (localStorage.getItem('user-consent') === 'granted') {
-                savedConsent = 'grant';
-            }
-        } catch (e) {}
+        let savedConsent = config.autoConsent ? 'grant' : 'revoke';
+        if (!config.autoConsent) {
+            try {
+                if (localStorage.getItem('user-consent') === 'granted') {
+                    savedConsent = 'grant';
+                }
+            } catch (e) {}
+        }
 
         if (savedConsent === 'revoke') {
             fbq('consent', 'revoke');
@@ -145,19 +158,20 @@
                     var o = document.createElement('script');
                     ((o.type = 'text/javascript'),
                         (o.async = !0),
-                        (o.crossOrigin = 'anonymous'),
                         (o.src = i + '?sdkid=' + e + '&lib=' + t));
                     var a = document.getElementsByTagName('script')[0];
                     a.parentNode.insertBefore(o, a);
                 }));
 
             // Check storage
-            let cookieEnabled = false;
-            try {
-                if (localStorage.getItem('user-consent') === 'granted') {
-                    cookieEnabled = true;
-                }
-            } catch (e) {}
+            let cookieEnabled = Boolean(config.autoConsent);
+            if (!cookieEnabled) {
+                try {
+                    if (localStorage.getItem('user-consent') === 'granted') {
+                        cookieEnabled = true;
+                    }
+                } catch (e) {}
+            }
 
             if (cookieEnabled) {
                 ttq.enableCookie();
