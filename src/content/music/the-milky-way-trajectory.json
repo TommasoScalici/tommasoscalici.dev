@@ -5,6 +5,12 @@
     "genre": "Space Rock / Prog Metal",
     "coverImage": "../../assets/album_covers/the-milky-way-trajectory.webp",
     "type": "Album",
-    "isUpcoming": true,
-    "presaveLink": "https://ditto.fm/the-milky-way-trajectory"
+    "links": {
+        "spotify": "https://open.spotify.com/album/0kifvMwkFzF0ofbTqzyr8p",
+        "deezer": "https://www.deezer.com/album/1040806382",
+        "tidal": "https://tidal.com/browse/album/547336883",
+        "amazon": "https://music.amazon.com/albums/B0HC1X2CSS",
+        "youtube": "https://music.youtube.com/playlist?list=OLAK5uy_npKMijZR-XZCC-A9pYEbgDyA8cT9JNXAA",
+        "bandcamp": "https://tommasoscalici.bandcamp.com/album/the-milky-way-trajectory"
+    }
 }
