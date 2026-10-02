@@ -1,3 +1,10 @@
+## [1.27.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.27.0...v1.27.1) (2026-10-02)
+
+
+### Bug Fixes
+
+* **analytics:** fix Meta Pixel CORS loading and Spotify deep link playlist routing ([f174a02](https://github.com/TommasoScalici/tommasoscalici.dev/commit/f174a0259e4b9988d1941b866c21272f966e95d7))
+
 # [1.27.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.26.2...v1.27.0) (2026-09-28)
 
 
