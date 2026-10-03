@@ -13,8 +13,25 @@ interface Props {
 
 const { title, description, coverImage, theme } = Astro.props;
 
-// Optimize image for background and SEO
+// 1. High-priority optimized cover for LCP preload & picture tag
+const optimizedCover = await getImage({
+    src: coverImage,
+    format: 'avif',
+    width: 300,
+    height: 300,
+});
+
+// 2. Ultra-lightweight blurred background (64x64 WebP, ~400 bytes instead of ~30KB)
 const optimizedBg = await getImage({
+    src: coverImage,
+    format: 'webp',
+    width: 64,
+    height: 64,
+    quality: 25,
+});
+
+// 3. Crisp OpenGraph image for social crawlers (640x640)
+const ogImage = await getImage({
     src: coverImage,
     format: 'webp',
     width: 640,
@@ -55,6 +72,15 @@ const gradientClasses =
 
 <BaseLayout title={title} hideCookieBanner={true} autoConsent={true}>
     <Fragment slot="head">
+        <!-- Preload LCP Cover Image -->
+        <link
+            rel="preload"
+            as="image"
+            href={optimizedCover.src}
+            type="image/avif"
+            fetchpriority="high"
+        />
+
         <!-- SEO -->
         <meta name="description" content={description} />
         <meta name="robots" content="noindex, nofollow" />
@@ -67,21 +93,8 @@ const gradientClasses =
         <!-- Open Graph -->
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content={optimizedBg.src} />
+        <meta property="og:image" content={ogImage.src} />
         <meta property="og:type" content="music.playlist" />
-
-        <style>
-            @keyframes floatUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-        </style>
     </Fragment>
 
     <div
@@ -100,8 +113,8 @@ const gradientClasses =
         ></div>
 
         <div
-            class="w-[90%] max-w-95 rounded-3xl p-[30px_20px] text-center"
-            style={`${currentTheme.card} animation: floatUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);`}
+            class="landing-card w-[90%] max-w-95 rounded-3xl p-[30px_20px] text-center"
+            style={currentTheme.card}
         >
             <div class="group relative mx-auto mb-5 aspect-square w-full rounded-xl">
                 <div
@@ -123,25 +136,17 @@ const gradientClasses =
 
             <slot />
 
-            <div
-                class={`mt-5 text-[11px] ${
-                    theme === 'lofi'
-                        ? 'text-[#484f58]'
-                        : theme === 'jrpg'
-                          ? 'text-[#9c8eb9]'
-                          : 'text-[#666]'
-                } border-none outline-none bg-transparent`}
-            >
+            <div class="mt-5 text-xs text-zinc-400 border-none outline-none bg-transparent">
                 Curated by{' '}
                 <a
                     href="https://tommasoscalici.dev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="border-b border-transparent bg-transparent font-semibold text-inherit no-underline transition-colors duration-200 outline-none hover:border-white hover:text-white"
+                    class="border-b border-transparent bg-transparent font-semibold text-zinc-200 no-underline transition-colors duration-200 outline-none hover:border-white hover:text-white"
                 >
                     Tommaso Scalici
                 </a>
-                <p class="mt-1.5 text-[9px] opacity-60">
+                <p class="mt-1.5 text-[10px] text-zinc-400">
                     This page uses cookies for analytics & music deep-linking.
                 </p>
             </div>

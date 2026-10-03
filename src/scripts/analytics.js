@@ -56,23 +56,60 @@
 
         gtag('js', new Date());
 
-        // Use Cloudflare Gateway for reporting
-        gtag('config', gaId, {
-            transport_url: window.location.origin + '/metrics',
+        // SDK Deferred Loader
+        var sdkLoaded = false;
+        var sdkLoadCallbacks = [];
+        function triggerSDKLoads() {
+            if (sdkLoaded) return;
+            sdkLoaded = true;
+            for (var i = 0; i < sdkLoadCallbacks.length; i++) {
+                try {
+                    sdkLoadCallbacks[i]();
+                } catch (e) {}
+            }
+        }
+        function scheduleSDKLoad(fn) {
+            sdkLoadCallbacks.push(fn);
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(triggerSDKLoads, { timeout: 2000 });
+            } else {
+                setTimeout(triggerSDKLoads, 150);
+            }
+        }
+        ['pointerdown', 'keydown', 'touchstart'].forEach(function (evt) {
+            window.addEventListener(evt, triggerSDKLoads, { once: true, passive: true });
+        });
+
+        // Use Cloudflare Gateway for reporting in production, Google directly in local dev
+        var isLocalhost = Boolean(
+            window.location.hostname === 'localhost' ||
+            window.location.hostname === '127.0.0.1' ||
+            window.location.hostname.endsWith('.local'),
+        );
+
+        var gtagConfig = {
             allow_google_signals: false,
             allow_ad_personalization_signals: false,
             restricted_data_processing: true,
-        });
+        };
 
-        // Optimization: Inherit consent -> load script immediately
+        if (!isLocalhost) {
+            gtagConfig.transport_url = window.location.origin + '/metrics';
+        }
+
+        gtag('config', gaId, gtagConfig);
+
+        // Optimization: Inherit consent -> load script with idle/interaction scheduling
         if (savedConsent === 'granted') {
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.async = true;
-            script.crossOrigin = 'anonymous';
-            script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
-            var firstScript = document.getElementsByTagName('script')[0];
-            firstScript.parentNode.insertBefore(script, firstScript);
+            scheduleSDKLoad(function () {
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.async = true;
+                script.crossOrigin = 'anonymous';
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+                var firstScript = document.getElementsByTagName('script')[0];
+                firstScript.parentNode.insertBefore(script, firstScript);
+            });
         }
     }
 
@@ -88,11 +125,14 @@
             n.loaded = !0;
             n.version = '2.0';
             n.queue = [];
-            t = b.createElement(e);
-            t.async = !0;
-            t.src = v;
-            s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s);
+
+            scheduleSDKLoad(function () {
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s);
+            });
         })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
 
         let savedConsent = config.autoConsent ? 'grant' : 'revoke';
@@ -155,12 +195,14 @@
                         (ttq._t[e] = +new Date()),
                         (ttq._o = ttq._o || {}),
                         (ttq._o[e] = n || {}));
-                    var o = document.createElement('script');
-                    ((o.type = 'text/javascript'),
-                        (o.async = !0),
-                        (o.src = i + '?sdkid=' + e + '&lib=' + t));
-                    var a = document.getElementsByTagName('script')[0];
-                    a.parentNode.insertBefore(o, a);
+                    scheduleSDKLoad(function () {
+                        var o = document.createElement('script');
+                        ((o.type = 'text/javascript'),
+                            (o.async = !0),
+                            (o.src = i + '?sdkid=' + e + '&lib=' + t));
+                        var a = document.getElementsByTagName('script')[0];
+                        a.parentNode.insertBefore(o, a);
+                    });
                 }));
 
             // Check storage
