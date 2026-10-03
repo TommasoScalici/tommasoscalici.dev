@@ -1,3 +1,10 @@
+## [1.28.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.28.0...v1.28.1) (2026-10-03)
+
+
+### Performance Improvements
+
+* **landing:** optimize LCP, image delivery, and analytics loading for Spotify pages ([bd6f402](https://github.com/TommasoScalici/tommasoscalici.dev/commit/bd6f4024ee2abe62ff2928c5626246b92f5c0409))
+
 # [1.28.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.27.1...v1.28.0) (2026-10-02)
 
 
