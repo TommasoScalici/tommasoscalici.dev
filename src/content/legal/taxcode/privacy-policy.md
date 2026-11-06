@@ -84,7 +84,7 @@ The App implements a **Pure Guest Mode** that operates 100% locally: no anonymou
 
 The App supports **Android AppFunctions**, enabling Google Gemini and the system voice assistant to interact with the application to retrieve your Tax Code (including phonetic spelling for seamless dictation) or open the barcode screen directly upon the user's voice command.
 
-- **Exclusively On-Device Processing:** Contact lookup, query matching, and function execution take place *exclusively on-device*.
+- **Exclusively On-Device Processing:** Contact lookup, query matching, and function execution take place _exclusively on-device_.
 - **Privacy Guarantee:** No personal data, voice search queries, or contact/card archives are transmitted to external servers or used to train artificial intelligence models.
 - **Full User Control:** The user retains full control over this feature and can disable it at any time via the dedicated toggle in the App's Settings.
 

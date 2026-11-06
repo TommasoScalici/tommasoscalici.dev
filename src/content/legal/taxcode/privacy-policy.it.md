@@ -84,7 +84,7 @@ L'App implementa una **Modalità Ospite pura (Pure Guest Mode)** che opera al 10
 
 L'App supporta le **Android AppFunctions**, consentendo a Google Gemini e all'assistente vocale di sistema di interagire con l'applicazione per recuperare il Codice Fiscale (con eventuale sillabazione fonetica per agevolarne la comprensione e la dettatura) o aprire la schermata del codice a barre su richiesta vocale dell'utente.
 
-- **Elaborazione Esclusivamente Locale (On-Device):** La ricerca dei contatti, il matching delle query e l'esecuzione delle funzioni vocali avvengono *esclusivamente in locale on-device*.
+- **Elaborazione Esclusivamente Locale (On-Device):** La ricerca dei contatti, il matching delle query e l'esecuzione delle funzioni vocali avvengono _esclusivamente in locale on-device_.
 - **Garanzia di Riservatezza:** Nessun dato personale, query vocale o archivio contatti viene trasmesso a server esterni né utilizzato per addestrare modelli di intelligenza artificiale.
 - **Pieno Controllo dell'Utente:** L'utente ha il pieno controllo della funzionalità e può disattivarla in qualsiasi momento tramite il toggle dedicato nelle Impostazioni dell'app.
 
