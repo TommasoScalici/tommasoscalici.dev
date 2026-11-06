@@ -123,8 +123,11 @@ const trackingId = release.title.toLowerCase().replace(/[^a-z0-9]/g, '-');
 
     class MusicReleaseManager {
         constructor() {
-            const btns = document.querySelectorAll<HTMLButtonElement>('[data-release-btn]');
+            const btns = document.querySelectorAll<HTMLButtonElement>(
+                '[data-release-btn]:not([data-initialized])',
+            );
             for (const btn of btns) {
+                btn.setAttribute('data-initialized', 'true');
                 btn.addEventListener('click', this.#handleClick);
             }
         }
@@ -157,7 +160,14 @@ const trackingId = release.title.toLowerCase().replace(/[^a-z0-9]/g, '-');
         };
     }
 
-    document.addEventListener('astro:page-load', () => {
+    const initMusicRelease = () => {
         new MusicReleaseManager();
-    });
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMusicRelease);
+    } else {
+        initMusicRelease();
+    }
+    document.addEventListener('astro:page-load', initMusicRelease);
 </script>

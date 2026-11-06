@@ -66,8 +66,11 @@
             }
         }
         updateConsent(false);
-        window.addEventListener('consent-update', function () {
-            updateConsent(true);
-        });
+        if (!window.__consentManagerInit) {
+            window.__consentManagerInit = true;
+            window.addEventListener('consent-update', function () {
+                updateConsent(true);
+            });
+        }
     })();
 </script>

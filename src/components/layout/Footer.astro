@@ -124,14 +124,19 @@ const { lang, t, copyrightDate } = Astro.props;
 
     class FooterManager {
         constructor() {
-            const trackLinks = document.querySelectorAll<HTMLAnchorElement>('[data-track-footer]');
+            const trackLinks = document.querySelectorAll<HTMLAnchorElement>(
+                '[data-track-footer]:not([data-initialized])',
+            );
             for (const link of trackLinks) {
+                link.setAttribute('data-initialized', 'true');
                 link.addEventListener('click', this.#handleTrackClick);
             }
 
-            const dialogTriggers =
-                document.querySelectorAll<HTMLButtonElement>('[data-dialog-trigger]');
+            const dialogTriggers = document.querySelectorAll<HTMLButtonElement>(
+                '[data-dialog-trigger]:not([data-initialized])',
+            );
             for (const btn of dialogTriggers) {
+                btn.setAttribute('data-initialized', 'true');
                 btn.addEventListener('click', this.#handleDialogOpen);
             }
         }
@@ -156,7 +161,14 @@ const { lang, t, copyrightDate } = Astro.props;
         };
     }
 
-    document.addEventListener('astro:page-load', () => {
+    const initFooter = () => {
         new FooterManager();
-    });
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initFooter);
+    } else {
+        initFooter();
+    }
+    document.addEventListener('astro:page-load', initFooter);
 </script>

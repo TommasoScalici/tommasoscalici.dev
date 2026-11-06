@@ -35,6 +35,7 @@ const iconMapping: Record<string, string> = {
 
 <dialog
     id={id}
+    data-smart-dialog
     class="border-glass-border open:zoom-in-95 dark:bg-background fixed inset-0 m-auto w-[90%] max-w-sm rounded-2xl border bg-white p-6 shadow-2xl backdrop:bg-black/60 backdrop:backdrop-blur-sm"
 >
     <!-- Close Button -->
@@ -80,11 +81,36 @@ const iconMapping: Record<string, string> = {
 
     class SocialSmartDialogManager {
         constructor() {
-            const links = document.querySelectorAll<HTMLAnchorElement>('[data-track-social]');
+            const links = document.querySelectorAll<HTMLAnchorElement>(
+                '[data-track-social]:not([data-initialized])',
+            );
             for (const link of links) {
+                link.setAttribute('data-initialized', 'true');
                 link.addEventListener('click', this.#handleClick);
             }
+
+            // Close dialog when clicking backdrop
+            const dialogs = document.querySelectorAll<HTMLDialogElement>(
+                'dialog[data-smart-dialog]:not([data-backdrop-initialized])',
+            );
+            for (const dialog of dialogs) {
+                dialog.setAttribute('data-backdrop-initialized', 'true');
+                dialog.addEventListener('click', this.#handleBackdropClick);
+            }
         }
+
+        #handleBackdropClick = (e: MouseEvent) => {
+            const dialog = e.currentTarget as HTMLDialogElement;
+            const rect = dialog.getBoundingClientRect();
+            const isInDialog =
+                rect.top <= e.clientY &&
+                e.clientY <= rect.top + rect.height &&
+                rect.left <= e.clientX &&
+                e.clientX <= rect.left + rect.width;
+            if (!isInDialog) {
+                dialog.close();
+            }
+        };
 
         #handleClick = (e: MouseEvent) => {
             const el = e.currentTarget as HTMLAnchorElement;
@@ -100,7 +126,14 @@ const iconMapping: Record<string, string> = {
         };
     }
 
-    document.addEventListener('astro:page-load', () => {
+    const initSocialSmartDialog = () => {
         new SocialSmartDialogManager();
-    });
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSocialSmartDialog);
+    } else {
+        initSocialSmartDialog();
+    }
+    document.addEventListener('astro:page-load', initSocialSmartDialog);
 </script>

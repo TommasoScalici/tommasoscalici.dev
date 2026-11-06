@@ -91,21 +91,33 @@ const getLocalized = (
     <script>
         import { trackEvent } from '../../lib/analytics';
 
-        const links = document.querySelectorAll<HTMLAnchorElement>('.track-uses-link');
+        const initUsesTracking = () => {
+            const links = document.querySelectorAll<HTMLAnchorElement>(
+                '.track-uses-link:not([data-initialized])',
+            );
 
-        links.forEach((link) => {
-            link.addEventListener('click', () => {
-                const name = link.getAttribute('data-track-name');
-                const category = link.getAttribute('data-track-category');
+            for (const link of links) {
+                link.setAttribute('data-initialized', 'true');
+                link.addEventListener('click', () => {
+                    const name = link.getAttribute('data-track-name');
+                    const category = link.getAttribute('data-track-category');
 
-                if (name) {
-                    trackEvent('select_content', {
-                        content_type: 'uses_link',
-                        content_name: name,
-                        item_id: category || 'General',
-                    });
-                }
-            });
-        });
+                    if (name) {
+                        trackEvent('select_content', {
+                            content_type: 'uses_link',
+                            content_name: name,
+                            item_id: category || 'General',
+                        });
+                    }
+                });
+            }
+        };
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initUsesTracking);
+        } else {
+            initUsesTracking();
+        }
+        document.addEventListener('astro:page-load', initUsesTracking);
     </script>
 </Layout>
