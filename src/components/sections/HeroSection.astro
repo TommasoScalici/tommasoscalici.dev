@@ -28,10 +28,10 @@ const bio = bioEntry.data;
                 {/* Text Content */}
                 <div class="max-w-4xl">
                     <h1 class="mb-8 font-mono text-4xl leading-none font-bold tracking-tighter md:text-5xl lg:text-7xl">
-                        <span class="via-primary dark:via-primary block animate-pulse bg-linear-to-r from-gray-600 to-blue-400 bg-clip-text pb-2 text-transparent dark:from-white dark:to-blue-400">
+                        <span class="via-primary dark:via-primary block animate-pulse motion-reduce:animate-none bg-linear-to-r from-gray-600 to-blue-400 bg-clip-text pb-2 text-transparent dark:from-white dark:to-blue-400">
                             {bio.heroTitle}
                         </span>
-                        <span class="via-secondary dark:via-secondary block animate-pulse bg-linear-to-r from-gray-600 to-purple-500 bg-clip-text pb-2 text-transparent dark:from-white dark:to-purple-500">
+                        <span class="via-secondary dark:via-secondary block animate-pulse motion-reduce:animate-none bg-linear-to-r from-gray-600 to-purple-500 bg-clip-text pb-2 text-transparent dark:from-white dark:to-purple-500">
                             {bio.heroSubtitle}
                         </span>
                     </h1>
@@ -43,19 +43,19 @@ const bio = bioEntry.data;
                     <div class="flex flex-wrap gap-4">
                         <a
                             href="#projects"
-                            class="border-primary text-primary hover:bg-primary/10 hover:shadow-primary-glow rounded-full border px-8 py-3 font-bold transition-all duration-300"
+                            class="border-primary text-primary hover:bg-primary/10 hover:shadow-primary-glow focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded-full border px-8 py-3 font-bold transition-all duration-300"
                         >
                             {t['hero.viewProjects']}
                         </a>
                         <a
                             href="#music"
-                            class="border-secondary text-secondary hover:bg-secondary/10 hover:shadow-secondary-glow rounded-full border px-8 py-3 font-bold transition-all duration-300"
+                            class="border-secondary text-secondary hover:bg-secondary/10 hover:shadow-secondary-glow focus-visible:ring-2 focus-visible:ring-secondary focus-visible:outline-none rounded-full border px-8 py-3 font-bold transition-all duration-300"
                         >
                             {t['hero.listenMusic']}
                         </a>
                         <a
                             href="#playlists"
-                            class="border-glass-border hover:border-glass-border/30 text-muted hover:bg-glass-bg/15 hover:text-main rounded-full border bg-white/70 px-8 py-3 font-bold transition-all duration-300 dark:border-white/10 dark:bg-white/5"
+                            class="border-glass-border hover:border-glass-border/30 text-muted hover:bg-glass-bg/15 hover:text-main focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded-full border bg-white/70 px-8 py-3 font-bold transition-all duration-300 dark:border-white/10 dark:bg-white/5"
                         >
                             {t['hero.enterFlow']}
                         </a>

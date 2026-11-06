@@ -118,9 +118,10 @@ const { lang, t, navItems, logoSrc, targetLangUrl } = Astro.props;
                     <button
                         type="button"
                         data-menu-btn
-                        class="text-muted hover:text-main"
+                        class="text-muted hover:text-main focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded-lg p-1 transition-colors"
                         aria-label={t['aria.menu'] || 'Menu'}
                         aria-expanded="false"
+                        aria-controls="mobile-menu"
                     >
                         <Icon name="lucide:menu" class="menu-open-hidden block h-6 w-6" />
                         <Icon name="lucide:x" class="menu-open-block hidden h-6 w-6" />
@@ -131,6 +132,7 @@ const { lang, t, navItems, logoSrc, targetLangUrl } = Astro.props;
 
         <!-- Mobile Nav Overlay -->
         <div
+            id="mobile-menu"
             data-mobile-menu
             class="border-surface slide-in-from-top-5 absolute top-16 right-0 left-0 hidden flex-col border-b bg-black/95 p-6 backdrop-blur-xl lg:hidden"
         >
@@ -138,7 +140,7 @@ const { lang, t, navItems, logoSrc, targetLangUrl } = Astro.props;
                 {navItems.map((item) => (
                     <a
                         href={item.href}
-                        class="mobile-nav-link hover:text-primary text-lg font-semibold text-gray-300 transition-colors"
+                        class="mobile-nav-link hover:text-primary focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded-lg text-lg font-semibold text-gray-300 transition-colors"
                     >
                         {item.label}
                     </a>
@@ -221,33 +223,95 @@ const { lang, t, navItems, logoSrc, targetLangUrl } = Astro.props;
             }
         }
 
-        #toggleMenu = () => {
-            this.#isOpen = !this.#isOpen;
-            if (this.#isOpen) {
-                this.#mobileMenu?.classList.remove('hidden');
-                this.#mobileMenu?.classList.add('flex');
-                if (this.#menuBtn) {
-                    this.#menuBtn.setAttribute('aria-expanded', 'true');
-                    this.#menuBtn.querySelector('.menu-open-hidden')?.classList.add('hidden');
-                    this.#menuBtn.querySelector('.menu-open-hidden')?.classList.remove('block');
-                    this.#menuBtn.querySelector('.menu-open-block')?.classList.remove('hidden');
-                    this.#menuBtn.querySelector('.menu-open-block')?.classList.add('block');
+        disconnectedCallback() {
+            document.body.style.overflow = '';
+            document.removeEventListener('keydown', this.#handleKeyDown);
+        }
+
+        #handleKeyDown = (e: KeyboardEvent) => {
+            if (!this.#isOpen) return;
+
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                this.#closeMenu(true);
+                return;
+            }
+
+            if (e.key === 'Tab') {
+                const allElements = [
+                    this.#menuBtn,
+                    ...Array.from(
+                        this.#mobileMenu?.querySelectorAll<HTMLElement>(
+                            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+                        ) ?? [],
+                    ),
+                ];
+                const focusableElements = allElements.filter(
+                    (el): el is HTMLElement =>
+                        el !== null &&
+                        el.offsetParent !== null &&
+                        !el.hasAttribute('disabled') &&
+                        el.getAttribute('aria-hidden') !== 'true',
+                );
+
+                if (focusableElements.length === 0) return;
+
+                const firstEl = focusableElements[0];
+                const lastEl = focusableElements[focusableElements.length - 1];
+
+                if (e.shiftKey) {
+                    if (document.activeElement === firstEl) {
+                        e.preventDefault();
+                        lastEl.focus();
+                    }
+                } else {
+                    if (document.activeElement === lastEl) {
+                        e.preventDefault();
+                        firstEl.focus();
+                    }
                 }
-            } else {
-                this.#closeMenu();
             }
         };
 
-        #closeMenu = () => {
+        #toggleMenu = () => {
+            if (this.#isOpen) {
+                this.#closeMenu();
+            } else {
+                this.#openMenu();
+            }
+        };
+
+        #openMenu = () => {
+            this.#isOpen = true;
+            this.#mobileMenu?.classList.remove('hidden');
+            this.#mobileMenu?.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            document.addEventListener('keydown', this.#handleKeyDown);
+            if (this.#menuBtn) {
+                this.#menuBtn.setAttribute('aria-expanded', 'true');
+                this.#menuBtn.querySelector('.menu-open-hidden')?.classList.add('hidden');
+                this.#menuBtn.querySelector('.menu-open-hidden')?.classList.remove('block');
+                this.#menuBtn.querySelector('.menu-open-block')?.classList.remove('hidden');
+                this.#menuBtn.querySelector('.menu-open-block')?.classList.add('block');
+            }
+        };
+
+        #closeMenu = (returnFocus = false) => {
+            if (!this.#isOpen) return;
             this.#isOpen = false;
             this.#mobileMenu?.classList.add('hidden');
             this.#mobileMenu?.classList.remove('flex');
+            document.body.style.overflow = '';
+            document.removeEventListener('keydown', this.#handleKeyDown);
             if (this.#menuBtn) {
                 this.#menuBtn.setAttribute('aria-expanded', 'false');
                 this.#menuBtn.querySelector('.menu-open-hidden')?.classList.remove('hidden');
                 this.#menuBtn.querySelector('.menu-open-hidden')?.classList.add('block');
                 this.#menuBtn.querySelector('.menu-open-block')?.classList.add('hidden');
                 this.#menuBtn.querySelector('.menu-open-block')?.classList.remove('block');
+                if (returnFocus) {
+                    this.#menuBtn.focus();
+                }
             }
         };
 

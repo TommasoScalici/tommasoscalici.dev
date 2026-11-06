@@ -73,10 +73,10 @@ const trackingId = release.title.toLowerCase().replace(/[^a-z0-9]/g, '-');
                 data-track-name={release.title}
                 data-track-id={trackingId}
                 disabled={isUpcoming && !release.presaveLink}
-                class={`inline-flex transform items-center gap-2 rounded-full bg-secondary/90 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 border-none outline-none ${
+                class={`inline-flex transform items-center gap-2 rounded-full bg-secondary/90 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 border-none outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
                     isUpcoming && !release.presaveLink
                         ? 'translate-y-0 cursor-not-allowed bg-gray-700 text-gray-400 opacity-100 hover:bg-gray-700'
-                        : 'hover:bg-secondary hover:shadow-secondary-glow translate-y-4 opacity-0 transition-all hover:scale-105 hover:brightness-110 group-hover:translate-y-0 group-hover:opacity-100'
+                        : 'hover:bg-secondary hover:shadow-secondary-glow translate-y-4 opacity-0 transition-all hover:scale-105 hover:brightness-110 group-hover:translate-y-0 group-hover:opacity-100 focus-visible:translate-y-0 focus-visible:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100'
                 }`}
             >
                 {isUpcoming ? (

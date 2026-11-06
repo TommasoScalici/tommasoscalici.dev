@@ -31,18 +31,21 @@ const iconMapping: Record<string, string> = {
     lastfm: 'simple-icons:lastdotfm',
     steam: 'simple-icons:steam',
 };
+
+const titleId = `social-dialog-title-${id}`;
 ---
 
 <dialog
     id={id}
     data-smart-dialog
+    aria-labelledby={titleId}
     class="border-glass-border open:zoom-in-95 dark:bg-background fixed inset-0 m-auto w-[90%] max-w-sm rounded-2xl border bg-white p-6 shadow-2xl backdrop:bg-black/60 backdrop:backdrop-blur-sm"
 >
     <!-- Close Button -->
     <form method="dialog">
         <button
             type="submit"
-            class="text-muted hover:text-main absolute top-4 right-4 transition-colors"
+            class="text-muted hover:text-main focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded-lg p-1 absolute top-4 right-4 transition-colors"
             aria-label={closeLabel}
         >
             <Icon name="lucide:x" class="h-5 w-5" />
@@ -51,7 +54,9 @@ const iconMapping: Record<string, string> = {
 
     <!-- Header -->
     <div class="mb-6 flex flex-col items-center">
-        <h3 class="text-main font-mono text-lg font-bold">{title}</h3>
+        <h3 id={titleId} class="text-main font-mono text-lg font-bold">
+            {title}
+        </h3>
     </div>
 
     <!-- Links Grid -->
