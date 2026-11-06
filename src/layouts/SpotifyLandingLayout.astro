@@ -1,6 +1,7 @@
 ---
 import { getImage, Picture } from 'astro:assets';
 
+import fallbackCover from '../assets/playlist-fallback.webp';
 import SpotifyConsentDialog from '../components/dialogs/SpotifyConsentDialog.astro';
 import { defaultLang, ui } from '../i18n/ui';
 import { normalizePath } from '../lib/seo';
@@ -17,9 +18,12 @@ interface Props {
 const { title, description, coverImage, theme, lang = defaultLang } = Astro.props;
 const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
 
+// Robust fallback: if remote coverImage is empty/broken, fallback to local optimized WebP
+const effectiveCover = coverImage && coverImage.trim() !== '' ? coverImage : fallbackCover;
+
 // 1. High-priority optimized cover for LCP preload & picture tag
 const optimizedCover = await getImage({
-    src: coverImage,
+    src: effectiveCover,
     format: 'avif',
     width: 300,
     height: 300,
@@ -27,7 +31,7 @@ const optimizedCover = await getImage({
 
 // 2. Ultra-lightweight blurred background (64x64 WebP, ~400 bytes instead of ~30KB)
 const optimizedBg = await getImage({
-    src: coverImage,
+    src: effectiveCover,
     format: 'webp',
     width: 64,
     height: 64,
@@ -36,7 +40,7 @@ const optimizedBg = await getImage({
 
 // 3. Crisp OpenGraph image for social crawlers (640x640)
 const ogImage = await getImage({
-    src: coverImage,
+    src: effectiveCover,
     format: 'webp',
     width: 640,
     height: 640,
@@ -124,18 +128,32 @@ const gradientClasses =
                 <div
                     class={`absolute -inset-1 animate-spin-slow rounded-xl bg-linear-to-r opacity-75 blur-lg ${gradientClasses}`}
                 ></div>
-                <Picture
-                    src={coverImage}
-                    alt={`${title} Cover`}
-                    width={300}
-                    height={300}
-                    formats={['avif', 'webp']}
-                    loading="eager"
-                    fetchpriority="high"
-                    class="relative h-full w-full rounded-xl object-cover"
-                    style={currentTheme.coverShadow}
-                    inferSize={true}
-                />
+                {typeof effectiveCover === 'string' ? (
+                    <Picture
+                        src={effectiveCover}
+                        alt={`${title} Cover`}
+                        width={300}
+                        height={300}
+                        formats={['avif', 'webp']}
+                        loading="eager"
+                        fetchpriority="high"
+                        class="relative h-full w-full rounded-xl object-cover"
+                        style={currentTheme.coverShadow}
+                        inferSize={true}
+                    />
+                ) : (
+                    <Picture
+                        src={effectiveCover}
+                        alt={`${title} Cover`}
+                        width={300}
+                        height={300}
+                        formats={['avif', 'webp']}
+                        loading="eager"
+                        fetchpriority="high"
+                        class="relative h-full w-full rounded-xl object-cover"
+                        style={currentTheme.coverShadow}
+                    />
+                )}
             </div>
 
             <slot />

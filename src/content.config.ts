@@ -5,6 +5,8 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { defineCollection } from 'astro:content';
 
+import { getPlaylistCover } from './lib/spotify';
+
 // ============= SHARED SCHEMAS =============
 
 // Helper for safe string validation with configurable bounds
@@ -151,20 +153,12 @@ const playlists = defineCollection({
                     [key: string]: string | number | boolean | undefined;
                 }[];
 
-                // Fetch thumbnails for each playlist in the array
+                // Fetch thumbnails for each playlist with caching & fallback
                 const enrichedPlaylists = await Promise.all(
-                    playlistData.map(async (playlist) => {
-                        const response = await fetch(
-                            `https://open.spotify.com/oembed?url=https://open.spotify.com/playlist/${playlist.spotifyId}`,
-                        );
-                        const oEmbedData = (response.ok ? await response.json() : {}) as Partial<
-                            Record<string, string>
-                        >;
-                        return {
-                            ...playlist,
-                            coverImage: oEmbedData.thumbnail_url ?? '',
-                        };
-                    }),
+                    playlistData.map(async (playlist) => ({
+                        ...playlist,
+                        coverImage: await getPlaylistCover(playlist.spotifyId),
+                    })),
                 );
 
                 entries.push({
@@ -183,9 +177,7 @@ const playlists = defineCollection({
                 z.object({
                     title: safeString(1, 200),
                     description: safeString(10, 500),
-                    coverImage: z.string().regex(/^https:\/\/[^\s/$.?#].[^\s]*$/, {
-                        message: 'Invalid Spotify thumbnail URL',
-                    }),
+                    coverImage: safeRouteOrUrl(),
                     spotifyId: z
                         .string()
                         .trim()
