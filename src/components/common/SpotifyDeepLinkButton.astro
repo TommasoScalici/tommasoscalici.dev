@@ -24,6 +24,9 @@ const webUrl = `https://open.spotify.com/playlist/${playlistId}`;
 </a>
 
 <script>
+    import { trackEvent } from '../../lib/analytics';
+    import { getConsent } from '../../lib/consent';
+
     class SpotifyDeepLinkManager {
         constructor() {
             const links = document.querySelectorAll<HTMLAnchorElement>(
@@ -59,29 +62,36 @@ const webUrl = `https://open.spotify.com/playlist/${playlistId}`;
 
         #handleClick = (e: MouseEvent) => {
             const link = e.currentTarget as HTMLAnchorElement;
-            const playlistId = link.getAttribute('data-playlist-id');
+            const playlistId = link.getAttribute('data-playlist-id') || '';
             const eventName = link.getAttribute('data-event-name') || 'Spotify Playlist';
             const labelEl = link.querySelector('.label-text');
+
+            // 1. Intercept if consent is pending and not bypassed
+            if (!link.hasAttribute('data-skip-intercept')) {
+                const consent = getConsent();
+                if (consent === 'pending') {
+                    e.preventDefault();
+                    window.dispatchEvent(
+                        new CustomEvent('open-spotify-consent', {
+                            detail: { link },
+                        }),
+                    );
+                    return;
+                }
+            } else {
+                link.removeAttribute('data-skip-intercept');
+            }
 
             if (labelEl) labelEl.textContent = 'Opening...';
             link.classList.add('cursor-wait', 'opacity-75');
 
-            // 1. Fire Meta Pixel Conversion Event immediately
-            if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
-                window.fbq('track', 'ViewContent', {
-                    content_name: eventName,
-                    content_category: 'Spotify Playlist Deep Link',
-                });
-            }
-
-            // 2. Fire GA4 Conversion Event immediately
-            if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-                window.gtag('event', 'select_content', {
-                    content_type: 'spotify_playlist',
-                    item_id: playlistId,
-                    content_name: eventName,
-                });
-            }
+            // 2. Fire unified conversion event (trackEvent checks consent internally)
+            trackEvent('select_content', {
+                content_type: 'spotify_playlist',
+                item_id: playlistId,
+                content_name: eventName,
+                content_category: 'Spotify Playlist Deep Link',
+            });
 
             const userAgent = navigator.userAgent || '';
             const isIOS = /iPhone|iPad|iPod/i.test(userAgent);

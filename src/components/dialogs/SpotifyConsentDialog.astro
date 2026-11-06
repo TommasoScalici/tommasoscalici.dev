@@ -1,0 +1,140 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import { defaultLang, ui } from '../../i18n/ui';
+
+interface Props {
+    lang?: string;
+}
+
+const { lang = defaultLang } = Astro.props;
+const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
+---
+
+<dialog
+    id="spotify-consent-dialog"
+    aria-labelledby="spotify-consent-title"
+    aria-describedby="spotify-consent-desc"
+    class="border-glass-border fixed inset-0 m-auto w-[90%] max-w-sm rounded-3xl border bg-black/95 p-6 text-white shadow-2xl backdrop-blur-2xl backdrop:bg-black/75 backdrop:backdrop-blur-sm open:animate-in open:fade-in open:zoom-in-95 duration-200"
+>
+    <!-- Close Button -->
+    <form method="dialog">
+        <button
+            type="submit"
+            class="text-zinc-400 hover:text-white absolute top-4 right-4 rounded-lg p-1 transition-colors focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+            aria-label={t['aria.close']}
+        >
+            <Icon name="lucide:x" class="h-5 w-5" />
+        </button>
+    </form>
+
+    <!-- Header Icon -->
+    <div class="mb-4 flex flex-col items-center text-center">
+        <div class="shadow-spotify-glow mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-spotify/15 text-spotify">
+            <Icon name="simple-icons:spotify" class="h-6 w-6" />
+        </div>
+        <h3 id="spotify-consent-title" class="text-base font-bold text-white">
+            {t['spotifyConsent.title']}
+        </h3>
+        <p id="spotify-consent-desc" class="mt-2 text-xs leading-relaxed text-zinc-300">
+            {t['spotifyConsent.text']}
+        </p>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex flex-col gap-2.5">
+        <button
+            type="button"
+            data-spotify-consent-accept
+            class="bg-spotify shadow-spotify-glow hover:bg-spotify-hover hover:shadow-spotify-glow-hover flex w-full cursor-pointer select-none items-center justify-center gap-2 rounded-xl px-4 py-3 text-xs font-bold text-black transition-all hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
+        >
+            <Icon name="simple-icons:spotify" class="h-4 w-4" />
+            <span>{t['spotifyConsent.accept']}</span>
+        </button>
+        <button
+            type="button"
+            data-spotify-consent-deny
+            class="flex w-full cursor-pointer select-none items-center justify-center rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-semibold text-zinc-400 transition-colors hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+        >
+            <span>{t['spotifyConsent.deny']}</span>
+        </button>
+    </div>
+
+    <div class="mt-4 text-center">
+        <a
+            href={lang === 'en' ? '/privacy-policy/' : `/${lang}/privacy-policy/`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-[10px] text-zinc-500 underline transition-colors hover:text-zinc-300"
+        >
+            {t['footer.privacy']}
+        </a>
+    </div>
+</dialog>
+
+<script>
+    import { setConsent } from '../../lib/consent';
+
+    class SpotifyConsentDialogManager {
+        #dialog: HTMLDialogElement | null = null;
+        #pendingLink: HTMLAnchorElement | null = null;
+
+        constructor() {
+            this.#dialog = document.getElementById(
+                'spotify-consent-dialog',
+            ) as HTMLDialogElement | null;
+            if (!this.#dialog) return;
+
+            // Close when backdrop is clicked
+            this.#dialog.addEventListener('click', (e) => {
+                if (e.target === this.#dialog) {
+                    this.#dialog?.close();
+                }
+            });
+
+            const acceptBtn = this.#dialog.querySelector('[data-spotify-consent-accept]');
+            const denyBtn = this.#dialog.querySelector('[data-spotify-consent-deny]');
+
+            acceptBtn?.addEventListener('click', () => {
+                setConsent('granted');
+                this.#dialog?.close();
+                this.#resumeNavigation();
+            });
+
+            denyBtn?.addEventListener('click', () => {
+                setConsent('denied');
+                this.#dialog?.close();
+                this.#resumeNavigation();
+            });
+
+            window.addEventListener('open-spotify-consent', this.#handleOpen as EventListener);
+        }
+
+        #handleOpen = (e: CustomEvent<{ link?: HTMLAnchorElement }>) => {
+            this.#pendingLink = e.detail?.link ?? null;
+            if (this.#dialog && !this.#dialog.open) {
+                this.#dialog.showModal();
+            }
+        };
+
+        #resumeNavigation = () => {
+            if (this.#pendingLink) {
+                const link = this.#pendingLink;
+                this.#pendingLink = null;
+                link.setAttribute('data-skip-intercept', 'true');
+                link.click();
+            }
+        };
+    }
+
+    const initSpotifyConsentDialog = () => {
+        new SpotifyConsentDialogManager();
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSpotifyConsentDialog);
+    } else {
+        initSpotifyConsentDialog();
+    }
+    document.addEventListener('astro:page-load', initSpotifyConsentDialog);
+</script>

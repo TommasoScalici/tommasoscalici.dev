@@ -22,6 +22,19 @@
   Content-Type: application/json; charset=utf-8
 /.well-known/mcp/config.json
   Content-Type: application/json; charset=utf-8
+/.well-known/openapi.yaml
+  Content-Type: application/yaml; charset=utf-8
+
+# CORS for Public API and Machine-Readable endpoints
+/api/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Allow-Headers: Content-Type
+/.well-known/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+/llms.txt
+  Access-Control-Allow-Origin: *
 
 # Cache other static assets for 1 week
 /*.webp

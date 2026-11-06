@@ -18,16 +18,9 @@ interface Props {
     lang?: string;
     gaId?: string;
     hideCookieBanner?: boolean;
-    autoConsent?: boolean;
 }
 
-const {
-    title,
-    lang = 'en',
-    gaId = 'G-LMT1M9750Q',
-    hideCookieBanner = false,
-    autoConsent = false,
-} = Astro.props;
+const { title, lang = 'en', gaId = 'G-LMT1M9750Q', hideCookieBanner = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -42,26 +35,19 @@ const {
         {ENABLE_FACEBOOK_PIXEL && <link rel="dns-prefetch" href="https://connect.facebook.net" />}
         {ENABLE_TIKTOK_PIXEL && <link rel="dns-prefetch" href="https://analytics.tiktok.com" />}
 
-        {autoConsent && <script is:inline>
-            try {
-                localStorage.setItem('user-consent', 'granted');
-            } catch (e) {}
-        </script>}
-
         <AnalyticsHead
             gaId={gaId}
             fbPixelId={PUBLIC_FACEBOOK_PIXEL_ID}
             tiktokPixelId={PUBLIC_TIKTOK_PIXEL_ID}
             enableFbPixel={ENABLE_FACEBOOK_PIXEL}
             enableTiktokPixel={ENABLE_TIKTOK_PIXEL}
-            autoConsent={autoConsent}
         />
 
         <slot name="head" />
     </head>
     <body class="bg-background text-main antialiased">
         {!hideCookieBanner && <CookieBanner lang={lang} />}
-        {!autoConsent && <ConsentManager />}
+        <ConsentManager />
 
         <slot />
     </body>

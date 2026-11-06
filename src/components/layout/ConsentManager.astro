@@ -30,7 +30,15 @@
                 if (typeof window.fbq === 'function') {
                     window.fbq('consent', 'grant');
                     if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.fbPixelId) {
-                        window.fbq('set', 'autoConfig', false, window.ANALYTICS_CONFIG.fbPixelId);
+                        var fbPixelId = window.ANALYTICS_CONFIG.fbPixelId;
+                        if (!document.querySelector('script[src*="fbevents.js"]')) {
+                            var fbScript = document.createElement('script');
+                            fbScript.async = true;
+                            fbScript.src = 'https://connect.facebook.net/en_US/fbevents.js';
+                            var fbFirstScript = document.getElementsByTagName('script')[0];
+                            fbFirstScript.parentNode.insertBefore(fbScript, fbFirstScript);
+                        }
+                        window.fbq('set', 'autoConfig', false, fbPixelId);
                     }
                     if (isUpdate) window.fbq('track', 'PageView');
                 }

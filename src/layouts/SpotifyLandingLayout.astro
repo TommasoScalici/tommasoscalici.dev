@@ -1,6 +1,8 @@
 ---
 import { getImage, Picture } from 'astro:assets';
 
+import SpotifyConsentDialog from '../components/dialogs/SpotifyConsentDialog.astro';
+import { defaultLang, ui } from '../i18n/ui';
 import { normalizePath } from '../lib/seo';
 import BaseLayout from './BaseLayout.astro';
 
@@ -9,9 +11,11 @@ interface Props {
     description: string;
     coverImage: string;
     theme: 'lofi' | 'prog' | 'jrpg';
+    lang?: string;
 }
 
-const { title, description, coverImage, theme } = Astro.props;
+const { title, description, coverImage, theme, lang = defaultLang } = Astro.props;
+const t = lang in ui ? ui[lang as keyof typeof ui] : ui[defaultLang];
 
 // 1. High-priority optimized cover for LCP preload & picture tag
 const optimizedCover = await getImage({
@@ -70,7 +74,7 @@ const gradientClasses =
           : 'from-primary via-secondary to-primary';
 ---
 
-<BaseLayout title={title} hideCookieBanner={true} autoConsent={true}>
+<BaseLayout title={title} lang={lang} hideCookieBanner={true}>
     <Fragment slot="head">
         <!-- Preload LCP Cover Image -->
         <link
@@ -148,8 +152,39 @@ const gradientClasses =
                 </a>
                 <p class="mt-1.5 text-[10px] text-zinc-400">
                     This page uses cookies for analytics & music deep-linking.
+                    <button
+                        type="button"
+                        data-open-spotify-consent
+                        class="ml-1 cursor-pointer underline hover:text-white transition-colors"
+                    >
+                        {t['spotifyConsent.manage']}
+                    </button>
                 </p>
             </div>
         </div>
     </div>
+
+    <SpotifyConsentDialog lang={lang} />
+
+    <script>
+        const initManageConsent = () => {
+            const btns = document.querySelectorAll<HTMLButtonElement>(
+                '[data-open-spotify-consent]:not([data-initialized])',
+            );
+            for (const btn of btns) {
+                btn.setAttribute('data-initialized', 'true');
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.dispatchEvent(new CustomEvent('open-spotify-consent'));
+                });
+            }
+        };
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initManageConsent);
+        } else {
+            initManageConsent();
+        }
+        document.addEventListener('astro:page-load', initManageConsent);
+    </script>
 </BaseLayout>

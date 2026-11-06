@@ -37,14 +37,12 @@
         }
         window.gtag = gtag;
 
-        let savedConsent = config.autoConsent ? 'granted' : 'denied';
-        if (!config.autoConsent) {
-            try {
-                if (localStorage.getItem('user-consent') === 'granted') {
-                    savedConsent = 'granted';
-                }
-            } catch (e) {}
-        }
+        let savedConsent = 'denied';
+        try {
+            if (localStorage.getItem('user-consent') === 'granted') {
+                savedConsent = 'granted';
+            }
+        } catch (e) {}
 
         gtag('consent', 'default', {
             ad_storage: savedConsent,
@@ -115,44 +113,43 @@
 
     // --- Meta Pixel ---
     if (fbPixelId && trafficOrigin !== 'tiktok') {
-        !(function (f, b, e, v, n, t, s) {
+        !(function (f) {
             if (f.fbq) return;
-            n = f.fbq = function () {
+            var n = (f.fbq = function () {
                 n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-            };
+            });
             if (!f._fbq) f._fbq = n;
             n.push = n;
             n.loaded = !0;
             n.version = '2.0';
             n.queue = [];
+        })(window);
 
-            scheduleSDKLoad(function () {
-                t = b.createElement(e);
-                t.async = !0;
-                t.src = v;
-                s = b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t, s);
-            });
-        })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-
-        let savedConsent = config.autoConsent ? 'grant' : 'revoke';
-        if (!config.autoConsent) {
-            try {
-                if (localStorage.getItem('user-consent') === 'granted') {
-                    savedConsent = 'grant';
-                }
-            } catch (e) {}
-        }
+        let savedConsent = 'revoke';
+        try {
+            if (localStorage.getItem('user-consent') === 'granted') {
+                savedConsent = 'grant';
+            }
+        } catch (e) {}
 
         if (savedConsent === 'revoke') {
             fbq('consent', 'revoke');
+            fbq('set', 'autoConfig', false, fbPixelId);
+            fbq('init', fbPixelId);
         } else {
             fbq('consent', 'grant');
-        }
+            fbq('set', 'autoConfig', false, fbPixelId);
+            fbq('init', fbPixelId);
+            fbq('track', 'PageView');
 
-        fbq('set', 'autoConfig', false, fbPixelId);
-        fbq('init', fbPixelId);
-        fbq('track', 'PageView');
+            scheduleSDKLoad(function () {
+                var t = document.createElement('script');
+                t.async = true;
+                t.src = 'https://connect.facebook.net/en_US/fbevents.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(t, s);
+            });
+        }
     }
 
     // --- TikTok Pixel ---
@@ -206,14 +203,12 @@
                 }));
 
             // Check storage
-            let cookieEnabled = Boolean(config.autoConsent);
-            if (!cookieEnabled) {
-                try {
-                    if (localStorage.getItem('user-consent') === 'granted') {
-                        cookieEnabled = true;
-                    }
-                } catch (e) {}
-            }
+            let cookieEnabled = false;
+            try {
+                if (localStorage.getItem('user-consent') === 'granted') {
+                    cookieEnabled = true;
+                }
+            } catch (e) {}
 
             if (cookieEnabled) {
                 ttq.enableCookie();
