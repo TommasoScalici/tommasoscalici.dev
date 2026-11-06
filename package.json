@@ -52,7 +52,7 @@
         "@iconify-json/simple-icons": "^1.2.96",
         "@tailwindcss/typography": "^0.5.20",
         "@tailwindcss/vite": "^4.3.3",
-        "astro": "^7.3.2",
+        "astro": "^7.3.3",
         "astro-icon": "^1.2.0",
         "astro-seo": "^1.2.0",
         "tailwindcss": "^4.3.3"
@@ -70,7 +70,7 @@
         "eslint-plugin-astro": "^3.2.0",
         "eslint-plugin-simple-import-sort": "^14.0.0",
         "globals": "^17.12.0",
-        "happy-dom": "^20.14.5",
+        "happy-dom": "^21.0.4",
         "husky": "^9.1.7",
         "lint-staged": "^17.5.1",
         "prettier": "^3.9.7",
@@ -78,7 +78,7 @@
         "prettier-plugin-tailwindcss": "^0.8.1",
         "semantic-release": "^25.0.9",
         "typescript-eslint": "^8.70.0",
-        "vitest": "^5.0.1",
-        "wrangler": "^4.151.0"
+        "vitest": "^5.1.0",
+        "wrangler": "^4.158.0"
     }
 }
