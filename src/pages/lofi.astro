@@ -12,32 +12,14 @@ const coverImage = await getPlaylistCover(playlistId);
 ---
 
 <SpotifyLandingLayout title={title} description={description} coverImage={coverImage} theme="lofi">
-    <style>
-        /* Typography */
-        h1 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
-        .subtitle {
-            color: #8b949e;
-            font-size: 14px;
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
-        .highlight {
-            color: #58a6ff;
-            font-weight: 600;
-        } /* GitHub Blue */
-    </style>
-
-    <h1>Coding Lofi ☕</h1>
-    <p class="subtitle">
+    <h1 class="mb-2 text-[22px] font-bold tracking-tight">Coding Lofi ☕</h1>
+    <p class="text-zinc-400 mb-7 text-sm leading-normal">
         Focus music curated for Developers.
         <br />
-        <span class="highlight">Python</span>, <span class="highlight">JS</span>,{' '}
-        <span class="highlight">C++</span> & <span class="highlight">Deep Work</span>.
+        <span class="text-sky-400 font-semibold">Python</span>,{' '}
+        <span class="text-sky-400 font-semibold">JS</span>,{' '}
+        <span class="text-sky-400 font-semibold">C++</span> &{' '}
+        <span class="text-sky-400 font-semibold">Deep Work</span>.
     </p>
 
     <SpotifyDeepLinkButton playlistId={playlistId} eventName="Coding Lofi" />

@@ -20,6 +20,14 @@ export interface PlatformLinks {
     bandcamp?: string;
 }
 
+export interface SmartLink {
+    label: string;
+    url: string;
+    icon: string;
+    color: string;
+    hoverBorder: string;
+}
+
 export interface MusicRelease {
     title: string;
     year: string;

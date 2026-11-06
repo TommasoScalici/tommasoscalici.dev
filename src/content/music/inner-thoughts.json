@@ -13,5 +13,11 @@
         "amazon": "https://music.amazon.com/albums/B0FWLPT28Z",
         "youtube": "https://music.youtube.com/playlist?list=OLAK5uy_nwemOas8nlbFcvH7MEUUc2Qpk3p1O45QE",
         "bandcamp": "https://tommasoscalici.bandcamp.com/album/inner-thoughts"
-    }
+    },
+    "tracks": [
+        { "name": "Dreamshaped Will", "duration": "PT6M31S", "isrcCode": "TCAHT2448275" },
+        { "name": "Night Wandering", "duration": "PT7M22S", "isrcCode": "TCAHT2448301" },
+        { "name": "Rageshaped Will", "duration": "PT3M54S", "isrcCode": "TCAHT2448312" },
+        { "name": "Displaced Mind", "duration": "PT3M0S", "isrcCode": "TCAHT2448321" }
+    ]
 }

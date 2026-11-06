@@ -2,6 +2,7 @@ export interface ToolItem {
     name: string;
     description?: string | Record<string, string>; // Optional description, supports localization
     url?: string; // Optional link
+    isSponsored?: boolean;
 }
 
 export interface UsesCategory {
@@ -84,6 +85,7 @@ export const usesData: UsesCategory[] = [
                     it: 'Per composizione e trascrizione.',
                 },
                 url: 'https://www.guitar-pro.com/?ae=1200',
+                isSponsored: true,
             },
             {
                 name: 'Fender Studio',
@@ -100,6 +102,7 @@ export const usesData: UsesCategory[] = [
                     it: 'Il futuro della creazione musicale collaborativa.',
                 },
                 url: 'https://www.flowmusic.app/invite/GRDKS4',
+                isSponsored: true,
             },
         ],
     },
@@ -116,6 +119,7 @@ export const usesData: UsesCategory[] = [
                     it: 'Miglior distributore musicale con release illimitate.',
                 },
                 url: 'https://vrlps.co/iyizd55/cp',
+                isSponsored: true,
             },
             {
                 name: 'artist.tools',
@@ -124,6 +128,7 @@ export const usesData: UsesCategory[] = [
                     it: 'Proteggi la tua musica da playlist bot e stream falsi.',
                 },
                 url: 'https://artist.tools/?via=tommaso',
+                isSponsored: true,
             },
             {
                 name: 'Songstats',
@@ -132,6 +137,7 @@ export const usesData: UsesCategory[] = [
                     it: 'Piattaforma di analytics musicale per artisti ed etichette discografiche.',
                 },
                 url: 'https://songstats.com/app?ref=TOMMASOSCALICI',
+                isSponsored: true,
             },
             {
                 name: 'PlaylistPanda',
@@ -140,15 +146,8 @@ export const usesData: UsesCategory[] = [
                     it: 'Invia la tua musica a curatori indipendenti di playlist Spotify.',
                 },
                 url: 'https://playlistpanda.com/c/tommaso-scalici?ref=cmpv54w9b000704jnxq0d5ljw',
+                isSponsored: true,
             },
-            // {
-            //     name: 'PlaylistHub',
-            //     description: {
-            //         en: 'AI tool to get into playlists and grow your fanbase organically.',
-            //         it: 'Strumento AI per entrare in playlist SEO e far crescere organicamente la tua fanbase.',
-            //     },
-            //     url: 'https://playlisthub.io/?via=tommaso',
-            // },
             {
                 name: 'SubmitLink',
                 description: {
@@ -156,6 +155,7 @@ export const usesData: UsesCategory[] = [
                     it: 'Smart link e piattaforma di submission. Inviami la tua musica qui!',
                 },
                 url: 'https://www.submitlink.io/c/tommasoscalici?via=tommasoscalici&s=tommasoscalici.dev',
+                isSponsored: true,
             },
             {
                 name: 'Groover',
@@ -164,6 +164,7 @@ export const usesData: UsesCategory[] = [
                     it: 'Fai ascoltare la tua musica a curatori e label professionisti.',
                 },
                 url: 'https://groover.co/band/referral/2-TOMMASO-64CA8/',
+                isSponsored: true,
             },
         ],
     },

@@ -3,8 +3,8 @@ import { Picture } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 
 import { platformOrder, platforms } from '../../data/platforms';
-import type { MusicRelease, PlatformLinks } from '../../data/types';
-import SmartLinkDialog, { type SmartLink } from '../dialogs/SmartLinkDialog.astro';
+import type { MusicRelease, PlatformLinks, SmartLink } from '../../data/types';
+import SmartDialog from '../dialogs/SmartDialog.astro';
 
 interface Props {
     release: MusicRelease;
@@ -108,7 +108,7 @@ const trackingId = release.title.toLowerCase().replace(/[^a-z0-9]/g, '-');
 </div>
 
 {!isUpcoming && (
-    <SmartLinkDialog
+    <SmartDialog
         id={dialogId}
         title={t['dialog.choosePlatform'] || 'Choose Platform'}
         links={albumLinks}

@@ -44,6 +44,8 @@ export const ui = {
         'spotifyConsent.accept': 'Accept & Open Spotify',
         'spotifyConsent.deny': 'Open without tracking',
         'spotifyConsent.manage': 'Cookie preferences',
+        'spotifyConsent.disclaimer': 'This page uses cookies for analytics & music deep-linking.',
+        'spotifyLanding.curatedBy': 'Curated by',
         '404.message': "Looks like you've reached a dead end in the matrix.",
         '404.backHome': 'Back to Home',
         'aria.viewSource': 'View Source Code',
@@ -97,6 +99,9 @@ export const ui = {
         'spotifyConsent.accept': 'Accetta e Ascolta su Spotify',
         'spotifyConsent.deny': 'Ascolta senza tracciamento',
         'spotifyConsent.manage': 'Preferenze cookie',
+        'spotifyConsent.disclaimer':
+            'Questa pagina utilizza cookie per analisi e deep-linking musicale.',
+        'spotifyLanding.curatedBy': 'Curata da',
         '404.message': 'Sembra che tu abbia raggiunto un vicolo cieco in Matrix.',
         '404.backHome': 'Torna alla Home',
         'aria.viewSource': 'Visualizza Codice Sorgente',

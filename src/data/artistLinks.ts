@@ -1,12 +1,7 @@
 import { platforms } from './platforms';
+import type { SmartLink } from './types';
 
-export interface SmartLink {
-    label: string;
-    url: string;
-    icon: string;
-    color: string;
-    hoverBorder: string;
-}
+export type { SmartLink };
 
 export const artistLinks: SmartLink[] = [
     { ...platforms.spotify, url: 'https://open.spotify.com/artist/6KswMpmmtp3tUbWF3TjBgD' },

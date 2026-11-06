@@ -3,8 +3,7 @@ import { Icon } from 'astro-icon/components';
 
 import { artistLinks } from '../../data/artistLinks';
 import { secondarySocials } from '../../data/socials';
-import SmartLinkDialog from '../dialogs/SmartLinkDialog.astro';
-import SocialSmartDialog from '../dialogs/SocialSmartDialog.astro';
+import SmartDialog from '../dialogs/SmartDialog.astro';
 
 interface Props {
     lang: string;
@@ -99,7 +98,7 @@ const { lang, t, copyrightDate } = Astro.props;
         </div>
     </div>
 
-    <SmartLinkDialog
+    <SmartDialog
         id="artist-links-dialog"
         links={artistLinks}
         title={t['dialog.choosePlatform'] || 'Choose Platform'}
@@ -109,13 +108,14 @@ const { lang, t, copyrightDate } = Astro.props;
         closeLabel={t['aria.close'] || 'Close'}
     />
 
-    <SocialSmartDialog
+    <SmartDialog
         id="social-links-dialog"
         links={secondarySocials}
         title={t['dialog.connectEverywhere'] || 'Connect'}
         trackingType="social_link"
         trackingName="Tommaso Scalici"
         closeLabel={t['aria.close'] || 'Close'}
+        scrollable={true}
     />
 </footer>
 

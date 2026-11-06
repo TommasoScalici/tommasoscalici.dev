@@ -1,27 +1,40 @@
 ---
 import { Icon } from 'astro-icon/components';
 
-export interface SocialLink {
-    label: string;
-    url: string;
-    icon: string;
-    color: string;
-    hoverBorder: string;
-}
+import type { SmartLink } from '../../data/types';
+
+export type { SmartLink };
 
 interface Props {
     id: string;
-    links: SocialLink[];
+    links: SmartLink[];
     title: string;
     trackingType: string;
     trackingName: string;
+    trackingId?: string;
     closeLabel?: string;
+    scrollable?: boolean;
 }
 
-const { id, links, title, trackingType, trackingName, closeLabel = 'Close' } = Astro.props;
+const {
+    id,
+    links,
+    title,
+    trackingType,
+    trackingName,
+    trackingId,
+    closeLabel = 'Close',
+    scrollable = false,
+} = Astro.props;
 
 const iconMapping: Record<string, string> = {
     spotify: 'simple-icons:spotify',
+    apple: 'simple-icons:applemusic',
+    youtube: 'simple-icons:youtubemusic',
+    amazon: 'simple-icons:amazon',
+    tidal: 'simple-icons:tidal',
+    deezer: 'simple-icons:deezer',
+    bandcamp: 'simple-icons:bandcamp',
     facebook: 'simple-icons:facebook',
     x: 'simple-icons:x',
     tiktok: 'simple-icons:tiktok',
@@ -32,7 +45,8 @@ const iconMapping: Record<string, string> = {
     steam: 'simple-icons:steam',
 };
 
-const titleId = `social-dialog-title-${id}`;
+const titleId = `smart-dialog-title-${id}`;
+const isScrollable = scrollable || links.length > 5;
 ---
 
 <dialog
@@ -60,20 +74,23 @@ const titleId = `social-dialog-title-${id}`;
     </div>
 
     <!-- Links Grid -->
-    <div class="custom-scrollbar flex max-h-[60vh] flex-col gap-3 overflow-y-auto pr-2">
+    <div
+        class={`flex flex-col gap-3 ${isScrollable ? 'custom-scrollbar max-h-[60vh] overflow-y-auto pr-2' : ''}`}
+    >
         {links.map((link) => (
             <a
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                data-track-social
+                data-track-link
                 data-track-type={trackingType}
                 data-track-name={trackingName}
+                data-track-ids={trackingId}
                 data-track-item={link.label}
                 class={`border-glass-border/5 group bg-glass-bg/5 hover:bg-glass-bg/10 flex w-full items-center gap-3 rounded-xl border p-3 transition-all ${link.hoverBorder}`}
             >
-                <span class={`h-6 w-6 text-gray-400 transition-colors ${link.color}`}>
-                    <Icon name={iconMapping[link.icon] || 'lucide:link'} class="h-full w-full" />
+                <span class={`text-muted transition-colors ${link.color}`}>
+                    <Icon name={iconMapping[link.icon] || 'lucide:link'} class="h-5 w-5" />
                 </span>
                 <span class="text-muted group-hover:text-main font-medium">{link.label}</span>
             </a>
@@ -84,10 +101,10 @@ const titleId = `social-dialog-title-${id}`;
 <script>
     import { trackEvent } from '../../lib/analytics';
 
-    class SocialSmartDialogManager {
+    class SmartDialogManager {
         constructor() {
             const links = document.querySelectorAll<HTMLAnchorElement>(
-                '[data-track-social]:not([data-initialized])',
+                '[data-track-link]:not([data-initialized])',
             );
             for (const link of links) {
                 link.setAttribute('data-initialized', 'true');
@@ -119,26 +136,28 @@ const titleId = `social-dialog-title-${id}`;
 
         #handleClick = (e: MouseEvent) => {
             const el = e.currentTarget as HTMLAnchorElement;
-            const type = el.getAttribute('data-track-type') || 'social_link';
+            const type = el.getAttribute('data-track-type') || 'platform_link';
             const name = el.getAttribute('data-track-name') || '';
+            const ids = el.getAttribute('data-track-ids');
             const item = el.getAttribute('data-track-item') || '';
 
             trackEvent('select_content', {
                 content_type: type,
                 content_name: name,
+                content_ids: ids ? [ids] : undefined,
                 item_id: item,
             });
         };
     }
 
-    const initSocialSmartDialog = () => {
-        new SocialSmartDialogManager();
+    const initSmartDialog = () => {
+        new SmartDialogManager();
     };
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initSocialSmartDialog);
+        document.addEventListener('DOMContentLoaded', initSmartDialog);
     } else {
-        initSocialSmartDialog();
+        initSmartDialog();
     }
-    document.addEventListener('astro:page-load', initSocialSmartDialog);
+    document.addEventListener('astro:page-load', initSmartDialog);
 </script>

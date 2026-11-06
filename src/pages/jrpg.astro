@@ -13,45 +13,32 @@ const coverImage = await getPlaylistCover(playlistId);
 ---
 
 <SpotifyLandingLayout title={title} description={description} coverImage={coverImage} theme="jrpg">
-    <style>
-        /* Typography */
-        h1 {
-            font-size: 23px;
-            font-weight: 800;
-            margin-bottom: 8px;
-            letter-spacing: -0.3px;
-            text-transform: uppercase;
-        }
-        .subtitle {
-            color: #a89bb9;
-            font-size: 14px;
-            margin-bottom: 28px;
-            line-height: 1.5;
-        }
-        .highlight {
-            color: #fb7185;
-            font-weight: 700;
-            text-shadow: 0 0 12px rgba(251, 113, 133, 0.45);
-        }
-        .highlight-purple {
-            color: #c084fc;
-            font-weight: 700;
-            text-shadow: 0 0 12px rgba(192, 132, 252, 0.45);
-        }
-        .highlight-amber {
-            color: #fbbf24;
-            font-weight: 700;
-            text-shadow: 0 0 12px rgba(251, 191, 36, 0.45);
-        }
-    </style>
-
-    <h1>Anime & JRPG Boss Battles ⚔️</h1>
-    <p class="subtitle">
+    <h1 class="mb-2 text-[23px] font-extrabold uppercase tracking-tight">
+        Anime & JRPG Boss Battles ⚔️
+    </h1>
+    <p class="text-zinc-400 mb-7 text-sm leading-normal">
         Epic battle themes, orchestrations & heavy riffs.
         <br />
-        <span class="highlight">Final Fantasy</span>, <span class="highlight-purple">Persona</span>,{' '}
-        <span class="highlight-amber">Evangelion</span>, <span class="highlight">Death Note</span> &{' '}
-        <span class="highlight-purple">Attack on Titan</span>.
+        <span class="text-rose-400 font-bold drop-shadow-[0_0_12px_rgba(251,113,133,0.45)]">
+            Final Fantasy
+        </span>
+        ,{' '}
+        <span class="text-purple-400 font-bold drop-shadow-[0_0_12px_rgba(192,132,252,0.45)]">
+            Persona
+        </span>
+        ,{' '}
+        <span class="text-amber-400 font-bold drop-shadow-[0_0_12px_rgba(251,191,36,0.45)]">
+            Evangelion
+        </span>
+        ,{' '}
+        <span class="text-rose-400 font-bold drop-shadow-[0_0_12px_rgba(251,113,133,0.45)]">
+            Death Note
+        </span>{' '}
+        &{' '}
+        <span class="text-purple-400 font-bold drop-shadow-[0_0_12px_rgba(192,132,252,0.45)]">
+            Attack on Titan
+        </span>
+        .
     </p>
 
     <SpotifyDeepLinkButton playlistId={playlistId} eventName="Anime & JRPG Boss Battles" />

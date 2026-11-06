@@ -13,36 +13,20 @@ const coverImage = await getPlaylistCover(playlistId);
 ---
 
 <SpotifyLandingLayout title={title} description={description} coverImage={coverImage} theme="prog">
-    <style>
-        /* Typography */
-        h1 {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .subtitle {
-            color: var(--color-muted);
-            font-size: 14px;
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
-
-        /* Highlight Cyberpunk */
-        .highlight {
-            color: var(--color-primary);
-            font-weight: 700;
-            text-shadow: var(--shadow-primary-glow);
-        }
-    </style>
-
-    <h1>Modern Prog ⚡</h1>
-    <p class="subtitle">
+    <h1 class="mb-2 text-2xl font-extrabold uppercase tracking-wider">Modern Prog ⚡</h1>
+    <p class="text-muted mb-7 text-sm leading-normal">
         The ultimate Progressive Instrumental collection.
         <br />
-        <span class="highlight">Djent</span>, <span class="highlight">Math Rock</span> &{' '}
-        <span class="highlight">Heavy Riffs</span>.
+        <span class="text-primary font-bold drop-shadow-[0_0_20px_rgba(0,243,255,0.4)]">Djent</span>
+        ,{' '}
+        <span class="text-primary font-bold drop-shadow-[0_0_20px_rgba(0,243,255,0.4)]">
+            Math Rock
+        </span>{' '}
+        &{' '}
+        <span class="text-primary font-bold drop-shadow-[0_0_20px_rgba(0,243,255,0.4)]">
+            Heavy Riffs
+        </span>
+        .
     </p>
 
     <SpotifyDeepLinkButton playlistId={playlistId} eventName="Modern Prog" />

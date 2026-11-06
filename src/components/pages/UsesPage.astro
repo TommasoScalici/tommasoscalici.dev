@@ -57,7 +57,11 @@ const getLocalized = (
                                             <a
                                                 href={item.url}
                                                 target="_blank"
-                                                rel="noopener noreferrer"
+                                                rel={
+                                                    item.isSponsored
+                                                        ? 'noopener noreferrer sponsored'
+                                                        : 'noopener noreferrer'
+                                                }
                                                 data-track-name={item.name}
                                                 data-track-category={getLocalized(category.title)}
                                                 class="track-uses-link text-main group-hover/link:text-primary flex items-center gap-1 font-bold transition-colors hover:underline dark:text-white"

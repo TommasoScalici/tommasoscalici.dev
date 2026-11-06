@@ -47,6 +47,13 @@ jobs:
             - name: Build
               run: npm run build
 
+            - name: Upload Build Artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: dist
+                  path: dist
+                  retention-days: 1
+
     release:
         name: Semantic Release
         needs: check
@@ -79,27 +86,18 @@ jobs:
 
     deploy:
         name: Deploy to Cloudflare Pages
-        needs: release
+        needs: [check, release]
         if: github.ref == 'refs/heads/main'
         runs-on: ubuntu-latest
         permissions:
             contents: read
             deployments: write
         steps:
-            - name: Checkout
-              uses: actions/checkout@v6
-
-            - name: Setup Node
-              uses: actions/setup-node@v6
+            - name: Download Build Artifact
+              uses: actions/download-artifact@v4
               with:
-                  node-version-file: '.nvmrc'
-                  cache: 'npm'
-
-            - name: Install dependencies
-              run: npm ci
-
-            - name: Build
-              run: npm run build
+                  name: dist
+                  path: dist
 
             - name: Deploy to Cloudflare Pages
               uses: cloudflare/wrangler-action@v3

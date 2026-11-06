@@ -12,5 +12,17 @@
         "amazon": "https://music.amazon.com/albums/B0HC1X2CSS",
         "youtube": "https://music.youtube.com/playlist?list=OLAK5uy_npKMijZR-XZCC-A9pYEbgDyA8cT9JNXAA",
         "bandcamp": "https://tommasoscalici.bandcamp.com/album/the-milky-way-trajectory"
-    }
+    },
+    "tracks": [
+        { "name": "SLS: Ignition (Artemis Launch / Operation Skuld)", "duration": "PT5M42S" },
+        { "name": "Trans-Lunar Injection (Reading Steiner)", "duration": "PT5M8S" },
+        { "name": "Far Side Silence (Black Moon Horizon)", "duration": "PT4M32S" },
+        { "name": "Red Horizons (Ares Bridge & Outer Heaven)", "duration": "PT7M28S" },
+        { "name": "Belt Diver (The Meteor Field)", "duration": "PT5M18S" },
+        { "name": "Jovian Storms (Bahamut's Eye)", "duration": "PT4M56S" },
+        { "name": "Cassini's Lament (Zero Requiem in the Rings)", "duration": "PT5M0S" },
+        { "name": "The Blue Void (Diamond Dust)", "duration": "PT9M2S" },
+        { "name": "Voyager's Shadow (El Psy Kongroo)", "duration": "PT7M8S" },
+        { "name": "Apex: Proxima Centauri (Sea of Souls)", "duration": "PT17M10S" }
+    ]
 }

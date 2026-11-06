@@ -106,14 +106,8 @@ const gradientClasses =
     </Fragment>
 
     <div
-        class="relative flex h-screen items-center justify-center overflow-hidden font-sans text-white"
-        style={
-            theme === 'lofi'
-                ? 'background-color: #0d1117;'
-                : theme === 'jrpg'
-                  ? 'background-color: #0a0514;'
-                  : 'background-color: #050505;'
-        }
+        class="bg-background relative flex h-screen items-center justify-center overflow-hidden font-sans text-white"
+        data-landing-theme={theme}
     >
         <div
             class="absolute top-0 left-0 -z-10 h-full w-full scale-110 bg-cover bg-center bg-no-repeat"
@@ -159,7 +153,7 @@ const gradientClasses =
             <slot />
 
             <div class="mt-5 text-xs text-zinc-400 border-none outline-none bg-transparent">
-                Curated by{' '}
+                {t['spotifyLanding.curatedBy']}{' '}
                 <a
                     href="https://tommasoscalici.dev"
                     target="_blank"
@@ -169,7 +163,7 @@ const gradientClasses =
                     Tommaso Scalici
                 </a>
                 <p class="mt-1.5 text-[10px] text-zinc-400">
-                    This page uses cookies for analytics & music deep-linking.
+                    {t['spotifyConsent.disclaimer']}
                     <button
                         type="button"
                         data-open-spotify-consent

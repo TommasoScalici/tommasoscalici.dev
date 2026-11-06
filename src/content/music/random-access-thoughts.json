@@ -13,5 +13,17 @@
         "amazon": "https://music.amazon.com/albums/B0FWKPGPTJ",
         "youtube": "https://music.youtube.com/playlist?list=OLAK5uy_lVFpqujENo2g2mqThSzltKzgV-k4gE1hM",
         "bandcamp": "https://tommasoscalici.bandcamp.com/album/random-access-thoughts"
-    }
+    },
+    "tracks": [
+        { "name": "Initialize()", "duration": "PT3M50S", "isrcCode": "TCAJB2464596" },
+        { "name": "#100021", "duration": "PT5M0S", "isrcCode": "TCAJB2464599" },
+        { "name": "#200052", "duration": "PT3M16S", "isrcCode": "TCAJB2464607" },
+        { "name": "#300041", "duration": "PT2M44S", "isrcCode": "TCAJB2464611" },
+        { "name": "#40004E", "duration": "PT3M50S", "isrcCode": "TCAJB2464613" },
+        { "name": "#500044", "duration": "PT1M52S", "isrcCode": "TCAJB2464614" },
+        { "name": "#60004F", "duration": "PT1M38S", "isrcCode": "TCAJB2464615" },
+        { "name": "#70004D", "duration": "PT9M32S", "isrcCode": "TCAJB2464619" },
+        { "name": "Segmentation Fault", "duration": "PT2M26S", "isrcCode": "TCAJB2464624" },
+        { "name": "Dispose()", "duration": "PT2M12S", "isrcCode": "TCAJB2464632" }
+    ]
 }

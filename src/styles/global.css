@@ -180,6 +180,14 @@
         --theme-glass-bg: rgb(255 255 255);
     }
 
+    [data-landing-theme='lofi'] {
+        --theme-background: rgb(13 17 23);
+    }
+
+    [data-landing-theme='jrpg'] {
+        --theme-background: rgb(10 5 20);
+    }
+
     body {
         @apply bg-background text-main font-sans antialiased transition-colors duration-300;
     }

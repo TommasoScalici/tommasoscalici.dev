@@ -1,3 +1,34 @@
+import innerThoughts from '../content/music/inner-thoughts.json';
+import randomAccessThoughts from '../content/music/random-access-thoughts.json';
+import sinestesie from '../content/music/sinestesie.json';
+import theMilkyWayTrajectory from '../content/music/the-milky-way-trajectory.json';
+
+interface TrackItem {
+    name: string;
+    duration?: string;
+    isrcCode?: string;
+}
+
+interface MusicJsonRelease {
+    title: string;
+    releaseDate?: string;
+    genre: string;
+    type: 'Album' | 'EP' | 'Single';
+    coverImage: string;
+    links?: {
+        spotify?: string;
+        [key: string]: string | undefined;
+    };
+    tracks?: TrackItem[];
+}
+
+const rawReleases: { slug: string; data: MusicJsonRelease }[] = [
+    { slug: 'the-milky-way-trajectory', data: theMilkyWayTrajectory as MusicJsonRelease },
+    { slug: 'sinestesie', data: sinestesie as MusicJsonRelease },
+    { slug: 'random-access-thoughts', data: randomAccessThoughts as MusicJsonRelease },
+    { slug: 'inner-thoughts', data: innerThoughts as MusicJsonRelease },
+];
+
 const getIdentitySchema = (url: URL, image: string, worksForName = 'BC Soft S.r.l.') => ({
     '@type': 'Person',
     '@id': `${url.origin}/#person`,
@@ -47,166 +78,37 @@ const getIdentitySchema = (url: URL, image: string, worksForName = 'BC Soft S.r.
     ],
 });
 
-const musicReleases = [
-    {
-        '@type': 'MusicAlbum',
-        '@id': 'https://open.spotify.com/album/0z5dDG3w9PfgQ8DOxiiMfa',
-        url: 'https://open.spotify.com/album/0z5dDG3w9PfgQ8DOxiiMfa',
-        name: 'Sinestesie',
-        byArtist: { '@id': 'https://tommasoscalici.dev/#person' },
-        datePublished: '2026-02-06',
-        albumReleaseType: 'https://schema.org/EPRelease',
-        image: 'https://tommasoscalici.dev/assets/album_covers/sinestesie.webp',
-        numTracks: 4,
-        genre: [
-            'Instrumental',
-            'Progressive Rock',
-            'Progressive Metal',
-            'Experimental',
-            'Math Rock',
-        ],
-        track: [
-            {
-                '@type': 'MusicRecording',
-                name: 'Pareidolie Silenziose',
-                duration: 'PT5M49S',
-                isrcCode: 'GXJBS2531458',
-            },
-            {
-                '@type': 'MusicRecording',
-                name: 'Echi Di Velluto',
-                duration: 'PT2M39S',
-                isrcCode: 'GXJBS2531461',
-            },
-            {
-                '@type': 'MusicRecording',
-                name: 'Discromia Violenta',
-                duration: 'PT4M19S',
-                isrcCode: 'GXJBS2531460',
-            },
-            {
-                '@type': 'MusicRecording',
-                name: 'Immagine Residua',
-                duration: 'PT2M14S',
-                isrcCode: 'GXJBS2531459',
-            },
-        ],
-    },
-    {
-        '@type': 'MusicAlbum',
-        '@id': 'https://open.spotify.com/album/28mIion9ys60E5GbX5CpLS',
-        url: 'https://open.spotify.com/album/28mIion9ys60E5GbX5CpLS',
-        name: 'Random Access Thoughts',
-        byArtist: { '@id': 'https://tommasoscalici.dev/#person' },
-        datePublished: '2025-01-30',
-        albumReleaseType: 'https://schema.org/AlbumRelease',
-        image: 'https://f4.bcbits.com/img/a0744178181_10.jpg',
-        numTracks: 10,
-        genre: ['Progressive Rock', 'Progressive Metal', 'Art Rock', 'lo-fi', 'Dubstep'],
-        track: [
-            {
-                '@type': 'MusicRecording',
-                name: 'Initialize()',
-                duration: 'PT3M50S',
-                isrcCode: 'TCAJB2464596',
-            },
-            {
-                '@type': 'MusicRecording',
-                name: '#100021',
-                duration: 'PT5M0S',
-                isrcCode: 'TCAJB2464599',
-            },
-            {
-                '@type': 'MusicRecording',
-                name: '#200052',
-                duration: 'PT3M16S',
-                isrcCode: 'TCAJB2464607',
-            },
-            {
-                '@type': 'MusicRecording',
-                name: '#300041',
-                duration: 'PT2M44S',
-                isrcCode: 'TCAJB2464611',
-            },
-            {
-                '@type': 'MusicRecording',
-                name: '#40004E',
-                duration: 'PT3M50S',
-                isrcCode: 'TCAJB2464613',
-            },
-            {
-                '@type': 'MusicRecording',
-                name: '#500044',
-                duration: 'PT1M52S',
-                isrcCode: 'TCAJB2464614',
-            },
-            {
-                '@type': 'MusicRecording',
-                name: '#60004F',
-                duration: 'PT1M38S',
-                isrcCode: 'TCAJB2464615',
-            },
-            {
-                '@type': 'MusicRecording',
-                name: '#70004D',
-                duration: 'PT9M32S',
-                isrcCode: 'TCAJB2464619',
-            },
-            {
-                '@type': 'MusicRecording',
-                name: 'Segmentation Fault',
-                duration: 'PT2M26S',
-                isrcCode: 'TCAJB2464624',
-            },
-            {
-                '@type': 'MusicRecording',
-                name: 'Dispose()',
-                duration: 'PT2M12S',
-                isrcCode: 'TCAJB2464632',
-            },
-        ],
-    },
-    {
-        '@type': 'MusicAlbum',
-        '@id': 'https://open.spotify.com/album/4ReGhGEuJ3WQpW5uuEXusv',
-        url: 'https://open.spotify.com/album/4ReGhGEuJ3WQpW5uuEXusv',
-        name: 'Inner Thoughts',
-        byArtist: { '@id': 'https://tommasoscalici.dev/#person' },
-        datePublished: '2024-01-30',
-        albumReleaseType: 'https://schema.org/EPRelease',
-        image: 'https://f4.bcbits.com/img/a2746045371_10.jpg',
-        numTracks: 4,
-        genre: ['Progressive Rock', 'Progressive Metal', 'Art Rock'],
-        track: [
-            {
-                '@type': 'MusicRecording',
-                name: 'Dreamshaped Will',
-                duration: 'PT6M31S',
-                isrcCode: 'TCAHT2448275',
-            },
-            {
-                '@type': 'MusicRecording',
-                name: 'Night Wandering',
-                duration: 'PT7M22S',
-                isrcCode: 'TCAHT2448301',
-            },
-            {
-                '@type': 'MusicRecording',
-                name: 'Rageshaped Will',
-                duration: 'PT3M54S',
-                isrcCode: 'TCAHT2448312',
-            },
-            {
-                '@type': 'MusicRecording',
-                name: 'Displaced Mind',
-                duration: 'PT3M0S',
-                isrcCode: 'TCAHT2448321',
-            },
-        ],
-    },
-];
+export const getMusicReleasesSchema = (origin: string) =>
+    rawReleases.map(({ slug, data }) => {
+        const spotifyUrl = data.links?.spotify;
+        const genres = data.genre
+            .split('/')
+            .map((g) => g.trim())
+            .filter(Boolean);
+
+        return {
+            '@type': 'MusicAlbum' as const,
+            ...(spotifyUrl ? { '@id': spotifyUrl, url: spotifyUrl } : {}),
+            name: data.title,
+            byArtist: { '@id': `${origin}/#person` },
+            ...(data.releaseDate ? { datePublished: data.releaseDate } : {}),
+            albumReleaseType:
+                data.type === 'EP'
+                    ? 'https://schema.org/EPRelease'
+                    : 'https://schema.org/AlbumRelease',
+            image: `${origin}/assets/album_covers/${slug}.webp`,
+            numTracks: data.tracks?.length ?? 0,
+            genre: genres,
+            track: (data.tracks ?? []).map((t) => ({
+                '@type': 'MusicRecording' as const,
+                name: t.name,
+                ...(t.duration ? { duration: t.duration } : {}),
+                ...(t.isrcCode ? { isrcCode: t.isrcCode } : {}),
+            })),
+        };
+    });
 
 export const getCombinedSchema = (url: URL, image: string) => ({
     '@context': 'https://schema.org',
-    '@graph': [getIdentitySchema(url, image), ...musicReleases],
+    '@graph': [getIdentitySchema(url, image), ...getMusicReleasesSchema(url.origin)],
 });

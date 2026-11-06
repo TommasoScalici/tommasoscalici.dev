@@ -88,6 +88,18 @@ const projects = defineCollection({
     }),
 });
 
+const trackSchema = z.object({
+    name: safeString(1, 200),
+    duration: z
+        .string()
+        .regex(/^PT\d+M\d+S$/, 'Must be ISO 8601 duration format, e.g. PT3M50S')
+        .optional(),
+    isrcCode: z
+        .string()
+        .regex(/^[A-Z]{2}[A-Z0-9]{3}\d{7}$/, 'Must be valid ISRC code format')
+        .optional(),
+});
+
 const music = defineCollection({
     loader: glob({ pattern: '**/*.json', base: './src/content/music' }),
     schema: ({ image }) =>
@@ -103,6 +115,7 @@ const music = defineCollection({
                 coverImage: image(),
                 type: z.enum(['Album', 'EP', 'Single']),
                 links: musicLinksSchema.optional(),
+                tracks: z.array(trackSchema).optional(),
                 isUpcoming: z.boolean().optional(),
                 presaveLink: safeUrl().optional(),
             })

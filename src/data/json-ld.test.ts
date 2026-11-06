@@ -38,9 +38,9 @@ describe('json-ld', () => {
             const graph = schema['@graph'] as Record<string, unknown>[];
             const musicNodes = graph.filter((node) => node['@type'] === 'MusicAlbum');
 
-            expect(musicNodes.length).toBeGreaterThan(0);
+            expect(musicNodes.length).toBe(4);
 
-            // Check properties of a specific known release to ensure mapping is correct
+            // Check properties of Sinestesie
             const sinestesie = musicNodes.find((album) => album.name === 'Sinestesie');
             expect(sinestesie).toBeDefined();
             expect(sinestesie?.datePublished).toBe('2026-02-06');
@@ -49,6 +49,14 @@ describe('json-ld', () => {
             expect((sinestesie?.byArtist as Record<string, string>)['@id']).toBe(
                 'https://tommasoscalici.dev/#person',
             );
+
+            // Check properties of The Milky Way: Trajectory
+            const milkyWay = musicNodes.find((album) => album.name === 'The Milky Way: Trajectory');
+            expect(milkyWay).toBeDefined();
+            expect(milkyWay?.datePublished).toBe('2026-10-02');
+            expect(milkyWay?.url).toBe('https://open.spotify.com/album/0kifvMwkFzF0ofbTqzyr8p');
+            expect((milkyWay?.track as unknown[]).length).toBe(10);
+            expect(milkyWay?.albumReleaseType).toBe('https://schema.org/AlbumRelease');
         });
     });
 });
