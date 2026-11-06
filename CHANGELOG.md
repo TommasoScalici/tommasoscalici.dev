@@ -1,3 +1,18 @@
+# [1.29.0](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.28.1...v1.29.0) (2026-11-06)
+
+
+### Bug Fixes
+
+* **privacy:** implement GDPR-compliant smart action gate and conditional pixel tracking ([b7a921d](https://github.com/TommasoScalici/tommasoscalici.dev/commit/b7a921d3804f78046a4a2d783874c0a4772d4e5a))
+* **router:** prevent duplicate event listeners on view transitions and astro:page-load ([f72d116](https://github.com/TommasoScalici/tommasoscalici.dev/commit/f72d116c31fa545ce3692481a8fadaf04693b73d))
+
+
+### Features
+
+* **a11y:** improve mobile navigation focus trap, modal labeling, focus rings, and reduced motion ([b77d189](https://github.com/TommasoScalici/tommasoscalici.dev/commit/b77d189d18bcff07d0ace0f24d20a3c6a025f2cd))
+* **core:** enhance a11y focus rings, home lcp preload, tokenized themes, and test suite ([644026c](https://github.com/TommasoScalici/tommasoscalici.dev/commit/644026ca568becc8f20d74ab7629f77375e28181))
+* **music:** add resilient spotify oembed thumbnail fetching with local webp fallback ([a591a3f](https://github.com/TommasoScalici/tommasoscalici.dev/commit/a591a3f50b580727fbf60a1908f3c88a0e277647))
+
 ## [1.28.1](https://github.com/TommasoScalici/tommasoscalici.dev/compare/v1.28.0...v1.28.1) (2026-10-03)
 
 
