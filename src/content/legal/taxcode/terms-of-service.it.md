@@ -3,7 +3,7 @@ title: 'Tax Code by Tommaso Scalici - Termini di Servizio'
 description: "Termini di Servizio e condizioni d'uso per l'applicazione Tax Code by Tommaso Scalici."
 ---
 
-<p class="text-sm text-muted">Ultimo aggiornamento: 22 Settembre 2026</p>
+<p class="text-sm text-muted">Ultimo aggiornamento: 6 Novembre 2026</p>
 
 Benvenuti in **Tax Code by Tommaso Scalici** (l'"App"), sviluppata e gestita da **Tommaso Scalici** ("Sviluppatore", "noi", "nostro").
 
@@ -45,20 +45,30 @@ Nell'utilizzo dell'App, l'utente si impegna a **non**:
 
 <hr class="my-8 border-white/10" />
 
-## 4. Account Utente e Sincronizzazione Cloud
+## 4. Account Utente, Modalità Ospite e Sincronizzazione Cloud
 
-- **Modalità Ospite:** L'utente può usufruire del calcolo e della memorizzazione locale senza dover creare un account o effettuare l'accesso.
-- **Accesso con Google:** Qualora si desideri attivare la sincronizzazione multi-dispositivo (Android e Wear OS), l'autenticazione avviene tramite protocollo sicuro Google OAuth 2.0. L'utente è responsabile della riservatezza e della sicurezza delle credenziali del proprio account Google.
+- **Modalità Ospite (Pure Guest Mode):** L'utente può utilizzare l'App e usufruire del calcolo e della memorizzazione locale operando al 100% in locale, senza dover creare un account né inviare token di autenticazione o dati a Firebase.
+- **Requisiti per Funzionalità Avanzate (Accesso con Google):** Funzionalità avanzate quali la **Scansione Documenti Intelligente (OCR AI)** e la **Sincronizzazione Cloud** multi-dispositivo (Android e Wear OS) richiedono l'autenticazione tramite Account Google (Google OAuth 2.0). L'utente è responsabile della riservatezza e della sicurezza delle credenziali del proprio account Google.
+- **Riconciliazione dei Dati:** In caso di passaggio dalla Modalità Ospite all'accesso con Account Google, i codici fiscali salvati localmente sul dispositivo vengono riconciliati e trasferiti in modo sicuro, automatico e non distruttivo all'interno del database cloud privato dell'utente.
 - **Cancellazione Account e Dati:** È possibile interrompere l'utilizzo della sincronizzazione ed eliminare definitivamente il proprio account e tutti i dati cloud in qualsiasi momento tramite il pulsante in-app (**Impostazioni → Elimina Account**) o consultando le nostre <a href="/it/apps/taxcode/data-deletion/">Istruzioni per la Cancellazione dei Dati</a>.
 
 <hr class="my-8 border-white/10" />
 
-## 5. Disclaimer sulla Scansione Documenti con Intelligenza Artificiale
+## 5. Disclaimer su Strumenti di Assistenza, Scansione Documenti AI e Comandi Vocali
+
+### A. Scansione Documenti Intelligente (OCR AI)
 
 La funzione di scansione intelligente dei documenti utilizza il riconoscimento ottico dei caratteri (OCR) supportato da **Gemini Enterprise Agent Platform (GEAP)**. Sebbene progettata per la massima precisione:
 
 - Lo scanner IA costituisce uno strumento di assistenza all'inserimento e potrebbe occasionalmente interpretare caratteri in modo inesatto a causa di riflessi, qualità della fotocamera o usura del documento.
 - **L'utente ha l'onere esclusivo di controllare e confermare l'esattezza dei campi estratti** prima di procedere al salvataggio o all'utilizzo del codice calcolato.
+
+### B. Ausilio Vocale e Assistenti AI (Google Gemini & Android AppFunctions)
+
+L'interazione vocale tramite Google Gemini, l'assistente di sistema o le Android AppFunctions costituisce uno strumento di facilitazione all'accesso rapido e alla consultazione immediata dei dati.
+
+- L'interpretazione vocale, la sintesi vocale e la sillabazione fonetica possono essere soggette a imprecisioni ambientali, limitazioni di riconoscimento vocale o disturbi audio.
+- **L'utente rimane l'unico responsabile della verifica della corrispondenza del codice fiscale** letto a voce o mostrato a video prima del suo impiego formale, fiscale, tributario o amministrativo.
 
 <hr class="my-8 border-white/10" />
 

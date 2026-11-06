@@ -3,7 +3,7 @@ title: 'Tax Code by Tommaso Scalici - Informativa sulla Privacy'
 description: 'Informativa sulla Privacy e conformità alla Google API Services User Data Policy per Tax Code by Tommaso Scalici.'
 ---
 
-<p class="text-sm text-muted">Ultimo aggiornamento: 22 Settembre 2026</p>
+<p class="text-sm text-muted">Ultimo aggiornamento: 6 Novembre 2026</p>
 
 La presente Informativa sulla Privacy descrive le modalità di gestione dei dati personali e dei dati utente da parte dell'applicazione **Tax Code by Tommaso Scalici** (di seguito denominata "l'App", "noi" o "nostro"), sviluppata da **Tommaso Scalici** ("Titolare del Trattamento").
 
@@ -69,12 +69,24 @@ Il calcolo del Codice Fiscale a partire dai dati anagrafici (nome, cognome, data
 
 L'App include una funzionalità di scansione ottica con fotocamera per agevolare l'acquisizione di Tessera Sanitaria e Carta d'Identità.
 
+- Trattandosi di una funzionalità avanzata che interagisce con le API di backend, l'utilizzo dello scanner richiede l'autenticazione tramite Account Google.
 - Quando si utilizza lo scanner, l'immagine acquisita viene trasmessa tramite connessione cifrata TLS direttamente a Google Cloud Functions basate su **Gemini Enterprise Agent Platform (GEAP)** al solo scopo di eseguire il riconoscimento ottico dei caratteri (OCR) ed estrarre i campi del form.
 - Le immagini vengono elaborate in modo effimero nella memoria di calcolo e **distrutte immediatamente al termine dell'estrazione**. Le immagini **non vengono mai salvate su disco** e **non vengono utilizzate per addestrare modelli IA**.
 
-### C. Archiviazione Locale (Hive CE)
+### C. Archiviazione Locale e Modalità Ospite (Hive CE - Pure Guest Mode)
 
-Se si utilizza l'App in Modalità Ospite (senza accesso con account Google), i codici fiscali salvati e le impostazioni restano memorizzati esclusivamente nella memoria locale del dispositivo tramite Hive CE, sotto il diretto controllo fisico dell'utente.
+L'App implementa una **Modalità Ospite pura (Pure Guest Mode)** che opera al 100% in locale: non vengono creati account anonimi su Firebase né vengono inviati token di autenticazione o identificativi a server esterni. I codici fiscali salvati e le preferenze restano memorizzati esclusivamente nella memoria locale del dispositivo tramite Hive CE, sotto il diretto controllo fisico dell'utente.
+
+- **Requisiti per Funzionalità Avanzate:** La **Scansione Documenti Intelligente (OCR AI)** e la **Sincronizzazione Cloud** multi-dispositivo sono funzionalità avanzate che richiedono l'autenticazione mediante Account Google (Google OAuth 2.0).
+- **Riconciliazione e Trasferimento Dati:** Al momento del passaggio dalla Modalità Ospite all'accesso con Account Google, le tessere salvate localmente vengono automaticamente riconciliate e trasferite in modo sicuro e non distruttivo all'interno del database cloud privato dell'utente su Google Cloud Firestore.
+
+### D. Integrazione Google Gemini e Comandi Vocali (Android AppFunctions)
+
+L'App supporta le **Android AppFunctions**, consentendo a Google Gemini e all'assistente vocale di sistema di interagire con l'applicazione per recuperare il Codice Fiscale (con eventuale sillabazione fonetica per agevolarne la comprensione e la dettatura) o aprire la schermata del codice a barre su richiesta vocale dell'utente.
+
+- **Elaborazione Esclusivamente Locale (On-Device):** La ricerca dei contatti, il matching delle query e l'esecuzione delle funzioni vocali avvengono *esclusivamente in locale on-device*.
+- **Garanzia di Riservatezza:** Nessun dato personale, query vocale o archivio contatti viene trasmesso a server esterni né utilizzato per addestrare modelli di intelligenza artificiale.
+- **Pieno Controllo dell'Utente:** L'utente ha il pieno controllo della funzionalità e può disattivarla in qualsiasi momento tramite il toggle dedicato nelle Impostazioni dell'app.
 
 <hr class="my-8 border-white/10" />
 
@@ -92,7 +104,7 @@ Il trattamento dei dati personali avviene in conformità al Regolamento Generale
 Garantiamo all'utente il pieno controllo sui propri dati:
 
 - **Periodo di Conservazione:** I dati sincronizzati rimangono su Cloud Firestore solo per la durata di attività dell'account.
-- **Eliminazione Account In-App (Self-Service):** L'utente può eliminare definitivamente il proprio account e tutti i dati cloud associati in qualsiasi momento direttamente dall'App tramite il percorso **Impostazioni → Elimina Account**. Questa operazione elimina istantaneamente e in modo irreversibile il profilo e tutte le tessere salvate su Google Cloud Firestore.
+- **Eliminazione Account In-App e Cancellazione a Cascata (Server-Side):** L'utente può eliminare definitivamente il proprio account e tutti i dati cloud associati in qualsiasi momento direttamente dall'App tramite il percorso **Impostazioni → Elimina Account**. Questa operazione attiva automaticamente un trigger server-side sicuro gestito tramite Firebase Cloud Functions, che distrugge in modo irreversibile ed a cascata il record dell'utente e tutte le relative sottocollezioni di tessere salvate su Cloud Firestore.
 - **Guida Web alla Cancellazione Dati:** Per maggiori dettagli o richieste di assistenza, è possibile consultare la pagina dedicata <a href="/it/apps/taxcode/data-deletion/">Istruzioni per la Cancellazione dei Dati</a>.
 - **Revoca delle Autorizzazioni Google:** È possibile revocare l'accesso dell'App al proprio account Google in qualunque momento tramite la pagina <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer">Autorizzazioni Account Google</a>.
 

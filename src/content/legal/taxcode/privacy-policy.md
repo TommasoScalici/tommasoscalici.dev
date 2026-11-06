@@ -3,7 +3,7 @@ title: 'Tax Code by Tommaso Scalici - Privacy Policy'
 description: 'Privacy Policy and Google API Services User Data Policy compliance for Tax Code by Tommaso Scalici.'
 ---
 
-<p class="text-sm text-muted">Last updated: September 22, 2026</p>
+<p class="text-sm text-muted">Last updated: November 6, 2026</p>
 
 This Privacy Policy describes how personal information and user data are handled by the application **Tax Code by Tommaso Scalici** (referred to as "the App", "we", "our", or "us"), developed by **Tommaso Scalici** ("Data Controller").
 
@@ -69,12 +69,24 @@ The calculation of the Italian Tax Code (_Codice Fiscale_) from personal details
 
 The App includes an assistive camera scanner to recognize physical Health Cards (_Tessera Sanitaria_) and Identity Cards (_Carta d'Identità_).
 
+- As an advanced feature interacting with backend APIs, using the document scanner requires authentication with a Google Account.
 - When you use the document scanner, the image capture is transmitted over TLS directly to secure Google Cloud Functions powered by the **Gemini Enterprise Agent Platform (GEAP)** for optical character recognition (OCR) and structured field extraction.
 - Scanned images are processed transiently in memory and are **immediately discarded**. Images are **never stored on servers** and are **never used to train machine learning models**.
 
-### C. Local Storage (Hive CE)
+### C. Local Storage and Guest Mode (Hive CE - Pure Guest Mode)
 
-If you use the App in Guest Mode (without Google Sign-In), your saved tax codes and settings are stored strictly in local on-device storage using Hive CE. This data remains under your exclusive physical control.
+The App implements a **Pure Guest Mode** that operates 100% locally: no anonymous accounts are created in Firebase, and no authentication tokens or device identifiers are sent to external servers. Saved tax codes and preferences remain stored strictly in local on-device storage using Hive CE, under your exclusive physical control.
+
+- **Requirements for Advanced Features:** **Smart Document Scanning (AI OCR)** and multi-device **Cloud Synchronization** are advanced features that require authentication via a Google Account (Google OAuth 2.0).
+- **Data Reconciliation and Safe Migration:** When transitioning from Guest Mode to a Google Account, cards saved locally on the device are automatically, securely, and non-destructively reconciled and transferred to your private cloud database in Google Cloud Firestore.
+
+### D. Google Gemini Integration and Voice Commands (Android AppFunctions)
+
+The App supports **Android AppFunctions**, enabling Google Gemini and the system voice assistant to interact with the application to retrieve your Tax Code (including phonetic spelling for seamless dictation) or open the barcode screen directly upon the user's voice command.
+
+- **Exclusively On-Device Processing:** Contact lookup, query matching, and function execution take place *exclusively on-device*.
+- **Privacy Guarantee:** No personal data, voice search queries, or contact/card archives are transmitted to external servers or used to train artificial intelligence models.
+- **Full User Control:** The user retains full control over this feature and can disable it at any time via the dedicated toggle in the App's Settings.
 
 <hr class="my-8 border-white/10" />
 
@@ -92,7 +104,7 @@ The processing of personal data is carried out in compliance with the General Da
 We believe in complete data ownership and user control:
 
 - **Data Retention Period:** Your synchronized data is retained in Cloud Firestore only for as long as your account remains active.
-- **In-App Account Deletion (Self-Service):** You can permanently delete your account and all associated cloud data at any time directly within the app under **Settings → Delete Account**. This action permanently wipes your user record and all saved tax code entries from Google Cloud Firestore.
+- **In-App Account Deletion & Cascading Server-Side Deletion:** You can permanently delete your account and all associated cloud data at any time directly within the app under **Settings → Delete Account**. This action automatically invokes a secure server-side trigger (Firebase Cloud Functions) that irreversibly deletes your user record and all associated subcollections of saved cards in Google Cloud Firestore in a cascading manner.
 - **Web Data Deletion Guide:** For step-by-step instructions or deletion requests, please refer to our dedicated <a href="/apps/taxcode/data-deletion/">Data Deletion Instructions</a> page.
 - **Revoking Google Permissions:** You can revoke the App's access to your Google Account at any time through your <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer">Google Account Permissions Settings</a>.
 

@@ -3,7 +3,7 @@ title: 'Tax Code by Tommaso Scalici - Terms of Service'
 description: 'Terms of Service and legal conditions for using the Tax Code by Tommaso Scalici application.'
 ---
 
-<p class="text-sm text-muted">Last updated: September 22, 2026</p>
+<p class="text-sm text-muted">Last updated: November 6, 2026</p>
 
 Welcome to **Tax Code by Tommaso Scalici** (the "App"), developed and maintained by **Tommaso Scalici** ("Developer", "we", "us", or "our").
 
@@ -45,20 +45,30 @@ When using the App, you agree **not** to:
 
 <hr class="my-8 border-white/10" />
 
-## 4. User Accounts and Cloud Synchronization
+## 4. User Accounts, Guest Mode, and Cloud Synchronization
 
-- **Guest Mode:** You may use all core calculation and local storage features without creating an account or providing authentication credentials.
-- **Google Sign-In:** If you choose to enable cloud synchronization across multiple devices (Android & Wear OS), you authenticate using Google OAuth 2.0. You are responsible for safeguarding the security and access credentials of your Google Account.
+- **Guest Mode (Pure Guest Mode):** You may use all core calculation and local storage features 100% locally without creating an account or transmitting authentication tokens to Firebase. All data remains exclusively on your device.
+- **Requirements for Advanced Features (Google Sign-In):** Advanced features, including **Smart Document Scanning (AI OCR)** and multi-device **Cloud Synchronization** (Android & Wear OS), require authentication using a Google Account (Google OAuth 2.0). You are responsible for safeguarding the security and access credentials of your Google Account.
+- **Data Reconciliation:** When transitioning from Guest Mode to sign-in with a Google Account, tax codes saved locally on your device are securely, automatically, and non-destructively reconciled and transferred to your private cloud database.
 - **Account Termination & Data Removal:** You may stop using the cloud synchronization service and delete your account and all associated cloud data at any time via the in-app deletion button (**Settings → Delete Account**) or by consulting our <a href="/apps/taxcode/data-deletion/">Data Deletion Instructions</a>.
 
 <hr class="my-8 border-white/10" />
 
-## 5. AI Document Scanner Disclaimer
+## 5. Assistive Tools, AI Document Scanner, and Voice Commands Disclaimer
+
+### A. Smart Document Scanning (AI OCR)
 
 The smart document scanner feature utilizes optical character recognition powered by the **Gemini Enterprise Agent Platform (GEAP)**. While designed for high accuracy:
 
 - The AI scanner is an assistive tool and may occasionally misread characters due to lighting, reflection, camera quality, or document wear.
 - **You are solely responsible for reviewing and verifying the extracted information** before saving or using any calculated Tax Code.
+
+### B. Voice Assistance and AI Helpers (Google Gemini & Android AppFunctions)
+
+Voice interaction via Google Gemini, system voice assistants, or Android AppFunctions is provided as an assistive tool for quick access and rapid retrieval.
+
+- Voice recognition, speech synthesis, and phonetic spelling may be subject to ambient noise, acoustic interference, or voice recognition engine limitations.
+- **The user remains solely responsible for verifying the accuracy of the tax code** read aloud or displayed on screen before using it for any formal, tax, legal, or administrative purpose.
 
 <hr class="my-8 border-white/10" />
 
