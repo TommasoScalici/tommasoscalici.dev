@@ -180,12 +180,54 @@
         --theme-glass-bg: rgb(255 255 255);
     }
 
+    [data-landing-theme='prog'] {
+        --theme-background: rgb(5 5 5);
+        --landing-bg-filter: blur(30px) brightness(0.3);
+        --landing-card-bg: rgba(10, 10, 10, 0.8);
+        --landing-card-backdrop: blur(15px);
+        --landing-card-border: rgba(0, 243, 255, 0.2);
+        --landing-card-shadow: 0 0 40px rgba(0, 243, 255, 0.1);
+        --landing-cover-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+
     [data-landing-theme='lofi'] {
         --theme-background: rgb(13 17 23);
+        --landing-bg-filter: blur(25px) brightness(0.4);
+        --landing-card-bg: rgba(22, 27, 34, 0.85);
+        --landing-card-backdrop: blur(10px);
+        --landing-card-border: rgba(255, 255, 255, 0.1);
+        --landing-card-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        --landing-cover-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     }
 
     [data-landing-theme='jrpg'] {
         --theme-background: rgb(10 5 20);
+        --landing-bg-filter: blur(28px) brightness(0.32);
+        --landing-card-bg: rgba(14, 10, 26, 0.85);
+        --landing-card-backdrop: blur(16px);
+        --landing-card-border: rgba(244, 63, 94, 0.3);
+        --landing-card-shadow: 0 0 45px rgba(225, 29, 72, 0.2), 0 0 25px rgba(168, 85, 247, 0.15);
+        --landing-cover-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--theme-primary);
+        outline-offset: 2px;
+    }
+
+    .landing-card {
+        background: var(--landing-card-bg);
+        backdrop-filter: var(--landing-card-backdrop);
+        border: 1px solid var(--landing-card-border);
+        box-shadow: var(--landing-card-shadow);
+    }
+
+    .landing-cover {
+        box-shadow: var(--landing-cover-shadow);
+    }
+
+    .landing-bg {
+        filter: var(--landing-bg-filter);
     }
 
     body {

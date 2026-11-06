@@ -25,6 +25,12 @@
                 "name": "Music Data",
                 "mimeType": "application/json",
                 "documentation": "https://tommasoscalici.dev/.well-known/openapi.yaml"
+            },
+            {
+                "uri": "https://tommasoscalici.dev/api/bio.json",
+                "name": "Biography Data",
+                "mimeType": "application/json",
+                "documentation": "https://tommasoscalici.dev/.well-known/openapi.yaml"
             }
         ]
     }

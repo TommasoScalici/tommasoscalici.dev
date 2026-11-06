@@ -8,6 +8,7 @@
     ],
     "pages_build_output_dir": "./dist",
     "vars": {
+        "PUBLIC_GA_ID": "G-LMT1M9750Q",
         "PUBLIC_FACEBOOK_PIXEL_ID": "266069036512109",
         "PUBLIC_TIKTOK_PIXEL_ID": "D5EOGDBC77UEEICND2UG",
         "ENABLE_FACEBOOK_PIXEL": true,

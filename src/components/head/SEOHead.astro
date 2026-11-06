@@ -16,6 +16,7 @@ import { getLocalizedUrl, normalizePath } from '../../lib/seo';
 // 1. Canonical & Hreflang Logic
 const canonicalURL = new URL(normalizePath(Astro.url.pathname), Astro.site);
 const path = Astro.url.pathname;
+const isHome = path === '/' || path === '/it/' || path === '/it';
 
 const site = Astro.site ?? Astro.url.origin;
 const enUrl = getLocalizedUrl(path, site, 'en');
@@ -70,6 +71,17 @@ const combinedSchema = getCombinedSchema(canonicalURL, profileUrl);
             { rel: 'alternate', hreflang: 'en', href: enUrl },
             { rel: 'alternate', hreflang: 'it', href: itUrl },
             { rel: 'alternate', hreflang: 'x-default', href: enUrl },
+            ...(isHome
+                ? [
+                      {
+                          rel: 'preload',
+                          as: 'image',
+                          href: optimizedProfile.src,
+                          type: 'image/webp',
+                          fetchPriority: 'high' as const,
+                      },
+                  ]
+                : []),
         ],
         meta: [
             {

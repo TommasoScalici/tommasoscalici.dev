@@ -9,6 +9,7 @@ import icon from 'astro-icon';
 const wranglerPath = './wrangler.jsonc';
 /**
  * @typedef {Object} WranglerVars
+ * @property {string} [PUBLIC_GA_ID]
  * @property {string} [PUBLIC_FACEBOOK_PIXEL_ID]
  * @property {string} [PUBLIC_TIKTOK_PIXEL_ID]
  * @property {boolean} [ENABLE_FACEBOOK_PIXEL]
@@ -62,6 +63,11 @@ export default defineConfig({
     },
     env: {
         schema: {
+            PUBLIC_GA_ID: envField.string({
+                context: 'client',
+                access: 'public',
+                default: wranglerVars.PUBLIC_GA_ID ?? 'G-LMT1M9750Q',
+            }),
             PUBLIC_FACEBOOK_PIXEL_ID: envField.string({
                 context: 'client',
                 access: 'public',

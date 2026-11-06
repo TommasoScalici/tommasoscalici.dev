@@ -6,6 +6,7 @@ import {
     ENABLE_FACEBOOK_PIXEL,
     ENABLE_TIKTOK_PIXEL,
     PUBLIC_FACEBOOK_PIXEL_ID,
+    PUBLIC_GA_ID,
     PUBLIC_TIKTOK_PIXEL_ID,
 } from 'astro:env/client';
 
@@ -20,7 +21,7 @@ interface Props {
     hideCookieBanner?: boolean;
 }
 
-const { title, lang = 'en', gaId = 'G-LMT1M9750Q', hideCookieBanner = false } = Astro.props;
+const { title, lang = 'en', gaId = PUBLIC_GA_ID, hideCookieBanner = false } = Astro.props;
 ---
 
 <!doctype html>

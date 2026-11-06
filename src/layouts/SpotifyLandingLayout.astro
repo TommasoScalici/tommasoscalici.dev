@@ -50,26 +50,6 @@ const ogImage = await getImage({
 const canonicalURL = new URL(normalizePath(Astro.url.pathname), Astro.site);
 const themeColor = theme === 'lofi' ? '#0d1117' : theme === 'jrpg' ? '#0a0514' : '#050505';
 
-// Theme Configuration
-const themeConfig = {
-    prog: {
-        bgBlur: 'filter: blur(30px) brightness(0.3);',
-        card: 'background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(0, 243, 255, 0.2); box-shadow: 0 0 40px rgba(0, 243, 255, 0.1);',
-        coverShadow: 'box-shadow: 0 10px 30px rgba(0,0,0,0.6);',
-    },
-    lofi: {
-        bgBlur: 'filter: blur(25px) brightness(0.4);',
-        card: 'background: rgba(22, 27, 34, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5);',
-        coverShadow: 'box-shadow: 0 8px 20px rgba(0,0,0,0.4);',
-    },
-    jrpg: {
-        bgBlur: 'filter: blur(28px) brightness(0.32);',
-        card: 'background: rgba(14, 10, 26, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(244, 63, 94, 0.3); box-shadow: 0 0 45px rgba(225, 29, 72, 0.2), 0 0 25px rgba(168, 85, 247, 0.15);',
-        coverShadow: 'box-shadow: 0 12px 35px rgba(0,0,0,0.7);',
-    },
-};
-
-const currentTheme = themeConfig[theme];
 const gradientClasses =
     theme === 'lofi'
         ? 'from-indigo-500 via-sky-500 to-indigo-500'
@@ -110,14 +90,11 @@ const gradientClasses =
         data-landing-theme={theme}
     >
         <div
-            class="absolute top-0 left-0 -z-10 h-full w-full scale-110 bg-cover bg-center bg-no-repeat"
-            style={`${currentTheme.bgBlur} background-image: url('${optimizedBg.src}');`}
+            class="landing-bg absolute top-0 left-0 -z-10 h-full w-full scale-110 bg-cover bg-center bg-no-repeat"
+            style={`background-image: url('${optimizedBg.src}');`}
         ></div>
 
-        <div
-            class="landing-card w-[90%] max-w-95 rounded-3xl p-[30px_20px] text-center"
-            style={currentTheme.card}
-        >
+        <div class="landing-card w-[90%] max-w-95 rounded-3xl p-[30px_20px] text-center">
             <div class="group relative mx-auto mb-5 aspect-square w-full rounded-xl">
                 <div
                     class={`absolute -inset-1 animate-spin-slow rounded-xl bg-linear-to-r opacity-75 blur-lg ${gradientClasses}`}
@@ -131,8 +108,7 @@ const gradientClasses =
                         formats={['avif', 'webp']}
                         loading="eager"
                         fetchpriority="high"
-                        class="relative h-full w-full rounded-xl object-cover"
-                        style={currentTheme.coverShadow}
+                        class="landing-cover relative h-full w-full rounded-xl object-cover"
                         inferSize={true}
                     />
                 ) : (
@@ -144,8 +120,7 @@ const gradientClasses =
                         formats={['avif', 'webp']}
                         loading="eager"
                         fetchpriority="high"
-                        class="relative h-full w-full rounded-xl object-cover"
-                        style={currentTheme.coverShadow}
+                        class="landing-cover relative h-full w-full rounded-xl object-cover"
                     />
                 )}
             </div>

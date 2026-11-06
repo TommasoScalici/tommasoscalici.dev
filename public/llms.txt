@@ -25,6 +25,7 @@ Senior Software Engineer specialized in Flutter, React, Astro, and Cloud AI, wit
 - [Email Contact](mailto:contact@tommasoscalici.dev): Direct contact for engineering and music collaborations.
 
 ## Discography & Music Projects
+- [The Milky Way: Trajectory](https://tommasoscalici.dev/prog): Progressive metal concept album featuring intricate polyrhythmic structures, virtuosic guitar work, and atmospheric synths (Released October 2026).
 - [Inner Thoughts](https://tommasoscalici.dev/prog): Progressive metal project featuring complex rhythms and technical guitar work.
 - [Sinestesie](https://tommasoscalici.dev/lofi): Atmospheric ambient and lofi soundscapes.
 - [Random Access Thoughts](https://tommasoscalici.dev/prog): Experimental music tracks and instrumental improvisations.
@@ -32,6 +33,7 @@ Senior Software Engineer specialized in Flutter, React, Astro, and Cloud AI, wit
 ## Machine Readable Endpoints & Specifications
 - [Projects Data API](https://tommasoscalici.dev/api/projects.json): JSON endpoint exposing structured project metadata.
 - [Music Data API](https://tommasoscalici.dev/api/music.json): JSON endpoint exposing structured discography metadata.
+- [Bio Data API](https://tommasoscalici.dev/api/bio.json): JSON endpoint exposing structured professional biography metadata.
 - [API Catalog](https://tommasoscalici.dev/.well-known/api-catalog.json): Standardized API discovery specification catalog.
 - [OpenAPI Spec](https://tommasoscalici.dev/.well-known/openapi.yaml): Full OpenAPI v3 specification for site endpoints.
 - [MCP Config](https://tommasoscalici.dev/.well-known/mcp/config.json): Model Context Protocol configuration for AI agents.
